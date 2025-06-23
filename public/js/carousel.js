@@ -79,3 +79,65 @@ document.addEventListener('keydown', function(e) {
         changeSlide(1);
     }
 });
+
+// Events Slider functionality
+let currentEventsSlideIndex = 0;
+const eventsSlides = document.querySelectorAll('.events-slide');
+const eventsIndicators = document.querySelectorAll('.events-indicator');
+
+function showEventsSlide(index) {
+    // Hide all slides
+    eventsSlides.forEach(slide => slide.classList.remove('active'));
+    eventsIndicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    // Show current slide
+    if (eventsSlides[index]) {
+        eventsSlides[index].classList.add('active');
+        eventsIndicators[index].classList.add('active');
+    }
+}
+
+function changeEventsSlide(direction) {
+    currentEventsSlideIndex += direction;
+    
+    if (currentEventsSlideIndex >= eventsSlides.length) {
+        currentEventsSlideIndex = 0;
+    }
+    if (currentEventsSlideIndex < 0) {
+        currentEventsSlideIndex = eventsSlides.length - 1;
+    }
+    
+    showEventsSlide(currentEventsSlideIndex);
+}
+
+function currentEventsSlide(index) {
+    currentEventsSlideIndex = index - 1;
+    showEventsSlide(currentEventsSlideIndex);
+}
+
+// Auto-advance events slider every 4 seconds
+function autoAdvanceEvents() {
+    changeEventsSlide(1);
+}
+
+// Initialize events slider
+document.addEventListener('DOMContentLoaded', function() {
+    if (eventsSlides.length > 0) {
+        showEventsSlide(0);
+        
+        // Start auto-advance for events slider
+        let eventsAutoInterval = setInterval(autoAdvanceEvents, 4000);
+        
+        // Pause auto-advance on hover for events slider
+        const eventsSlider = document.querySelector('.events-slider-container');
+        if (eventsSlider) {
+            eventsSlider.addEventListener('mouseenter', () => {
+                clearInterval(eventsAutoInterval);
+            });
+            
+            eventsSlider.addEventListener('mouseleave', () => {
+                eventsAutoInterval = setInterval(autoAdvanceEvents, 4000);
+            });
+        }
+    }
+});

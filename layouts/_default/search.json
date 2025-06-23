@@ -1,0 +1,38 @@
+{{- $searchIndex := slice -}}
+{{- range where site.RegularPages "Section" "blog" -}}
+  {{- $item := dict 
+    "title" .Title
+    "description" .Description
+    "content" .Plain
+    "url" .RelPermalink
+    "date" (.Date.Format "2006-01-02")
+    "author" (.Params.author | default "Code & Coffee Team")
+    "tags" (.Params.tags | default slice)
+    "topic" (.Params.topic | default "blog")
+    "featured" (.Params.featured | default false)
+    "readingTime" (.Params.readingTime | default 5)
+    "type" "blog"
+  -}}
+  {{- $searchIndex = $searchIndex | append $item -}}
+{{- end -}}
+
+{{- range where site.RegularPages "Section" "!=" "blog" -}}
+  {{- if and (not (in .RelPermalink "/search/")) (.Title) -}}
+    {{- $item := dict 
+      "title" .Title
+      "description" (.Description | default .Summary)
+      "content" .Plain
+      "url" .RelPermalink
+      "date" (.Date.Format "2006-01-02")
+      "author" "Code & Coffee Team"
+      "tags" slice
+      "topic" (.Section | default "page")
+      "featured" false
+      "readingTime" (div (countwords .Plain) 200 | add 1)
+      "type" "page"
+    -}}
+    {{- $searchIndex = $searchIndex | append $item -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $searchIndex | jsonify -}}

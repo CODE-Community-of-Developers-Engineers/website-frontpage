@@ -45,65 +45,32 @@ document.addEventListener('DOMContentLoaded', function() {
     let searchIndex = [];
     let isLoading = true;
     
-    // Build search index from all content
+    // Build search index from Hugo-generated JSON
     async function buildSearchIndex() {
         try {
-            // Get all content (blog posts and pages)
-            const content = [
-                {{ range where site.RegularPages "Section" "blog" }}
-                {
-                    title: {{ .Title | jsonify }},
-                    description: {{ .Description | jsonify }},
-                    content: {{ .Plain | jsonify }},
-                    url: {{ .RelPermalink | jsonify }},
-                    date: {{ .Date.Format "2006-01-02" | jsonify }},
-                    author: {{ .Params.author | default "Code & Coffee Team" | jsonify }},
-                    tags: {{ .Params.tags | default slice | jsonify }},
-                    topic: {{ .Params.topic | default "blog" | jsonify }},
-                    featured: {{ .Params.featured | default false }},
-                    readingTime: {{ .Params.readingTime | default 5 }},
-                    type: "blog"
-                },
-                {{ end }}
-                {{ range where site.RegularPages "Section" "!=" "blog" }}
-                {{ if and (not (in .RelPermalink "/search/")) (.Title) }}
-                {
-                    title: {{ .Title | jsonify }},
-                    description: {{ .Description | default .Summary | jsonify }},
-                    content: {{ .Plain | jsonify }},
-                    url: {{ .RelPermalink | jsonify }},
-                    date: {{ .Date.Format "2006-01-02" | jsonify }},
-                    author: "Code & Coffee Team",
-                    tags: [],
-                    topic: {{ .Section | default "page" | jsonify }},
-                    featured: false,
-                    readingTime: {{ div (countwords .Plain) 200 | add 1 }},
-                    type: "page"
-                },
-                {{ end }}
-                {{ end }}
-            ];
+            console.log('Fetching search index...');
+            const response = await fetch('/search.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch search index');
+            }
             
-            searchIndex = content.filter(item => item.title && item.title.trim()); // Remove any empty items
+            const content = await response.json();
+            searchIndex = content.filter(item => item.title && item.title.trim());
             isLoading = false;
             
-            console.log(`Search index built with ${searchIndex.length} items (${searchIndex.filter(i => i.type === 'blog').length} blog posts, ${searchIndex.filter(i => i.type === 'page').length} pages)`);
+            console.log(`Search index loaded with ${searchIndex.length} items (${searchIndex.filter(i => i.type === 'blog').length} blog posts, ${searchIndex.filter(i => i.type === 'page').length} pages)`);
             console.log('Sample items:', searchIndex.slice(0, 3).map(i => ({ title: i.title, type: i.type, url: i.url })));
             
             // Debug URLs
             console.log('All URLs in search index:');
             searchIndex.forEach((item, index) => {
-                if (index < 10) { // Only show first 10 to avoid console spam
+                if (index < 10) {
                     console.log(`${index + 1}. "${item.title}" -> ${item.url}`);
                 }
             });
             
-            // Test navigation from current page
-            console.log('Current page:', window.location.href);
-            console.log('Base URL would be:', window.location.origin);
-            
         } catch (error) {
-            console.error('Error building search index:', error);
+            console.error('Error loading search index:', error);
             isLoading = false;
         }
     }

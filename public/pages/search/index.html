@@ -238,6 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isLoading = false;
             
             console.log(`Search index built with ${searchIndex.length} items (${searchIndex.filter(i => i.type === 'blog').length} blog posts, ${searchIndex.filter(i => i.type === 'page').length} pages)`);
+            console.log('Sample items:', searchIndex.slice(0, 3).map(i => ({ title: i.title, type: i.type, url: i.url })));
             
         } catch (error) {
             console.error('Error building search index:', error);
@@ -247,12 +248,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     function performSearch(query, filter = 'all') {
-        if (isLoading) return [];
+        if (isLoading) {
+            console.log('Search index still loading...');
+            return [];
+        }
         
         const searchQuery = query.toLowerCase().trim();
         if (!searchQuery) return [];
         
-        return searchIndex.filter(item => {
+        console.log('Performing search for:', searchQuery, 'with filter:', filter);
+        
+        const results = searchIndex.filter(item => {
             
             if (filter !== 'all') {
                 if (filter === 'tutorial' || filter === 'community' || filter === 'events') {
@@ -274,8 +280,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 ...item.tags
             ].join(' ').toLowerCase();
             
-            return searchableText.includes(searchQuery);
-        }).sort((a, b) => {
+            const matches = searchableText.includes(searchQuery);
+            if (matches) {
+                console.log('Match found:', item.title, item.type);
+            }
+            return matches;
+        });
+        
+        console.log('Filtered results:', results.length);
+        
+        return results.sort((a, b) => {
             
             const aTitle = a.title.toLowerCase().includes(searchQuery);
             const bTitle = b.title.toLowerCase().includes(searchQuery);
@@ -319,7 +333,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        const resultsHTML = results.map(item => `
+        const resultsHTML = results.map((item, index) => {
+            console.log(`Rendering result ${index + 1}:`, item.title, item.url);
+            return `
             <div class="search-result" style="padding: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--radius); margin-bottom: 1rem; background: var(--background); transition: all 0.2s ease;">
                 <h3 style="margin-bottom: 0.5rem;">
                     <a href="${item.url}" style="text-decoration: none; color: var(--text-primary);">${item.title}</a>
@@ -333,14 +349,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}
                 </div>
                 <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">${item.description || 'No description available.'}</p>
-                ${item.tags.length > 0 ? `
+                ${item.tags && item.tags.length > 0 ? `
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                     ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
                 ` : ''}
             </div>
-        `).join('');
+        `;
+        }).join('');
         
+        console.log('Setting results HTML:', resultsHTML.length, 'characters');
         resultsContainer.innerHTML = resultsHTML;
         
         
@@ -363,10 +381,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let searchTimeout;
     
     searchInput.addEventListener('input', function() {
+        const query = this.value;
+        console.log('Search input:', query);
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
-            const results = performSearch(this.value, currentFilter);
-            renderResults(results, this.value);
+            const results = performSearch(query, currentFilter);
+            console.log('Search results:', results.length, 'items found');
+            renderResults(results, query);
         }, 300); 
     });
     
@@ -376,6 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
             searchFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             currentFilter = this.getAttribute('data-filter');
+            console.log('Filter changed to:', currentFilter);
             
             const results = performSearch(searchInput.value, currentFilter);
             renderResults(results, searchInput.value);

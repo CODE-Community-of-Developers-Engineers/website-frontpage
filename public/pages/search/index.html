@@ -23,7 +23,7 @@
     <header>
     <div class="header-container">
         <a href="/" class="logo">
-            <img src="/media/coffeecup.svg" alt="Code & Coffee Logo">
+            <img src="/media/logo.png" alt="Code & Coffee Logo">
             <span>Code & Coffee</span>
         </a>
         
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function buildSearchIndex() {
         try {
             console.log('Fetching search index...');
-            const response = await fetch('/search.json');
+            const response = await fetch('/index.json');
             if (!response.ok) {
                 throw new Error('Failed to fetch search index');
             }

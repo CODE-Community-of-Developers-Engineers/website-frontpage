@@ -3,6 +3,13 @@ languageCode: 'en-us'
 title: 'Code & Coffee Philadelphia'
 theme: ''
 
+# Output formats
+outputs:
+  home:
+    - "HTML"
+    - "RSS"
+    - "JSON"
+
 params:
   description: 'Your space to build.'
   author: 'Code & Coffee Philadelphia'

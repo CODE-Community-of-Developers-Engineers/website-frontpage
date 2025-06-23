@@ -905,15 +905,19 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
+/* Mobile Navigation Breakpoint */
+@media (max-width: 1300px) {
     .nav-desktop {
-        display: none;
+        display: none !important;
     }
     
     .mobile-menu-btn {
-        display: block;
+        display: block !important;
     }
-    
+}
+
+/* General Mobile Styles */
+@media (max-width: 768px) {
     .blog-layout,
     .blog-layout-full {
         grid-template-columns: 1fr;
@@ -956,6 +960,21 @@ footer {
     .tag-cloud-item {
         font-size: 0.75rem;
         padding: 0.25rem 0.5rem;
+    }
+}
+
+/* Tablet and smaller laptop breakpoints */
+@media (max-width: 1024px) {
+    .nav-desktop {
+        display: none !important;
+    }
+    
+    .mobile-menu-btn {
+        display: block !important;
+    }
+    
+    .container {
+        padding: 0 2rem;
     }
 }
 

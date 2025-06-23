@@ -26,16 +26,37 @@
     <loc>http://localhost:5000/tags/</loc>
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:5000/blog/ptw-hackathon-2025/</loc>
+    <loc>http://localhost:5000/tags/api/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/blog/example-tech-tutorial/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/express/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/javascript/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/nodejs/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/tutorial/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/ai/</loc>
+    <lastmod>2025-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/gaming/</loc>
     <lastmod>2025-05-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/tags/hackathon/</loc>
     <lastmod>2025-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:5000/tags/innovation/</loc>
+    <loc>http://localhost:5000/blog/ptw-hackathon-2025/</loc>
     <lastmod>2025-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:5000/tags/philly-tech-week/</loc>
+    <loc>http://localhost:5000/tags/startup/</loc>
     <lastmod>2025-05-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/blog/readme/</loc>
@@ -46,7 +67,11 @@
   </url><url>
     <loc>http://localhost:5000/links/</loc>
   </url><url>
+    <loc>http://localhost:5000/pages/</loc>
+  </url><url>
     <loc>http://localhost:5000/project-request/</loc>
+  </url><url>
+    <loc>http://localhost:5000/pages/search/</loc>
   </url><url>
     <loc>http://localhost:5000/talent-matchboard/</loc>
   </url>

@@ -1,0 +1,207 @@
+{{ define "main" }}
+<div class="container container-narrow" style="padding: 3rem 1.5rem;">
+    <div class="blog-post">
+        <h1>{{ .Title }}</h1>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">{{ .Description }}</p>
+        
+        <!-- Search Interface -->
+        <div style="margin-bottom: 3rem;">
+            <div style="position: relative; margin-bottom: 1.5rem;">
+                <input type="text" id="search-input" placeholder="Search posts, tutorials, and community content..." 
+                       style="width: 100%; padding: 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-lg); font-size: 1.1rem; background: var(--background); color: var(--text-primary);">
+                <div id="search-stats" style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.875rem;"></div>
+            </div>
+            
+            <!-- Quick Filters -->
+            <div style="margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem; font-size: 1rem;">Quick Filters</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <button class="tag search-filter active" data-filter="all">All Content</button>
+                    <button class="tag search-filter" data-filter="tutorial">Tutorials</button>
+                    <button class="tag search-filter" data-filter="community">Community</button>
+                    <button class="tag search-filter" data-filter="events">Events</button>
+                    <button class="tag search-filter" data-filter="javascript">JavaScript</button>
+                    <button class="tag search-filter" data-filter="beginners">Beginners</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Search Results -->
+        <div id="search-results">
+            <div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;">
+                <h3>Start typing to search</h3>
+                <p>Search through our blog posts, tutorials, and community content.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Index Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let searchIndex = [];
+    let isLoading = true;
+    
+    // Build search index from all blog posts
+    async function buildSearchIndex() {
+        try {
+            // Get all blog posts data
+            const posts = [
+                {{ range where site.RegularPages "Section" "blog" }}
+                {
+                    title: {{ .Title | jsonify }},
+                    description: {{ .Description | jsonify }},
+                    content: {{ .Plain | jsonify }},
+                    url: {{ .RelPermalink | jsonify }},
+                    date: {{ .Date.Format "2006-01-02" | jsonify }},
+                    author: {{ .Params.author | default "Code & Coffee Team" | jsonify }},
+                    tags: {{ .Params.tags | jsonify }},
+                    featured: {{ .Params.featured | default false }},
+                    readingTime: {{ .Params.readingTime | default 5 }}
+                },
+                {{ end }}
+            ];
+            
+            searchIndex = posts.filter(post => post.title); // Remove any empty posts
+            isLoading = false;
+            
+            console.log(`Search index built with ${searchIndex.length} posts`);
+            
+        } catch (error) {
+            console.error('Error building search index:', error);
+            isLoading = false;
+        }
+    }
+    
+    // Search function
+    function performSearch(query, filter = 'all') {
+        if (isLoading) return [];
+        
+        const searchQuery = query.toLowerCase().trim();
+        if (!searchQuery) return [];
+        
+        return searchIndex.filter(post => {
+            // Filter by category first
+            if (filter !== 'all') {
+                if (!post.tags.includes(filter)) return false;
+            }
+            
+            // Then search content
+            const searchableText = [
+                post.title,
+                post.description,
+                post.content,
+                post.author,
+                ...post.tags
+            ].join(' ').toLowerCase();
+            
+            return searchableText.includes(searchQuery);
+        }).sort((a, b) => {
+            // Sort by relevance (title matches first, then featured posts)
+            const aTitle = a.title.toLowerCase().includes(searchQuery);
+            const bTitle = b.title.toLowerCase().includes(searchQuery);
+            
+            if (aTitle && !bTitle) return -1;
+            if (!aTitle && bTitle) return 1;
+            if (a.featured && !b.featured) return -1;
+            if (!a.featured && b.featured) return 1;
+            
+            return new Date(b.date) - new Date(a.date);
+        });
+    }
+    
+    // Render search results
+    function renderResults(results, query) {
+        const resultsContainer = document.getElementById('search-results');
+        const statsContainer = document.getElementById('search-stats');
+        
+        if (!query.trim()) {
+            resultsContainer.innerHTML = `
+                <div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;">
+                    <h3>Start typing to search</h3>
+                    <p>Search through our blog posts, tutorials, and community content.</p>
+                </div>
+            `;
+            statsContainer.textContent = '';
+            return;
+        }
+        
+        statsContainer.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
+        
+        if (results.length === 0) {
+            resultsContainer.innerHTML = `
+                <div style="text-align: center; color: var(--text-muted); padding: 3rem;">
+                    <h3>No results found</h3>
+                    <p>Try different keywords or check your spelling.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        const resultsHTML = results.map(post => `
+            <div class="search-result" style="padding: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--radius); margin-bottom: 1rem; background: var(--background); transition: all 0.2s ease;">
+                <h3 style="margin-bottom: 0.5rem;">
+                    <a href="${post.url}" style="text-decoration: none; color: var(--text-primary);">${post.title}</a>
+                    ${post.featured ? '<span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
+                </h3>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+                    <span>${new Date(post.date).toLocaleDateString()}</span>
+                    <span>by ${post.author}</span>
+                    <span>${post.readingTime} min read</span>
+                </div>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">${post.description}</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            </div>
+        `).join('');
+        
+        resultsContainer.innerHTML = resultsHTML;
+        
+        // Add hover effects
+        document.querySelectorAll('.search-result').forEach(result => {
+            result.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--primary-color)';
+                this.style.boxShadow = 'var(--shadow)';
+            });
+            result.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'var(--border-color)';
+                this.style.boxShadow = 'none';
+            });
+        });
+    }
+    
+    // Search input handling
+    const searchInput = document.getElementById('search-input');
+    const searchFilters = document.querySelectorAll('.search-filter');
+    let currentFilter = 'all';
+    let searchTimeout;
+    
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            const results = performSearch(this.value, currentFilter);
+            renderResults(results, this.value);
+        }, 300); // Debounce search
+    });
+    
+    // Filter handling
+    searchFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            searchFilters.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            currentFilter = this.getAttribute('data-filter');
+            
+            const results = performSearch(searchInput.value, currentFilter);
+            renderResults(results, searchInput.value);
+        });
+    });
+    
+    // Initialize
+    buildSearchIndex();
+    
+    // Focus search input on page load
+    searchInput.focus();
+});
+</script>
+{{ end }}

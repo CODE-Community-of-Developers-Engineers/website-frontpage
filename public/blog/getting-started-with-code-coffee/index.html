@@ -29,6 +29,7 @@
         
         <nav class="nav-desktop">
             <a href="/blog" class="nav-link">Blog</a>
+            <a href="/pages/search" class="nav-link">Search</a>
             <a href="/project-request" class="nav-link">Get Help</a>
             <a href="/talent-matchboard" class="nav-link">Jobs</a>
             <a href="/event-sponsorship" class="nav-link">Sponsor</a>
@@ -44,6 +45,7 @@
 <div class="mobile-nav" id="mobile-nav">
     <div class="mobile-nav-content">
         <a href="/blog" class="nav-link">Blog</a>
+        <a href="/pages/search" class="nav-link">Search</a>
         <a href="/project-request" class="nav-link">Get Help</a>
         <a href="/talent-matchboard" class="nav-link">Jobs</a>
         <a href="/event-sponsorship" class="nav-link">Sponsor</a>
@@ -61,6 +63,12 @@
         <article class="blog-post">
             
             <header style="margin-bottom: 2rem;">
+                
+                <div style="margin-bottom: 2rem;">
+                    <img src="/hero-community.jpg" alt="Getting Started with Code &amp; Coffee Philadelphia" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow);">
+                </div>
+                
+                
                 
                 <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
                     Featured
@@ -198,15 +206,32 @@
                         <div style="flex: 1;">
                             <h4 style="margin-bottom: 0.5rem;">
                                 <a href="/blog/ptw-hackathon-2025/" style="text-decoration: none; color: var(--text-primary);">
-                                    Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine
+                                    Philly Tech Week Innovation Hackathon 2025
                                 </a>
                             </h4>
                             <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.5rem;">
                                 May 10, 2025
-                                 • by Code &amp; Coffee Philadelphia
+                                 • by Code &amp; Coffee Team
                             </p>
                             <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
-                                Philadelphia&rsquo;s technology scene features communities fostering growth and innovation. Code …
+                                <p>Our Philly Tech Week Innovation Hackathon 2025 was an incredible success! Over three days, …</p>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); transition: all 0.2s ease;">
+                        <div style="flex: 1;">
+                            <h4 style="margin-bottom: 0.5rem;">
+                                <a href="/blog/example-tech-tutorial/" style="text-decoration: none; color: var(--text-primary);">
+                                    Building Your First REST API with Node.js and Express
+                                </a>
+                            </h4>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.5rem;">
+                                Jun 20, 2025
+                                 • by Alex Johnson
+                            </p>
+                            <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
+                                <p>Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&rsquo;ll …</p>
                             </p>
                         </div>
                     </div>
@@ -232,7 +257,14 @@
         </div>
         
         <div class="recent-post">
-            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine</a>
+            <a href="/blog/example-tech-tutorial/" class="recent-post-title">Building Your First REST API with Node.js and Express</a>
+            <div class="recent-post-meta">
+                Jun 20, 2025
+            </div>
+        </div>
+        
+        <div class="recent-post">
+            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Philly Tech Week Innovation Hackathon 2025</a>
             <div class="recent-post-meta">
                 May 10, 2025
             </div>
@@ -273,6 +305,24 @@
             
                 
             
+                
+            
+                
+            
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
         
             
         
@@ -302,34 +352,82 @@
             
             
         
+            
+            
         
-        <a href="/blog" class="tag-cloud-item" data-tag="beginners">
-            Beginners (1)
-        </a>
+            
+            
         
-        <a href="/blog" class="tag-cloud-item" data-tag="community">
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="ai">
+            Ai (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="api">
+            Api (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="beginners">
+            Beginners (2)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="community">
             Community (2)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="events">
-            Events (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="events">
+            Events (2)
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="hackathon">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="express">
+            Express (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="gaming">
+            Gaming (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="hackathon">
             Hackathon (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="innovation">
-            Innovation (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="javascript">
+            Javascript (1)
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="networking">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="networking">
             Networking (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="philly-tech-week">
-            Philly-Tech-Week (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="nodejs">
+            Nodejs (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="startup">
+            Startup (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="tutorial">
+            Tutorial (1)
+        </button>
         
     </div>
 </div>

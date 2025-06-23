@@ -105,36 +105,107 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tagFilters = document.querySelectorAll('.tag-filter');
     const blogPosts = document.querySelectorAll('.blog-post');
+    const searchInput = document.getElementById('search-input');
+    const sidebarTagFilters = document.querySelectorAll('.sidebar-tag-filter');
     
+    let currentTag = 'all';
+    let currentSearch = '';
+    
+    // Function to filter posts based on tag and search
+    function filterPosts() {
+        blogPosts.forEach(post => {
+            const postTags = post.getAttribute('data-tags') || '';
+            const postTitle = post.querySelector('h2 a').textContent.toLowerCase();
+            const postContent = post.querySelector('.blog-post-summary') ? 
+                post.querySelector('.blog-post-summary').textContent.toLowerCase() : '';
+            
+            const matchesTag = currentTag === 'all' || postTags.includes(currentTag);
+            const matchesSearch = currentSearch === '' || 
+                postTitle.includes(currentSearch) || 
+                postContent.includes(currentSearch);
+            
+            if (matchesTag && matchesSearch) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+        
+        // Update no results message
+        const visiblePosts = Array.from(blogPosts).filter(post => post.style.display !== 'none');
+        let noResultsDiv = document.getElementById('no-results');
+        
+        if (visiblePosts.length === 0) {
+            if (!noResultsDiv) {
+                noResultsDiv = document.createElement('div');
+                noResultsDiv.id = 'no-results';
+                noResultsDiv.style.cssText = 'text-align: center; padding: 3rem; color: var(--text-muted);';
+                noResultsDiv.innerHTML = '<h3>No posts found</h3><p>Try adjusting your search or filter criteria.</p>';
+                document.querySelector('.blog-posts').appendChild(noResultsDiv);
+            }
+            noResultsDiv.style.display = 'block';
+        } else if (noResultsDiv) {
+            noResultsDiv.style.display = 'none';
+        }
+    }
+    
+    // Tag filter functionality
     tagFilters.forEach(filter => {
         filter.addEventListener('click', function() {
-            // Update active filter
             tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             
-            const selectedTag = this.getAttribute('data-tag');
-            
-            // Filter posts
-            blogPosts.forEach(post => {
-                const postTags = post.getAttribute('data-tags');
-                if (selectedTag === 'all' || (postTags && postTags.includes(selectedTag))) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
+            currentTag = this.getAttribute('data-tag');
+            filterPosts();
         });
     });
+    
+    // Sidebar tag filter functionality
+    sidebarTagFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            
+            currentTag = this.getAttribute('data-tag');
+            
+            // Update main tag filter to match
+            const mainFilter = document.querySelector(`[data-tag="${currentTag}"].tag-filter`);
+            if (mainFilter) {
+                mainFilter.classList.add('active');
+            }
+            
+            filterPosts();
+        });
+    });
+    
+    // Search functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            currentSearch = this.value.toLowerCase();
+            filterPosts();
+        });
+    }
     
     // Handle tag clicks within posts
     const blogTags = document.querySelectorAll('.blog-tag');
     blogTags.forEach(tag => {
         tag.addEventListener('click', function() {
             const tagName = this.getAttribute('data-tag');
-            const correspondingFilter = document.querySelector(`[data-tag="${tagName}"]`);
-            if (correspondingFilter && correspondingFilter.classList.contains('tag-filter')) {
-                correspondingFilter.click();
-            }
+            currentTag = tagName;
+            
+            // Update all filters
+            tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            
+            const mainFilter = document.querySelector(`[data-tag="${tagName}"].tag-filter`);
+            const sidebarFilter = document.querySelector(`[data-tag="${tagName}"].sidebar-tag-filter`);
+            
+            if (mainFilter) mainFilter.classList.add('active');
+            if (sidebarFilter) sidebarFilter.classList.add('active');
+            
+            filterPosts();
         });
     });
 });

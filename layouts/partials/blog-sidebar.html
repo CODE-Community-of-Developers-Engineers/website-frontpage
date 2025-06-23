@@ -29,9 +29,9 @@
             {{ $tagCounts = merge $tagCounts (dict . (add $count 1)) }}
         {{ end }}
         {{ range $tag, $count := $tagCounts }}
-        <a href="{{ "/blog" | relURL }}" class="tag-cloud-item" data-tag="{{ $tag }}">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="{{ $tag }}">
             {{ $tag | title }} ({{ $count }})
-        </a>
+        </button>
         {{ end }}
     </div>
 </div>

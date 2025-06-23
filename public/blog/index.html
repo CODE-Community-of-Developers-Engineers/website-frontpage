@@ -29,6 +29,7 @@
         
         <nav class="nav-desktop">
             <a href="/blog" class="nav-link">Blog</a>
+            <a href="/pages/search" class="nav-link">Search</a>
             <a href="/project-request" class="nav-link">Get Help</a>
             <a href="/talent-matchboard" class="nav-link">Jobs</a>
             <a href="/event-sponsorship" class="nav-link">Sponsor</a>
@@ -44,6 +45,7 @@
 <div class="mobile-nav" id="mobile-nav">
     <div class="mobile-nav-content">
         <a href="/blog" class="nav-link">Blog</a>
+        <a href="/pages/search" class="nav-link">Search</a>
         <a href="/project-request" class="nav-link">Get Help</a>
         <a href="/talent-matchboard" class="nav-link">Jobs</a>
         <a href="/event-sponsorship" class="nav-link">Sponsor</a>
@@ -79,11 +81,25 @@
             
                 
             
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
                 
             
                 
             
         
+            
+                
+            
+                
             
                 
             
@@ -104,6 +120,14 @@
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
                 <button class="tag tag-filter active" data-tag="all">All Posts</button>
                 
+                <button class="tag tag-filter" data-tag="community">Community</button>
+                
+                <button class="tag tag-filter" data-tag="events">Events</button>
+                
+                <button class="tag tag-filter" data-tag="networking">Networking</button>
+                
+                <button class="tag tag-filter" data-tag="beginners">Beginners</button>
+                
                 <button class="tag tag-filter" data-tag="javascript">Javascript</button>
                 
                 <button class="tag tag-filter" data-tag="nodejs">Nodejs</button>
@@ -114,15 +138,13 @@
                 
                 <button class="tag tag-filter" data-tag="tutorial">Tutorial</button>
                 
-                <button class="tag tag-filter" data-tag="beginners">Beginners</button>
-                
                 <button class="tag tag-filter" data-tag="hackathon">Hackathon</button>
                 
-                <button class="tag tag-filter" data-tag="philly-tech-week">Philly-Tech-Week</button>
+                <button class="tag tag-filter" data-tag="ai">Ai</button>
                 
-                <button class="tag tag-filter" data-tag="innovation">Innovation</button>
+                <button class="tag tag-filter" data-tag="gaming">Gaming</button>
                 
-                <button class="tag tag-filter" data-tag="community">Community</button>
+                <button class="tag tag-filter" data-tag="startup">Startup</button>
                 
             </div>
         </div>
@@ -130,6 +152,56 @@
 
         
         <div class="blog-posts">
+            
+            <article class="blog-post featured" data-tags="community events networking beginners">
+                
+                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
+                    Featured
+                </div>
+                
+                
+                <h2 style="margin-bottom: 0.75rem;">
+                    <a href="/blog/getting-started-with-code-coffee/" style="text-decoration: none; color: var(--text-primary);">
+                        Getting Started with Code &amp; Coffee Philadelphia
+                    </a>
+                </h2>
+                
+                <div class="blog-meta">
+                    
+                    <span>June 23, 2025</span>
+                    
+                    
+                    <span>by Code &amp; Coffee Team</span>
+                    
+                    
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    
+                        <p>Welcome to Code &amp; Coffee Philadelphia! Whether you&rsquo;re a seasoned developer, a designer, or someone just starting their tech journey, our community has something for everyone.</p>
+<h2 id="what-were-all-about">What We&rsquo;re All About</h2>
+<p>Code &amp; Coffee Philadelphia is more than just a meetup group – we&rsquo;re a thriving community of tech enthusiasts who believe in the power of collaboration, learning, and good coffee. Our mission is to create an inclusive space where people can share ideas, work on projects, and grow their skills together.</p>
+                    
+                </div>
+                
+                
+                <div class="blog-tags">
+                    
+                    <span class="tag blog-tag" data-tag="community">Community</span>
+                    
+                    <span class="tag blog-tag" data-tag="events">Events</span>
+                    
+                    <span class="tag blog-tag" data-tag="networking">Networking</span>
+                    
+                    <span class="tag blog-tag" data-tag="beginners">Beginners</span>
+                    
+                </div>
+                
+                
+                <a href="/blog/getting-started-with-code-coffee/" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    Read full article →
+                </a>
+            </article>
             
             <article class="blog-post" data-tags="javascript nodejs api express tutorial beginners">
                 
@@ -189,12 +261,16 @@
                 </a>
             </article>
             
-            <article class="blog-post" data-tags="hackathon philly-tech-week innovation community">
+            <article class="blog-post featured" data-tags="hackathon events ai gaming startup community">
+                
+                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
+                    Featured
+                </div>
                 
                 
                 <h2 style="margin-bottom: 0.75rem;">
                     <a href="/blog/ptw-hackathon-2025/" style="text-decoration: none; color: var(--text-primary);">
-                        Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine
+                        Philly Tech Week Innovation Hackathon 2025
                     </a>
                 </h2>
                 
@@ -203,15 +279,18 @@
                     <span>May 10, 2025</span>
                     
                     
-                    <span>by Code &amp; Coffee Philadelphia</span>
+                    <span>by Code &amp; Coffee Team</span>
                     
+                    
+                    <span>6 min read</span>
                     
                 </div>
                 
                 <div style="margin-bottom: 1.5rem;">
                     
-                        Philadelphia&rsquo;s technology scene features communities fostering growth and innovation. Code &amp; Coffee Philadelphia, a non-profit, energizes this ecosystem. Their &ldquo;Philly Innovation Hackathon 2025&rdquo; during Philly Tech Week brought together innovators to solve challenges. This event reflects Code &amp; Coffee&rsquo;s mission to connect, educate, and empower local tech talent.
-Igniting Innovation: Code &amp; Coffee&rsquo;s Philly Tech Week Hackathon – The &ldquo;Philly Innovation Hackathon 2025&rdquo; A. Event Overview: Setting the Stage for Innovation During Philly Tech Week, a city-wide event showcasing Philadelphia&rsquo;s tech growth, Code &amp; Coffee Philadelphia hosted its &ldquo;Philly Innovation Hackathon 2025.
+                        <p>Our Philly Tech Week Innovation Hackathon 2025 was an incredible success! Over three days, developers, designers, and entrepreneurs came together to build innovative solutions and push the boundaries of technology.</p>
+<h2 id="event-highlights">Event Highlights</h2>
+<p>The hackathon brought together Philadelphia&rsquo;s brightest tech minds to collaborate on cutting-edge projects. With tracks focused on AI, generative gaming systems, and startup-oriented solutions, participants had the opportunity to work on truly innovative ideas.</p>
                     
                 </div>
                 
@@ -220,9 +299,13 @@ Igniting Innovation: Code &amp; Coffee&rsquo;s Philly Tech Week Hackathon – Th
                     
                     <span class="tag blog-tag" data-tag="hackathon">Hackathon</span>
                     
-                    <span class="tag blog-tag" data-tag="philly-tech-week">Philly-Tech-Week</span>
+                    <span class="tag blog-tag" data-tag="events">Events</span>
                     
-                    <span class="tag blog-tag" data-tag="innovation">Innovation</span>
+                    <span class="tag blog-tag" data-tag="ai">Ai</span>
+                    
+                    <span class="tag blog-tag" data-tag="gaming">Gaming</span>
+                    
+                    <span class="tag blog-tag" data-tag="startup">Startup</span>
                     
                     <span class="tag blog-tag" data-tag="community">Community</span>
                     
@@ -278,6 +361,13 @@ Blog Post Structure Each blog post should be in its own folder with an index.
     <div class="recent-posts">
         
         <div class="recent-post">
+            <a href="/blog/getting-started-with-code-coffee/" class="recent-post-title">Getting Started with Code &amp; Coffee Philadelphia</a>
+            <div class="recent-post-meta">
+                Jun 23, 2025
+            </div>
+        </div>
+        
+        <div class="recent-post">
             <a href="/blog/example-tech-tutorial/" class="recent-post-title">Building Your First REST API with Node.js and Express</a>
             <div class="recent-post-meta">
                 Jun 20, 2025
@@ -285,7 +375,7 @@ Blog Post Structure Each blog post should be in its own folder with an index.
         </div>
         
         <div class="recent-post">
-            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine</a>
+            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Philly Tech Week Innovation Hackathon 2025</a>
             <div class="recent-post-meta">
                 May 10, 2025
             </div>
@@ -316,6 +406,16 @@ Blog Post Structure Each blog post should be in its own folder with an index.
             
                 
             
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
                 
             
                 
@@ -330,19 +430,14 @@ Blog Post Structure Each blog post should be in its own folder with an index.
             
                 
             
-        
+                
             
-        
-        
-        
-            
+                
             
         
             
-            
         
-            
-            
+        
         
             
             
@@ -365,46 +460,85 @@ Blog Post Structure Each blog post should be in its own folder with an index.
             
             
         
+            
+            
         
-        <a href="/blog" class="tag-cloud-item" data-tag="api">
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="ai">
+            Ai (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="api">
             Api (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="beginners">
-            Beginners (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="beginners">
+            Beginners (2)
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="community">
-            Community (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="community">
+            Community (2)
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="express">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="events">
+            Events (2)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="express">
             Express (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="hackathon">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="gaming">
+            Gaming (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="hackathon">
             Hackathon (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="innovation">
-            Innovation (1)
-        </a>
-        
-        <a href="/blog" class="tag-cloud-item" data-tag="javascript">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="javascript">
             Javascript (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="nodejs">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="networking">
+            Networking (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="nodejs">
             Nodejs (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="philly-tech-week">
-            Philly-Tech-Week (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="startup">
+            Startup (1)
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="tutorial">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="tutorial">
             Tutorial (1)
-        </a>
+        </button>
         
     </div>
 </div>
@@ -475,36 +609,107 @@ Blog Post Structure Each blog post should be in its own folder with an index.
 document.addEventListener('DOMContentLoaded', function() {
     const tagFilters = document.querySelectorAll('.tag-filter');
     const blogPosts = document.querySelectorAll('.blog-post');
+    const searchInput = document.getElementById('search-input');
+    const sidebarTagFilters = document.querySelectorAll('.sidebar-tag-filter');
+    
+    let currentTag = 'all';
+    let currentSearch = '';
+    
+    
+    function filterPosts() {
+        blogPosts.forEach(post => {
+            const postTags = post.getAttribute('data-tags') || '';
+            const postTitle = post.querySelector('h2 a').textContent.toLowerCase();
+            const postContent = post.querySelector('.blog-post-summary') ? 
+                post.querySelector('.blog-post-summary').textContent.toLowerCase() : '';
+            
+            const matchesTag = currentTag === 'all' || postTags.includes(currentTag);
+            const matchesSearch = currentSearch === '' || 
+                postTitle.includes(currentSearch) || 
+                postContent.includes(currentSearch);
+            
+            if (matchesTag && matchesSearch) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+        
+        
+        const visiblePosts = Array.from(blogPosts).filter(post => post.style.display !== 'none');
+        let noResultsDiv = document.getElementById('no-results');
+        
+        if (visiblePosts.length === 0) {
+            if (!noResultsDiv) {
+                noResultsDiv = document.createElement('div');
+                noResultsDiv.id = 'no-results';
+                noResultsDiv.style.cssText = 'text-align: center; padding: 3rem; color: var(--text-muted);';
+                noResultsDiv.innerHTML = '<h3>No posts found</h3><p>Try adjusting your search or filter criteria.</p>';
+                document.querySelector('.blog-posts').appendChild(noResultsDiv);
+            }
+            noResultsDiv.style.display = 'block';
+        } else if (noResultsDiv) {
+            noResultsDiv.style.display = 'none';
+        }
+    }
+    
     
     tagFilters.forEach(filter => {
         filter.addEventListener('click', function() {
-            
             tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             
-            const selectedTag = this.getAttribute('data-tag');
-            
-            
-            blogPosts.forEach(post => {
-                const postTags = post.getAttribute('data-tags');
-                if (selectedTag === 'all' || (postTags && postTags.includes(selectedTag))) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
+            currentTag = this.getAttribute('data-tag');
+            filterPosts();
         });
     });
+    
+    
+    sidebarTagFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            
+            currentTag = this.getAttribute('data-tag');
+            
+            
+            const mainFilter = document.querySelector(`[data-tag="${currentTag}"].tag-filter`);
+            if (mainFilter) {
+                mainFilter.classList.add('active');
+            }
+            
+            filterPosts();
+        });
+    });
+    
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            currentSearch = this.value.toLowerCase();
+            filterPosts();
+        });
+    }
     
     
     const blogTags = document.querySelectorAll('.blog-tag');
     blogTags.forEach(tag => {
         tag.addEventListener('click', function() {
             const tagName = this.getAttribute('data-tag');
-            const correspondingFilter = document.querySelector(`[data-tag="${tagName}"]`);
-            if (correspondingFilter && correspondingFilter.classList.contains('tag-filter')) {
-                correspondingFilter.click();
-            }
+            currentTag = tagName;
+            
+            
+            tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            
+            const mainFilter = document.querySelector(`[data-tag="${tagName}"].tag-filter`);
+            const sidebarFilter = document.querySelector(`[data-tag="${tagName}"].sidebar-tag-filter`);
+            
+            if (mainFilter) mainFilter.classList.add('active');
+            if (sidebarFilter) sidebarFilter.classList.add('active');
+            
+            filterPosts();
         });
     });
 });

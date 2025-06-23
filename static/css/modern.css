@@ -404,9 +404,11 @@ p {
     text-decoration: none;
     color: var(--text-secondary);
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
-.tag-cloud-item:hover {
+.tag-cloud-item:hover,
+.tag-cloud-item.active {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
@@ -439,6 +441,24 @@ p {
 .community-link span {
     font-size: 0.875rem;
     color: var(--text-secondary);
+}
+
+/* Search Input Styling */
+#search-input {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(89, 150, 155, 0.1);
+}
+
+/* No results styling */
+#no-results {
+    background: var(--background-secondary);
+    border-radius: var(--radius-lg);
+    margin: 2rem 0;
 }
 
 /* Footer */

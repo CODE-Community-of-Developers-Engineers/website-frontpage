@@ -29,6 +29,7 @@
         
         <nav class="nav-desktop">
             <a href="/blog" class="nav-link">Blog</a>
+            <a href="/pages/search" class="nav-link">Search</a>
             <a href="/project-request" class="nav-link">Get Help</a>
             <a href="/talent-matchboard" class="nav-link">Jobs</a>
             <a href="/event-sponsorship" class="nav-link">Sponsor</a>
@@ -44,6 +45,7 @@
 <div class="mobile-nav" id="mobile-nav">
     <div class="mobile-nav-content">
         <a href="/blog" class="nav-link">Blog</a>
+        <a href="/pages/search" class="nav-link">Search</a>
         <a href="/project-request" class="nav-link">Get Help</a>
         <a href="/talent-matchboard" class="nav-link">Jobs</a>
         <a href="/event-sponsorship" class="nav-link">Sponsor</a>
@@ -171,7 +173,14 @@
         </div>
         
         <div class="recent-post">
-            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine</a>
+            <a href="/blog/example-tech-tutorial/" class="recent-post-title">Building Your First REST API with Node.js and Express</a>
+            <div class="recent-post-meta">
+                Jun 20, 2025
+            </div>
+        </div>
+        
+        <div class="recent-post">
+            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Philly Tech Week Innovation Hackathon 2025</a>
             <div class="recent-post-meta">
                 May 10, 2025
             </div>
@@ -212,6 +221,24 @@
             
                 
             
+                
+            
+                
+            
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
         
             
         
@@ -241,34 +268,82 @@
             
             
         
+            
+            
         
-        <a href="/blog" class="tag-cloud-item" data-tag="beginners">
-            Beginners (1)
-        </a>
+            
+            
         
-        <a href="/blog" class="tag-cloud-item" data-tag="community">
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="ai">
+            Ai (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="api">
+            Api (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="beginners">
+            Beginners (2)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="community">
             Community (2)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="events">
-            Events (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="events">
+            Events (2)
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="hackathon">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="express">
+            Express (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="gaming">
+            Gaming (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="hackathon">
             Hackathon (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="innovation">
-            Innovation (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="javascript">
+            Javascript (1)
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="networking">
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="networking">
             Networking (1)
-        </a>
+        </button>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="philly-tech-week">
-            Philly-Tech-Week (1)
-        </a>
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="nodejs">
+            Nodejs (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="startup">
+            Startup (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="tutorial">
+            Tutorial (1)
+        </button>
         
     </div>
 </div>
@@ -339,36 +414,107 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tagFilters = document.querySelectorAll('.tag-filter');
     const blogPosts = document.querySelectorAll('.blog-post');
+    const searchInput = document.getElementById('search-input');
+    const sidebarTagFilters = document.querySelectorAll('.sidebar-tag-filter');
+    
+    let currentTag = 'all';
+    let currentSearch = '';
+    
+    
+    function filterPosts() {
+        blogPosts.forEach(post => {
+            const postTags = post.getAttribute('data-tags') || '';
+            const postTitle = post.querySelector('h2 a').textContent.toLowerCase();
+            const postContent = post.querySelector('.blog-post-summary') ? 
+                post.querySelector('.blog-post-summary').textContent.toLowerCase() : '';
+            
+            const matchesTag = currentTag === 'all' || postTags.includes(currentTag);
+            const matchesSearch = currentSearch === '' || 
+                postTitle.includes(currentSearch) || 
+                postContent.includes(currentSearch);
+            
+            if (matchesTag && matchesSearch) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+        
+        
+        const visiblePosts = Array.from(blogPosts).filter(post => post.style.display !== 'none');
+        let noResultsDiv = document.getElementById('no-results');
+        
+        if (visiblePosts.length === 0) {
+            if (!noResultsDiv) {
+                noResultsDiv = document.createElement('div');
+                noResultsDiv.id = 'no-results';
+                noResultsDiv.style.cssText = 'text-align: center; padding: 3rem; color: var(--text-muted);';
+                noResultsDiv.innerHTML = '<h3>No posts found</h3><p>Try adjusting your search or filter criteria.</p>';
+                document.querySelector('.blog-posts').appendChild(noResultsDiv);
+            }
+            noResultsDiv.style.display = 'block';
+        } else if (noResultsDiv) {
+            noResultsDiv.style.display = 'none';
+        }
+    }
+    
     
     tagFilters.forEach(filter => {
         filter.addEventListener('click', function() {
-            
             tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             
-            const selectedTag = this.getAttribute('data-tag');
-            
-            
-            blogPosts.forEach(post => {
-                const postTags = post.getAttribute('data-tags');
-                if (selectedTag === 'all' || (postTags && postTags.includes(selectedTag))) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
+            currentTag = this.getAttribute('data-tag');
+            filterPosts();
         });
     });
+    
+    
+    sidebarTagFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            
+            currentTag = this.getAttribute('data-tag');
+            
+            
+            const mainFilter = document.querySelector(`[data-tag="${currentTag}"].tag-filter`);
+            if (mainFilter) {
+                mainFilter.classList.add('active');
+            }
+            
+            filterPosts();
+        });
+    });
+    
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            currentSearch = this.value.toLowerCase();
+            filterPosts();
+        });
+    }
     
     
     const blogTags = document.querySelectorAll('.blog-tag');
     blogTags.forEach(tag => {
         tag.addEventListener('click', function() {
             const tagName = this.getAttribute('data-tag');
-            const correspondingFilter = document.querySelector(`[data-tag="${tagName}"]`);
-            if (correspondingFilter && correspondingFilter.classList.contains('tag-filter')) {
-                correspondingFilter.click();
-            }
+            currentTag = tagName;
+            
+            
+            tagFilters.forEach(f => f.classList.remove('active'));
+            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            
+            const mainFilter = document.querySelector(`[data-tag="${tagName}"].tag-filter`);
+            const sidebarFilter = document.querySelector(`[data-tag="${tagName}"].sidebar-tag-filter`);
+            
+            if (mainFilter) mainFilter.classList.add('active');
+            if (sidebarFilter) sidebarFilter.classList.add('active');
+            
+            filterPosts();
         });
     });
 });

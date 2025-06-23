@@ -42,30 +42,60 @@ function currentSlide(index) {
     showSlide(currentSlideIndex);
 }
 
-// Auto-advance carousel every 5 seconds
-function autoAdvance() {
-    changeSlide(1);
-}
 
-// Initialize carousel
+
+// Initialize carousels
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize main carousel
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    
     if (slides.length > 0) {
-        showSlide(0);
+        showSlide(0, slides, indicators);
         
-        // Start auto-advance
-        setInterval(autoAdvance, 5000);
+        // Start auto-advance for main carousel
+        let autoAdvanceInterval = setInterval(() => {
+            changeSlide(1);
+        }, 5000);
         
         // Pause auto-advance on hover
         const carousel = document.querySelector('.carousel-container');
         if (carousel) {
-            let autoAdvanceInterval = setInterval(autoAdvance, 5000);
-            
             carousel.addEventListener('mouseenter', () => {
                 clearInterval(autoAdvanceInterval);
             });
             
             carousel.addEventListener('mouseleave', () => {
-                autoAdvanceInterval = setInterval(autoAdvance, 5000);
+                autoAdvanceInterval = setInterval(() => {
+                    changeSlide(1);
+                }, 5000);
+            });
+        }
+    }
+    
+    // Initialize events slider
+    const eventsSlides = document.querySelectorAll('.events-slide');
+    const eventsIndicators = document.querySelectorAll('.events-indicator');
+    
+    if (eventsSlides.length > 0) {
+        showEventsSlide(0, eventsSlides, eventsIndicators);
+        
+        // Start auto-advance for events slider
+        let eventsAutoInterval = setInterval(() => {
+            changeEventsSlide(1);
+        }, 4000);
+        
+        // Pause auto-advance on hover for events slider
+        const eventsSlider = document.querySelector('.events-slider-container');
+        if (eventsSlider) {
+            eventsSlider.addEventListener('mouseenter', () => {
+                clearInterval(eventsAutoInterval);
+            });
+            
+            eventsSlider.addEventListener('mouseleave', () => {
+                eventsAutoInterval = setInterval(() => {
+                    changeEventsSlide(1);
+                }, 4000);
             });
         }
     }
@@ -80,64 +110,3 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Events Slider functionality
-let currentEventsSlideIndex = 0;
-const eventsSlides = document.querySelectorAll('.events-slide');
-const eventsIndicators = document.querySelectorAll('.events-indicator');
-
-function showEventsSlide(index) {
-    // Hide all slides
-    eventsSlides.forEach(slide => slide.classList.remove('active'));
-    eventsIndicators.forEach(indicator => indicator.classList.remove('active'));
-    
-    // Show current slide
-    if (eventsSlides[index]) {
-        eventsSlides[index].classList.add('active');
-        eventsIndicators[index].classList.add('active');
-    }
-}
-
-function changeEventsSlide(direction) {
-    currentEventsSlideIndex += direction;
-    
-    if (currentEventsSlideIndex >= eventsSlides.length) {
-        currentEventsSlideIndex = 0;
-    }
-    if (currentEventsSlideIndex < 0) {
-        currentEventsSlideIndex = eventsSlides.length - 1;
-    }
-    
-    showEventsSlide(currentEventsSlideIndex);
-}
-
-function currentEventsSlide(index) {
-    currentEventsSlideIndex = index - 1;
-    showEventsSlide(currentEventsSlideIndex);
-}
-
-// Auto-advance events slider every 4 seconds
-function autoAdvanceEvents() {
-    changeEventsSlide(1);
-}
-
-// Initialize events slider
-document.addEventListener('DOMContentLoaded', function() {
-    if (eventsSlides.length > 0) {
-        showEventsSlide(0);
-        
-        // Start auto-advance for events slider
-        let eventsAutoInterval = setInterval(autoAdvanceEvents, 4000);
-        
-        // Pause auto-advance on hover for events slider
-        const eventsSlider = document.querySelector('.events-slider-container');
-        if (eventsSlider) {
-            eventsSlider.addEventListener('mouseenter', () => {
-                clearInterval(eventsAutoInterval);
-            });
-            
-            eventsSlider.addEventListener('mouseleave', () => {
-                eventsAutoInterval = setInterval(autoAdvanceEvents, 4000);
-            });
-        }
-    }
-});

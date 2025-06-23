@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: {{ .Title | jsonify }},
                     description: {{ .Description | jsonify }},
                     content: {{ .Plain | jsonify }},
-                    url: {{ .Permalink | jsonify }},
+                    url: {{ .RelPermalink | jsonify }},
                     date: {{ .Date.Format "2006-01-02" | jsonify }},
                     author: {{ .Params.author | default "Code & Coffee Team" | jsonify }},
                     tags: {{ .Params.tags | default slice | jsonify }},
@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 {{ end }}
                 {{ range where site.RegularPages "Section" "!=" "blog" }}
-                {{ if not (in .RelPermalink "/search/") }}
+                {{ if and (not (in .RelPermalink "/search/")) (.Title) }}
                 {
                     title: {{ .Title | jsonify }},
                     description: {{ .Description | default .Summary | jsonify }},
                     content: {{ .Plain | jsonify }},
-                    url: {{ .Permalink | jsonify }},
+                    url: {{ .RelPermalink | jsonify }},
                     date: {{ .Date.Format "2006-01-02" | jsonify }},
                     author: "Code & Coffee Team",
                     tags: [],
@@ -93,7 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Debug URLs
             console.log('All URLs in search index:');
             searchIndex.forEach((item, index) => {
-                console.log(`${index + 1}. "${item.title}" -> ${item.url}`);
+                if (index < 10) { // Only show first 10 to avoid console spam
+                    console.log(`${index + 1}. "${item.title}" -> ${item.url}`);
+                }
             });
             
         } catch (error) {
@@ -194,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return `
             <div class="search-result" style="padding: 1.5rem; border: 2px solid #ccc; border-radius: 8px; margin-bottom: 1rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 <h3 style="margin-bottom: 0.5rem; color: #333;">
-                    <a href="${item.url}" style="text-decoration: none; color: #007acc;">${item.title}</a>
+                    <a href="${item.url}" style="text-decoration: none; color: #007acc;" onclick="console.log('Clicking link to:', '${item.url}'); return true;">${item.title}</a>
                     ${item.featured ? '<span style="background: #ff6b6b; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
                     <span style="background: ${item.type === 'blog' ? '#007acc' : '#666'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
                 </h3>

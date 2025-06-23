@@ -58,6 +58,40 @@
         margin-right: auto;
     }
     
+    .blog-post-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+    }
+    
+    .blog-tag {
+        background-color: #59969B;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+    }
+    
+    .blog-tag:hover {
+        background-color: #3B2521;
+        color: white;
+    }
+    
+    .featured-badge {
+        display: inline-block;
+        background-color: #e83b3b;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-left: 10px;
+    }
+    
     .blog-content table {
         width: 100%;
         border-collapse: collapse;
@@ -163,7 +197,21 @@
             <div class="blog-meta">
                 Published on May 10, 2025
                  by Code &amp; Coffee Philadelphia
+                
             </div>
+            
+            <div class="blog-post-tags">
+                
+                <a href="/blog" class="blog-tag">Hackathon</a>
+                
+                <a href="/blog" class="blog-tag">Philly-Tech-Week</a>
+                
+                <a href="/blog" class="blog-tag">Innovation</a>
+                
+                <a href="/blog" class="blog-tag">Community</a>
+                
+            </div>
+            
             
         </div>
         

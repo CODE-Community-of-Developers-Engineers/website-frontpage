@@ -384,21 +384,26 @@ header h1 {
     
     #hero-and-splash {
         display: flex !important;
-        margin: 3rem;
-        justify-content: space-evenly;
-        align-items: flex-start;
+        margin: 3rem auto;
+        max-width: 1200px;
+        justify-content: center;
+        align-items: center;
+        gap: 4rem;
         flex-wrap: nowrap;
     }
     
     .hero-section {
-        width: min(70%, 600px) !important;
+        width: 600px !important;
         margin: 0 !important;
         flex: 0 0 auto;
     }
 
     #splash {
-        margin-top: 10rem;
+        margin-top: 0;
         flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     #splash, #splash p, #splash h1 {

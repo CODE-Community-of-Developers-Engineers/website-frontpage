@@ -15,7 +15,7 @@
 <style>
     .blog-list-container {
         width: 90%;
-        max-width: 800px;
+        max-width: 1000px;
         margin: 40px auto;
         padding: 30px;
         background-color: #f9f5f1;
@@ -29,6 +29,31 @@
         margin-bottom: 30px;
     }
     
+    .blog-filter-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .tag-filter {
+        padding: 6px 12px;
+        background-color: #59969B;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.2s ease;
+        text-decoration: none;
+    }
+    
+    .tag-filter:hover, .tag-filter.active {
+        background-color: #3B2521;
+        color: white;
+    }
+    
     .blog-post-item {
         background-color: white;
         border-radius: 8px;
@@ -36,6 +61,7 @@
         margin-bottom: 20px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
     }
     
     .blog-post-item:hover {
@@ -63,24 +89,72 @@
     .blog-post-meta {
         color: #666;
         font-size: 0.9rem;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .blog-post-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    
+    .blog-tag {
+        background-color: #E9E3DC;
+        color: #3B2521;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+    }
+    
+    .blog-tag:hover {
+        background-color: #59969B;
+        color: white;
     }
     
     .blog-post-summary {
         color: #555;
         line-height: 1.5;
+        margin-bottom: 15px;
     }
     
     .read-more {
         display: inline-block;
-        margin-top: 10px;
         color: #59969B;
         text-decoration: none;
         font-weight: bold;
+        padding: 8px 16px;
+        border: 1px solid #59969B;
+        border-radius: 4px;
+        transition: all 0.2s ease;
     }
     
     .read-more:hover {
-        text-decoration: underline;
+        background-color: #59969B;
+        color: white;
+    }
+    
+    .featured-post {
+        border-left: 4px solid #59969B;
+        background: linear-gradient(135deg, #f9f5f1 0%, #ffffff 100%);
+    }
+    
+    .featured-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: #e83b3b;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 </style>
 
@@ -154,29 +228,121 @@
         </div>
         
         
-        <article class="blog-post-item">
+        
+        
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+        
+        
+        
+        <div class="blog-filter-tags">
+            <a href="#" class="tag-filter active" data-tag="all">All Posts</a>
+            
+            <a href="#" class="tag-filter" data-tag="hackathon">Hackathon</a>
+            
+            <a href="#" class="tag-filter" data-tag="philly-tech-week">Philly-Tech-Week</a>
+            
+            <a href="#" class="tag-filter" data-tag="innovation">Innovation</a>
+            
+            <a href="#" class="tag-filter" data-tag="community">Community</a>
+            
+        </div>
+        
+        
+        
+        
+        <article class="blog-post-item" data-tags="hackathon philly-tech-week innovation community">
+            
             <h2 class="blog-post-title">
                 <a href="/blog/ptw-hackathon-2025/">Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine</a>
             </h2>
-            
             <div class="blog-post-meta">
-                Published on May 10, 2025
-                 by Code &amp; Coffee Philadelphia
+                
+                <span>May 10, 2025</span>
+                
+                
+                <span>by Code &amp; Coffee Philadelphia</span>
+                
+                
+                <div class="blog-post-tags">
+                    
+                    <a href="#" class="blog-tag" data-tag="hackathon">Hackathon</a>
+                    
+                    <a href="#" class="blog-tag" data-tag="philly-tech-week">Philly-Tech-Week</a>
+                    
+                    <a href="#" class="blog-tag" data-tag="innovation">Innovation</a>
+                    
+                    <a href="#" class="blog-tag" data-tag="community">Community</a>
+                    
+                </div>
+                
             </div>
-            
             <div class="blog-post-summary">
                 
                     Philadelphia&rsquo;s technology scene features communities fostering growth and innovation. Code &amp; Coffee Philadelphia, a non-profit, energizes this ecosystem. Their &ldquo;Philly Innovation Hackathon 2025&rdquo; during Philly Tech Week brought together innovators to solve challenges. This event reflects Code &amp; Coffee&rsquo;s mission to connect, educate, and empower local tech talent.
 Igniting Innovation: Code &amp; Coffee&rsquo;s Philly Tech Week Hackathon – The &ldquo;Philly Innovation Hackathon 2025&rdquo; A. Event Overview: Setting the Stage for Innovation During Philly Tech Week, a city-wide event showcasing Philadelphia&rsquo;s tech growth, Code &amp; Coffee Philadelphia hosted its &ldquo;Philly Innovation Hackathon 2025.
                 
             </div>
-            <a href="/blog/ptw-hackathon-2025/" class="read-more">Read more →</a>
+            <a href="/blog/ptw-hackathon-2025/" class="read-more">Read more</a>
         </article>
         
         
         
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tagFilters = document.querySelectorAll('.tag-filter');
+    const blogPosts = document.querySelectorAll('.blog-post-item');
+    
+    tagFilters.forEach(filter => {
+        filter.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            
+            tagFilters.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            
+            const selectedTag = this.getAttribute('data-tag');
+            
+            
+            blogPosts.forEach(post => {
+                const postTags = post.getAttribute('data-tags');
+                if (selectedTag === 'all' || postTags.includes(selectedTag)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    
+    const blogTags = document.querySelectorAll('.blog-tag');
+    blogTags.forEach(tag => {
+        tag.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tagName = this.getAttribute('data-tag');
+            
+            
+            const correspondingFilter = document.querySelector(`[data-tag="${tagName}"]`);
+            if (correspondingFilter) {
+                correspondingFilter.click();
+            }
+        });
+    });
+});
+</script>
 
     </main>
     

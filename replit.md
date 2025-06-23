@@ -101,9 +101,24 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 - **Replit Config**: Workflow configuration for development environment
 - **GitHub Actions**: Automated deployment pipeline
 
+## Recent Changes
+
+- June 23, 2025: Enhanced blog system with tagging and filtering
+  - Added tag-based filtering on blog listing page
+  - Implemented featured post functionality with badges
+  - Improved blog post templates with better metadata display
+  - Created comprehensive content management documentation
+  - Fixed desktop layout centering and responsiveness issues
+
+- June 23, 2025: Initial Hugo template conversion
+  - Converted static HTML site to Hugo static site generator
+  - Implemented responsive navigation with mobile menu
+  - Created blog functionality with Hugo content management
+  - Set up GitHub Pages deployment workflow
+
 ## Changelog
 
-- June 23, 2025. Initial setup
+- June 23, 2025: Initial setup
 
 ## User Preferences
 

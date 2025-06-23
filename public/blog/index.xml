@@ -6,14 +6,28 @@
     <description>Recent content in Blog on Code &amp; Coffee Philadelphia</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:5000/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting Started with Code &amp; Coffee Philadelphia</title>
+      <link>http://localhost:5000/blog/getting-started-with-code-coffee/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/blog/getting-started-with-code-coffee/</guid>
+      <description>&lt;p&gt;Welcome to Code &amp;amp; Coffee Philadelphia! Whether you&amp;rsquo;re a seasoned developer, a designer, or someone just starting their tech journey, our community has something for everyone.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-were-all-about&#34;&gt;What We&amp;rsquo;re All About&lt;/h2&gt;&#xA;&lt;p&gt;Code &amp;amp; Coffee Philadelphia is more than just a meetup group – we&amp;rsquo;re a thriving community of tech enthusiasts who believe in the power of collaboration, learning, and good coffee. Our mission is to create an inclusive space where people can share ideas, work on projects, and grow their skills together.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine</title>
       <link>http://localhost:5000/blog/ptw-hackathon-2025/</link>
       <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:5000/blog/ptw-hackathon-2025/</guid>
       <description>Philadelphia&amp;rsquo;s technology scene features communities fostering growth and innovation. Code &amp;amp; Coffee Philadelphia, a non-profit, energizes this ecosystem. Their &amp;ldquo;Philly Innovation Hackathon 2025&amp;rdquo; during Philly Tech Week brought together innovators to solve challenges. This event reflects Code &amp;amp; Coffee&amp;rsquo;s mission to connect, educate, and empower local tech talent.&#xA;Igniting Innovation: Code &amp;amp; Coffee&amp;rsquo;s Philly Tech Week Hackathon – The &amp;ldquo;Philly Innovation Hackathon 2025&amp;rdquo; A. Event Overview: Setting the Stage for Innovation During Philly Tech Week, a city-wide event showcasing Philadelphia&amp;rsquo;s tech growth, Code &amp;amp; Coffee Philadelphia hosted its &amp;ldquo;Philly Innovation Hackathon 2025.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:5000/blog/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/blog/readme/</guid>
+      <description>Blog Content Management Guide This guide explains how to create and manage blog posts for the Code &amp;amp; Coffee Philadelphia website.&#xA;Creating a New Blog Post 1. File Location Create new blog posts in the content/blog/ directory with a .md extension.&#xA;File naming convention:&#xA;Use lowercase letters Separate words with hyphens Use descriptive names Example: getting-started-with-react.md 2. Front Matter Structure Every blog post must start with YAML front matter:&#xA;--- title: &amp;#34;Your Post Title&amp;#34; date: 2025-06-23 author: &amp;#34;Author Name&amp;#34; description: &amp;#34;Brief description for SEO and previews&amp;#34; tags: [&amp;#34;tag1&amp;#34;, &amp;#34;tag2&amp;#34;, &amp;#34;tag3&amp;#34;] featured: true # Optional: makes this a featured post --- 3.</description>
     </item>
   </channel>
 </rss>

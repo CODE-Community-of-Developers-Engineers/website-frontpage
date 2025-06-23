@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>code & coffee | project request</title>
+        <meta charset="utf-8" />
+        <meta name="title" content="code & coffee | project request" />
+        <meta name="description" content="Submit your project request to Code & Coffee Philadelphia." />
+        <meta name="theme-color" content="#e83b3b" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="media/logo/transparent.png">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+
+        <link rel="stylesheet" href="./global.css" />
+        <link rel="stylesheet" href="./project-request.css" />
+    </head>
+    <body>
+        <header>
+            <div class="header-left">
+                <div id="logo">
+                    <a href="index.html">
+                        <img src="media/logo/transparent.png" alt="Coffee cup icon logo" draggable="false">
+                    </a>
+                </div>
+                <h1>Code & Coffee</h1>
+            </div>
+            <!-- Mobile hamburger menu button -->
+            <button id="mobile-menu-button" style="display: none; background: none; border: none; cursor: pointer; position: absolute; right: 15px; top: 15px; z-index: 1001;" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#828282" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+            </button>
+            <nav id="desktop-nav" class="header-right">
+                <div class="nav-container">
+                    <a href="links.html" class="nav-link">Links</a>
+                </div>
+                <div class="nav-container">
+                    <a href="project-request.html" class="nav-link active">Project Request</a>
+                </div>
+                <div class="nav-container">
+                    <a href="index.html" class="nav-link">Home</a>
+                </div>
+                <div class="nav-container">
+                    <a href="talent-matchboard.html" class="nav-link">Tech Talent Matchboard</a>
+                </div>
+                <div class="nav-container">
+                    <a href="event-sponsorship.html" class="nav-link">Event Sponsorship</a>
+                </div>
+                <div class="nav-container">
+                    <a href="https://nol-kky-shop.fourthwall.com/" target="_blank" class="nav-link">Merch</a>
+                </div>
+                <div class="nav-container">
+                    <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" target="_blank" class="nav-link">Community Fund</a>
+                </div>
+            </nav>
+        </header>
+        
+        <section id="main">
+            <div id="project-request-container">
+                <div class="project-request-header">
+                    <h1>Project Request</h1>
+                    <p class="mono">📝 Submit your project idea for Code & Coffee to build</p>
+                    <p id="attention-line"><img src="media/gizmo/attention-line.svg" draggable="false"></p>
+                </div>
+                
+                <div class="project-request-content">
+                    <p>
+                        Have a project idea but need help bringing it to life? Our team of skilled developers, 
+                        designers, and creatives can help turn your vision into reality.
+                    </p>
+                    <p>
+                        Fill out the form below to tell us about your project, and we'll get back to you 
+                        to discuss how we can help.
+                    </p>
+                    
+                    <div class="form-container" style="background-color: white; padding: 20px; border-radius: 8px;">
+                        <iframe 
+                            data-tally-src="https://tally.so/embed/npZRLZ?alignLeft=1&hideTitle=1&transparentBackground=0" 
+                            loading="lazy" 
+                            width="100%" 
+                            height="800" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0" 
+                            title="Project Request Form"
+                            style="background-color: white;">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="true-footer">
+            <p style="text-align: center;">
+                <span style="user-select: none;">
+                    <br /><br />
+                    code & coffee philadelphia is a node of <a href="https://socratica.info" target="_blank">socratica</a> and <a href="https://codeandcoffee.org/" target="_blank">code & coffee</a><br />
+                    <br />
+                </span>
+            </p>
+        </section>
+
+        <script>
+            // Load Tally form
+            var d = document, w = window, l = window.location,p = l.protocol == "file:" ? "http://" : "//";
+            if (!w.Tally) {
+                w.Tally = function (...args) { (w.Tally.q = w.Tally.q || []).push(args); };
+                w.Tally.q = w.Tally.q || [];
+            }
+            var s = d.createElement("script");
+            s.async = 1; s.src = p + "tally.so/widgets/embed.js";
+            var e = d.getElementsByTagName("script")[0];
+            e.parentNode.insertBefore(s, e);
+        </script>
+        
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #E9E3DC; z-index: 1000; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; overflow-y: auto;">
+            <button id="mobile-menu-close" style="position: absolute; top: 70px; right: 20px; background-color: rgba(255,255,255,0.8); border: 2px solid #3B2521; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 24px; color: #3B2521; display: flex; align-items: center; justify-content: center; z-index: 1002;" aria-label="Close menu">✕</button>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 40px; width: 100%;">
+                <div style="width: 100%; max-width: 250px; text-align: center;">
+                    <a href="index.html" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;">Home</a>
+                </div>
+                <div style="width: 100%; max-width: 250px; text-align: center;">
+                    <a href="links.html" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;">Links</a>
+                </div>
+                <div style="width: 100%; max-width: 250px; text-align: center;">
+                    <a href="project-request.html" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;">Project Request</a>
+                </div>
+                <div style="width: 100%; max-width: 250px; text-align: center;">
+                    <a href="talent-matchboard.html" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;">Tech Talent Matchboard</a>
+                </div>
+                <div style="width: 100%; max-width: 250px; text-align: center;">
+                    <a href="event-sponsorship.html" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;">Event Sponsorship</a>
+                </div>
+                <div style="width: 100%; max-width: 250px; text-align: center;">
+                    <a href="https://nol-kky-shop.fourthwall.com/" target="_blank" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;">Merch</a>
+                </div>
+                <div style="width: 100%; max-width: 250px; text-align: center;">
+                    <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" target="_blank" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;">Community Fund</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu functionality -->
+        <script src="./menu.js"></script>
+    </body>
+</html>

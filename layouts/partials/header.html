@@ -18,7 +18,7 @@
     <nav id="desktop-nav" class="header-right">
         {{ range .Site.Menus.main }}
             <div class="nav-container">
-                <a href="{{ .URL }}" class="nav-link" {{ if hasPrefix .URL "http" }}target="_blank"{{ end }}>{{ .Name }}</a>
+                <a href="{{ .URL }}" class="nav-link{{ if eq $.Page.RelPermalink .URL }} active{{ end }}" {{ if hasPrefix .URL "http" }}target="_blank"{{ end }}>{{ .Name }}</a>
             </div>
         {{ end }}
     </nav>

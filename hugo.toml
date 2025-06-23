@@ -52,6 +52,6 @@ url = "https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia"
 weight = 70
 
 [outputs]
-home = ["HTML", "RSS"]
+home = ["HTML", "RSS", "JSON"]
 page = ["HTML"]
 section = ["HTML", "RSS"]

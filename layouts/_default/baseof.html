@@ -1,33 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    <meta name="theme-color" content="#e83b3b">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="{{ "css/global.css" | relURL }}">
-    {{ block "css" . }}{{ end }}
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ "media/logo/transparent.png" | relURL }}">
-</head>
-<body>
-    {{ partial "header.html" . }}
-    
-    <main>
-        {{ block "main" . }}{{ end }}
-    </main>
-    
-    {{ partial "footer.html" . }}
-    {{ partial "mobile-menu.html" . }}
-    
-    <!-- JavaScript -->
-    <script src="{{ "js/menu.js" | relURL }}"></script>
-    {{ block "js" . }}{{ end }}
-</body>
-</html>
+{{ partial "header.html" . }}
+
+{{ block "main" . }}{{ end }}
+
+{{ partial "footer.html" . }}

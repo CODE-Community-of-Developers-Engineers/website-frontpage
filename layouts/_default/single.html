@@ -1,4 +1,7 @@
-{{ define "css" }}
+{{ define "main" }}
+<section>
+{{ if eq .Section "blog" }}
+<style>
 {{ if eq .Section "blog" }}
 <style>
     .blog-container {
@@ -116,7 +119,7 @@
 {{ end }}
 {{ end }}
 
-{{ define "main" }}
+{{ end }}
 {{ if eq .Section "blog" }}
 <section>
     <div class="blog-container">
@@ -164,6 +167,12 @@
             {{ .Content }}
         </div>
     </div>
+{{ else }}
+    <div class="content-container" style="max-width: 800px; margin: 40px auto; padding: 20px;">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </div>
+{{ end }}
 </section>
 {{ end }}
 {{ end }}

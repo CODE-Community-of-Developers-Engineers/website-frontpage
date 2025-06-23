@@ -1,25 +1,62 @@
-<header>
-    <div class="header-left">
-        <div id="logo">
-            <a href="{{ "/" | relURL }}">
-                <img src="{{ "media/logo/transparent.png" | relURL }}" alt="Coffee cup icon logo" draggable="false">
-            </a>
-        </div>
-        <h1>Code & Coffee</h1>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .Title }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     
-    <!-- Mobile hamburger menu button -->
-    <button id="mobile-menu-button" style="display: none; background: none; border: none; cursor: pointer; position: absolute; right: 15px; top: 15px; z-index: 1001;" aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="#828282" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/>
-        </svg>
-    </button>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
     
-    <nav id="desktop-nav" class="header-right">
-        {{ range .Site.Menus.main }}
-            <div class="nav-container">
-                <a href="{{ .URL }}" class="nav-link{{ if eq $.Page.RelPermalink .URL }} active{{ end }}" {{ if hasPrefix .URL "http" }}target="_blank"{{ end }}>{{ .Name }}</a>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="{{ "css/global.css" | relURL }}">
+    {{ if eq .Type "page" }}
+    <link rel="stylesheet" href="{{ "css/index.css" | relURL }}">
+    {{ end }}
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="logo">
+                <img src="{{ "media/coffeecup.svg" | relURL }}" alt="Code & Coffee Logo">
             </div>
-        {{ end }}
+            <h1><a href="{{ "/" | relURL }}" style="text-decoration: none; color: inherit;">Code & Coffee</a></h1>
+        </div>
+        
+        <div class="header-right">
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <div class="nav-container">
+                    <a href="{{ "blog" | relURL }}" class="nav-link">Blog</a>
+                    <a href="{{ "project-request" | relURL }}" class="nav-link">Project Help</a>
+                    <a href="{{ "talent-matchboard" | relURL }}" class="nav-link">Talent Board</a>
+                    <a href="{{ "event-sponsorship" | relURL }}" class="nav-link">Sponsor Events</a>
+                    <a href="{{ "links" | relURL }}" class="nav-link">Links</a>
+                    <a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" class="nav-link">Merch</a>
+                    <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate-link">Donate</a>
+                </div>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation -->
+    <nav id="mobile-nav" class="mobile-nav">
+        <a href="{{ "blog" | relURL }}" class="mobile-nav-link">Blog</a>
+        <a href="{{ "project-request" | relURL }}" class="mobile-nav-link">Project Help</a>
+        <a href="{{ "talent-matchboard" | relURL }}" class="mobile-nav-link">Talent Board</a>
+        <a href="{{ "event-sponsorship" | relURL }}" class="mobile-nav-link">Sponsor Events</a>
+        <a href="{{ "links" | relURL }}" class="mobile-nav-link">Links</a>
+        <a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" class="mobile-nav-link">Merch</a>
+        <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="mobile-nav-link donate-link">Donate</a>
     </nav>
-</header>
+    
+    <main>

@@ -1,9 +1,48 @@
-<section id="true-footer">
-    <p style="text-align: center;">
-        <span style="user-select: none;">
-            <br><br>
-            code & coffee philadelphia is a node of <a href="https://socratica.info" target="_blank">socratica</a> and <a href="https://codeandcoffee.org/" target="_blank">code & coffee</a><br>
-            <br>
-        </span>
-    </p>
-</section>
+    </main>
+    
+    <footer style="background-color: var(--background); padding: 40px 20px; border-top: 1px solid var(--greyen); margin-top: 60px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <h3 style="color: var(--text); margin-bottom: 20px;">Code & Coffee Philadelphia</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">
+                        Building Philadelphia's tech community through collaboration, learning, and innovation.
+                    </p>
+                </div>
+                
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <h4 style="color: var(--text); margin-bottom: 20px;">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="{{ "blog" | relURL }}" style="color: var(--accent); text-decoration: none;">Blog</a></li>
+                        <li style="margin-bottom: 10px;"><a href="{{ "project-request" | relURL }}" style="color: var(--accent); text-decoration: none;">Project Help</a></li>
+                        <li style="margin-bottom: 10px;"><a href="{{ "talent-matchboard" | relURL }}" style="color: var(--accent); text-decoration: none;">Talent Board</a></li>
+                        <li style="margin-bottom: 10px;"><a href="{{ "links" | relURL }}" style="color: var(--accent); text-decoration: none;">Community Links</a></li>
+                    </ul>
+                </div>
+                
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <h4 style="color: var(--text); margin-bottom: 20px;">Connect With Us</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="https://www.meetup.com/code-coffee-philly/" style="color: var(--accent); text-decoration: none;">Meetup Events</a></li>
+                        <li style="margin-bottom: 10px;"><a href="https://www.linkedin.com/company/code-coffee-philadelphia" style="color: var(--accent); text-decoration: none;">LinkedIn</a></li>
+                        <li style="margin-bottom: 10px;"><a href="https://www.instagram.com/philly_codes/" style="color: var(--accent); text-decoration: none;">Instagram</a></li>
+                        <li style="margin-bottom: 10px;"><a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" style="color: var(--accent); text-decoration: none;">Merchandise</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid var(--greyen); margin-top: 30px; padding-top: 20px; text-align: center;">
+                <p style="color: var(--text-secondary); margin: 0;">
+                    © {{ now.Format "2006" }} Code & Coffee Philadelphia. Made with ❤️ for the tech community.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="{{ "js/menu.js" | relURL }}"></script>
+    {{ if .IsHome }}
+    <script src="{{ "js/meetup.js" | relURL }}"></script>
+    {{ end }}
+</body>
+</html>

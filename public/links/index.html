@@ -10,62 +10,57 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
     
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/modern.css">
+    
     
 </head>
 <body>
     <header>
-        <div class="header-left">
-            <div id="logo">
-                <img src="/media/coffeecup.svg" alt="Code & Coffee Logo">
-            </div>
-            <h1><a href="/" style="text-decoration: none; color: inherit;">Code & Coffee</a></h1>
-        </div>
+    <div class="header-container">
+        <a href="/" class="logo">
+            <img src="/media/coffeecup.svg" alt="Code & Coffee Logo">
+            <span>Code & Coffee</span>
+        </a>
         
-        <div class="header-right">
-            
-            <nav class="desktop-nav">
-                <div class="nav-container">
-                    <a href="/blog" class="nav-link">Blog</a>
-                    <a href="/project-request" class="nav-link">Project Help</a>
-                    <a href="/talent-matchboard" class="nav-link">Talent Board</a>
-                    <a href="/event-sponsorship" class="nav-link">Sponsor Events</a>
-                    <a href="/links" class="nav-link">Links</a>
-                    <a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" class="nav-link">Merch</a>
-                    <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate-link">Donate</a>
-                </div>
-            </nav>
-            
-            
-            <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
-        </div>
-    </header>
+        <nav class="nav-desktop">
+            <a href="/blog" class="nav-link">Blog</a>
+            <a href="/project-request" class="nav-link">Get Help</a>
+            <a href="/talent-matchboard" class="nav-link">Jobs</a>
+            <a href="/event-sponsorship" class="nav-link">Sponsor</a>
+            <a href="/links" class="nav-link">Links</a>
+            <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
+            <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate">Donate</a>
+        </nav>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+    </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-content">
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="/project-request" class="nav-link">Get Help</a>
+        <a href="/talent-matchboard" class="nav-link">Jobs</a>
+        <a href="/event-sponsorship" class="nav-link">Sponsor</a>
+        <a href="/links" class="nav-link">Links</a>
+        <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
+        <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate">Donate</a>
+    </div>
+</div>
     
-    
-    <nav id="mobile-nav" class="mobile-nav">
-        <a href="/blog" class="mobile-nav-link">Blog</a>
-        <a href="/project-request" class="mobile-nav-link">Project Help</a>
-        <a href="/talent-matchboard" class="mobile-nav-link">Talent Board</a>
-        <a href="/event-sponsorship" class="mobile-nav-link">Sponsor Events</a>
-        <a href="/links" class="mobile-nav-link">Links</a>
-        <a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" class="mobile-nav-link">Merch</a>
-        <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="mobile-nav-link donate-link">Donate</a>
-    </nav>
-    
-    <main>
+    <main class="main-content">
+        
 
 
-<section>
-
-
-<div class="content-container" style="max-width: 800px; margin: 40px auto; padding: 20px;">
-    <h1>Our Links</h1>
-    <div class="links-grid">
+<div class="container container-narrow" style="padding: 3rem 1.5rem;">
+    <article class="blog-post">
+        <h1>Our Links</h1>
+        <div class="links-grid">
     <div class="button link-button">
         <a href="https://www.meetup.com/code-coffee-philly/" target="_blank">
             <span class="link-icon">
@@ -116,55 +111,50 @@
 </code></pre>
 </div>
 
+    </article>
 </div>
-
-
-</section>
 
 
     </main>
     
-    <footer style="background-color: var(--background); padding: 40px 20px; border-top: 1px solid var(--greyen); margin-top: 60px;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-3">
-                    <h3 style="color: var(--text); margin-bottom: 20px;">Code & Coffee Philadelphia</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.6;">
-                        Building Philadelphia's tech community through collaboration, learning, and innovation.
-                    </p>
-                </div>
-                
-                <div class="pure-u-1 pure-u-md-1-3">
-                    <h4 style="color: var(--text); margin-bottom: 20px;">Quick Links</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 10px;"><a href="/blog" style="color: var(--accent); text-decoration: none;">Blog</a></li>
-                        <li style="margin-bottom: 10px;"><a href="/project-request" style="color: var(--accent); text-decoration: none;">Project Help</a></li>
-                        <li style="margin-bottom: 10px;"><a href="/talent-matchboard" style="color: var(--accent); text-decoration: none;">Talent Board</a></li>
-                        <li style="margin-bottom: 10px;"><a href="/links" style="color: var(--accent); text-decoration: none;">Community Links</a></li>
-                    </ul>
-                </div>
-                
-                <div class="pure-u-1 pure-u-md-1-3">
-                    <h4 style="color: var(--text); margin-bottom: 20px;">Connect With Us</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 10px;"><a href="https://www.meetup.com/code-coffee-philly/" style="color: var(--accent); text-decoration: none;">Meetup Events</a></li>
-                        <li style="margin-bottom: 10px;"><a href="https://www.linkedin.com/company/code-coffee-philadelphia" style="color: var(--accent); text-decoration: none;">LinkedIn</a></li>
-                        <li style="margin-bottom: 10px;"><a href="https://www.instagram.com/philly_codes/" style="color: var(--accent); text-decoration: none;">Instagram</a></li>
-                        <li style="margin-bottom: 10px;"><a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" style="color: var(--accent); text-decoration: none;">Merchandise</a></li>
-                    </ul>
-                </div>
+    <footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Code & Coffee Philadelphia</h4>
+                <p>Building Philadelphia's tech community through collaboration, learning, and innovation.</p>
             </div>
             
-            <div style="border-top: 1px solid var(--greyen); margin-top: 30px; padding-top: 20px; text-align: center;">
-                <p style="color: var(--text-secondary); margin: 0;">
-                    © 2025 Code & Coffee Philadelphia. Made with ❤️ for the tech community.
-                </p>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/project-request">Get Project Help</a></li>
+                    <li><a href="/talent-matchboard">Find Jobs</a></li>
+                    <li><a href="/links">Community Links</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="https://www.meetup.com/code-coffee-philly/">Meetup Events</a></li>
+                    <li><a href="https://www.linkedin.com/company/code-coffee-philadelphia">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com/philly_codes/">Instagram</a></li>
+                    <li><a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia">Merchandise</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Code & Coffee Philadelphia. Made with ❤️ for the tech community.</p>
+        </div>
+    </div>
+</footer>
     
     
     <script src="/js/menu.js"></script>
+    
     
 </body>
 </html>

@@ -13,8 +13,8 @@
             
             <!-- Quick Filters -->
             <div style="margin-bottom: 2rem;">
+                <div id="search-stats" style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem; display: none;"></div>
                 <h3 style="margin-bottom: 1rem; font-size: 1rem;">Quick Filters</h3>
-                <div id="search-stats" style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;"></div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                     <button class="tag search-filter active" data-filter="all">All Content</button>
                     <button class="tag search-filter" data-filter="tutorial">Tutorials</button>
@@ -186,22 +186,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultsHTML = results.map((item, index) => {
             console.log(`Rendering result ${index + 1}:`, item.title, item.url);
             return `
-            <div class="search-result" style="padding: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--radius); margin-bottom: 1rem; background: var(--background); transition: all 0.2s ease;">
-                <h3 style="margin-bottom: 0.5rem;">
-                    <a href="${item.url}" style="text-decoration: none; color: var(--text-primary);">${item.title}</a>
-                    ${item.featured ? '<span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
-                    <span style="background: ${item.type === 'blog' ? 'var(--primary-color)' : 'var(--text-muted)'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
+            <div class="search-result" style="padding: 1.5rem; border: 2px solid #ccc; border-radius: 8px; margin-bottom: 1rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-bottom: 0.5rem; color: #333;">
+                    <a href="${item.url}" style="text-decoration: none; color: #007acc;">${item.title}</a>
+                    ${item.featured ? '<span style="background: #ff6b6b; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
+                    <span style="background: ${item.type === 'blog' ? '#007acc' : '#666'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
                 </h3>
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: #666; font-size: 0.875rem;">
                     <span>${new Date(item.date).toLocaleDateString()}</span>
                     <span>by ${item.author}</span>
                     <span>${item.readingTime} min read</span>
                     ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}
                 </div>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">${item.description || 'No description available.'}</p>
+                <p style="color: #555; margin-bottom: 1rem; line-height: 1.6;">${item.description || 'No description available.'}</p>
                 ${item.tags && item.tags.length > 0 ? `
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    ${item.tags.map(tag => `<span style="display: inline-block; padding: 0.25rem 0.5rem; background: #f0f0f0; border-radius: 12px; font-size: 0.75rem; color: #333;">${tag}</span>`).join('')}
                 </div>
                 ` : ''}
             </div>
@@ -209,7 +209,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }).join('');
         
         console.log('Setting results HTML:', resultsHTML.length, 'characters');
+        console.log('Results container:', resultsContainer);
         resultsContainer.innerHTML = resultsHTML;
+        console.log('Results container after setting innerHTML:', resultsContainer.innerHTML.length, 'characters');
         
         // Add hover effects
         document.querySelectorAll('.search-result').forEach(result => {

@@ -122,11 +122,12 @@
     <main>
         
 <section id="main">
-    <div class="hero-section" style="position: relative; width: 80%; max-width: 600px; margin: 3rem auto;">
+    <div class="hero-section" style="position: relative; width: 100%; max-width: 1200px; margin: 3rem auto; padding: 0 20px;">
         
-        <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; width: 100%;">
+        <div class="hero-layout" style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
             
-            <div id="simple-carousel" style="position: relative; width: 100%; height: 300px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+            <div class="carousel-container" style="width: 100%; max-width: 500px; flex: 1;">
+                <div id="simple-carousel" style="position: relative; width: 100%; height: 300px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); margin: 0 auto;">
                 
                 <div id="carousel-slides" style="position: relative; width: 100%; height: 100%;">
                     <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease-in-out; display: block;">
@@ -230,21 +231,82 @@
                     <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">📅 Join our upcoming events!</a>
                 </div>
             </div>
+            
+            
+            <div class="splash-container" style="width: 100%; max-width: 500px; flex: 1;">
+                <div id="splash">
+                    <h1>Your space to build.</h1>
+                    <p>
+                        Code & Coffee Philadelphia is a place for sharing ideas and growing tech projects. 
+                        Whether you're a seasoned developer or just starting out, our community welcomes 
+                        everyone who's passionate about technology and innovation.
+                    </p>
+                    <div class="button">
+                        <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Join us on Meetup</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <div id="splash">
-        <h1>Your space to build.</h1>
-        <p>
-            Code & Coffee Philadelphia is a place for sharing ideas and growing tech projects. 
-            Whether you're a seasoned developer or just starting out, our community welcomes 
-            everyone who's passionate about technology and innovation.
-        </p>
-        <div class="button">
-            <a href="https://www.meetup.com/code-coffee-philly/">Join us on Meetup</a>
-        </div>
-    </div>
+<style>
+@media (min-width: 1024px) {
+    .hero-layout {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 3rem !important;
+        justify-content: center !important;
+    }
+    
+    .carousel-container,
+    .splash-container {
+        max-width: none !important;
+        width: 50% !important;
+    }
+    
+    .carousel-container {
+        display: flex;
+        justify-content: center;
+    }
+    
+    #simple-carousel {
+        margin: 0 !important;
+    }
+    
+    #splash {
+        text-align: left !important;
+        padding: 0 !important;
+    }
+    
+    #splash h1 {
+        text-align: left !important;
+    }
+    
+    #splash p {
+        text-align: left !important;
+    }
+    
+    .button {
+        justify-content: flex-start !important;
+    }
+}
 
+@media (max-width: 1023px) {
+    .hero-layout {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .carousel-container,
+    .splash-container {
+        width: 100% !important;
+        max-width: 500px !important;
+    }
+}
+</style>
+
+<section>
     
     <div id="events-section">
         <h2>Upcoming Events</h2>

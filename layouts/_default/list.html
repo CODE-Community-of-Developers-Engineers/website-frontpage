@@ -37,32 +37,7 @@
         </div>
         {{ end }}
         
-        <!-- Filter by Tags -->
-        {{ $tags := slice }}
-        {{ range .Pages }}
-            {{ range .Params.tags }}
-                {{ $tags = $tags | append . }}
-            {{ end }}
-        {{ end }}
-        {{ $uniqueTags := $tags | uniq }}
-        
-        {{ if $uniqueTags }}
-        <div style="margin-bottom: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h3 style="margin: 0;">Filter by Tags (click multiple)</h3>
-                <button id="clear-tags" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Clear All</button>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                {{ range $uniqueTags }}
-                <button class="tag tag-filter" data-tag="{{ . }}">{{ title . }}</button>
-                {{ end }}
-            </div>
-            <div id="selected-tags" style="margin-top: 1rem; display: none;">
-                <span style="color: var(--text-muted); font-size: 0.875rem; margin-right: 0.5rem;">Selected:</span>
-                <div id="selected-tags-list" style="display: inline-flex; flex-wrap: wrap; gap: 0.5rem;"></div>
-            </div>
-        </div>
-        {{ end }}
+
 
         <!-- Blog Posts -->
         <div class="blog-posts">
@@ -268,24 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Sidebar tag filter functionality
-    sidebarTagFilters.forEach(filter => {
-        filter.addEventListener('click', function() {
-            const tag = this.getAttribute('data-tag');
-            
-            // Clear current selection and select this tag
-            selectedTags = [tag];
-            tagFilters.forEach(f => f.classList.remove('active'));
-            
-            const mainFilter = document.querySelector(`[data-tag="${tag}"].tag-filter`);
-            if (mainFilter) {
-                mainFilter.classList.add('active');
-            }
-            
-            updateSelectedTagsDisplay();
-            filterPosts();
-        });
-    });
+
     
 
     

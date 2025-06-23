@@ -13,9 +13,12 @@
     </div>
 </div>
 
-<!-- Popular Tags -->
+<!-- Filter by Tags -->
 <div class="sidebar-widget">
-    <h3>Popular Tags</h3>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="margin: 0;">Filter by Tags (click multiple)</h3>
+        <button id="clear-tags" class="btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Clear</button>
+    </div>
     <div class="tag-cloud">
         {{ $tags := slice }}
         {{ range where site.RegularPages "Section" "blog" }}
@@ -29,10 +32,14 @@
             {{ $tagCounts = merge $tagCounts (dict . (add $count 1)) }}
         {{ end }}
         {{ range $tag, $count := $tagCounts }}
-        <button class="tag-cloud-item sidebar-tag-filter" data-tag="{{ $tag }}">
+        <button class="tag-cloud-item tag-filter" data-tag="{{ $tag }}">
             {{ $tag | title }} ({{ $count }})
         </button>
         {{ end }}
+    </div>
+    <div id="selected-tags" style="margin-top: 1rem; display: none;">
+        <span style="color: var(--text-muted); font-size: 0.875rem; margin-right: 0.5rem;">Selected:</span>
+        <div id="selected-tags-list" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;"></div>
     </div>
 </div>
 

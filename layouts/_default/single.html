@@ -2,8 +2,6 @@
 <section>
 {{ if eq .Section "blog" }}
 <style>
-{{ if eq .Section "blog" }}
-<style>
     .blog-container {
         width: 90%;
         max-width: 800px;
@@ -81,98 +79,74 @@
         text-transform: uppercase;
         margin-left: 10px;
     }
-    
-    .blog-content table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }
-    
-    .blog-content table, .blog-content th, .blog-content td {
-        border: 1px solid #ddd;
-    }
-    
-    .blog-content th, .blog-content td {
-        padding: 12px;
-        text-align: left;
-    }
-    
-    .blog-content th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-    }
-    
-    @media (max-width: 767px) {
-        .blog-container {
-            width: 95%;
-            padding: 20px 15px;
-            margin: 20px auto;
-        }
-        
-        .blog-content {
-            font-size: 1rem;
-        }
-    }
 </style>
-{{ else }}
-<link rel="stylesheet" href="{{ "css/links.css" | relURL }}">
-{{ end }}
-{{ end }}
 
-{{ end }}
-{{ if eq .Section "blog" }}
-<section>
-    <div class="blog-container">
-        <div class="blog-header">
-            <h1>{{ .Title }}</h1>
-            {{ if .Date }}
-            <div class="blog-meta">
-                Published on {{ .Date.Format "January 2, 2006" }}
-                {{ if .Params.author }} by {{ .Params.author }}{{ end }}
-                {{ if .Params.featured }}<span class="featured-badge">Featured</span>{{ end }}
-            </div>
-            {{ if .Params.tags }}
-            <div class="blog-post-tags">
-                {{ range .Params.tags }}
-                <a href="{{ "/blog" | relURL }}" class="blog-tag">{{ title . }}</a>
-                {{ end }}
-            </div>
-            {{ end }}
-            {{ end }}
-        </div>
-        
-        <div class="blog-content">
-            {{ .Content }}
-        </div>
-        
-        <div class="blog-footer" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center;">
-            <a href="{{ "blog" | relURL }}" style="color: #59969B; text-decoration: none; font-weight: bold;">← Back to Blog</a>
-        </div>
-    </div>
-</section>
-{{ else }}
-<section id="main">
-    <div id="links-container">
-        <div class="links-header">
-            <h1>{{ .Title }}</h1>
-            {{ if .Params.subtitle }}
-            <p class="mono">{{ .Params.subtitle }}</p>
-            {{ end }}
-            {{ if .Params.attention_line }}
-            <p id="attention-line"><img src="{{ "media/gizmo/attention-line.svg" | relURL }}" draggable="false"></p>
-            {{ end }}
-        </div>
-        
-        <div class="project-request-content">
-            {{ .Content }}
-        </div>
-    </div>
-{{ else }}
-    <div class="content-container" style="max-width: 800px; margin: 40px auto; padding: 20px;">
+<div class="blog-container">
+    <div class="blog-header">
         <h1>{{ .Title }}</h1>
+        {{ if .Date }}
+        <div class="blog-meta">
+            Published on {{ .Date.Format "January 2, 2006" }}
+            {{ if .Params.author }} by {{ .Params.author }}{{ end }}
+            {{ if .Params.featured }}<span class="featured-badge">Featured</span>{{ end }}
+        </div>
+        {{ if .Params.tags }}
+        <div class="blog-post-tags">
+            {{ range .Params.tags }}
+            <a href="{{ "/blog" | relURL }}" class="blog-tag">{{ title . }}</a>
+            {{ end }}
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+    
+    <div class="blog-content">
         {{ .Content }}
     </div>
+</div>
+
+{{ else if eq .Type "project-request" }}
+
+<style>
+    .project-request-container {
+        width: 90%;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #f9f5f1;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #3B2521;
+    }
+    
+    .project-request-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .project-request-content {
+        line-height: 1.6;
+        font-size: 1.1rem;
+    }
+</style>
+
+<div class="project-request-container">
+    <div class="project-request-header">
+        <h1>{{ .Title }}</h1>
+    </div>
+    
+    <div class="project-request-content">
+        {{ .Content }}
+    </div>
+</div>
+
+{{ else }}
+
+<div class="content-container" style="max-width: 800px; margin: 40px auto; padding: 20px;">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+</div>
+
 {{ end }}
 </section>
-{{ end }}
 {{ end }}

@@ -103,12 +103,18 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 
 ## Recent Changes
 
+- June 23, 2025: Template structure improvements and carousel removal
+  - Removed carousel component per user feedback
+  - Created reusable header and footer partials for consistent site structure
+  - Implemented baseof.html template for DRY architecture
+  - Cleaned up template inheritance structure
+  - Fixed blog system with proper tagging and filtering functionality
+
 - June 23, 2025: Enhanced blog system with tagging and filtering
   - Added tag-based filtering on blog listing page
   - Implemented featured post functionality with badges
   - Improved blog post templates with better metadata display
   - Created comprehensive content management documentation
-  - Fixed desktop layout centering and responsiveness issues
 
 - June 23, 2025: Initial Hugo template conversion
   - Converted static HTML site to Hugo static site generator

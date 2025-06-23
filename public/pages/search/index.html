@@ -382,6 +382,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentFilter = 'all';
     let searchTimeout;
     
+    
+    window.currentFilter = currentFilter;
+    
     searchInput.addEventListener('input', function() {
         const query = this.value;
         console.log('Search input:', query);
@@ -399,10 +402,27 @@ document.addEventListener('DOMContentLoaded', function() {
             searchFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             currentFilter = this.getAttribute('data-filter');
+            window.currentFilter = currentFilter;
             console.log('Filter changed to:', currentFilter);
             
-            const results = performSearch(searchInput.value, currentFilter);
-            renderResults(results, searchInput.value);
+            
+            const query = searchInput.value.trim();
+            if (!query && currentFilter !== 'all') {
+                
+                const results = searchIndex.filter(item => {
+                    if (currentFilter === 'tutorial' || currentFilter === 'community' || currentFilter === 'events') {
+                        return item.topic === currentFilter;
+                    } else {
+                        return Array.isArray(item.tags) && item.tags.includes(currentFilter);
+                    }
+                }).sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                renderResults(results, '');
+            } else {
+                
+                const results = performSearch(query, currentFilter);
+                renderResults(results, query);
+            }
         });
     });
     

@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return `
             <div class="search-result" style="padding: 1.5rem; border: 2px solid #ccc; border-radius: 8px; margin-bottom: 1rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 <h3 style="margin-bottom: 0.5rem; color: #333;">
-                    <a href="#" style="text-decoration: none; color: #007acc;" onclick="console.log('Navigating to:', '${item.url}'); window.location.href = '${item.url.startsWith('/') ? item.url : '/' + item.url}'; return false;">${item.title}</a>
+                    <a href="#" style="text-decoration: none; color: #007acc;" onclick="navigateToPage('${item.url}'); return false;">${item.title}</a>
                     ${item.featured ? '<span style="background: #ff6b6b; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
                     <span style="background: ${item.type === 'blog' ? '#007acc' : '#666'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
                 </h3>
@@ -282,6 +282,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Navigation helper function
+    window.navigateToPage = function(url) {
+        console.log('Navigating to:', url);
+        console.log('Current location:', window.location.href);
+        
+        // Ensure proper URL formatting
+        let targetUrl = url;
+        if (!targetUrl.startsWith('/')) {
+            targetUrl = '/' + targetUrl;
+        }
+        
+        console.log('Final target URL:', targetUrl);
+        window.location.href = targetUrl;
+    };
     
     // Initialize
     buildSearchIndex();

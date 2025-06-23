@@ -99,9 +99,9 @@
                 
                 <button class="tag tag-filter" data-tag="express">Express</button>
                 
-                <button class="tag tag-filter" data-tag="tutorial">Tutorial</button>
-                
                 <button class="tag tag-filter" data-tag="beginners">Beginners</button>
+                
+                <button class="tag tag-filter" data-tag="backend">Backend</button>
                 
             </div>
         </div>
@@ -110,7 +110,9 @@
         
         <div class="blog-posts">
             
-            <article class="blog-post" data-tags="javascript nodejs api express tutorial beginners">
+            <article class="blog-post" 
+                     data-tags="javascript nodejs api express beginners backend" 
+                     data-topic="tutorial">
                 
                 
                 <h2 style="margin-bottom: 0.75rem;">
@@ -156,9 +158,9 @@
                     
                     <span class="tag blog-tag" data-tag="express">Express</span>
                     
-                    <span class="tag blog-tag" data-tag="tutorial">Tutorial</span>
-                    
                     <span class="tag blog-tag" data-tag="beginners">Beginners</span>
+                    
+                    <span class="tag blog-tag" data-tag="backend">Backend</span>
                     
                 </div>
                 
@@ -214,6 +216,56 @@
 
 
 <div class="sidebar-widget">
+    <h3>Browse by Topic</h3>
+    <div class="topic-list">
+        
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+        
+        <button class="community-link sidebar-topic-filter" data-topic="community" style="margin-bottom: 0.5rem;">
+            <strong>Community</strong>
+            <span>1 post</span>
+        </button>
+        
+        <button class="community-link sidebar-topic-filter" data-topic="events" style="margin-bottom: 0.5rem;">
+            <strong>Events</strong>
+            <span>1 post</span>
+        </button>
+        
+        <button class="community-link sidebar-topic-filter" data-topic="tutorial" style="margin-bottom: 0.5rem;">
+            <strong>Tutorial</strong>
+            <span>1 post</span>
+        </button>
+        
+    </div>
+</div>
+
+
+<div class="sidebar-widget">
     <h3>Popular Tags</h3>
     <div class="tag-cloud">
         
@@ -253,15 +305,10 @@
             
                 
             
-                
-            
         
             
         
         
-        
-            
-            
         
             
             
@@ -317,16 +364,16 @@
             Api (1)
         </button>
         
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="backend">
+            Backend (1)
+        </button>
+        
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="beginners">
             Beginners (2)
         </button>
         
-        <button class="tag-cloud-item sidebar-tag-filter" data-tag="community">
-            Community (2)
-        </button>
-        
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="events">
-            Events (2)
+            Events (1)
         </button>
         
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="express">
@@ -341,8 +388,16 @@
             Hackathon (1)
         </button>
         
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="innovation">
+            Innovation (1)
+        </button>
+        
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="javascript">
             Javascript (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="meetup">
+            Meetup (1)
         </button>
         
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="networking">
@@ -355,10 +410,6 @@
         
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="startup">
             Startup (1)
-        </button>
-        
-        <button class="tag-cloud-item sidebar-tag-filter" data-tag="tutorial">
-            Tutorial (1)
         </button>
         
     </div>
@@ -429,43 +480,58 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tagFilters = document.querySelectorAll('.tag-filter');
+    const topicFilters = document.querySelectorAll('.topic-filter');
     const blogPosts = document.querySelectorAll('.blog-post');
     const searchInput = document.getElementById('search-input');
     const sidebarTagFilters = document.querySelectorAll('.sidebar-tag-filter');
+    const clearTagsBtn = document.getElementById('clear-tags');
+    const selectedTagsDiv = document.getElementById('selected-tags');
+    const selectedTagsList = document.getElementById('selected-tags-list');
     
-    let currentTag = 'all';
+    let selectedTags = [];
+    let currentTopic = 'all';
     let currentSearch = '';
     
     
     function filterPosts() {
+        let visibleCount = 0;
+        
         blogPosts.forEach(post => {
-            const postTags = post.getAttribute('data-tags') || '';
+            const postTags = (post.getAttribute('data-tags') || '').split(' ').filter(tag => tag);
+            const postTopic = post.getAttribute('data-topic') || 'general';
             const postTitle = post.querySelector('h2 a').textContent.toLowerCase();
-            const postContent = post.querySelector('.blog-post-summary') ? 
-                post.querySelector('.blog-post-summary').textContent.toLowerCase() : '';
+            const postContent = post.querySelector('div[style*="margin-bottom: 1.5rem"]') ? 
+                post.querySelector('div[style*="margin-bottom: 1.5rem"]').textContent.toLowerCase() : '';
             
-            const matchesTag = currentTag === 'all' || postTags.includes(currentTag);
+            
+            const matchesTopic = currentTopic === 'all' || postTopic === currentTopic;
+            
+            
+            const matchesTags = selectedTags.length === 0 || 
+                selectedTags.every(tag => postTags.includes(tag));
+            
+            
             const matchesSearch = currentSearch === '' || 
                 postTitle.includes(currentSearch) || 
                 postContent.includes(currentSearch);
             
-            if (matchesTag && matchesSearch) {
+            if (matchesTopic && matchesTags && matchesSearch) {
                 post.style.display = 'block';
+                visibleCount++;
             } else {
                 post.style.display = 'none';
             }
         });
         
         
-        const visiblePosts = Array.from(blogPosts).filter(post => post.style.display !== 'none');
         let noResultsDiv = document.getElementById('no-results');
         
-        if (visiblePosts.length === 0) {
+        if (visibleCount === 0) {
             if (!noResultsDiv) {
                 noResultsDiv = document.createElement('div');
                 noResultsDiv.id = 'no-results';
                 noResultsDiv.style.cssText = 'text-align: center; padding: 3rem; color: var(--text-muted);';
-                noResultsDiv.innerHTML = '<h3>No posts found</h3><p>Try adjusting your search or filter criteria.</p>';
+                noResultsDiv.innerHTML = '<h3>No posts found</h3><p>Try adjusting your search, topic, or tag filters.</p>';
                 document.querySelector('.blog-posts').appendChild(noResultsDiv);
             }
             noResultsDiv.style.display = 'block';
@@ -475,32 +541,89 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    tagFilters.forEach(filter => {
+    function updateSelectedTagsDisplay() {
+        if (selectedTags.length === 0) {
+            selectedTagsDiv.style.display = 'none';
+        } else {
+            selectedTagsDiv.style.display = 'block';
+            selectedTagsList.innerHTML = selectedTags.map(tag => 
+                `<span class="tag" style="background: var(--primary-color); color: white;">
+                    ${tag} <button onclick="removeTag('${tag}')" style="background: none; border: none; color: white; margin-left: 0.25rem; cursor: pointer;">×</button>
+                </span>`
+            ).join('');
+        }
+    }
+    
+    
+    window.removeTag = function(tag) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+        
+        
+        const tagButton = document.querySelector(`[data-tag="${tag}"].tag-filter`);
+        if (tagButton) {
+            tagButton.classList.remove('active');
+        }
+        
+        updateSelectedTagsDisplay();
+        filterPosts();
+    };
+    
+    
+    topicFilters.forEach(filter => {
         filter.addEventListener('click', function() {
-            tagFilters.forEach(f => f.classList.remove('active'));
-            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            topicFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             
-            currentTag = this.getAttribute('data-tag');
+            currentTopic = this.getAttribute('data-topic');
             filterPosts();
         });
     });
     
     
+    tagFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            const tag = this.getAttribute('data-tag');
+            
+            if (selectedTags.includes(tag)) {
+                
+                selectedTags = selectedTags.filter(t => t !== tag);
+                this.classList.remove('active');
+            } else {
+                
+                selectedTags.push(tag);
+                this.classList.add('active');
+            }
+            
+            updateSelectedTagsDisplay();
+            filterPosts();
+        });
+    });
+    
+    
+    if (clearTagsBtn) {
+        clearTagsBtn.addEventListener('click', function() {
+            selectedTags = [];
+            tagFilters.forEach(f => f.classList.remove('active'));
+            updateSelectedTagsDisplay();
+            filterPosts();
+        });
+    }
+    
+    
     sidebarTagFilters.forEach(filter => {
         filter.addEventListener('click', function() {
+            const tag = this.getAttribute('data-tag');
+            
+            
+            selectedTags = [tag];
             tagFilters.forEach(f => f.classList.remove('active'));
-            sidebarTagFilters.forEach(f => f.classList.remove('active'));
-            this.classList.add('active');
             
-            currentTag = this.getAttribute('data-tag');
-            
-            
-            const mainFilter = document.querySelector(`[data-tag="${currentTag}"].tag-filter`);
+            const mainFilter = document.querySelector(`[data-tag="${tag}"].tag-filter`);
             if (mainFilter) {
                 mainFilter.classList.add('active');
             }
             
+            updateSelectedTagsDisplay();
             filterPosts();
         });
     });
@@ -518,19 +641,18 @@ document.addEventListener('DOMContentLoaded', function() {
     blogTags.forEach(tag => {
         tag.addEventListener('click', function() {
             const tagName = this.getAttribute('data-tag');
-            currentTag = tagName;
             
-            
-            tagFilters.forEach(f => f.classList.remove('active'));
-            sidebarTagFilters.forEach(f => f.classList.remove('active'));
-            
-            const mainFilter = document.querySelector(`[data-tag="${tagName}"].tag-filter`);
-            const sidebarFilter = document.querySelector(`[data-tag="${tagName}"].sidebar-tag-filter`);
-            
-            if (mainFilter) mainFilter.classList.add('active');
-            if (sidebarFilter) sidebarFilter.classList.add('active');
-            
-            filterPosts();
+            if (!selectedTags.includes(tagName)) {
+                selectedTags.push(tagName);
+                
+                const mainFilter = document.querySelector(`[data-tag="${tagName}"].tag-filter`);
+                if (mainFilter) {
+                    mainFilter.classList.add('active');
+                }
+                
+                updateSelectedTagsDisplay();
+                filterPosts();
+            }
         });
     });
 });

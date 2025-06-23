@@ -149,3 +149,4 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 - **Design preferences**: Modern blog-focused layout with original Code & Coffee branding maintained
 - **Color scheme**: Original coffee-tone palette (#E9E3DC background, #59969B accent, warm earth tones)
 - **Typography**: Vollkorn serif for body text, Gloria Hallelujah for buttons/headings, original button styles with borders
+- **Filtering preferences**: Multi-tag selection capability, separate topic categories, clear filter options

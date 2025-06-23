@@ -3,7 +3,8 @@ title: "Getting Started with Code & Coffee Philadelphia"
 date: 2025-06-23
 author: "Code & Coffee Team"
 description: "Everything you need to know about joining our vibrant tech community in Philadelphia."
-tags: ["community", "events", "networking", "beginners"]
+topic: "community"
+tags: ["events", "networking", "beginners", "meetup"]
 featured: true
 image: "hero-community.jpg"
 ---

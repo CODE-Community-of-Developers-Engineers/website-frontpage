@@ -3,7 +3,8 @@ title: "Building Your First REST API with Node.js and Express"
 date: 2025-06-20
 author: "Alex Johnson"
 description: "A beginner-friendly guide to creating a REST API using Node.js and Express framework with practical examples."
-tags: ["javascript", "nodejs", "api", "express", "tutorial", "beginners"]
+topic: "tutorial"
+tags: ["javascript", "nodejs", "api", "express", "beginners", "backend"]
 featured: false
 image: "nodejs-api-cover.jpg"
 readingTime: 8

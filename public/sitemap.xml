@@ -11,13 +11,13 @@
     <loc>http://localhost:5000/</loc>
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:5000/tags/community/</loc>
-    <lastmod>2025-06-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:5000/tags/events/</loc>
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/blog/getting-started-with-code-coffee/</loc>
+    <lastmod>2025-06-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/meetup/</loc>
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/tags/networking/</loc>
@@ -27,6 +27,9 @@
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/tags/api/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/backend/</loc>
     <lastmod>2025-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/blog/example-tech-tutorial/</loc>
@@ -41,9 +44,6 @@
     <loc>http://localhost:5000/tags/nodejs/</loc>
     <lastmod>2025-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:5000/tags/tutorial/</loc>
-    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:5000/tags/ai/</loc>
     <lastmod>2025-05-10T00:00:00+00:00</lastmod>
   </url><url>
@@ -51,6 +51,9 @@
     <lastmod>2025-05-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/tags/hackathon/</loc>
+    <lastmod>2025-05-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:5000/tags/innovation/</loc>
     <lastmod>2025-05-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:5000/blog/ptw-hackathon-2025/</loc>

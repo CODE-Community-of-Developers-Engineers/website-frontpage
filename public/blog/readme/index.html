@@ -73,7 +73,7 @@
                     
                     
                     
-                    <span>3 min read</span>
+                    <span>4 min read</span>
                     
                 </div>
                 
@@ -106,7 +106,8 @@
 </span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">2025-06-23</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;Your Name&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Brief description for SEO and previews&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;tag1&#34;</span>, <span style="color:#e6db74">&#34;tag2&#34;</span>, <span style="color:#e6db74">&#34;tag3&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">topic</span>: <span style="color:#e6db74">&#34;tutorial&#34;</span>        <span style="color:#75715e"># Required: choose from available topics</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;javascript&#34;</span>, <span style="color:#e6db74">&#34;beginners&#34;</span>, <span style="color:#e6db74">&#34;web-development&#34;</span><span style="color:#f92672">]  # Optional</span>: <span style="color:#ae81ff">specific tags</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">featured</span>: <span style="color:#66d9ef">false</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">image</span>: <span style="color:#e6db74">&#34;hero-image.jpg&#34;</span>  <span style="color:#75715e"># Optional: header image filename</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">readingTime: 5           # Optional</span>: <span style="color:#ae81ff">estimated reading time in minutes</span>
@@ -123,7 +124,8 @@
 <li><strong>date</strong>: Publication date in YYYY-MM-DD format</li>
 <li><strong>author</strong>: Author name</li>
 <li><strong>description</strong>: Brief summary for previews and SEO</li>
-<li><strong>tags</strong>: Array of tags for categorization</li>
+<li><strong>topic</strong>: Primary topic category (see available topics below)</li>
+<li><strong>tags</strong>: Array of specific tags for detailed categorization</li>
 </ul>
 <h3 id="4-optional-front-matter-fields">4. Optional Front Matter Fields</h3>
 <ul>
@@ -131,24 +133,36 @@
 <li><strong>image</strong>: Filename of the header image (place in same folder)</li>
 <li><strong>readingTime</strong>: Estimated reading time in minutes</li>
 </ul>
-<h2 id="available-tags">Available Tags</h2>
-<p>Use relevant tags from these categories:</p>
-<h3 id="topics">Topics</h3>
+<h2 id="topics-and-tags-system">Topics and Tags System</h2>
+<h3 id="available-topics-choose-one">Available Topics (choose one)</h3>
+<p>Primary content categories for broad organization:</p>
 <ul>
-<li><code>community</code>, <code>events</code>, <code>networking</code>, <code>hackathon</code>, <code>workshops</code>, <code>meetup</code></li>
+<li><code>community</code> - Community updates, member spotlights, general announcements</li>
+<li><code>events</code> - Event recaps, upcoming events, meetup information</li>
+<li><code>tutorial</code> - Technical tutorials and how-to guides</li>
+<li><code>news</code> - Industry news, tech trends, announcements</li>
+<li><code>projects</code> - Project showcases, open source contributions</li>
+<li><code>career</code> - Career advice, job opportunities, professional development</li>
 </ul>
-<h3 id="technologies">Technologies</h3>
+<h3 id="available-tags-choose-multiple">Available Tags (choose multiple)</h3>
+<p>Specific descriptors for detailed categorization:</p>
+<h4 id="technologies">Technologies</h4>
 <ul>
 <li><code>javascript</code>, <code>python</code>, <code>react</code>, <code>nodejs</code>, <code>api</code>, <code>web-development</code></li>
 <li><code>ai</code>, <code>machine-learning</code>, <code>data-science</code>, <code>devops</code>, <code>cloud</code></li>
+<li><code>mobile</code>, <code>ios</code>, <code>android</code>, <code>blockchain</code>, <code>gaming</code></li>
 </ul>
-<h3 id="skill-levels">Skill Levels</h3>
+<h4 id="skill-levels">Skill Levels</h4>
 <ul>
-<li><code>beginners</code>, <code>intermediate</code>, <code>advanced</code>, <code>tutorial</code></li>
+<li><code>beginners</code>, <code>intermediate</code>, <code>advanced</code></li>
 </ul>
-<h3 id="event-types">Event Types</h3>
+<h4 id="event-types">Event Types</h4>
 <ul>
-<li><code>tech-talk</code>, <code>project-showcase</code>, <code>workshop-recap</code>, <code>hackathon-recap</code></li>
+<li><code>hackathon</code>, <code>workshop</code>, <code>tech-talk</code>, <code>networking</code>, <code>meetup</code></li>
+</ul>
+<h4 id="content-types">Content Types</h4>
+<ul>
+<li><code>recap</code>, <code>announcement</code>, <code>showcase</code>, <code>discussion</code>, <code>interview</code></li>
 </ul>
 <h2 id="adding-images">Adding Images</h2>
 <h3 id="headerfeatured-images">Header/Featured Images</h3>
@@ -216,7 +230,8 @@ hugo server -D
 </span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">2025-06-23</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;Alex Johnson&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Learn to build REST APIs with Node.js and Express&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;javascript&#34;</span>, <span style="color:#e6db74">&#34;nodejs&#34;</span>, <span style="color:#e6db74">&#34;api&#34;</span>, <span style="color:#e6db74">&#34;tutorial&#34;</span>, <span style="color:#e6db74">&#34;beginners&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">topic</span>: <span style="color:#e6db74">&#34;tutorial&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;javascript&#34;</span>, <span style="color:#e6db74">&#34;nodejs&#34;</span>, <span style="color:#e6db74">&#34;api&#34;</span>, <span style="color:#e6db74">&#34;beginners&#34;</span>, <span style="color:#e6db74">&#34;backend&#34;</span>]
 </span></span><span style="display:flex;"><span><span style="color:#f92672">featured</span>: <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">image</span>: <span style="color:#e6db74">&#34;cover.jpg&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">readingTime</span>: <span style="color:#ae81ff">8</span>
@@ -301,6 +316,56 @@ hugo server -D
 
 
 <div class="sidebar-widget">
+    <h3>Browse by Topic</h3>
+    <div class="topic-list">
+        
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+        
+        <button class="community-link sidebar-topic-filter" data-topic="community" style="margin-bottom: 0.5rem;">
+            <strong>Community</strong>
+            <span>1 post</span>
+        </button>
+        
+        <button class="community-link sidebar-topic-filter" data-topic="events" style="margin-bottom: 0.5rem;">
+            <strong>Events</strong>
+            <span>1 post</span>
+        </button>
+        
+        <button class="community-link sidebar-topic-filter" data-topic="tutorial" style="margin-bottom: 0.5rem;">
+            <strong>Tutorial</strong>
+            <span>1 post</span>
+        </button>
+        
+    </div>
+</div>
+
+
+<div class="sidebar-widget">
     <h3>Popular Tags</h3>
     <div class="tag-cloud">
         
@@ -340,15 +405,10 @@ hugo server -D
             
                 
             
-                
-            
         
             
         
         
-        
-            
-            
         
             
             
@@ -404,16 +464,16 @@ hugo server -D
             Api (1)
         </button>
         
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="backend">
+            Backend (1)
+        </button>
+        
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="beginners">
             Beginners (2)
         </button>
         
-        <button class="tag-cloud-item sidebar-tag-filter" data-tag="community">
-            Community (2)
-        </button>
-        
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="events">
-            Events (2)
+            Events (1)
         </button>
         
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="express">
@@ -428,8 +488,16 @@ hugo server -D
             Hackathon (1)
         </button>
         
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="innovation">
+            Innovation (1)
+        </button>
+        
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="javascript">
             Javascript (1)
+        </button>
+        
+        <button class="tag-cloud-item sidebar-tag-filter" data-tag="meetup">
+            Meetup (1)
         </button>
         
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="networking">
@@ -442,10 +510,6 @@ hugo server -D
         
         <button class="tag-cloud-item sidebar-tag-filter" data-tag="startup">
             Startup (1)
-        </button>
-        
-        <button class="tag-cloud-item sidebar-tag-filter" data-tag="tutorial">
-            Tutorial (1)
         </button>
         
     </div>

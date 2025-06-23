@@ -34,7 +34,9 @@
         <!-- Blog Posts -->
         <div class="blog-posts">
             {{ range .Pages }}
-            <article class="blog-post{{ if .Params.featured }} featured{{ end }}" data-tags="{{ if .Params.tags }}{{ delimit .Params.tags " " }}{{ end }}">
+            <article class="blog-post{{ if .Params.featured }} featured{{ end }}" 
+                     data-tags="{{ if .Params.tags }}{{ delimit .Params.tags " " }}{{ end }}" 
+                     data-topic="{{ .Params.topic | default "general" }}">
                 {{ if .Params.featured }}
                 <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
                     Featured
@@ -104,43 +106,58 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tagFilters = document.querySelectorAll('.tag-filter');
+    const topicFilters = document.querySelectorAll('.topic-filter');
     const blogPosts = document.querySelectorAll('.blog-post');
     const searchInput = document.getElementById('search-input');
     const sidebarTagFilters = document.querySelectorAll('.sidebar-tag-filter');
+    const clearTagsBtn = document.getElementById('clear-tags');
+    const selectedTagsDiv = document.getElementById('selected-tags');
+    const selectedTagsList = document.getElementById('selected-tags-list');
     
-    let currentTag = 'all';
+    let selectedTags = [];
+    let currentTopic = 'all';
     let currentSearch = '';
     
-    // Function to filter posts based on tag and search
+    // Function to filter posts based on tags, topic, and search
     function filterPosts() {
+        let visibleCount = 0;
+        
         blogPosts.forEach(post => {
-            const postTags = post.getAttribute('data-tags') || '';
+            const postTags = (post.getAttribute('data-tags') || '').split(' ').filter(tag => tag);
+            const postTopic = post.getAttribute('data-topic') || 'general';
             const postTitle = post.querySelector('h2 a').textContent.toLowerCase();
-            const postContent = post.querySelector('.blog-post-summary') ? 
-                post.querySelector('.blog-post-summary').textContent.toLowerCase() : '';
+            const postContent = post.querySelector('div[style*="margin-bottom: 1.5rem"]') ? 
+                post.querySelector('div[style*="margin-bottom: 1.5rem"]').textContent.toLowerCase() : '';
             
-            const matchesTag = currentTag === 'all' || postTags.includes(currentTag);
+            // Check topic match
+            const matchesTopic = currentTopic === 'all' || postTopic === currentTopic;
+            
+            // Check tag match (all selected tags must be present)
+            const matchesTags = selectedTags.length === 0 || 
+                selectedTags.every(tag => postTags.includes(tag));
+            
+            // Check search match
             const matchesSearch = currentSearch === '' || 
                 postTitle.includes(currentSearch) || 
                 postContent.includes(currentSearch);
             
-            if (matchesTag && matchesSearch) {
+            if (matchesTopic && matchesTags && matchesSearch) {
                 post.style.display = 'block';
+                visibleCount++;
             } else {
                 post.style.display = 'none';
             }
         });
         
         // Update no results message
-        const visiblePosts = Array.from(blogPosts).filter(post => post.style.display !== 'none');
         let noResultsDiv = document.getElementById('no-results');
         
-        if (visiblePosts.length === 0) {
+        if (visibleCount === 0) {
             if (!noResultsDiv) {
                 noResultsDiv = document.createElement('div');
                 noResultsDiv.id = 'no-results';
                 noResultsDiv.style.cssText = 'text-align: center; padding: 3rem; color: var(--text-muted);';
-                noResultsDiv.innerHTML = '<h3>No posts found</h3><p>Try adjusting your search or filter criteria.</p>';
+                noResultsDiv.innerHTML = '<h3>No posts found</h3><p>Try adjusting your search, topic, or tag filters.</p>';
                 document.querySelector('.blog-posts').appendChild(noResultsDiv);
             }
             noResultsDiv.style.display = 'block';
@@ -149,33 +166,90 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Tag filter functionality
-    tagFilters.forEach(filter => {
+    // Function to update selected tags display
+    function updateSelectedTagsDisplay() {
+        if (selectedTags.length === 0) {
+            selectedTagsDiv.style.display = 'none';
+        } else {
+            selectedTagsDiv.style.display = 'block';
+            selectedTagsList.innerHTML = selectedTags.map(tag => 
+                `<span class="tag" style="background: var(--primary-color); color: white;">
+                    ${tag} <button onclick="removeTag('${tag}')" style="background: none; border: none; color: white; margin-left: 0.25rem; cursor: pointer;">×</button>
+                </span>`
+            ).join('');
+        }
+    }
+    
+    // Function to remove a tag
+    window.removeTag = function(tag) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+        
+        // Update button state
+        const tagButton = document.querySelector(`[data-tag="${tag}"].tag-filter`);
+        if (tagButton) {
+            tagButton.classList.remove('active');
+        }
+        
+        updateSelectedTagsDisplay();
+        filterPosts();
+    };
+    
+    // Topic filter functionality
+    topicFilters.forEach(filter => {
         filter.addEventListener('click', function() {
-            tagFilters.forEach(f => f.classList.remove('active'));
-            sidebarTagFilters.forEach(f => f.classList.remove('active'));
+            topicFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             
-            currentTag = this.getAttribute('data-tag');
+            currentTopic = this.getAttribute('data-topic');
             filterPosts();
         });
     });
     
+    // Tag filter functionality (multi-select)
+    tagFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            const tag = this.getAttribute('data-tag');
+            
+            if (selectedTags.includes(tag)) {
+                // Remove tag
+                selectedTags = selectedTags.filter(t => t !== tag);
+                this.classList.remove('active');
+            } else {
+                // Add tag
+                selectedTags.push(tag);
+                this.classList.add('active');
+            }
+            
+            updateSelectedTagsDisplay();
+            filterPosts();
+        });
+    });
+    
+    // Clear tags functionality
+    if (clearTagsBtn) {
+        clearTagsBtn.addEventListener('click', function() {
+            selectedTags = [];
+            tagFilters.forEach(f => f.classList.remove('active'));
+            updateSelectedTagsDisplay();
+            filterPosts();
+        });
+    }
+    
     // Sidebar tag filter functionality
     sidebarTagFilters.forEach(filter => {
         filter.addEventListener('click', function() {
+            const tag = this.getAttribute('data-tag');
+            
+            // Clear current selection and select this tag
+            selectedTags = [tag];
             tagFilters.forEach(f => f.classList.remove('active'));
-            sidebarTagFilters.forEach(f => f.classList.remove('active'));
-            this.classList.add('active');
             
-            currentTag = this.getAttribute('data-tag');
-            
-            // Update main tag filter to match
-            const mainFilter = document.querySelector(`[data-tag="${currentTag}"].tag-filter`);
+            const mainFilter = document.querySelector(`[data-tag="${tag}"].tag-filter`);
             if (mainFilter) {
                 mainFilter.classList.add('active');
             }
             
+            updateSelectedTagsDisplay();
             filterPosts();
         });
     });
@@ -193,19 +267,18 @@ document.addEventListener('DOMContentLoaded', function() {
     blogTags.forEach(tag => {
         tag.addEventListener('click', function() {
             const tagName = this.getAttribute('data-tag');
-            currentTag = tagName;
             
-            // Update all filters
-            tagFilters.forEach(f => f.classList.remove('active'));
-            sidebarTagFilters.forEach(f => f.classList.remove('active'));
-            
-            const mainFilter = document.querySelector(`[data-tag="${tagName}"].tag-filter`);
-            const sidebarFilter = document.querySelector(`[data-tag="${tagName}"].sidebar-tag-filter`);
-            
-            if (mainFilter) mainFilter.classList.add('active');
-            if (sidebarFilter) sidebarFilter.classList.add('active');
-            
-            filterPosts();
+            if (!selectedTags.includes(tagName)) {
+                selectedTags.push(tagName);
+                
+                const mainFilter = document.querySelector(`[data-tag="${tagName}"].tag-filter`);
+                if (mainFilter) {
+                    mainFilter.classList.add('active');
+                }
+                
+                updateSelectedTagsDisplay();
+                filterPosts();
+            }
         });
     });
 });

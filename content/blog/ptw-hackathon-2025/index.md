@@ -3,7 +3,8 @@ title: "Philly Tech Week Innovation Hackathon 2025"
 date: 2025-05-10
 author: "Code & Coffee Team"
 description: "Recap of our successful Philly Tech Week hackathon featuring AI, generative gaming, and startup-oriented projects."
-tags: ["hackathon", "events", "ai", "gaming", "startup", "community"]
+topic: "events"
+tags: ["hackathon", "ai", "gaming", "startup", "innovation"]
 featured: true
 image: "hackathon-cover.jpg"
 readingTime: 6

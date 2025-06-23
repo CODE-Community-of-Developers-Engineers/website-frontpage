@@ -36,7 +36,8 @@ title: "Your Post Title"
 date: 2025-06-23
 author: "Your Name"
 description: "Brief description for SEO and previews"
-tags: ["tag1", "tag2", "tag3"]
+topic: "tutorial"        # Required: choose from available topics
+tags: ["javascript", "beginners", "web-development"]  # Optional: specific tags
 featured: false
 image: "hero-image.jpg"  # Optional: header image filename
 readingTime: 5           # Optional: estimated reading time in minutes
@@ -54,29 +55,41 @@ More detailed content after the summary break...
 - **date**: Publication date in YYYY-MM-DD format
 - **author**: Author name
 - **description**: Brief summary for previews and SEO
-- **tags**: Array of tags for categorization
+- **topic**: Primary topic category (see available topics below)
+- **tags**: Array of specific tags for detailed categorization
 
 ### 4. Optional Front Matter Fields
 - **featured**: Set to `true` to mark as a featured post (shows badge)
 - **image**: Filename of the header image (place in same folder)
 - **readingTime**: Estimated reading time in minutes
 
-## Available Tags
+## Topics and Tags System
 
-Use relevant tags from these categories:
+### Available Topics (choose one)
+Primary content categories for broad organization:
+- `community` - Community updates, member spotlights, general announcements
+- `events` - Event recaps, upcoming events, meetup information
+- `tutorial` - Technical tutorials and how-to guides
+- `news` - Industry news, tech trends, announcements
+- `projects` - Project showcases, open source contributions
+- `career` - Career advice, job opportunities, professional development
 
-### Topics
-- `community`, `events`, `networking`, `hackathon`, `workshops`, `meetup`
+### Available Tags (choose multiple)
+Specific descriptors for detailed categorization:
 
-### Technologies
+#### Technologies
 - `javascript`, `python`, `react`, `nodejs`, `api`, `web-development`
 - `ai`, `machine-learning`, `data-science`, `devops`, `cloud`
+- `mobile`, `ios`, `android`, `blockchain`, `gaming`
 
-### Skill Levels
-- `beginners`, `intermediate`, `advanced`, `tutorial`
+#### Skill Levels
+- `beginners`, `intermediate`, `advanced`
 
-### Event Types
-- `tech-talk`, `project-showcase`, `workshop-recap`, `hackathon-recap`
+#### Event Types
+- `hackathon`, `workshop`, `tech-talk`, `networking`, `meetup`
+
+#### Content Types
+- `recap`, `announcement`, `showcase`, `discussion`, `interview`
 
 ## Adding Images
 
@@ -155,7 +168,8 @@ title: "Building Your First REST API"
 date: 2025-06-23
 author: "Alex Johnson"
 description: "Learn to build REST APIs with Node.js and Express"
-tags: ["javascript", "nodejs", "api", "tutorial", "beginners"]
+topic: "tutorial"
+tags: ["javascript", "nodejs", "api", "beginners", "backend"]
 featured: true
 image: "cover.jpg"
 readingTime: 8

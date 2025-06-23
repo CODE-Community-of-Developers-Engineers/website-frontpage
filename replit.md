@@ -103,13 +103,14 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 
 ## Recent Changes
 
-- June 23, 2025: Complete modern blog-focused redesign
-  - Redesigned entire site with modern, clean aesthetic inspired by severity.one blog
+- June 23, 2025: Complete modern blog-focused redesign with original branding
+  - Redesigned entire site with modern layout while preserving original Code & Coffee aesthetics
+  - Restored original color scheme (coffee tones, #59969B accent, #E9E3DC background)
+  - Kept original button styles with Gloria Hallelujah font and bordered design
+  - Maintained Vollkorn typography and subtle grid background pattern
   - Implemented comprehensive blog-first layout with sidebar, related posts, and tag filtering
   - Created modular component system with reusable partials
-  - Updated typography with Inter font family and improved visual hierarchy
-  - Added responsive grid layouts and modern CSS variables system
-  - Enhanced navigation with improved mobile experience
+  - Added responsive grid layouts and improved mobile experience
   - Integrated tag cloud and community links in sidebar
 
 - June 23, 2025: Template structure improvements and carousel removal

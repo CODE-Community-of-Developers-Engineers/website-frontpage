@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code &amp; Coffee Philadelphia</title>
+    <link>http://localhost:5000/</link>
+    <description>Recent content on Code &amp; Coffee Philadelphia</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:5000/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fueling Philly&#39;s Tech Future: Code &amp; Coffee&#39;s Innovation Engine</title>
+      <link>http://localhost:5000/blog/ptw-hackathon-2025/</link>
+      <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/blog/ptw-hackathon-2025/</guid>
+      <description>Philadelphia&amp;rsquo;s technology scene features communities fostering growth and innovation. Code &amp;amp; Coffee Philadelphia, a non-profit, energizes this ecosystem. Their &amp;ldquo;Philly Innovation Hackathon 2025&amp;rdquo; during Philly Tech Week brought together innovators to solve challenges. This event reflects Code &amp;amp; Coffee&amp;rsquo;s mission to connect, educate, and empower local tech talent.&#xA;Igniting Innovation: Code &amp;amp; Coffee&amp;rsquo;s Philly Tech Week Hackathon – The &amp;ldquo;Philly Innovation Hackathon 2025&amp;rdquo; A. Event Overview: Setting the Stage for Innovation During Philly Tech Week, a city-wide event showcasing Philadelphia&amp;rsquo;s tech growth, Code &amp;amp; Coffee Philadelphia hosted its &amp;ldquo;Philly Innovation Hackathon 2025.</description>
+    </item>
+    <item>
+      <title>Event Sponsorship Request</title>
+      <link>http://localhost:5000/event-sponsorship/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/event-sponsorship/</guid>
+      <description>Interested in sponsoring Code &amp;amp; Coffee Philadelphia events? Your support helps us create meaningful experiences for our tech community while giving your organization visibility among talented developers, designers, and tech professionals.&#xA;Fill out the form below to inquire about sponsorship opportunities, and we&amp;rsquo;ll get back to you with options that align with your goals and budget.</description>
+    </item>
+    <item>
+      <title>Our Links</title>
+      <link>http://localhost:5000/links/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/links/</guid>
+      <description>RSVP for Events &amp;lt;div class=&amp;quot;button link-button&amp;quot;&amp;gt; &amp;lt;a href=&amp;quot;https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt; &amp;lt;span class=&amp;quot;link-icon&amp;quot;&amp;gt; &amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot; width=&amp;quot;24&amp;quot; height=&amp;quot;24&amp;quot; viewBox=&amp;quot;0 0 24 24&amp;quot; fill=&amp;quot;none&amp;quot; stroke=&amp;quot;currentColor&amp;quot; stroke-width=&amp;quot;2&amp;quot; stroke-linecap=&amp;quot;round&amp;quot; stroke-linejoin=&amp;quot;round&amp;quot;&amp;gt; &amp;lt;path d=&amp;quot;M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z&amp;quot;&amp;gt;&amp;lt;/path&amp;gt; &amp;lt;/svg&amp;gt; &amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;link-text&amp;quot;&amp;gt;Donate&amp;lt;/span&amp;gt; &amp;lt;/a&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;button link-button&amp;quot;&amp;gt; &amp;lt;a href=&amp;quot;https://nol-kky-shop.fourthwall.com/&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt; &amp;lt;span class=&amp;quot;link-icon&amp;quot;&amp;gt; &amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot; width=&amp;quot;24&amp;quot; height=&amp;quot;24&amp;quot; viewBox=&amp;quot;0 0 24 24&amp;quot; fill=&amp;quot;none&amp;quot; stroke=&amp;quot;currentColor&amp;quot; stroke-width=&amp;quot;2&amp;quot; stroke-linecap=&amp;quot;round&amp;quot; stroke-linejoin=&amp;quot;round&amp;quot;&amp;gt; &amp;lt;path d=&amp;quot;M20.</description>
+    </item>
+    <item>
+      <title>Project Request</title>
+      <link>http://localhost:5000/project-request/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/project-request/</guid>
+      <description>Got a coding challenge you&amp;rsquo;re stuck on? Working on an exciting project that could use some extra hands? Code &amp;amp; Coffee Philadelphia is here to help! Our community is full of talented developers, designers, and tech enthusiasts who love collaborating and sharing knowledge.&#xA;Whether you&amp;rsquo;re a beginner looking for guidance or an experienced developer seeking feedback, we welcome project requests of all kinds. From debugging sessions to architectural advice, our community members are eager to contribute their expertise.</description>
+    </item>
+    <item>
+      <title>Tech Talent Matchboard</title>
+      <link>http://localhost:5000/talent-matchboard/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/talent-matchboard/</guid>
+      <description>Looking to connect with talented developers, designers, and tech professionals in Philadelphia? Or maybe you&amp;rsquo;re seeking new opportunities in the local tech scene? Our Tech Talent Matchboard is designed to bring together the best minds in Philly&amp;rsquo;s growing technology ecosystem.&#xA;Whether you&amp;rsquo;re a company looking for skilled professionals, a freelancer seeking projects, or a developer wanting to network and collaborate, this platform helps facilitate meaningful connections within our community.</description>
+    </item>
+  </channel>
+</rss>

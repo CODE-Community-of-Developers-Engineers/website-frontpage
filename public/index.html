@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta name="generator" content="Hugo 0.126.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=5000&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Code &amp; Coffee Philadelphia</title>
+    <meta name="description" content="Your space to build.">
+    <meta name="theme-color" content="#e83b3b">
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    
+<link rel="stylesheet" href="/css/index.css">
+<style>
+    #carousel-slides .slide a img {
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    
+    #carousel-slides .slide a:hover img {
+        transform: scale(1.02);
+        filter: brightness(1.1);
+    }
+    
+    #carousel-indicators button.indicator:hover {
+        background-color: white !important;
+        transform: scale(1.3) !important;
+    }
+    
+    #prev-btn:hover, #next-btn:hover {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        transform: scale(1.1);
+    }
+    
+    #carousel-captions a:hover {
+        text-decoration: underline !important;
+        color: #f0f0f0 !important;
+    }
+    
+    #carousel-slides .slide a, 
+    #carousel-captions a, 
+    #carousel-indicators a,
+    #prev-btn, #next-btn {
+        cursor: pointer;
+    }
+
+    #carousel-captions a {
+        transition: background-color 0.3s ease, color 0.3s ease;
+        padding: 5px;
+        border-radius: 4px;
+    }
+    
+    #carousel-captions a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #f0f0f0 !important;
+        text-decoration: none !important;
+    }
+</style>
+
+    
+    
+    <link rel="icon" type="image/x-icon" href="/media/logo/transparent.png">
+</head>
+<body>
+    <header>
+    <div class="header-left">
+        <div id="logo">
+            <a href="/">
+                <img src="/media/logo/transparent.png" alt="Coffee cup icon logo" draggable="false">
+            </a>
+        </div>
+        <h1>Code & Coffee</h1>
+    </div>
+    
+    
+    <button id="mobile-menu-button" style="display: none; background: none; border: none; cursor: pointer; position: absolute; right: 15px; top: 15px; z-index: 1001;" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#828282" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/>
+        </svg>
+    </button>
+    
+    <nav id="desktop-nav" class="header-right">
+        
+            <div class="nav-container">
+                <a href="/" class="nav-link" >Home</a>
+            </div>
+        
+            <div class="nav-container">
+                <a href="/links/" class="nav-link" >Links</a>
+            </div>
+        
+            <div class="nav-container">
+                <a href="/blog/" class="nav-link" >Blog</a>
+            </div>
+        
+            <div class="nav-container">
+                <a href="/project-request/" class="nav-link" >Project Request</a>
+            </div>
+        
+            <div class="nav-container">
+                <a href="/talent-matchboard/" class="nav-link" >Tech Talent Matchboard</a>
+            </div>
+        
+            <div class="nav-container">
+                <a href="/event-sponsorship/" class="nav-link" >Event Sponsorship</a>
+            </div>
+        
+            <div class="nav-container">
+                <a href="https://nol-kky-shop.fourthwall.com/" class="nav-link" target="_blank">Merch</a>
+            </div>
+        
+            <div class="nav-container">
+                <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" class="nav-link" target="_blank">Community Fund</a>
+            </div>
+        
+    </nav>
+</header>
+
+    
+    <main>
+        
+<section id="main">
+    <div style="position: relative; width: 80%; max-width: 600px; margin: 3rem auto;">
+        
+        <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; width: 100%;">
+            
+            <div id="simple-carousel" style="position: relative; width: 100%; height: 300px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                
+                <div id="carousel-slides" style="position: relative; width: 100%; height: 100%;">
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease-in-out; display: block;">
+                        <a href="/blog/ptw-hackathon-2025" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/hackathon.jpg" alt="Code & Coffee 2025 Philly Tech Week Hackathon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="/project-request" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/DevShop.JPG" alt="Project Help" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="/talent-matchboard" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/Tap%20into%20the%20Code%20and%20Coffee%20Community.JPEG" alt="Code and Coffee Community" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="https://www.meetup.com/code-coffee-philly/" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/AI%20Paper%20Talks.jpg" alt="AI Paper Talks" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="https://www.meetup.com/code-coffee-philly/" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/FounderCoworking.jpeg" alt="Founder Coworking" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="https://www.meetup.com/code-coffee-philly/" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/LeetCode%20Practice.JPEG" alt="LeetCode Practice" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="https://www.meetup.com/code-coffee-philly/" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/ML%20System%20Design.JPEG" alt="ML System Design" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="https://www.meetup.com/code-coffee-philly/" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/Web3workshops.JPG" alt="Web3 Workshops" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                    <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; display: none;">
+                        <a href="https://www.meetup.com/code-coffee-philly/" style="display: block; width: 100%; height: 100%;">
+                            <img src="/media/hero/weekendcodingsessions.jpg" alt="Weekend Coding Sessions" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </a>
+                    </div>
+                </div>
+                
+                
+                <div style="position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 15px; z-index: 5;">
+                    <button id="prev-btn" style="background-color: rgba(255, 255, 255, 0.7); border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 18px; color: #3B2521;">❮</button>
+                    
+                    <div id="carousel-indicators" style="display: flex; gap: 8px;">
+                        <button class="indicator" data-slide="0" style="width: 12px; height: 12px; border-radius: 50%; background-color: white; border: none; cursor: pointer; transform: scale(1.2);"></button>
+                        <button class="indicator" data-slide="1" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="2" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="3" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="4" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="5" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="6" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="7" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="8" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                        <button class="indicator" data-slide="9" style="width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.5); border: none; cursor: pointer;"></button>
+                    </div>
+                    
+                    <button id="next-btn" style="background-color: rgba(255, 255, 255, 0.7); border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 18px; color: #3B2521;">❯</button>
+                </div>
+            </div>
+            
+            
+            <div id="carousel-captions" style="text-align: center; min-height: 60px; display: flex; align-items: center; justify-content: center; padding: 10px;">
+                <div class="caption" data-slide="0" style="display: block;">
+                    <a href="/blog/ptw-hackathon-2025" style="color: #3B2521; text-decoration: none; font-weight: bold;">🚀 Join our Philly Tech Week Hackathon 2025!</a>
+                </div>
+                <div class="caption" data-slide="1" style="display: none;">
+                    <a href="/project-request" style="color: #3B2521; text-decoration: none; font-weight: bold;">💡 Need help with your project?</a>
+                </div>
+                <div class="caption" data-slide="2" style="display: none;">
+                    <a href="/talent-matchboard" style="color: #3B2521; text-decoration: none; font-weight: bold;">🤝 Connect with our tech community</a>
+                </div>
+                <div class="caption" data-slide="3" style="display: none;">
+                    <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">🤖 AI Paper Discussion Sessions</a>
+                </div>
+                <div class="caption" data-slide="4" style="display: none;">
+                    <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">👥 Founder Coworking Sessions</a>
+                </div>
+                <div class="caption" data-slide="5" style="display: none;">
+                    <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">💻 LeetCode Practice Groups</a>
+                </div>
+                <div class="caption" data-slide="6" style="display: none;">
+                    <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">🧠 ML System Design Workshops</a>
+                </div>
+                <div class="caption" data-slide="7" style="display: none;">
+                    <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">🌐 Web3 Learning Workshops</a>
+                </div>
+                <div class="caption" data-slide="8" style="display: none;">
+                    <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">⚡ Weekend Coding Sessions</a>
+                </div>
+                <div class="caption" data-slide="9" style="display: none;">
+                    <a href="https://www.meetup.com/code-coffee-philly/" style="color: #3B2521; text-decoration: none; font-weight: bold;">📅 Join our upcoming events!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="splash">
+        <h1>Your space to build.</h1>
+        <p>
+            Code & Coffee Philadelphia is a place for sharing ideas and growing tech projects. 
+            Whether you're a seasoned developer or just starting out, our community welcomes 
+            everyone who's passionate about technology and innovation.
+        </p>
+        <div class="button">
+            <a href="https://www.meetup.com/code-coffee-philly/">Join us on Meetup</a>
+        </div>
+    </div>
+
+    
+    <div id="events-section">
+        <h2>Upcoming Events</h2>
+        <div id="upcoming-events">
+            <div class="loading">Loading upcoming events...</div>
+        </div>
+        <div class="view-all-events">
+            <a href="https://www.meetup.com/code-coffee-philly/events/" target="_blank">View all events on Meetup →</a>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="point">
+                    <h2>Community Driven</h2>
+                    <p>
+                        Our events are shaped by what the community wants to learn and build. 
+                        From AI workshops to startup pitch sessions, we create spaces for 
+                        collaboration and growth.
+                    </p>
+                    <img src="/media/gizmo/community.svg" alt="Community illustration" draggable="false">
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="point">
+                    <h2>Open Source</h2>
+                    <p>
+                        We believe in the power of open collaboration. Many of our projects 
+                        and resources are freely available for the community to use and 
+                        contribute to.
+                    </p>
+                    <img src="/media/gizmo/opensource.svg" alt="Open source illustration" draggable="false">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 style="text-align: center; margin-bottom: 2em;">Community Projects</h2>
+        <div class="evil-container">
+            <div class="card-container">
+                <div class="card">
+                    <h2>Tech Talent Matchboard</h2>
+                    <p>Connect with local tech professionals and find opportunities in Philadelphia's growing tech scene.</p>
+                    <div class="tag-container">
+                        <div class="tag">Network</div>
+                        <div class="tag">Jobs</div>
+                    </div>
+                    <a href="/talent-matchboard">
+                        <img src="/media/gizmo/external-link.svg" alt="External link" width="24" height="24">
+                    </a>
+                </div>
+                
+                <div class="card">
+                    <h2>Project Requests</h2>
+                    <p>Need help with your project? Submit a request and connect with community members who can assist.</p>
+                    <div class="tag-container">
+                        <div class="tag">Help</div>
+                        <div class="tag">Code</div>
+                    </div>
+                    <a href="/project-request">
+                        <img src="/media/gizmo/external-link.svg" alt="External link" width="24" height="24">
+                    </a>
+                </div>
+                
+                <div class="card">
+                    <h2>Community Blog</h2>
+                    <p>Read about our latest events, tech insights, and community highlights.</p>
+                    <div class="tag-container">
+                        <div class="tag">Blog</div>
+                        <div class="tag">News</div>
+                    </div>
+                    <a href="/blog">
+                        <img src="/media/gizmo/external-link.svg" alt="External link" width="24" height="24">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-text handwriting">
+        <p style="text-align: center; margin-top: 3em;">
+            <span style="margin-right: 20px;">Connect with us:</span>
+        </p>
+        <div id="footer-buttons">
+            <div class="button">
+                <a href="https://www.meetup.com/code-coffee-philly/" target="_blank" class="icon-button">
+                    <img src="/media/social/meetup.svg" alt="Meetup" class="button-icon">
+                    Meetup
+                </a>
+            </div>
+            <div class="button">
+                <a href="https://www.linkedin.com/company/code-coffee-philadelphia" target="_blank" class="icon-button">
+                    <img src="/media/social/linkedin.svg" alt="LinkedIn" class="button-icon">
+                    LinkedIn
+                </a>
+            </div>
+            <div class="button">
+                <a href="https://www.instagram.com/philly_codes/" target="_blank" class="icon-button">
+                    <img src="/media/social/instagram.svg" alt="Instagram" class="button-icon">
+                    Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+</section>
+
+    </main>
+    
+    <section id="true-footer">
+    <p style="text-align: center;">
+        <span style="user-select: none;">
+            <br><br>
+            code & coffee philadelphia is a node of <a href="https://socratica.info" target="_blank">socratica</a> and <a href="https://codeandcoffee.org/" target="_blank">code & coffee</a><br>
+            <br>
+        </span>
+    </p>
+</section>
+
+    
+<div id="mobile-menu" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #E9E3DC; z-index: 1000; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; overflow-y: auto;">
+    <button id="mobile-menu-close" style="position: absolute; top: 70px; right: 20px; background-color: rgba(255,255,255,0.8); border: 2px solid #3B2521; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 24px; color: #3B2521; display: flex; align-items: center; justify-content: center; z-index: 1002;" aria-label="Close menu">✕</button>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 40px; width: 100%;">
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="/" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" >Home</a>
+            </div>
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="/links/" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" >Links</a>
+            </div>
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="/blog/" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" >Blog</a>
+            </div>
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="/project-request/" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" >Project Request</a>
+            </div>
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="/talent-matchboard/" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" >Tech Talent Matchboard</a>
+            </div>
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="/event-sponsorship/" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" >Event Sponsorship</a>
+            </div>
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="https://nol-kky-shop.fourthwall.com/" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" target="_blank">Merch</a>
+            </div>
+        
+            <div style="width: 100%; max-width: 250px; text-align: center;">
+                <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" style="display: block; padding: 12px 15px; border: 2px solid #59969B; border-radius: 5px; font-family: 'Gloria Hallelujah', sans-serif; color: #3B2521; text-decoration: none; font-size: 1.1rem; transition: all 0.2s ease;" target="_blank">Community Fund</a>
+            </div>
+        
+    </div>
+</div>
+
+    
+    
+    <script src="/js/menu.js"></script>
+    
+<link rel="stylesheet" href="/css/meetup.css">
+<script src="/js/carousel.js"></script>
+<script src="/js/meetup.js"></script>
+
+</body>
+</html>

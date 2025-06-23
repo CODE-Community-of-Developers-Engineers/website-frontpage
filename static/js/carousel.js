@@ -4,11 +4,20 @@ const slides = document.querySelectorAll('.carousel-slide');
 const indicators = document.querySelectorAll('.indicator');
 
 function showSlide(index) {
-    // Hide all slides
-    slides.forEach(slide => slide.classList.remove('active'));
+    // Remove all classes from slides
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev', 'next');
+        if (i < index) {
+            slide.classList.add('prev');
+        } else if (i > index) {
+            slide.classList.add('next');
+        }
+    });
+    
+    // Remove active from indicators
     indicators.forEach(indicator => indicator.classList.remove('active'));
     
-    // Show current slide
+    // Show current slide and indicator
     if (slides[index]) {
         slides[index].classList.add('active');
         indicators[index].classList.add('active');

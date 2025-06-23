@@ -4,46 +4,62 @@
     <div class="blog-content">
         <article class="blog-post">
             <!-- Blog Header -->
-            <header style="margin-bottom: 2rem;">
+            <header class="blog-post-header">
                 {{ if .Params.image }}
-                <div style="margin-bottom: 2rem;">
-                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow);">
+                <div class="blog-hero-image">
+                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
                 </div>
                 {{ end }}
                 
-                {{ if .Params.featured }}
-                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
-                    Featured
+                <div class="blog-header-content">
+                    {{ if .Params.featured }}
+                    <div class="featured-badge">
+                        <i class="star-icon">⭐</i>
+                        Featured
+                    </div>
+                    {{ end }}
+                    
+                    {{ if .Params.topic }}
+                    <div class="topic-badge">
+                        {{ .Params.topic | title }}
+                    </div>
+                    {{ end }}
+                    
+                    <h1 class="blog-title">{{ .Title }}</h1>
+                    
+                    {{ if .Description }}
+                    <p class="blog-description">{{ .Description }}</p>
+                    {{ end }}
+                    
+                    <div class="blog-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">📅</span>
+                            <span>{{ .Date.Format "January 2, 2006" }}</span>
+                        </div>
+                        {{ if .Params.author }}
+                        <div class="meta-item">
+                            <span class="meta-icon">👤</span>
+                            <span>{{ .Params.author }}</span>
+                        </div>
+                        {{ end }}
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span>{{ if .Params.readingTime }}{{ .Params.readingTime }}{{ else }}{{ math.Round (div (countwords .Content) 200.0) }}{{ end }} min read</span>
+                        </div>
+                    </div>
+                    
+                    {{ if .Params.tags }}
+                    <div class="blog-tags">
+                        {{ range .Params.tags }}
+                        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag blog-tag">{{ title . }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
                 </div>
-                {{ end }}
-                
-                <h1 style="margin-bottom: 1rem;">{{ .Title }}</h1>
-                
-                <div class="blog-meta" style="margin-bottom: 1.5rem;">
-                    {{ if .Date }}
-                    <span>{{ .Date.Format "January 2, 2006" }}</span>
-                    {{ end }}
-                    {{ if .Params.author }}
-                    <span>by {{ .Params.author }}</span>
-                    {{ end }}
-                    {{ if .Params.readingTime }}
-                    <span>{{ .Params.readingTime }} min read</span>
-                    {{ else }}
-                    <span>{{ math.Round (div (countwords .Content) 200.0) }} min read</span>
-                    {{ end }}
-                </div>
-                
-                {{ if .Params.tags }}
-                <div class="blog-tags">
-                    {{ range .Params.tags }}
-                    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ title . }}</a>
-                    {{ end }}
-                </div>
-                {{ end }}
             </header>
             
             <!-- Blog Content -->
-            <div style="prose max-w-none; line-height: 1.7; color: var(--text-secondary);">
+            <div class="blog-content-body">
                 {{ .Content }}
             </div>
             

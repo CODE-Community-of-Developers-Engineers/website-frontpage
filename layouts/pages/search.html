@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (item.topic !== filter) return false;
                 } else {
                     // Tag-based filtering
-                    if (!item.tags.includes(filter)) return false;
+                    if (!Array.isArray(item.tags) || !item.tags.includes(filter)) return false;
                 }
             }
             
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.content,
                 item.author,
                 item.topic,
-                ...item.tags
+                ...(Array.isArray(item.tags) ? item.tags : [])
             ].join(' ').toLowerCase();
             
             const matches = searchableText.includes(searchQuery);
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}
                 </div>
                 <p style="color: #555; margin-bottom: 1rem; line-height: 1.6;">${item.description || 'No description available.'}</p>
-                ${item.tags && item.tags.length > 0 ? `
+                ${(item.tags && Array.isArray(item.tags) && item.tags.length > 0) ? `
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                     ${item.tags.map(tag => `<span style="display: inline-block; padding: 0.25rem 0.5rem; background: #f0f0f0; border-radius: 12px; font-size: 0.75rem; color: #333;">${tag}</span>`).join('')}
                 </div>

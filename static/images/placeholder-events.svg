@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#BB8D5F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#59969B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg2)"/>
+  <rect x="150" y="150" width="500" height="300" rx="20" fill="#E9E3DC" opacity="0.8"/>
+  <rect x="150" y="150" width="500" height="60" rx="20" fill="#E9E3DC" opacity="0.9"/>
+  <circle cx="220" cy="180" r="20" fill="#59969B"/>
+  <circle cx="280" cy="180" r="20" fill="#BB8D5F"/>
+  <circle cx="340" cy="180" r="20" fill="#59969B"/>
+  <rect x="200" y="250" width="80" height="60" rx="10" fill="#59969B" opacity="0.7"/>
+  <rect x="320" y="250" width="80" height="60" rx="10" fill="#BB8D5F" opacity="0.7"/>
+  <rect x="440" y="250" width="80" height="60" rx="10" fill="#59969B" opacity="0.7"/>
+  <rect x="200" y="350" width="80" height="60" rx="10" fill="#BB8D5F" opacity="0.7"/>
+  <rect x="320" y="350" width="80" height="60" rx="10" fill="#59969B" opacity="0.7"/>
+  <rect x="440" y="350" width="80" height="60" rx="10" fill="#BB8D5F" opacity="0.7"/>
+  <text x="400" y="500" text-anchor="middle" fill="#E9E3DC" font-family="Vollkorn, serif" font-size="36" font-weight="bold">Events</text>
+</svg>

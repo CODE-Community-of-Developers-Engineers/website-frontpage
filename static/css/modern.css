@@ -443,10 +443,11 @@ p {
 
 /* Footer */
 footer {
-    background: var(--background-secondary);
-    border-top: 1px solid var(--border-color);
+    background: rgba(177, 164, 156, 0.3);
+    border-top: 2px solid var(--border-color);
     padding: 3rem 0 2rem;
     margin-top: 4rem;
+    backdrop-filter: blur(10px);
 }
 
 .footer-content {

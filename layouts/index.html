@@ -1,132 +1,18 @@
 {{ define "main" }}
-<!-- Image Carousel -->
-<div class="carousel-container">
-    <div class="carousel" id="heroCarousel">
-        <div class="carousel-slide active">
-            <div class="slide-background" style="background-image: url('{{ "images/placeholder-community.svg" | relURL }}')"></div>
-            <div class="slide-content">
-                <h2>Welcome to Code & Coffee</h2>
-                <p>Where Philadelphia's developers, designers, and tech enthusiasts gather to build amazing things together. Join our caffeinated community of creators.</p>
-                <a href="{{ "blog" | relURL }}" class="btn">Explore Our Blog</a>
-            </div>
-        </div>
-        
-        <div class="carousel-slide">
-            <div class="slide-background" style="background-image: url('{{ "images/placeholder-events.svg" | relURL }}')"></div>
-            <div class="slide-content">
-                <h2>Caffeinated Coding Events</h2>
-                <p>Join our weekly coffee-fueled meetups, weekend hackathons, and hands-on workshops. Learn, code, and connect over great coffee and even better conversations.</p>
-                <a href="https://www.meetup.com/code-coffee-philly/" class="btn">Join the Brew</a>
-            </div>
-        </div>
-        
-        <div class="carousel-slide">
-            <div class="slide-background" style="background-image: url('{{ "images/placeholder-projects.svg" | relURL }}')"></div>
-            <div class="slide-content">
-                <h2>Brew Up Your Next Project</h2>
-                <p>From debugging nightmares to launching dreams - our community is your coding café. Get help, find collaborators, and turn ideas into reality.</p>
-                <a href="{{ "project-request" | relURL }}" class="btn">Get Brewing</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Carousel Navigation -->
-    <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">❮</button>
-    <button class="carousel-btn carousel-next" onclick="changeSlide(1)">❯</button>
-    
-    <!-- Carousel Indicators -->
-    <div class="carousel-indicators">
-        <button class="indicator active" onclick="currentSlide(1)"></button>
-        <button class="indicator" onclick="currentSlide(2)"></button>
-        <button class="indicator" onclick="currentSlide(3)"></button>
-    </div>
-</div>
-
 <div class="container" style="padding: 4rem 1.5rem;">
-    <!-- Featured Blog Posts -->
-    <section style="margin-bottom: 4rem;">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Latest from Our Community</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-            {{ range first 3 (where site.RegularPages "Section" "blog") }}
-            <article class="card">
-                {{ if .Params.featured }}
-                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
-                    Featured
-                </div>
-                {{ end }}
-                <h3 style="margin-bottom: 0.75rem;">
-                    <a href="{{ .RelPermalink }}" style="text-decoration: none; color: var(--text-primary);">
-                        {{ .Title }}
-                    </a>
-                </h3>
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
-                    <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-                    {{ if .Params.author }}
-                    <span>by {{ .Params.author }}</span>
-                    {{ end }}
-                </div>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    {{ if .Summary }}
-                        {{ .Summary | truncate 120 }}
-                    {{ else }}
-                        {{ .Description | truncate 120 }}
-                    {{ end }}
-                </p>
-                {{ if .Params.tags }}
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                    {{ range first 3 .Params.tags }}
-                    <span class="tag">{{ . | title }}</span>
-                    {{ end }}
-                </div>
-                {{ end }}
-                <a href="{{ .RelPermalink }}" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
-                    Read more →
-                </a>
-            </article>
-            {{ end }}
+    <!-- Hero Section -->
+    <div style="text-align: center; margin-bottom: 4rem;">
+        <h1 style="font-size: 3rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-primary); font-family: var(--font-sans);">
+            Your Space to Build
+        </h1>
+        <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
+            Code & Coffee Philadelphia is where developers, designers, and tech enthusiasts come together to learn, build, and grow.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.meetup.com/code-coffee-philly/" class="btn">Join Our Events</a>
+            <a href="{{ "blog" | relURL }}" class="btn btn-secondary">Read Our Blog</a>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="{{ "blog" | relURL }}" class="btn btn-secondary">View All Posts</a>
-        </div>
-    </section>
-
-    <!-- Community Features -->
-    <section style="margin-bottom: 4rem;">
-        <h2 style="text-align: center; margin-bottom: 2rem;">How We Help</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <div class="card" style="text-align: center;">
-                <h3>Project Help</h3>
-                <p>Stuck on a coding challenge? Connect with experienced developers who can provide guidance and mentorship.</p>
-                <a href="{{ "project-request" | relURL }}" class="btn">Get Help</a>
-            </div>
-            
-            <div class="card" style="text-align: center;">
-                <h3>Job Opportunities</h3>
-                <p>Find your next role or discover talented developers in Philadelphia's thriving tech ecosystem.</p>
-                <a href="{{ "talent-matchboard" | relURL }}" class="btn">Browse Jobs</a>
-            </div>
-            
-            <div class="card" style="text-align: center;">
-                <h3>Weekly Events</h3>
-                <p>Join our regular meetups for hands-on coding, workshops, and networking with fellow developers.</p>
-                <a href="https://www.meetup.com/code-coffee-philly/" class="btn">Join Events</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Upcoming Events -->
-    <section>
-        <h2 style="text-align: center; margin-bottom: 2rem;">Upcoming Events</h2>
-        <div class="card" style="text-align: center;">
-            <div id="upcoming-events">
-                <div style="color: var(--text-muted);">Loading upcoming events...</div>
-            </div>
-            <div style="margin-top: 1.5rem;">
-                <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary">View All Events</a>
-            </div>
-        </div>
-    </section>
-</div>
+    </div>
 
     <!-- Featured Blog Posts -->
     <section style="margin-bottom: 4rem;">

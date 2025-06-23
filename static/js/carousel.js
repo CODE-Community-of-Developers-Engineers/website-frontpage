@@ -1,7 +1,7 @@
 // Carousel functionality
 let currentSlideIndex = 0;
-let slides = [];
-let indicators = [];
+const slides = document.querySelectorAll('.carousel-slide');
+const indicators = document.querySelectorAll('.indicator');
 
 function showSlide(index) {
     // Remove all classes from slides
@@ -49,19 +49,17 @@ function autoAdvance() {
 
 // Initialize carousel
 document.addEventListener('DOMContentLoaded', function() {
-    // Get carousel elements
-    slides = document.querySelectorAll('.carousel-slide');
-    indicators = document.querySelectorAll('.indicator');
-    
     if (slides.length > 0) {
         showSlide(0);
         
         // Start auto-advance
-        let autoAdvanceInterval = setInterval(autoAdvance, 5000);
+        setInterval(autoAdvance, 5000);
         
         // Pause auto-advance on hover
         const carousel = document.querySelector('.carousel-container');
         if (carousel) {
+            let autoAdvanceInterval = setInterval(autoAdvance, 5000);
+            
             carousel.addEventListener('mouseenter', () => {
                 clearInterval(autoAdvanceInterval);
             });

@@ -255,23 +255,18 @@ document.addEventListener('DOMContentLoaded', function() {
             window.currentFilter = currentFilter;
             console.log('Filter changed to:', currentFilter);
             
-            // If no search query, show filtered results from all content
-            const query = searchInput.value.trim();
-            if (!query && currentFilter !== 'all') {
-                // Show all items matching the filter
-                const results = searchIndex.filter(item => {
-                    if (currentFilter === 'tutorial' || currentFilter === 'community' || currentFilter === 'events') {
-                        return item.topic === currentFilter;
-                    } else {
-                        return Array.isArray(item.tags) && item.tags.includes(currentFilter);
-                    }
-                }).sort((a, b) => new Date(b.date) - new Date(a.date));
+            // Populate search field with filter term
+            if (currentFilter !== 'all') {
+                searchInput.value = currentFilter;
+                searchInput.focus();
                 
-                renderResults(results, '');
+                // Perform search with the filter term
+                const results = performSearch(currentFilter, 'all');
+                renderResults(results, currentFilter);
             } else {
-                // Perform search with the filter
-                const results = performSearch(query, currentFilter);
-                renderResults(results, query);
+                // Clear search field for "All Content"
+                searchInput.value = '';
+                renderResults([], '');
             }
         });
     });

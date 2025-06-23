@@ -1,222 +1,113 @@
 {{ define "main" }}
-<section>
-<style>
-    .blog-list-container {
-        width: 90%;
-        max-width: 1000px;
-        margin: 40px auto;
-        padding: 30px;
-        background-color: #f9f5f1;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #3B2521;
-    }
-    
-    .blog-list-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    
-    .blog-filter-tags {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 30px;
-    }
-    
-    .tag-filter {
-        padding: 6px 12px;
-        background-color: #59969B;
-        color: white;
-        border-radius: 15px;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: background-color 0.2s ease;
-        cursor: pointer;
-    }
-    
-    .tag-filter:hover,
-    .tag-filter.active {
-        background-color: #3B2521;
-        color: white;
-    }
-    
-    .blog-post-item {
-        margin-bottom: 30px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease;
-    }
-    
-    .blog-post-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-    
-    .featured-post {
-        background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
-        border: 2px solid #59969B;
-        position: relative;
-    }
-    
-    .featured-badge {
-        position: absolute;
-        top: -10px;
-        right: 15px;
-        background-color: #e83b3b;
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    
-    .blog-post-title {
-        margin: 0 0 10px 0;
-    }
-    
-    .blog-post-title a {
-        color: #3B2521;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-    
-    .blog-post-title a:hover {
-        color: #59969B;
-    }
-    
-    .blog-post-meta {
-        color: #666;
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        align-items: center;
-    }
-    
-    .blog-post-tags {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-    }
-    
-    .blog-tag {
-        background-color: #59969B;
-        color: white;
-        padding: 4px 8px;
-        border-radius: 12px;
-        font-size: 0.75rem;
-        text-decoration: none;
-        transition: background-color 0.2s ease;
-        cursor: pointer;
-    }
-    
-    .blog-tag:hover {
-        background-color: #3B2521;
-        color: white;
-    }
-    
-    .blog-post-summary {
-        line-height: 1.6;
-        margin-bottom: 15px;
-        color: #555;
-    }
-    
-    .read-more {
-        color: #59969B;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.2s ease;
-    }
-    
-    .read-more:hover {
-        color: #3B2521;
-    }
-</style>
+<div class="container blog-layout">
+    <div class="blog-content">
+        <!-- Page Header -->
+        <div style="margin-bottom: 3rem; text-align: center;">
+            <h1>{{ .Title }}</h1>
+            {{ with .Content }}
+            <p style="font-size: 1.125rem; color: var(--text-secondary);">{{ . }}</p>
+            {{ end }}
+        </div>
 
-<div class="blog-list-container">
-    <div class="blog-list-header">
-        <h1>{{ .Title }}</h1>
-        <p>{{ .Content }}</p>
-    </div>
-    
-    {{ if .Pages }}
-    <!-- Tag Filter -->
-    {{ $tags := slice }}
-    {{ range .Pages }}
-        {{ range .Params.tags }}
-            {{ $tags = $tags | append . }}
-        {{ end }}
-    {{ end }}
-    {{ $uniqueTags := $tags | uniq }}
-    
-    {{ if $uniqueTags }}
-    <div class="blog-filter-tags">
-        <a href="#" class="tag-filter active" data-tag="all">All Posts</a>
-        {{ range $uniqueTags }}
-        <a href="#" class="tag-filter" data-tag="{{ . }}">{{ title . }}</a>
-        {{ end }}
-    </div>
-    {{ end }}
-    {{ end }}
-    
-    {{ range .Pages }}
-    <article class="blog-post-item{{ if .Params.featured }} featured-post{{ end }}" data-tags="{{ if .Params.tags }}{{ delimit .Params.tags " " }}{{ end }}">
-        {{ if .Params.featured }}
-        <div class="featured-badge">Featured</div>
-        {{ end }}
-        <h2 class="blog-post-title">
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </h2>
-        <div class="blog-post-meta">
-            {{ if .Date }}
-            <span>{{ .Date.Format "January 2, 2006" }}</span>
+        <!-- Tag Filter -->
+        {{ if .Pages }}
+        {{ $tags := slice }}
+        {{ range .Pages }}
+            {{ range .Params.tags }}
+                {{ $tags = $tags | append . }}
             {{ end }}
-            {{ if .Params.author }}
-            <span>by {{ .Params.author }}</span>
-            {{ end }}
-            {{ if .Params.tags }}
-            <div class="blog-post-tags">
-                {{ range .Params.tags }}
-                <a href="#" class="blog-tag" data-tag="{{ . }}">{{ title . }}</a>
+        {{ end }}
+        {{ $uniqueTags := $tags | uniq }}
+        
+        {{ if $uniqueTags }}
+        <div style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1rem;">Filter by Topic</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <button class="tag tag-filter active" data-tag="all">All Posts</button>
+                {{ range $uniqueTags }}
+                <button class="tag tag-filter" data-tag="{{ . }}">{{ title . }}</button>
                 {{ end }}
             </div>
-            {{ end }}
         </div>
-        <div class="blog-post-summary">
-            {{ if .Summary }}
-                {{ .Summary }}
-            {{ else if .Description }}
-                {{ .Description }}
-            {{ else }}
-                {{ .Content | truncate 200 }}
-            {{ end }}
-        </div>
-        <a href="{{ .RelPermalink }}" class="read-more">Read more</a>
-    </article>
-    {{ end }}
-    
-    {{ if eq (len .Pages) 0 }}
-    <div style="text-align: center; padding: 40px; color: #666;">
-        <p>No blog posts yet. Check back soon for updates!</p>
-    </div>
-    {{ end }}
-</div>
+        {{ end }}
 
+        <!-- Blog Posts -->
+        <div class="blog-posts">
+            {{ range .Pages }}
+            <article class="blog-post{{ if .Params.featured }} featured{{ end }}" data-tags="{{ if .Params.tags }}{{ delimit .Params.tags " " }}{{ end }}">
+                {{ if .Params.featured }}
+                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
+                    Featured
+                </div>
+                {{ end }}
+                
+                <h2 style="margin-bottom: 0.75rem;">
+                    <a href="{{ .RelPermalink }}" style="text-decoration: none; color: var(--text-primary);">
+                        {{ .Title }}
+                    </a>
+                </h2>
+                
+                <div class="blog-meta">
+                    {{ if .Date }}
+                    <span>{{ .Date.Format "January 2, 2006" }}</span>
+                    {{ end }}
+                    {{ if .Params.author }}
+                    <span>by {{ .Params.author }}</span>
+                    {{ end }}
+                    {{ if .Params.readingTime }}
+                    <span>{{ .Params.readingTime }} min read</span>
+                    {{ end }}
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    {{ if .Summary }}
+                        {{ .Summary }}
+                    {{ else if .Description }}
+                        {{ .Description }}
+                    {{ else }}
+                        {{ .Content | truncate 200 }}
+                    {{ end }}
+                </div>
+                
+                {{ if .Params.tags }}
+                <div class="blog-tags">
+                    {{ range .Params.tags }}
+                    <span class="tag blog-tag" data-tag="{{ . }}">{{ title . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+                
+                <a href="{{ .RelPermalink }}" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    Read full article →
+                </a>
+            </article>
+            {{ end }}
+        </div>
+        
+        {{ if eq (len .Pages) 0 }}
+        <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+            <h3>No posts yet</h3>
+            <p>Check back soon for updates from our community!</p>
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="blog-sidebar">
+        {{ partial "blog-sidebar.html" . }}
+    </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tagFilters = document.querySelectorAll('.tag-filter');
-    const blogPosts = document.querySelectorAll('.blog-post-item');
+    const blogPosts = document.querySelectorAll('.blog-post');
     
     tagFilters.forEach(filter => {
-        filter.addEventListener('click', function(e) {
-            e.preventDefault();
-            
+        filter.addEventListener('click', function() {
             // Update active filter
             tagFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
@@ -226,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Filter posts
             blogPosts.forEach(post => {
                 const postTags = post.getAttribute('data-tags');
-                if (selectedTag === 'all' || postTags.includes(selectedTag)) {
+                if (selectedTag === 'all' || (postTags && postTags.includes(selectedTag))) {
                     post.style.display = 'block';
                 } else {
                     post.style.display = 'none';
@@ -238,18 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle tag clicks within posts
     const blogTags = document.querySelectorAll('.blog-tag');
     blogTags.forEach(tag => {
-        tag.addEventListener('click', function(e) {
-            e.preventDefault();
+        tag.addEventListener('click', function() {
             const tagName = this.getAttribute('data-tag');
-            
-            // Find and click the corresponding filter
             const correspondingFilter = document.querySelector(`[data-tag="${tagName}"]`);
-            if (correspondingFilter) {
+            if (correspondingFilter && correspondingFilter.classList.contains('tag-filter')) {
                 correspondingFilter.click();
             }
         });
     });
 });
 </script>
-</section>
 {{ end }}

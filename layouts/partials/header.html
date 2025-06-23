@@ -1,62 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .Title }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
-    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="{{ "css/global.css" | relURL }}">
-    {{ if .IsHome }}
-    <link rel="stylesheet" href="{{ "css/index.css" | relURL }}">
-    {{ end }}
-</head>
-<body>
-    <header>
-        <div class="header-left">
-            <div id="logo">
-                <img src="{{ "media/coffeecup.svg" | relURL }}" alt="Code & Coffee Logo">
-            </div>
-            <h1><a href="{{ "/" | relURL }}" style="text-decoration: none; color: inherit;">Code & Coffee</a></h1>
-        </div>
+<header>
+    <div class="header-container">
+        <a href="{{ "/" | relURL }}" class="logo">
+            <img src="{{ "media/coffeecup.svg" | relURL }}" alt="Code & Coffee Logo">
+            <span>Code & Coffee</span>
+        </a>
         
-        <div class="header-right">
-            <!-- Desktop Navigation -->
-            <nav class="desktop-nav">
-                <div class="nav-container">
-                    <a href="{{ "blog" | relURL }}" class="nav-link">Blog</a>
-                    <a href="{{ "project-request" | relURL }}" class="nav-link">Project Help</a>
-                    <a href="{{ "talent-matchboard" | relURL }}" class="nav-link">Talent Board</a>
-                    <a href="{{ "event-sponsorship" | relURL }}" class="nav-link">Sponsor Events</a>
-                    <a href="{{ "links" | relURL }}" class="nav-link">Links</a>
-                    <a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" class="nav-link">Merch</a>
-                    <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate-link">Donate</a>
-                </div>
-            </nav>
-            
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
-        </div>
-    </header>
-    
-    <!-- Mobile Navigation -->
-    <nav id="mobile-nav" class="mobile-nav">
-        <a href="{{ "blog" | relURL }}" class="mobile-nav-link">Blog</a>
-        <a href="{{ "project-request" | relURL }}" class="mobile-nav-link">Project Help</a>
-        <a href="{{ "talent-matchboard" | relURL }}" class="mobile-nav-link">Talent Board</a>
-        <a href="{{ "event-sponsorship" | relURL }}" class="mobile-nav-link">Sponsor Events</a>
-        <a href="{{ "links" | relURL }}" class="mobile-nav-link">Links</a>
-        <a href="https://shop.fourth-wall.com/codeandcoffeephiladelphia" class="mobile-nav-link">Merch</a>
-        <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="mobile-nav-link donate-link">Donate</a>
-    </nav>
-    
-    <main>
+        <nav class="nav-desktop">
+            <a href="{{ "blog" | relURL }}" class="nav-link">Blog</a>
+            <a href="{{ "project-request" | relURL }}" class="nav-link">Get Help</a>
+            <a href="{{ "talent-matchboard" | relURL }}" class="nav-link">Jobs</a>
+            <a href="{{ "event-sponsorship" | relURL }}" class="nav-link">Sponsor</a>
+            <a href="{{ "links" | relURL }}" class="nav-link">Links</a>
+            <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
+            <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate">Donate</a>
+        </nav>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+    </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-content">
+        <a href="{{ "blog" | relURL }}" class="nav-link">Blog</a>
+        <a href="{{ "project-request" | relURL }}" class="nav-link">Get Help</a>
+        <a href="{{ "talent-matchboard" | relURL }}" class="nav-link">Jobs</a>
+        <a href="{{ "event-sponsorship" | relURL }}" class="nav-link">Sponsor</a>
+        <a href="{{ "links" | relURL }}" class="nav-link">Links</a>
+        <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
+        <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate">Donate</a>
+    </div>
+</div>

@@ -1,152 +1,88 @@
 {{ define "main" }}
-<section>
 {{ if eq .Section "blog" }}
-<style>
-    .blog-container {
-        width: 90%;
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 30px;
-        background-color: #f9f5f1;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #3B2521;
-    }
-    
-    .blog-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    
-    .blog-meta {
-        text-align: center;
-        color: #666;
-        margin-bottom: 20px;
-        font-style: italic;
-    }
-    
-    .blog-content {
-        line-height: 1.6;
-        font-size: 1.1rem;
-    }
-    
-    .blog-content h1, .blog-content h2, .blog-content h3 {
-        color: #3B2521;
-        margin-top: 30px;
-        margin-bottom: 15px;
-    }
-    
-    .blog-content img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin: 20px 0;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .blog-post-tags {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin: 20px 0;
-    }
-    
-    .blog-tag {
-        background-color: #59969B;
-        color: white;
-        padding: 6px 12px;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        text-decoration: none;
-        transition: background-color 0.2s ease;
-    }
-    
-    .blog-tag:hover {
-        background-color: #3B2521;
-        color: white;
-    }
-    
-    .featured-badge {
-        display: inline-block;
-        background-color: #e83b3b;
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-left: 10px;
-    }
-</style>
-
-<div class="blog-container">
-    <div class="blog-header">
-        <h1>{{ .Title }}</h1>
-        {{ if .Date }}
-        <div class="blog-meta">
-            Published on {{ .Date.Format "January 2, 2006" }}
-            {{ if .Params.author }} by {{ .Params.author }}{{ end }}
-            {{ if .Params.featured }}<span class="featured-badge">Featured</span>{{ end }}
-        </div>
-        {{ if .Params.tags }}
-        <div class="blog-post-tags">
-            {{ range .Params.tags }}
-            <a href="{{ "/blog" | relURL }}" class="blog-tag">{{ title . }}</a>
-            {{ end }}
-        </div>
-        {{ end }}
-        {{ end }}
-    </div>
-    
+<div class="container blog-layout">
     <div class="blog-content">
-        {{ .Content }}
+        <article class="blog-post">
+            <!-- Blog Header -->
+            <header style="margin-bottom: 2rem;">
+                {{ if .Params.featured }}
+                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
+                    Featured
+                </div>
+                {{ end }}
+                
+                <h1 style="margin-bottom: 1rem;">{{ .Title }}</h1>
+                
+                <div class="blog-meta" style="margin-bottom: 1.5rem;">
+                    {{ if .Date }}
+                    <span>{{ .Date.Format "January 2, 2006" }}</span>
+                    {{ end }}
+                    {{ if .Params.author }}
+                    <span>by {{ .Params.author }}</span>
+                    {{ end }}
+                    {{ if .Params.readingTime }}
+                    <span>{{ .Params.readingTime }} min read</span>
+                    {{ else }}
+                    <span>{{ math.Round (div (countwords .Content) 200.0) }} min read</span>
+                    {{ end }}
+                </div>
+                
+                {{ if .Params.tags }}
+                <div class="blog-tags">
+                    {{ range .Params.tags }}
+                    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ title . }}</a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </header>
+            
+            <!-- Blog Content -->
+            <div style="prose max-w-none; line-height: 1.7; color: var(--text-secondary);">
+                {{ .Content }}
+            </div>
+            
+            <!-- Related Posts -->
+            {{ $related := .Site.RegularPages.Related . | first 3 }}
+            {{ if $related }}
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <h3 style="margin-bottom: 1.5rem;">Related Posts</h3>
+                <div style="display: grid; gap: 1.5rem;">
+                    {{ range $related }}
+                    <div style="display: flex; gap: 1rem; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); transition: all 0.2s ease;">
+                        <div style="flex: 1;">
+                            <h4 style="margin-bottom: 0.5rem;">
+                                <a href="{{ .RelPermalink }}" style="text-decoration: none; color: var(--text-primary);">
+                                    {{ .Title }}
+                                </a>
+                            </h4>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.5rem;">
+                                {{ .Date.Format "Jan 2, 2006" }}
+                                {{ if .Params.author }} • by {{ .Params.author }}{{ end }}
+                            </p>
+                            <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
+                                {{ if .Summary }}{{ .Summary | truncate 100 }}{{ else }}{{ .Description | truncate 100 }}{{ end }}
+                            </p>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+        </article>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="blog-sidebar">
+        {{ partial "blog-sidebar.html" . }}
     </div>
 </div>
-
-{{ else if eq .Type "project-request" }}
-
-<style>
-    .project-request-container {
-        width: 90%;
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 30px;
-        background-color: #f9f5f1;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #3B2521;
-    }
-    
-    .project-request-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    
-    .project-request-content {
-        line-height: 1.6;
-        font-size: 1.1rem;
-    }
-</style>
-
-<div class="project-request-container">
-    <div class="project-request-header">
-        <h1>{{ .Title }}</h1>
-    </div>
-    
-    <div class="project-request-content">
-        {{ .Content }}
-    </div>
-</div>
-
 {{ else }}
-
-<div class="content-container" style="max-width: 800px; margin: 40px auto; padding: 20px;">
-    <h1>{{ .Title }}</h1>
-    {{ .Content }}
+<!-- Non-blog content -->
+<div class="container container-narrow" style="padding: 3rem 1.5rem;">
+    <article class="blog-post">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </article>
 </div>
-
 {{ end }}
-</section>
 {{ end }}

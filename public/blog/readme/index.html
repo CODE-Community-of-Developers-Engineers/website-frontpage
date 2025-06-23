@@ -63,13 +63,15 @@
             <header style="margin-bottom: 2rem;">
                 
                 
+                
+                
                 <h1 style="margin-bottom: 1rem;"></h1>
                 
                 <div class="blog-meta" style="margin-bottom: 1.5rem;">
                     
                     
                     
-                    <span>2 min read</span>
+                    <span>3 min read</span>
                     
                 </div>
                 
@@ -79,122 +81,174 @@
             
             <div style="prose max-w-none; line-height: 1.7; color: var(--text-secondary);">
                 <h1 id="blog-content-management-guide">Blog Content Management Guide</h1>
-<p>This guide explains how to create and manage blog posts for the Code &amp; Coffee Philadelphia website.</p>
-<h2 id="creating-a-new-blog-post">Creating a New Blog Post</h2>
-<h3 id="1-file-location">1. File Location</h3>
-<p>Create new blog posts in the <code>content/blog/</code> directory with a <code>.md</code> extension.</p>
-<p><strong>File naming convention:</strong></p>
-<ul>
-<li>Use lowercase letters</li>
-<li>Separate words with hyphens</li>
-<li>Use descriptive names</li>
-<li>Example: <code>getting-started-with-react.md</code></li>
-</ul>
-<h3 id="2-front-matter-structure">2. Front Matter Structure</h3>
-<p>Every blog post must start with YAML front matter:</p>
+<p>This guide explains how to create and manage blog posts for the Code &amp; Coffee Philadelphia website using Hugo&rsquo;s page bundles.</p>
+<h2 id="hugo-page-bundles">Hugo Page Bundles</h2>
+<p>Hugo supports &ldquo;page bundles&rdquo; which allow you to organize content and assets together in folders. This makes it easier to manage blog posts with images and other resources.</p>
+<h3 id="blog-post-structure">Blog Post Structure</h3>
+<p>Each blog post should be in its own folder with an <code>index.md</code> file:</p>
+<pre tabindex="0"><code>content/blog/
+├── your-post-title/
+│   ├── index.md          # The blog post content
+│   ├── hero-image.jpg    # Featured image
+│   ├── diagram.png       # Other images used in the post
+│   └── data.csv          # Any other assets
+└── another-post/
+    ├── index.md
+    └── cover.jpg
+</code></pre><h2 id="creating-a-new-blog-post">Creating a New Blog Post</h2>
+<h3 id="1-create-the-post-folder">1. Create the Post Folder</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir content/blog/your-post-title
+</span></span></code></pre></div><h3 id="2-create-indexmd-with-front-matter">2. Create index.md with Front Matter</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
 </span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Your Post Title&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">2025-06-23</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;Author Name&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;Your Name&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Brief description for SEO and previews&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;tag1&#34;</span>, <span style="color:#e6db74">&#34;tag2&#34;</span>, <span style="color:#e6db74">&#34;tag3&#34;</span>]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">featured: true # Optional</span>: <span style="color:#ae81ff">makes this a featured post</span>
-</span></span><span style="display:flex;"><span>---
-</span></span></code></pre></div><h3 id="3-required-fields">3. Required Fields</h3>
-<ul>
-<li><strong>title</strong>: The post title (will appear as the main heading)</li>
-<li><strong>date</strong>: Publication date in YYYY-MM-DD format</li>
-<li><strong>author</strong>: Author name</li>
-<li><strong>description</strong>: Brief summary for previews and SEO</li>
-</ul>
-<h3 id="4-optional-fields">4. Optional Fields</h3>
-<ul>
-<li><strong>tags</strong>: Array of tags for categorization and filtering</li>
-<li><strong>featured</strong>: Set to <code>true</code> to mark as a featured post</li>
-</ul>
-<h3 id="5-available-tags">5. Available Tags</h3>
-<p>Use relevant tags from these categories:</p>
-<ul>
-<li><strong>Topics</strong>: <code>community</code>, <code>events</code>, <code>networking</code>, <code>hackathon</code>, <code>workshops</code></li>
-<li><strong>Technologies</strong>: <code>javascript</code>, <code>python</code>, <code>react</code>, <code>ai</code>, <code>machine-learning</code>, <code>web-development</code></li>
-<li><strong>Skill Levels</strong>: <code>beginners</code>, <code>intermediate</code>, <code>advanced</code></li>
-<li><strong>Event Types</strong>: <code>meetup</code>, <code>tech-talk</code>, <code>project-showcase</code></li>
-</ul>
-<h2 id="content-structure">Content Structure</h2>
-<h3 id="summaryexcerpt">Summary/Excerpt</h3>
-<p>Add <code>&lt;!--more--&gt;</code> in your content to create a manual summary break. Everything before this tag becomes the excerpt shown in lists.</p>
-<h3 id="images">Images</h3>
-<p>Place images in the <code>static/media/blog/</code> directory and reference them:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>![<span style="color:#f92672">Alt text</span>](<span style="color:#a6e22e">{{ &#34;media/blog/your-image.jpg&#34; | relURL }}</span>)
-</span></span></code></pre></div><h3 id="links">Links</h3>
-<ul>
-<li>Internal links: <code>[Link text]({{ &quot;page-url&quot; | relURL }})</code></li>
-<li>External links: <code>[Link text](https://example.com)</code></li>
-</ul>
-<h2 id="blog-features">Blog Features</h2>
-<h3 id="tag-filtering">Tag Filtering</h3>
-<p>The blog automatically generates:</p>
-<ul>
-<li>Tag filter buttons on the blog listing page</li>
-<li>Clickable tags on individual posts</li>
-<li>Automatic tag aggregation across all posts</li>
-</ul>
-<h3 id="featured-posts">Featured Posts</h3>
-<p>Posts marked with <code>featured: true</code> will:</p>
-<ul>
-<li>Display a &ldquo;Featured&rdquo; badge</li>
-<li>Have enhanced styling with gradient background</li>
-<li>Appear prominently in the listing</li>
-</ul>
-<h3 id="responsive-design">Responsive Design</h3>
-<p>All blog content is automatically responsive and follows the site&rsquo;s design system.</p>
-<h2 id="examples">Examples</h2>
-<h3 id="minimal-post">Minimal Post</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Quick Update&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">2025-06-23</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;Team&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;A quick community update&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;community&#34;</span>, <span style="color:#e6db74">&#34;updates&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">featured</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">image</span>: <span style="color:#e6db74">&#34;hero-image.jpg&#34;</span>  <span style="color:#75715e"># Optional: header image filename</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">readingTime: 5           # Optional</span>: <span style="color:#ae81ff">estimated reading time in minutes</span>
 </span></span><span style="display:flex;"><span>---
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">Your content here...</span>
-</span></span></code></pre></div><h3 id="full-featured-post">Full Featured Post</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Advanced React Patterns Workshop Recap&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">2025-06-23</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;Jane Doe&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Key takeaways from our advanced React patterns workshop including hooks, context, and performance optimization&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;react&#34;</span>, <span style="color:#e6db74">&#34;javascript&#34;</span>, <span style="color:#e6db74">&#34;workshops&#34;</span>, <span style="color:#e6db74">&#34;web-development&#34;</span>, <span style="color:#e6db74">&#34;advanced&#34;</span>]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">featured</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">Workshop overview and content...</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">Your post content here...</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">&lt;!--more--&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">Detailed content continues here...</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">More detailed content after the summary break...</span>
+</span></span></code></pre></div><h3 id="3-required-front-matter-fields">3. Required Front Matter Fields</h3>
+<ul>
+<li><strong>title</strong>: The post title (appears as the main heading)</li>
+<li><strong>date</strong>: Publication date in YYYY-MM-DD format</li>
+<li><strong>author</strong>: Author name</li>
+<li><strong>description</strong>: Brief summary for previews and SEO</li>
+<li><strong>tags</strong>: Array of tags for categorization</li>
+</ul>
+<h3 id="4-optional-front-matter-fields">4. Optional Front Matter Fields</h3>
+<ul>
+<li><strong>featured</strong>: Set to <code>true</code> to mark as a featured post (shows badge)</li>
+<li><strong>image</strong>: Filename of the header image (place in same folder)</li>
+<li><strong>readingTime</strong>: Estimated reading time in minutes</li>
+</ul>
+<h2 id="available-tags">Available Tags</h2>
+<p>Use relevant tags from these categories:</p>
+<h3 id="topics">Topics</h3>
+<ul>
+<li><code>community</code>, <code>events</code>, <code>networking</code>, <code>hackathon</code>, <code>workshops</code>, <code>meetup</code></li>
+</ul>
+<h3 id="technologies">Technologies</h3>
+<ul>
+<li><code>javascript</code>, <code>python</code>, <code>react</code>, <code>nodejs</code>, <code>api</code>, <code>web-development</code></li>
+<li><code>ai</code>, <code>machine-learning</code>, <code>data-science</code>, <code>devops</code>, <code>cloud</code></li>
+</ul>
+<h3 id="skill-levels">Skill Levels</h3>
+<ul>
+<li><code>beginners</code>, <code>intermediate</code>, <code>advanced</code>, <code>tutorial</code></li>
+</ul>
+<h3 id="event-types">Event Types</h3>
+<ul>
+<li><code>tech-talk</code>, <code>project-showcase</code>, <code>workshop-recap</code>, <code>hackathon-recap</code></li>
+</ul>
+<h2 id="adding-images">Adding Images</h2>
+<h3 id="headerfeatured-images">Header/Featured Images</h3>
+<ol>
+<li>Place your header image in the same folder as your <code>index.md</code></li>
+<li>Reference it in the front matter: <code>image: &quot;your-image.jpg&quot;</code></li>
+<li>Hugo will automatically use this for social media previews</li>
+</ol>
+<h3 id="images-in-content">Images in Content</h3>
+<p>Reference images in the same folder directly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>![<span style="color:#f92672">Alt text</span>](<span style="color:#a6e22e">diagram.png</span>)
+</span></span></code></pre></div><p>Or use Hugo shortcodes for more control:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><figure><img src="screenshot.png"
+    alt="Screenshot description"><figcaption>
+      <p>Optional caption</p>
+    </figcaption>
+</figure>
+
+</span></span></code></pre></div><h2 id="content-features">Content Features</h2>
+<h3 id="summaryexcerpt">Summary/Excerpt</h3>
+<p>Add <code>&lt;!--more--&gt;</code> in your content to create a manual summary break. Everything before this tag becomes the excerpt shown in blog lists.</p>
+<h3 id="code-blocks">Code Blocks</h3>
+<p>Use fenced code blocks with syntax highlighting:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>```javascript
+</span></span><span style="display:flex;"><span>function hello() {
+</span></span><span style="display:flex;"><span>    console.log(&#34;Hello, Code <span style="color:#960050;background-color:#1e0010">&amp;</span> Coffee!&#34;);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>
+### Links
+- Internal links: `[Link text](/blog/other-post/)`
+- External links: `[Link text](https://example.com)`
+
+## Blog Publishing Workflow
+
+### 1. Local Development
+```bash
+# Start Hugo development server
+hugo server -D
+
+# View your post at http://localhost:5000
+</code></pre><h3 id="2-publishing">2. Publishing</h3>
+<ol>
+<li>Create your post folder and <code>index.md</code></li>
+<li>Add any images or assets to the same folder</li>
+<li>Test locally with <code>hugo server</code></li>
+<li>Commit and push to trigger automatic deployment</li>
+</ol>
+<h3 id="3-automatic-updates">3. Automatic Updates</h3>
+<p>Hugo automatically:</p>
+<ul>
+<li>Generates the blog listing page</li>
+<li>Creates tag pages</li>
+<li>Updates the RSS feed</li>
+<li>Builds related posts suggestions</li>
+<li>Updates the sitemap</li>
+</ul>
+<h2 id="example-post-structure">Example Post Structure</h2>
+<pre tabindex="0"><code>content/blog/building-rest-api/
+├── index.md              # Main content
+├── api-diagram.png       # Referenced in content
+├── postman-screenshot.jpg # Referenced in content
+└── cover.jpg            # Featured image
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Building Your First REST API&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">2025-06-23</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;Alex Johnson&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Learn to build REST APIs with Node.js and Express&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;javascript&#34;</span>, <span style="color:#e6db74">&#34;nodejs&#34;</span>, <span style="color:#e6db74">&#34;api&#34;</span>, <span style="color:#e6db74">&#34;tutorial&#34;</span>, <span style="color:#e6db74">&#34;beginners&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">featured</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">image</span>: <span style="color:#e6db74">&#34;cover.jpg&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">readingTime</span>: <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">Building REST APIs is essential for modern web development...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">&lt;!--more--&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Setting Up the Project</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">First, create a new directory...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>![<span style="color:#ae81ff">API Structure](api-diagram.png)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Here&#39;s how to test with Postman</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>![<span style="color:#ae81ff">Postman Testing](postman-screenshot.jpg)</span>
 </span></span></code></pre></div><h2 id="best-practices">Best Practices</h2>
 <ol>
-<li><strong>Use descriptive titles</strong> that clearly indicate the post content</li>
+<li><strong>Use descriptive folder names</strong> - lowercase with hyphens</li>
+<li><strong>Optimize images</strong> - compress before adding to reduce load times</li>
+<li><strong>Write compelling descriptions</strong> - these appear in social media previews</li>
 <li><strong>Choose relevant tags</strong> - typically 3-5 tags per post</li>
-<li><strong>Write compelling descriptions</strong> for better engagement</li>
-<li><strong>Include images</strong> to make posts more visual</li>
-<li><strong>Use the summary break</strong> (<code>&lt;!--more--&gt;</code>) to control excerpts</li>
-<li><strong>Test locally</strong> using <code>hugo server</code> before publishing</li>
-</ol>
-<h2 id="publication-process">Publication Process</h2>
-<ol>
-<li>Create your markdown file in <code>content/blog/</code></li>
-<li>Test locally with Hugo server</li>
-<li>Commit and push to trigger automatic deployment via GitHub Actions</li>
-<li>Posts automatically appear on the blog listing page with filtering</li>
+<li><strong>Include reading time</strong> - helps readers plan their time</li>
+<li><strong>Use the summary break</strong> - control what appears in post previews</li>
+<li><strong>Test locally first</strong> - always preview before publishing</li>
 </ol>
 <h2 id="maintenance">Maintenance</h2>
 <ul>
 <li>Review tags periodically to ensure consistency</li>
 <li>Update older posts if information becomes outdated</li>
 <li>Monitor featured posts to keep them current and relevant</li>
+<li>Check image links if you move or rename files</li>
 </ul>
 
             </div>
@@ -213,9 +267,9 @@
     <div class="recent-posts">
         
         <div class="recent-post">
-            <a href="/blog/getting-started-with-code-coffee/" class="recent-post-title">Getting Started with Code &amp; Coffee Philadelphia</a>
+            <a href="/blog/example-tech-tutorial/" class="recent-post-title">Building Your First REST API with Node.js and Express</a>
             <div class="recent-post-meta">
-                Jun 23, 2025
+                Jun 20, 2025
             </div>
         </div>
         
@@ -251,6 +305,10 @@
             
                 
             
+                
+            
+                
+            
         
             
                 
@@ -290,17 +348,27 @@
             
             
         
+            
+            
+        
+            
+            
+        
+        
+        <a href="/blog" class="tag-cloud-item" data-tag="api">
+            Api (1)
+        </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="beginners">
             Beginners (1)
         </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="community">
-            Community (2)
+            Community (1)
         </a>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="events">
-            Events (1)
+        <a href="/blog" class="tag-cloud-item" data-tag="express">
+            Express (1)
         </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="hackathon">
@@ -311,12 +379,20 @@
             Innovation (1)
         </a>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="networking">
-            Networking (1)
+        <a href="/blog" class="tag-cloud-item" data-tag="javascript">
+            Javascript (1)
+        </a>
+        
+        <a href="/blog" class="tag-cloud-item" data-tag="nodejs">
+            Nodejs (1)
         </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="philly-tech-week">
             Philly-Tech-Week (1)
+        </a>
+        
+        <a href="/blog" class="tag-cloud-item" data-tag="tutorial">
+            Tutorial (1)
         </a>
         
     </div>

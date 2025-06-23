@@ -5,6 +5,12 @@
         <article class="blog-post">
             <!-- Blog Header -->
             <header style="margin-bottom: 2rem;">
+                {{ if .Params.image }}
+                <div style="margin-bottom: 2rem;">
+                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow);">
+                </div>
+                {{ end }}
+                
                 {{ if .Params.featured }}
                 <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
                     Featured

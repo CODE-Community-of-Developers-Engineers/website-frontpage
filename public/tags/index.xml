@@ -6,8 +6,15 @@
     <description>Recent content in Tags on Code &amp; Coffee Philadelphia</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:5000/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Api</title>
+      <link>http://localhost:5000/tags/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/tags/api/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Beginners</title>
       <link>http://localhost:5000/tags/beginners/</link>
@@ -16,24 +23,38 @@
       <description></description>
     </item>
     <item>
+      <title>Express</title>
+      <link>http://localhost:5000/tags/express/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/tags/express/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Javascript</title>
+      <link>http://localhost:5000/tags/javascript/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nodejs</title>
+      <link>http://localhost:5000/tags/nodejs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tutorial</title>
+      <link>http://localhost:5000/tags/tutorial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Community</title>
       <link>http://localhost:5000/tags/community/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:5000/tags/community/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Events</title>
-      <link>http://localhost:5000/tags/events/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:5000/tags/events/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Networking</title>
-      <link>http://localhost:5000/tags/networking/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:5000/tags/networking/</guid>
       <description></description>
     </item>
     <item>
@@ -55,6 +76,20 @@
       <link>http://localhost:5000/tags/philly-tech-week/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:5000/tags/philly-tech-week/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Events</title>
+      <link>http://localhost:5000/tags/events/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/tags/events/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Networking</title>
+      <link>http://localhost:5000/tags/networking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:5000/tags/networking/</guid>
       <description></description>
     </item>
   </channel>

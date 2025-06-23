@@ -5,6 +5,7 @@ author: "Code & Coffee Team"
 description: "Everything you need to know about joining our vibrant tech community in Philadelphia."
 tags: ["community", "events", "networking", "beginners"]
 featured: true
+image: "hero-community.jpg"
 ---
 
 Welcome to Code & Coffee Philadelphia! Whether you're a seasoned developer, a designer, or someone just starting their tech journey, our community has something for everyone.

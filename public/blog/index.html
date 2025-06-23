@@ -79,6 +79,10 @@
             
                 
             
+                
+            
+                
+            
         
             
                 
@@ -100,11 +104,15 @@
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
                 <button class="tag tag-filter active" data-tag="all">All Posts</button>
                 
-                <button class="tag tag-filter" data-tag="community">Community</button>
+                <button class="tag tag-filter" data-tag="javascript">Javascript</button>
                 
-                <button class="tag tag-filter" data-tag="events">Events</button>
+                <button class="tag tag-filter" data-tag="nodejs">Nodejs</button>
                 
-                <button class="tag tag-filter" data-tag="networking">Networking</button>
+                <button class="tag tag-filter" data-tag="api">Api</button>
+                
+                <button class="tag tag-filter" data-tag="express">Express</button>
+                
+                <button class="tag tag-filter" data-tag="tutorial">Tutorial</button>
                 
                 <button class="tag tag-filter" data-tag="beginners">Beginners</button>
                 
@@ -114,6 +122,8 @@
                 
                 <button class="tag tag-filter" data-tag="innovation">Innovation</button>
                 
+                <button class="tag tag-filter" data-tag="community">Community</button>
+                
             </div>
         </div>
         
@@ -121,52 +131,60 @@
         
         <div class="blog-posts">
             
-            <article class="blog-post featured" data-tags="community events networking beginners">
-                
-                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
-                    Featured
-                </div>
+            <article class="blog-post" data-tags="javascript nodejs api express tutorial beginners">
                 
                 
                 <h2 style="margin-bottom: 0.75rem;">
-                    <a href="/blog/getting-started-with-code-coffee/" style="text-decoration: none; color: var(--text-primary);">
-                        Getting Started with Code &amp; Coffee Philadelphia
+                    <a href="/blog/example-tech-tutorial/" style="text-decoration: none; color: var(--text-primary);">
+                        Building Your First REST API with Node.js and Express
                     </a>
                 </h2>
                 
                 <div class="blog-meta">
                     
-                    <span>June 23, 2025</span>
+                    <span>June 20, 2025</span>
                     
                     
-                    <span>by Code &amp; Coffee Team</span>
+                    <span>by Alex Johnson</span>
                     
+                    
+                    <span>8 min read</span>
                     
                 </div>
                 
                 <div style="margin-bottom: 1.5rem;">
                     
-                        <p>Welcome to Code &amp; Coffee Philadelphia! Whether you&rsquo;re a seasoned developer, a designer, or someone just starting their tech journey, our community has something for everyone.</p>
-<h2 id="what-were-all-about">What We&rsquo;re All About</h2>
-<p>Code &amp; Coffee Philadelphia is more than just a meetup group – we&rsquo;re a thriving community of tech enthusiasts who believe in the power of collaboration, learning, and good coffee. Our mission is to create an inclusive space where people can share ideas, work on projects, and grow their skills together.</p>
+                        <p>Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&rsquo;ll create a complete REST API using Node.js and Express, perfect for beginners who want to understand backend development.</p>
+<h2 id="what-youll-learn">What You&rsquo;ll Learn</h2>
+<p>By the end of this tutorial, you&rsquo;ll have built a functional REST API that can:</p>
+<ul>
+<li>Handle GET, POST, PUT, and DELETE requests</li>
+<li>Manage data with proper error handling</li>
+<li>Implement middleware for logging and validation</li>
+<li>Structure your project for scalability</li>
+</ul>
                     
                 </div>
                 
                 
                 <div class="blog-tags">
                     
-                    <span class="tag blog-tag" data-tag="community">Community</span>
+                    <span class="tag blog-tag" data-tag="javascript">Javascript</span>
                     
-                    <span class="tag blog-tag" data-tag="events">Events</span>
+                    <span class="tag blog-tag" data-tag="nodejs">Nodejs</span>
                     
-                    <span class="tag blog-tag" data-tag="networking">Networking</span>
+                    <span class="tag blog-tag" data-tag="api">Api</span>
+                    
+                    <span class="tag blog-tag" data-tag="express">Express</span>
+                    
+                    <span class="tag blog-tag" data-tag="tutorial">Tutorial</span>
                     
                     <span class="tag blog-tag" data-tag="beginners">Beginners</span>
                     
                 </div>
                 
                 
-                <a href="/blog/getting-started-with-code-coffee/" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                <a href="/blog/example-tech-tutorial/" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
                     Read full article →
                 </a>
             </article>
@@ -233,11 +251,9 @@ Igniting Innovation: Code &amp; Coffee&rsquo;s Philly Tech Week Hackathon – Th
                 
                 <div style="margin-bottom: 1.5rem;">
                     
-                        Blog Content Management Guide This guide explains how to create and manage blog posts for the Code &amp; Coffee Philadelphia website.
-Creating a New Blog Post 1. File Location Create new blog posts in the content/blog/ directory with a .md extension.
-File naming convention:
-Use lowercase letters Separate words with hyphens Use descriptive names Example: getting-started-with-react.md 2. Front Matter Structure Every blog post must start with YAML front matter:
---- title: &#34;Your Post Title&#34; date: 2025-06-23 author: &#34;Author Name&#34; description: &#34;Brief description for SEO and previews&#34; tags: [&#34;tag1&#34;, &#34;tag2&#34;, &#34;tag3&#34;] featured: true # Optional: makes this a featured post --- 3.
+                        Blog Content Management Guide This guide explains how to create and manage blog posts for the Code &amp; Coffee Philadelphia website using Hugo&rsquo;s page bundles.
+Hugo Page Bundles Hugo supports &ldquo;page bundles&rdquo; which allow you to organize content and assets together in folders. This makes it easier to manage blog posts with images and other resources.
+Blog Post Structure Each blog post should be in its own folder with an index.
                     
                 </div>
                 
@@ -262,9 +278,9 @@ Use lowercase letters Separate words with hyphens Use descriptive names Example:
     <div class="recent-posts">
         
         <div class="recent-post">
-            <a href="/blog/getting-started-with-code-coffee/" class="recent-post-title">Getting Started with Code &amp; Coffee Philadelphia</a>
+            <a href="/blog/example-tech-tutorial/" class="recent-post-title">Building Your First REST API with Node.js and Express</a>
             <div class="recent-post-meta">
-                Jun 23, 2025
+                Jun 20, 2025
             </div>
         </div>
         
@@ -300,6 +316,10 @@ Use lowercase letters Separate words with hyphens Use descriptive names Example:
             
                 
             
+                
+            
+                
+            
         
             
                 
@@ -339,17 +359,27 @@ Use lowercase letters Separate words with hyphens Use descriptive names Example:
             
             
         
+            
+            
+        
+            
+            
+        
+        
+        <a href="/blog" class="tag-cloud-item" data-tag="api">
+            Api (1)
+        </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="beginners">
             Beginners (1)
         </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="community">
-            Community (2)
+            Community (1)
         </a>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="events">
-            Events (1)
+        <a href="/blog" class="tag-cloud-item" data-tag="express">
+            Express (1)
         </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="hackathon">
@@ -360,12 +390,20 @@ Use lowercase letters Separate words with hyphens Use descriptive names Example:
             Innovation (1)
         </a>
         
-        <a href="/blog" class="tag-cloud-item" data-tag="networking">
-            Networking (1)
+        <a href="/blog" class="tag-cloud-item" data-tag="javascript">
+            Javascript (1)
+        </a>
+        
+        <a href="/blog" class="tag-cloud-item" data-tag="nodejs">
+            Nodejs (1)
         </a>
         
         <a href="/blog" class="tag-cloud-item" data-tag="philly-tech-week">
             Philly-Tech-Week (1)
+        </a>
+        
+        <a href="/blog" class="tag-cloud-item" data-tag="tutorial">
+            Tutorial (1)
         </a>
         
     </div>

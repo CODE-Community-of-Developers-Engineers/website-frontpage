@@ -58,20 +58,50 @@
     
     <main class="main-content">
         
-<div class="container" style="padding: 4rem 1.5rem;">
-    
-    <div style="text-align: center; margin-bottom: 4rem;">
-        <h1 style="font-size: 3rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-primary); font-family: var(--font-sans);">
-            Your Space to Build
-        </h1>
-        <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
-            Code & Coffee Philadelphia is where developers, designers, and tech enthusiasts come together to learn, build, and grow.
-        </p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="https://www.meetup.com/code-coffee-philly/" class="btn">Join Our Events</a>
-            <a href="/blog" class="btn btn-secondary">Read Our Blog</a>
+
+<div class="carousel-container">
+    <div class="carousel" id="heroCarousel">
+        <div class="carousel-slide active">
+            <div class="slide-background" style="background-image: url('/images/placeholder-community.svg')"></div>
+            <div class="slide-content">
+                <h2>Welcome to Code & Coffee</h2>
+                <p>Where Philadelphia's developers, designers, and tech enthusiasts gather to build amazing things together. Join our caffeinated community of creators.</p>
+                <a href="/blog" class="btn-primary">Explore Our Blog</a>
+            </div>
+        </div>
+        
+        <div class="carousel-slide">
+            <div class="slide-background" style="background-image: url('/images/placeholder-events.svg')"></div>
+            <div class="slide-content">
+                <h2>Caffeinated Coding Events</h2>
+                <p>Join our weekly coffee-fueled meetups, weekend hackathons, and hands-on workshops. Learn, code, and connect over great coffee and even better conversations.</p>
+                <a href="https://www.meetup.com/code-coffee-philly/" class="btn-primary">Join the Brew</a>
+            </div>
+        </div>
+        
+        <div class="carousel-slide">
+            <div class="slide-background" style="background-image: url('/images/placeholder-projects.svg')"></div>
+            <div class="slide-content">
+                <h2>Brew Up Your Next Project</h2>
+                <p>From debugging nightmares to launching dreams - our community is your coding café. Get help, find collaborators, and turn ideas into reality.</p>
+                <a href="/project-request" class="btn-primary">Get Brewing</a>
+            </div>
         </div>
     </div>
+    
+    
+    <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">❮</button>
+    <button class="carousel-btn carousel-next" onclick="changeSlide(1)">❯</button>
+    
+    
+    <div class="carousel-indicators">
+        <button class="indicator active" onclick="currentSlide(1)"></button>
+        <button class="indicator" onclick="currentSlide(2)"></button>
+        <button class="indicator" onclick="currentSlide(3)"></button>
+    </div>
+</div>
+
+<div class="container" style="padding: 4rem 1.5rem 2rem;">`
 
     
     <section style="margin-bottom: 4rem;">

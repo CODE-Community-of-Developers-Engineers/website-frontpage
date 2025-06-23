@@ -69,29 +69,15 @@
         </div>
 
         
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Search Posts</h3>
+            <input type="text" id="search-input" placeholder="Search posts..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 1rem; background: var(--background); color: var(--text-primary);">
+        </div>
         
         
         
-            
-                
-            
-                
-            
-                
-            
-                
-            
         
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
+        
             
                 
             
@@ -99,11 +85,7 @@
             
                 
             
-                
-            
-                
-            
-                
+        
             
                 
             
@@ -113,10 +95,71 @@
         
         
         
-        <div style="margin-bottom: 2rem;">
-            <h3 style="margin-bottom: 1rem;">Filter by Topic</h3>
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Browse by Topic</h3>
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                <button class="tag tag-filter active" data-tag="all">All Posts</button>
+                <button class="tag topic-filter active" data-topic="all">All Topics</button>
+                
+                <button class="tag topic-filter" data-topic="community">Community</button>
+                
+                <button class="tag topic-filter" data-topic="tutorial">Tutorial</button>
+                
+                <button class="tag topic-filter" data-topic="events">Events</button>
+                
+            </div>
+        </div>
+        
+        
+        
+        
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        
+            
+        
+        
+        
+        
+        <div style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="margin: 0;">Filter by Tags (click multiple)</h3>
+                <button id="clear-tags" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Clear All</button>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
                 
                 <button class="tag tag-filter" data-tag="events">Events</button>
                 
@@ -146,6 +189,10 @@
                 
                 <button class="tag tag-filter" data-tag="innovation">Innovation</button>
                 
+            </div>
+            <div id="selected-tags" style="margin-top: 1rem; display: none;">
+                <span style="color: var(--text-muted); font-size: 0.875rem; margin-right: 0.5rem;">Selected:</span>
+                <div id="selected-tags-list" style="display: inline-flex; flex-wrap: wrap; gap: 0.5rem;"></div>
             </div>
         </div>
         
@@ -393,56 +440,6 @@ Blog Post Structure Each blog post should be in its own folder with an index.
                 Jan 1, 0001
             </div>
         </div>
-        
-    </div>
-</div>
-
-
-<div class="sidebar-widget">
-    <h3>Browse by Topic</h3>
-    <div class="topic-list">
-        
-        
-            
-                
-            
-        
-            
-                
-            
-        
-            
-                
-            
-        
-            
-        
-        
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-        
-        <button class="community-link sidebar-topic-filter" data-topic="community" style="margin-bottom: 0.5rem;">
-            <strong>Community</strong>
-            <span>1 post</span>
-        </button>
-        
-        <button class="community-link sidebar-topic-filter" data-topic="events" style="margin-bottom: 0.5rem;">
-            <strong>Events</strong>
-            <span>1 post</span>
-        </button>
-        
-        <button class="community-link sidebar-topic-filter" data-topic="tutorial" style="margin-bottom: 0.5rem;">
-            <strong>Tutorial</strong>
-            <span>1 post</span>
-        </button>
         
     </div>
 </div>
@@ -810,6 +807,8 @@ document.addEventListener('DOMContentLoaded', function() {
             filterPosts();
         });
     });
+    
+
     
     
     if (searchInput) {

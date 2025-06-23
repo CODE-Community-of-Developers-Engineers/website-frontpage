@@ -461,6 +461,22 @@ p {
     margin: 2rem 0;
 }
 
+/* Clear button styling */
+.btn-secondary {
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+    border-color: var(--primary-color);
+}
+
 /* Footer */
 footer {
     background: rgba(177, 164, 156, 0.3);

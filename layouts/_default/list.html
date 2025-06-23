@@ -9,8 +9,35 @@
             {{ end }}
         </div>
 
-        <!-- Tag Filter -->
+        <!-- Search Box -->
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Search Posts</h3>
+            <input type="text" id="search-input" placeholder="Search posts..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 1rem; background: var(--background); color: var(--text-primary);">
+        </div>
+        
+        <!-- Browse by Topic -->
         {{ if .Pages }}
+        {{ $topics := slice }}
+        {{ range .Pages }}
+            {{ if .Params.topic }}
+                {{ $topics = $topics | append .Params.topic }}
+            {{ end }}
+        {{ end }}
+        {{ $uniqueTopics := $topics | uniq }}
+        
+        {{ if $uniqueTopics }}
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Browse by Topic</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <button class="tag topic-filter active" data-topic="all">All Topics</button>
+                {{ range $uniqueTopics }}
+                <button class="tag topic-filter" data-topic="{{ . }}">{{ title . }}</button>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+        
+        <!-- Filter by Tags -->
         {{ $tags := slice }}
         {{ range .Pages }}
             {{ range .Params.tags }}
@@ -20,13 +47,19 @@
         {{ $uniqueTags := $tags | uniq }}
         
         {{ if $uniqueTags }}
-        <div style="margin-bottom: 2rem;">
-            <h3 style="margin-bottom: 1rem;">Filter by Topic</h3>
+        <div style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="margin: 0;">Filter by Tags (click multiple)</h3>
+                <button id="clear-tags" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Clear All</button>
+            </div>
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                <button class="tag tag-filter active" data-tag="all">All Posts</button>
                 {{ range $uniqueTags }}
                 <button class="tag tag-filter" data-tag="{{ . }}">{{ title . }}</button>
                 {{ end }}
+            </div>
+            <div id="selected-tags" style="margin-top: 1rem; display: none;">
+                <span style="color: var(--text-muted); font-size: 0.875rem; margin-right: 0.5rem;">Selected:</span>
+                <div id="selected-tags-list" style="display: inline-flex; flex-wrap: wrap; gap: 0.5rem;"></div>
             </div>
         </div>
         {{ end }}
@@ -253,6 +286,8 @@ document.addEventListener('DOMContentLoaded', function() {
             filterPosts();
         });
     });
+    
+
     
     // Search functionality
     if (searchInput) {

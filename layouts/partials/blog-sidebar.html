@@ -13,30 +13,6 @@
     </div>
 </div>
 
-<!-- Topics -->
-<div class="sidebar-widget">
-    <h3>Browse by Topic</h3>
-    <div class="topic-list">
-        {{ $topics := slice }}
-        {{ range where site.RegularPages "Section" "blog" }}
-            {{ if .Params.topic }}
-                {{ $topics = $topics | append .Params.topic }}
-            {{ end }}
-        {{ end }}
-        {{ $topicCounts := dict }}
-        {{ range $topics }}
-            {{ $count := index $topicCounts . | default 0 }}
-            {{ $topicCounts = merge $topicCounts (dict . (add $count 1)) }}
-        {{ end }}
-        {{ range $topic, $count := $topicCounts }}
-        <button class="community-link sidebar-topic-filter" data-topic="{{ $topic }}" style="margin-bottom: 0.5rem;">
-            <strong>{{ $topic | title }}</strong>
-            <span>{{ $count }} post{{ if ne $count 1 }}s{{ end }}</span>
-        </button>
-        {{ end }}
-    </div>
-</div>
-
 <!-- Popular Tags -->
 <div class="sidebar-widget">
     <h3>Popular Tags</h3>

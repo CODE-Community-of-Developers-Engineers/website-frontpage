@@ -41,7 +41,7 @@
 
         <!-- Blog Posts -->
         <div class="blog-posts">
-            {{ range .Pages }}
+            {{ range .Pages.ByDate.Reverse }}
             <article class="blog-post{{ if .Params.featured }} featured{{ end }}" 
                      data-tags="{{ if .Params.tags }}{{ delimit .Params.tags " " }}{{ end }}" 
                      data-topic="{{ .Params.topic | default "general" }}">

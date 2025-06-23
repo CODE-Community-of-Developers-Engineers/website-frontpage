@@ -65,14 +65,14 @@
         
         <div style="margin-bottom: 3rem;">
             <div style="position: relative; margin-bottom: 1.5rem;">
-                <input type="text" id="search-input" placeholder="Search posts, tutorials, and community content..." 
+                <input type="text" id="search-input" placeholder="Search blog posts, pages, tutorials, and community content..." 
                        style="width: 100%; padding: 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-lg); font-size: 1.1rem; background: var(--background); color: var(--text-primary);">
-                <div id="search-stats" style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.875rem;"></div>
             </div>
             
             
             <div style="margin-bottom: 2rem;">
                 <h3 style="margin-bottom: 1rem; font-size: 1rem;">Quick Filters</h3>
+                <div id="search-stats" style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;"></div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                     <button class="tag search-filter active" data-filter="all">All Content</button>
                     <button class="tag search-filter" data-filter="tutorial">Tutorials</button>
@@ -80,6 +80,8 @@
                     <button class="tag search-filter" data-filter="events">Events</button>
                     <button class="tag search-filter" data-filter="javascript">JavaScript</button>
                     <button class="tag search-filter" data-filter="beginners">Beginners</button>
+                    <button class="tag search-filter" data-filter="nodejs">Node.js</button>
+                    <button class="tag search-filter" data-filter="ai">AI/ML</button>
                 </div>
             </div>
         </div>
@@ -88,7 +90,8 @@
         <div id="search-results">
             <div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;">
                 <h3>Start typing to search</h3>
-                <p>Search through our blog posts, tutorials, and community content.</p>
+                <p>Search through our blog posts, pages, tutorials, and community content.</p>
+                <div id="content-summary" style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; max-width: 600px; margin: 2rem auto 0;"></div>
             </div>
         </div>
     </div>
@@ -104,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function buildSearchIndex() {
         try {
             
-            const posts = [
+            const content = [
                 
                 {
                     title: "\"Getting Started with Code \\u0026 Coffee Philadelphia\"",
@@ -114,8 +117,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     date: "\"2025-06-23\"",
                     author: "\"Code \\u0026 Coffee Team\"",
                     tags: "[\"events\",\"networking\",\"beginners\",\"meetup\"]",
+                    topic: "\"community\"",
                     featured:  true ,
-                    readingTime:  5 
+                    readingTime:  5 ,
+                    type: "blog"
                 },
                 
                 {
@@ -126,8 +131,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     date: "\"2025-06-20\"",
                     author: "\"Alex Johnson\"",
                     tags: "[\"javascript\",\"nodejs\",\"api\",\"express\",\"beginners\",\"backend\"]",
+                    topic: "\"tutorial\"",
                     featured:  false ,
-                    readingTime:  8 
+                    readingTime:  8 ,
+                    type: "blog"
                 },
                 
                 {
@@ -138,8 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     date: "\"2025-05-10\"",
                     author: "\"Code \\u0026 Coffee Team\"",
                     tags: "[\"hackathon\",\"ai\",\"gaming\",\"startup\",\"innovation\"]",
+                    topic: "\"events\"",
                     featured:  true ,
-                    readingTime:  6 
+                    readingTime:  6 ,
+                    type: "blog"
                 },
                 
                 {
@@ -149,17 +158,86 @@ document.addEventListener('DOMContentLoaded', function() {
                     url: "\"/blog/readme/\"",
                     date: "\"0001-01-01\"",
                     author: "\"Code \\u0026 Coffee Team\"",
-                    tags: "null",
+                    tags: "[]",
+                    topic: "\"blog\"",
                     featured:  false ,
-                    readingTime:  5 
+                    readingTime:  5 ,
+                    type: "blog"
                 },
+                
+                
+                
+                {
+                    title: "\"Event Sponsorship Request\"",
+                    description: "\"Interested in sponsoring Code \\u0026amp; Coffee Philadelphia events? Your support helps us create meaningful experiences for our tech community while giving your organization visibility among talented developers, designers, and tech professionals.\\nFill out the form below to inquire about sponsorship opportunities, and we\\u0026rsquo;ll get back to you with options that align with your goals and budget.\"",
+                    content: "\"Interested in sponsoring Code \\u0026amp; Coffee Philadelphia events? Your support helps us create meaningful experiences for our tech community while giving your organization visibility among talented developers, designers, and tech professionals.\\nFill out the form below to inquire about sponsorship opportunities, and we\\u0026rsquo;ll get back to you with options that align with your goals and budget.\\n\"",
+                    url: "\"/event-sponsorship/\"",
+                    date: "\"0001-01-01\"",
+                    author: "Code & Coffee Team",
+                    tags: [],
+                    topic: "\"page\"",
+                    featured: false,
+                    readingTime:  1 ,
+                    type: "page"
+                },
+                
+                
+                
+                {
+                    title: "\"Our Links\"",
+                    description: "\"RSVP for Events \\u0026lt;div class=\\u0026quot;button link-button\\u0026quot;\\u0026gt; \\u0026lt;a href=\\u0026quot;https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia\\u0026quot; target=\\u0026quot;_blank\\u0026quot;\\u0026gt; \\u0026lt;span class=\\u0026quot;link-icon\\u0026quot;\\u0026gt; \\u0026lt;svg xmlns=\\u0026quot;http://www.w3.org/2000/svg\\u0026quot; width=\\u0026quot;24\\u0026quot; height=\\u0026quot;24\\u0026quot; viewBox=\\u0026quot;0 0 24 24\\u0026quot; fill=\\u0026quot;none\\u0026quot; stroke=\\u0026quot;currentColor\\u0026quot; stroke-width=\\u0026quot;2\\u0026quot; stroke-linecap=\\u0026quot;round\\u0026quot; stroke-linejoin=\\u0026quot;round\\u0026quot;\\u0026gt; \\u0026lt;path d=\\u0026quot;M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\\u0026quot;\\u0026gt;\\u0026lt;/path\\u0026gt; \\u0026lt;/svg\\u0026gt; \\u0026lt;/span\\u0026gt; \\u0026lt;span class=\\u0026quot;link-text\\u0026quot;\\u0026gt;Donate\\u0026lt;/span\\u0026gt; \\u0026lt;/a\\u0026gt; \\u0026lt;/div\\u0026gt; \\u0026lt;div class=\\u0026quot;button link-button\\u0026quot;\\u0026gt; \\u0026lt;a href=\\u0026quot;https://nol-kky-shop.fourthwall.com/\\u0026quot; target=\\u0026quot;_blank\\u0026quot;\\u0026gt; \\u0026lt;span class=\\u0026quot;link-icon\\u0026quot;\\u0026gt; \\u0026lt;svg xmlns=\\u0026quot;http://www.w3.org/2000/svg\\u0026quot; width=\\u0026quot;24\\u0026quot; height=\\u0026quot;24\\u0026quot; viewBox=\\u0026quot;0 0 24 24\\u0026quot; fill=\\u0026quot;none\\u0026quot; stroke=\\u0026quot;currentColor\\u0026quot; stroke-width=\\u0026quot;2\\u0026quot; stroke-linecap=\\u0026quot;round\\u0026quot; stroke-linejoin=\\u0026quot;round\\u0026quot;\\u0026gt; \\u0026lt;path d=\\u0026quot;M20.\"",
+                    content: "\" RSVP for Events \\u0026lt;div class=\\u0026quot;button link-button\\u0026quot;\\u0026gt; \\u0026lt;a href=\\u0026quot;https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia\\u0026quot; target=\\u0026quot;_blank\\u0026quot;\\u0026gt; \\u0026lt;span class=\\u0026quot;link-icon\\u0026quot;\\u0026gt; \\u0026lt;svg xmlns=\\u0026quot;http://www.w3.org/2000/svg\\u0026quot; width=\\u0026quot;24\\u0026quot; height=\\u0026quot;24\\u0026quot; viewBox=\\u0026quot;0 0 24 24\\u0026quot; fill=\\u0026quot;none\\u0026quot; stroke=\\u0026quot;currentColor\\u0026quot; stroke-width=\\u0026quot;2\\u0026quot; stroke-linecap=\\u0026quot;round\\u0026quot; stroke-linejoin=\\u0026quot;round\\u0026quot;\\u0026gt; \\u0026lt;path d=\\u0026quot;M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\\u0026quot;\\u0026gt;\\u0026lt;/path\\u0026gt; \\u0026lt;/svg\\u0026gt; \\u0026lt;/span\\u0026gt; \\u0026lt;span class=\\u0026quot;link-text\\u0026quot;\\u0026gt;Donate\\u0026lt;/span\\u0026gt; \\u0026lt;/a\\u0026gt; \\u0026lt;/div\\u0026gt; \\u0026lt;div class=\\u0026quot;button link-button\\u0026quot;\\u0026gt; \\u0026lt;a href=\\u0026quot;https://nol-kky-shop.fourthwall.com/\\u0026quot; target=\\u0026quot;_blank\\u0026quot;\\u0026gt; \\u0026lt;span class=\\u0026quot;link-icon\\u0026quot;\\u0026gt; \\u0026lt;svg xmlns=\\u0026quot;http://www.w3.org/2000/svg\\u0026quot; width=\\u0026quot;24\\u0026quot; height=\\u0026quot;24\\u0026quot; viewBox=\\u0026quot;0 0 24 24\\u0026quot; fill=\\u0026quot;none\\u0026quot; stroke=\\u0026quot;currentColor\\u0026quot; stroke-width=\\u0026quot;2\\u0026quot; stroke-linecap=\\u0026quot;round\\u0026quot; stroke-linejoin=\\u0026quot;round\\u0026quot;\\u0026gt; \\u0026lt;path d=\\u0026quot;M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\\u0026quot;\\u0026gt;\\u0026lt;/path\\u0026gt; \\u0026lt;/svg\\u0026gt; \\u0026lt;/span\\u0026gt; \\u0026lt;span class=\\u0026quot;link-text\\u0026quot;\\u0026gt;Merch Store\\u0026lt;/span\\u0026gt; \\u0026lt;/a\\u0026gt; \\u0026lt;/div\\u0026gt; \\u0026lt;div class=\\u0026quot;button link-button\\u0026quot;\\u0026gt; \\u0026lt;a href=\\u0026quot;https://www.linkedin.com/company/code-coffee-philadelphia\\u0026quot; target=\\u0026quot;_blank\\u0026quot;\\u0026gt; \\u0026lt;span class=\\u0026quot;link-icon\\u0026quot;\\u0026gt; \\u0026lt;img src=\\u0026quot;media/social/linkedin.svg\\u0026quot; alt=\\u0026quot;LinkedIn\\u0026quot; width=\\u0026quot;24\\u0026quot; height=\\u0026quot;24\\u0026quot;\\u0026gt; \\u0026lt;/span\\u0026gt; \\u0026lt;span class=\\u0026quot;link-text\\u0026quot;\\u0026gt;LinkedIn\\u0026lt;/span\\u0026gt; \\u0026lt;/a\\u0026gt; \\u0026lt;/div\\u0026gt; \\u0026lt;div class=\\u0026quot;button link-button\\u0026quot;\\u0026gt; \\u0026lt;a href=\\u0026quot;https://www.instagram.com/philly_codes/\\u0026quot; target=\\u0026quot;_blank\\u0026quot;\\u0026gt; \\u0026lt;span class=\\u0026quot;link-icon\\u0026quot;\\u0026gt; \\u0026lt;img src=\\u0026quot;media/social/instagram.svg\\u0026quot; alt=\\u0026quot;Instagram\\u0026quot; width=\\u0026quot;24\\u0026quot; height=\\u0026quot;24\\u0026quot;\\u0026gt; \\u0026lt;/span\\u0026gt; \\u0026lt;span class=\\u0026quot;link-text\\u0026quot;\\u0026gt;Instagram\\u0026lt;/span\\u0026gt; \\u0026lt;/a\\u0026gt; \\u0026lt;/div\\u0026gt; \"",
+                    url: "\"/links/\"",
+                    date: "\"0001-01-01\"",
+                    author: "Code & Coffee Team",
+                    tags: [],
+                    topic: "\"page\"",
+                    featured: false,
+                    readingTime:  1 ,
+                    type: "page"
+                },
+                
+                
+                
+                {
+                    title: "\"Project Request\"",
+                    description: "\"Got a coding challenge you\\u0026rsquo;re stuck on? Working on an exciting project that could use some extra hands? Code \\u0026amp; Coffee Philadelphia is here to help! Our community is full of talented developers, designers, and tech enthusiasts who love collaborating and sharing knowledge.\\nWhether you\\u0026rsquo;re a beginner looking for guidance or an experienced developer seeking feedback, we welcome project requests of all kinds. From debugging sessions to architectural advice, our community members are eager to contribute their expertise.\"",
+                    content: "\"Got a coding challenge you\\u0026rsquo;re stuck on? Working on an exciting project that could use some extra hands? Code \\u0026amp; Coffee Philadelphia is here to help! Our community is full of talented developers, designers, and tech enthusiasts who love collaborating and sharing knowledge.\\nWhether you\\u0026rsquo;re a beginner looking for guidance or an experienced developer seeking feedback, we welcome project requests of all kinds. From debugging sessions to architectural advice, our community members are eager to contribute their expertise.\\n\"",
+                    url: "\"/project-request/\"",
+                    date: "\"0001-01-01\"",
+                    author: "Code & Coffee Team",
+                    tags: [],
+                    topic: "\"page\"",
+                    featured: false,
+                    readingTime:  1 ,
+                    type: "page"
+                },
+                
+                
+                
+                
+                
+                {
+                    title: "\"Tech Talent Matchboard\"",
+                    description: "\"Looking to connect with talented developers, designers, and tech professionals in Philadelphia? Or maybe you\\u0026rsquo;re seeking new opportunities in the local tech scene? Our Tech Talent Matchboard is designed to bring together the best minds in Philly\\u0026rsquo;s growing technology ecosystem.\\nWhether you\\u0026rsquo;re a company looking for skilled professionals, a freelancer seeking projects, or a developer wanting to network and collaborate, this platform helps facilitate meaningful connections within our community.\"",
+                    content: "\"Looking to connect with talented developers, designers, and tech professionals in Philadelphia? Or maybe you\\u0026rsquo;re seeking new opportunities in the local tech scene? Our Tech Talent Matchboard is designed to bring together the best minds in Philly\\u0026rsquo;s growing technology ecosystem.\\nWhether you\\u0026rsquo;re a company looking for skilled professionals, a freelancer seeking projects, or a developer wanting to network and collaborate, this platform helps facilitate meaningful connections within our community.\\n\"",
+                    url: "\"/talent-matchboard/\"",
+                    date: "\"0001-01-01\"",
+                    author: "Code & Coffee Team",
+                    tags: [],
+                    topic: "\"page\"",
+                    featured: false,
+                    readingTime:  1 ,
+                    type: "page"
+                },
+                
                 
             ];
             
-            searchIndex = posts.filter(post => post.title); 
+            searchIndex = content.filter(item => item.title && item.title.trim()); 
             isLoading = false;
             
-            console.log(`Search index built with ${searchIndex.length} posts`);
+            console.log(`Search index built with ${searchIndex.length} items (${searchIndex.filter(i => i.type === 'blog').length} blog posts, ${searchIndex.filter(i => i.type === 'page').length} pages)`);
             
         } catch (error) {
             console.error('Error building search index:', error);
@@ -174,19 +252,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchQuery = query.toLowerCase().trim();
         if (!searchQuery) return [];
         
-        return searchIndex.filter(post => {
+        return searchIndex.filter(item => {
             
             if (filter !== 'all') {
-                if (!post.tags.includes(filter)) return false;
+                if (filter === 'tutorial' || filter === 'community' || filter === 'events') {
+                    
+                    if (item.topic !== filter) return false;
+                } else {
+                    
+                    if (!item.tags.includes(filter)) return false;
+                }
             }
             
             
             const searchableText = [
-                post.title,
-                post.description,
-                post.content,
-                post.author,
-                ...post.tags
+                item.title,
+                item.description,
+                item.content,
+                item.author,
+                item.topic,
+                ...item.tags
             ].join(' ').toLowerCase();
             
             return searchableText.includes(searchQuery);
@@ -199,6 +284,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!aTitle && bTitle) return 1;
             if (a.featured && !b.featured) return -1;
             if (!a.featured && b.featured) return 1;
+            if (a.type === 'blog' && b.type === 'page') return -1;
+            if (a.type === 'page' && b.type === 'blog') return 1;
             
             return new Date(b.date) - new Date(a.date);
         });
@@ -232,21 +319,25 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        const resultsHTML = results.map(post => `
+        const resultsHTML = results.map(item => `
             <div class="search-result" style="padding: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--radius); margin-bottom: 1rem; background: var(--background); transition: all 0.2s ease;">
                 <h3 style="margin-bottom: 0.5rem;">
-                    <a href="${post.url}" style="text-decoration: none; color: var(--text-primary);">${post.title}</a>
-                    ${post.featured ? '<span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
+                    <a href="${item.url}" style="text-decoration: none; color: var(--text-primary);">${item.title}</a>
+                    ${item.featured ? '<span style="background: var(--accent-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
+                    <span style="background: ${item.type === 'blog' ? 'var(--primary-color)' : 'var(--text-muted)'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
                 </h3>
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
-                    <span>${new Date(post.date).toLocaleDateString()}</span>
-                    <span>by ${post.author}</span>
-                    <span>${post.readingTime} min read</span>
+                    <span>${new Date(item.date).toLocaleDateString()}</span>
+                    <span>by ${item.author}</span>
+                    <span>${item.readingTime} min read</span>
+                    ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}
                 </div>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">${post.description}</p>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">${item.description || 'No description available.'}</p>
+                ${item.tags.length > 0 ? `
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
+                ` : ''}
             </div>
         `).join('');
         
@@ -293,6 +384,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     buildSearchIndex();
+    
+    
+    function showContentSummary() {
+        if (searchIndex.length > 0) {
+            const blogCount = searchIndex.filter(i => i.type === 'blog').length;
+            const pageCount = searchIndex.filter(i => i.type === 'page').length;
+            const topics = [...new Set(searchIndex.map(i => i.topic))];
+            
+            document.getElementById('content-summary').innerHTML = `
+                <div style="text-align: center; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); border: 1px solid var(--border-color);">
+                    <strong>${blogCount}</strong><br>Blog Posts
+                </div>
+                <div style="text-align: center; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); border: 1px solid var(--border-color);">
+                    <strong>${pageCount}</strong><br>Pages
+                </div>
+                <div style="text-align: center; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); border: 1px solid var(--border-color);">
+                    <strong>${topics.length}</strong><br>Topics
+                </div>
+            `;
+        }
+    }
+    
+    
+    setTimeout(showContentSummary, 100);
     
     
     searchInput.focus();

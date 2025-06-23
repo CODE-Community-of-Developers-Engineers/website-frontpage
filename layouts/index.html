@@ -48,11 +48,15 @@
 
 {{ define "main" }}
 <section id="main">
-    <div style="position: relative; width: 80%; max-width: 600px; margin: 3rem auto;">
+    <div class="hero-container" style="position: relative; width: 90%; max-width: 600px; margin: 2rem auto;">
         <!-- Carousel container -->
         <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; width: 100%;">
             <!-- Image container -->
-            <div id="simple-carousel" style="position: relative; width: 100%; height: 300px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+            <div id="simple-carousel" style="position: relative; width: 100%; height: 250px; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                @media (min-width: 768px) {
+                    height: 300px;
+                }
+            </div>
                 <!-- Carousel slides -->
                 <div id="carousel-slides" style="position: relative; width: 100%; height: 100%;">
                     <div class="slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease-in-out; display: block;">

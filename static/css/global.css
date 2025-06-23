@@ -100,23 +100,33 @@ p { line-height: 1.5rem; }
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
     .hide-mobile { 
         display: none; 
     }
     
     /* Hide desktop navigation on mobile */
-    .header-right {
-        display: none;
+    #desktop-nav {
+        display: none !important;
     }
     
     /* Show hamburger menu on mobile */
-    .hamburger-menu {
-        display: block;
+    #mobile-menu-button {
+        display: block !important;
     }
     
     /* Prevent scrolling when menu is open */
     body.menu-open {
         overflow: hidden;
+    }
+}
+
+@media (min-width: 1301px) {
+    #mobile-menu-button {
+        display: none !important;
+    }
+    
+    #desktop-nav {
+        display: flex !important;
     }
 }

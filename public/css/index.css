@@ -263,33 +263,22 @@ header h1 {
 
 /* responsiveness */
 
+/* Meetup Events Section */
+#events-section {
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f5f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+}
+
 /* Mobile styles */
 @media screen and (max-width: 767px) {
-    header {
-        flex-direction: column;
-        padding: 10px;
-        gap: 15px;
-    }
-    
-    .header-right {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .nav-container {
-        margin: 5px;
-    }
-    
-    .nav-link {
-        margin-left: 0;
-        font-size: 0.85rem;
-        padding: 4px 8px;
-    }
-    
     #footer-buttons {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 10px;
     }
     
     .footer-text.handwriting span {
@@ -299,10 +288,38 @@ header h1 {
         gap: 5px;
         margin-right: 0 !important;
     }
+    
+    #main {
+        padding: 1rem;
+    }
+    
+    #splash {
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+    
+    #splash h1 {
+        font-size: 2rem;
+    }
+    
+    .point {
+        padding: 1rem 0.5rem;
+    }
+}
+
+/* Tablet styles */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    #main {
+        padding: 2rem;
+    }
+    
+    #splash {
+        margin-top: 3rem;
+    }
 }
 
 /* Desktop styles */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1025px) {
     header #logo img {
         width: 60px;
     }
@@ -320,10 +337,12 @@ header h1 {
         display: flex;
         margin: 3rem;
         justify-content: space-evenly;
+        align-items: flex-start;
     }
 
     #splash {
         margin-top: 10rem;
+        order: 2;
     }
 
     #splash, #splash p, #splash h1 {
@@ -332,10 +351,11 @@ header h1 {
         width: 20rem;
     }
 
-    #hero-container {
+    .hero-container {
         width: min(70%, 600px);
         margin: 0;
         height: 300px;
+        order: 1;
     }
 
     #footer-buttons {

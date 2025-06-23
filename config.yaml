@@ -1,0 +1,45 @@
+baseURL: 'https://code-coffee-philadelphia.github.io'
+languageCode: 'en-us'
+title: 'Code & Coffee Philadelphia'
+theme: ''
+
+params:
+  description: 'Your space to build.'
+  author: 'Code & Coffee Philadelphia'
+  
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 10
+    - name: "Links"
+      url: "/links/"
+      weight: 20
+    - name: "Blog"
+      url: "/blog/"
+      weight: 25
+    - name: "Project Request"
+      url: "/project-request/"
+      weight: 30
+    - name: "Tech Talent Matchboard"
+      url: "/talent-matchboard/"
+      weight: 40
+    - name: "Event Sponsorship"
+      url: "/event-sponsorship/"
+      weight: 50
+    - name: "Merch"
+      url: "https://nol-kky-shop.fourthwall.com/"
+      weight: 60
+    - name: "Community Fund"
+      url: "https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia"
+      weight: 70
+
+outputs:
+  home: ["HTML", "RSS"]
+  page: ["HTML"]
+  section: ["HTML", "RSS"]

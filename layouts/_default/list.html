@@ -1,0 +1,112 @@
+{{ define "css" }}
+<style>
+    .blog-list-container {
+        width: 90%;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #f9f5f1;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #3B2521;
+    }
+    
+    .blog-list-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .blog-post-item {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .blog-post-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .blog-post-title {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #3B2521;
+        font-size: 1.4rem;
+        text-decoration: none;
+    }
+    
+    .blog-post-title a {
+        color: inherit;
+        text-decoration: none;
+    }
+    
+    .blog-post-title a:hover {
+        color: #59969B;
+    }
+    
+    .blog-post-meta {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    
+    .blog-post-summary {
+        color: #555;
+        line-height: 1.5;
+    }
+    
+    .read-more {
+        display: inline-block;
+        margin-top: 10px;
+        color: #59969B;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .read-more:hover {
+        text-decoration: underline;
+    }
+</style>
+{{ end }}
+
+{{ define "main" }}
+<section>
+    <div class="blog-list-container">
+        <div class="blog-list-header">
+            <h1>{{ .Title }}</h1>
+            <p>{{ .Content }}</p>
+        </div>
+        
+        {{ range .Pages }}
+        <article class="blog-post-item">
+            <h2 class="blog-post-title">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+            {{ if .Date }}
+            <div class="blog-post-meta">
+                Published on {{ .Date.Format "January 2, 2006" }}
+                {{ if .Params.author }} by {{ .Params.author }}{{ end }}
+            </div>
+            {{ end }}
+            <div class="blog-post-summary">
+                {{ if .Summary }}
+                    {{ .Summary }}
+                {{ else }}
+                    {{ .Description }}
+                {{ end }}
+            </div>
+            <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+        </article>
+        {{ end }}
+        
+        {{ if eq (len .Pages) 0 }}
+        <div style="text-align: center; padding: 40px; color: #666;">
+            <p>No blog posts yet. Check back soon for updates!</p>
+        </div>
+        {{ end }}
+    </div>
+</section>
+{{ end }}

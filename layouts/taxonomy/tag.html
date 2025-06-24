@@ -1,6 +1,6 @@
 {{ define "main" }}
-<div class="container blog-layout">
-    <div class="blog-content">
+<div class="container">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem;">
         <!-- Tag Header -->
         <div class="blog-header-box">
             <h1 class="blog-main-title">{{ .Title | title }}</h1>
@@ -78,13 +78,8 @@
         </div>
         {{ end }}
         </div>
-    </div>
-    
-    </div>
-    
-    <!-- Simplified Sidebar -->
-    <div class="blog-sidebar">
-        <!-- Related Tags -->
+        
+        <!-- Related Tags Section (inline, not sidebar) -->
         {{ $currentTag := .Title }}
         {{ $relatedTags := slice }}
         {{ range where site.RegularPages "Section" "blog" }}
@@ -99,49 +94,15 @@
         {{ $uniqueRelatedTags := $relatedTags | uniq | first 10 }}
         
         {{ if $uniqueRelatedTags }}
-        <div class="sidebar-widget">
-            <h3>Related Tags</h3>
-            <div class="tag-cloud">
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 1rem; text-align: center;">Related Tags</h3>
+            <div class="tag-cloud" style="justify-content: center;">
                 {{ range $uniqueRelatedTags }}
                 <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag-cloud-item">{{ title . }}</a>
                 {{ end }}
             </div>
         </div>
         {{ end }}
-
-        <!-- Recent Posts -->
-        <div class="sidebar-widget">
-            <h3>Recent Posts</h3>
-            <div class="recent-posts">
-                {{ range first 5 (where site.RegularPages "Section" "blog") }}
-                <div class="recent-post">
-                    <a href="{{ .RelPermalink }}" class="recent-post-title">{{ .Title }}</a>
-                    <div class="recent-post-meta">
-                        {{ .Date.Format "Jan 2, 2006" }}
-                    </div>
-                </div>
-                {{ end }}
-            </div>
-        </div>
-
-        <!-- Community Links -->
-        <div class="sidebar-widget">
-            <h3>Join Our Community</h3>
-            <div class="community-links">
-                <a href="https://www.meetup.com/code-coffee-philly/" class="community-link">
-                    <strong>Meetup Events</strong>
-                    <span>Join our weekly coding sessions</span>
-                </a>
-                <a href="{{ "project-request" | relURL }}" class="community-link">
-                    <strong>Get Project Help</strong>
-                    <span>Connect with experienced developers</span>
-                </a>
-                <a href="{{ "talent-matchboard" | relURL }}" class="community-link">
-                    <strong>Find Opportunities</strong>
-                    <span>Discover jobs and networking</span>
-                </a>
-            </div>
-        </div>
     </div>
 </div>
 {{ end }}

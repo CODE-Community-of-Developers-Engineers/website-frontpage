@@ -1002,30 +1002,8 @@ p {
 }
 
 .blog-sidebar {
-    position: sticky;
-    top: 2rem;
-    max-height: calc(100vh - 4rem);
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent) transparent;
+    /* Remove sticky positioning to allow natural scrolling */
 }
-
-.blog-sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-
-.blog-sidebar::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.blog-sidebar::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 3px;
-    opacity: 0.7;
-}
-
-.blog-sidebar::-webkit-scrollbar-thumb:hover {
-    opacity: 1;
 }
 
 /* Full-width Blog Layout */

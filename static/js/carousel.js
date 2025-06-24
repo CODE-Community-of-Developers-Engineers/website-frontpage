@@ -1,41 +1,62 @@
 // Events carousel functionality
 let currentEventsIndex = 0;
+let eventsData = [];
 
-// Event data with images, names, and dates
-const eventsData = [
-    {
-        image: '/images/events/coffee-coding-session.svg',
-        name: 'Weekend Coding Session',
-        date: 'December 28, 2024'
-    },
-    {
-        image: '/images/events/tech-talk-evening.svg',
-        name: 'Tech Talk Evening',
-        date: 'January 5, 2025'
-    },
-    {
-        image: '/images/events/networking-mixer.svg',
-        name: 'Networking Mixer & Coffee Social',
-        date: 'January 12, 2025'
-    },
-    {
-        image: '/images/events/hackathon-kickoff.svg',
-        name: 'Hackathon Kickoff',
-        date: 'January 19, 2025'
-    },
-    {
-        image: '/images/events/workshop-series.svg',
-        name: 'Workshop Series: Learn & Build',
-        date: 'January 26, 2025'
+function loadEventImages() {
+    // Use the data from events-data.js if available, otherwise use fallback
+    if (window.eventsImageData && window.eventsImageData.length > 0) {
+        eventsData = window.eventsImageData.map(item => ({
+            image: `/images/events/${item.filename}`,
+            name: item.name,
+            date: item.date
+        }));
+    } else {
+        // Fallback data
+        eventsData = [
+            {
+                image: '/images/events/coffee-coding-session.svg',
+                name: 'Coffee Coding Session',
+                date: 'January 1, 2025'
+            },
+            {
+                image: '/images/events/tech-talk-evening.svg',
+                name: 'Tech Talk Evening',
+                date: 'January 8, 2025'
+            },
+            {
+                image: '/images/events/networking-mixer.svg',
+                name: 'Networking Mixer',
+                date: 'January 15, 2025'
+            },
+            {
+                image: '/images/events/hackathon-kickoff.svg',
+                name: 'Hackathon Kickoff',
+                date: 'January 22, 2025'
+            },
+            {
+                image: '/images/events/workshop-series.svg',
+                name: 'Workshop Series',
+                date: 'January 29, 2025'
+            }
+        ];
     }
-];
+    return eventsData;
+}
 
 function initializeEventsCarousel() {
     const carousel = document.getElementById('eventsCarousel');
     if (!carousel) return;
     
+    // Load images
+    loadEventImages();
+    
     // Clear any existing content
     carousel.innerHTML = '';
+    
+    if (eventsData.length === 0) {
+        carousel.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 2rem;">No event images found</div>';
+        return;
+    }
     
     // Create slides
     eventsData.forEach((event, index) => {
@@ -51,13 +72,34 @@ function initializeEventsCarousel() {
         carousel.appendChild(slide);
     });
     
+    // Update indicators to match number of images
+    updateCarouselIndicators();
+    
     // Initialize the first slide
     showEventsSlide(0);
+}
+
+function updateCarouselIndicators() {
+    const indicatorContainer = document.querySelector('.carousel-indicators');
+    if (!indicatorContainer) return;
+    
+    // Clear existing indicators
+    indicatorContainer.innerHTML = '';
+    
+    // Create new indicators based on number of events
+    eventsData.forEach((_, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = `indicator${index === 0 ? ' active' : ''}`;
+        indicator.onclick = () => currentSlide(index + 1);
+        indicatorContainer.appendChild(indicator);
+    });
 }
 
 function showEventsSlide(index) {
     const slides = document.querySelectorAll('#eventsCarousel .carousel-slide');
     const indicators = document.querySelectorAll('.carousel-indicators .indicator');
+    
+    if (slides.length === 0) return;
     
     if (index >= slides.length) currentEventsIndex = 0;
     if (index < 0) currentEventsIndex = slides.length - 1;
@@ -97,7 +139,9 @@ let carouselInterval;
 
 function startCarouselAutoAdvance() {
     carouselInterval = setInterval(() => {
-        changeSlide(1);
+        if (eventsData.length > 1) {
+            changeSlide(1);
+        }
     }, 3000);
 }
 

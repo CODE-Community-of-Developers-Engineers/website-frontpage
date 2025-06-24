@@ -103,6 +103,14 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 
 ## Recent Changes
 
+- June 24, 2025: Enhanced tag pages and improved site styling
+  - Created simplified tag pages with focused content and limited sidebar options
+  - Removed "Browse by Topic" section from tag pages to reduce clutter
+  - Added tag-specific search functionality that only searches within that tag
+  - Implemented related tags section showing tags from posts in the current tag
+  - Added white backgrounds to hero section, search boxes, and blog headers
+  - Updated header logo with mixed fonts: "Code & Coffee" (serif) and "Philadelphia" (cursive)
+  
 - June 24, 2025: Implemented compact tag display with expandable/collapsible functionality
   - Created compact tag display showing 10 most popular tags initially (sorted by usage frequency)
   - Added "Show More/Show Fewer" toggle button matching site button design

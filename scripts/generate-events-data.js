@@ -89,8 +89,7 @@ function generateEventsData() {
         // Generate events data
         const eventsData = imageFiles.map((filename, index) => ({
             filename: filename,
-            name: filenameToName(filename),
-            date: generateEventDate(index)
+            name: filenameToName(filename)
         }));
 
         // Generate the JavaScript file content

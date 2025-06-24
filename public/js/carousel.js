@@ -30,8 +30,7 @@ function loadEventImages() {
             
             return {
                 image: imageUrl,
-                name: item.name,
-                date: item.date
+                name: item.name
             };
         });
         console.log(`Loaded ${eventsData.length} events from events-data.js`);
@@ -65,7 +64,6 @@ function initializeEventsCarousel() {
             <div class="slide-background" style="background-image: url('${event.image}')"></div>
             <div class="slide-content">
                 <h3>${event.name}</h3>
-                <p class="event-date">${event.date}</p>
             </div>
         `;
         carousel.appendChild(slide);

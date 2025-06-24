@@ -103,6 +103,13 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 
 ## Recent Changes
 
+- June 24, 2025: Enhanced deployment and mobile improvements
+  - Updated GitHub Actions workflow to use Hugo v0.126.1 and latest action versions
+  - Fixed mobile carousel centering issues for better responsive design
+  - Hidden floating coffee cups on mobile devices (below 768px width)
+  - Positioned coffee cups closer to hero text for better visual balance
+  - Enhanced tag pages with centered layout and removed sidebar clutter
+
 - June 24, 2025: Enhanced tag pages and improved site styling
   - Created simplified tag pages with focused content and limited sidebar options
   - Removed "Browse by Topic" section from tag pages to reduce clutter

@@ -1,39 +1,31 @@
 // Carousel functionality
 let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-const indicators = document.querySelectorAll('.indicator');
+let currentEventsIndex = 0;
 
 function showSlide(index) {
-    // Remove all classes from slides
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    if (index >= slides.length) currentSlideIndex = 0;
+    if (index < 0) currentSlideIndex = slides.length - 1;
+    
     slides.forEach((slide, i) => {
-        slide.classList.remove('active', 'prev', 'next');
-        if (i < index) {
-            slide.classList.add('prev');
-        } else if (i > index) {
-            slide.classList.add('next');
+        slide.classList.remove('active');
+        if (i === currentSlideIndex) {
+            slide.classList.add('active');
         }
     });
     
-    // Remove active from indicators
-    indicators.forEach(indicator => indicator.classList.remove('active'));
-    
-    // Show current slide and indicator
-    if (slides[index]) {
-        slides[index].classList.add('active');
-        indicators[index].classList.add('active');
-    }
+    indicators.forEach((indicator, i) => {
+        indicator.classList.remove('active');
+        if (i === currentSlideIndex) {
+            indicator.classList.add('active');
+        }
+    });
 }
 
 function changeSlide(direction) {
     currentSlideIndex += direction;
-    
-    if (currentSlideIndex >= slides.length) {
-        currentSlideIndex = 0;
-    }
-    if (currentSlideIndex < 0) {
-        currentSlideIndex = slides.length - 1;
-    }
-    
     showSlide(currentSlideIndex);
 }
 
@@ -42,66 +34,69 @@ function currentSlide(index) {
     showSlide(currentSlideIndex);
 }
 
+// Events carousel functions
+function showEventsSlide(index) {
+    const container = document.getElementById('eventsContainer');
+    const cards = document.querySelectorAll('.event-card');
+    const indicators = document.querySelectorAll('.events-indicator');
+    
+    if (!container || cards.length === 0) return;
+    
+    if (index >= cards.length) currentEventsIndex = 0;
+    if (index < 0) currentEventsIndex = cards.length - 1;
+    
+    // Calculate transform based on card width and gap
+    const cardWidth = 280; // min-width of event-card
+    const gap = 16; // 1rem gap
+    const translateX = -(currentEventsIndex * (cardWidth + gap));
+    
+    container.style.transform = `translateX(${translateX}px)`;
+    
+    // Update indicators
+    indicators.forEach((indicator, i) => {
+        indicator.classList.remove('active');
+        if (i === currentEventsIndex) {
+            indicator.classList.add('active');
+        }
+    });
+}
 
+function changeEventsSlide(direction) {
+    currentEventsIndex += direction;
+    showEventsSlide(currentEventsIndex);
+}
+
+function currentEventsSlide(index) {
+    currentEventsIndex = index - 1;
+    showEventsSlide(currentEventsIndex);
+}
 
 // Initialize carousels
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize main carousel
     const slides = document.querySelectorAll('.carousel-slide');
-    const indicators = document.querySelectorAll('.indicator');
-    
     if (slides.length > 0) {
-        showSlide(0, slides, indicators);
+        showSlide(0);
         
         // Start auto-advance for main carousel
-        let autoAdvanceInterval = setInterval(() => {
+        setInterval(() => {
             changeSlide(1);
         }, 5000);
-        
-        // Pause auto-advance on hover
-        const carousel = document.querySelector('.carousel-container');
-        if (carousel) {
-            carousel.addEventListener('mouseenter', () => {
-                clearInterval(autoAdvanceInterval);
-            });
-            
-            carousel.addEventListener('mouseleave', () => {
-                autoAdvanceInterval = setInterval(() => {
-                    changeSlide(1);
-                }, 5000);
-            });
-        }
     }
     
-    // Initialize events slider
-    const eventsSlides = document.querySelectorAll('.events-slide');
-    const eventsIndicators = document.querySelectorAll('.events-indicator');
-    
-    if (eventsSlides.length > 0) {
-        showEventsSlide(0, eventsSlides, eventsIndicators);
+    // Initialize events carousel
+    const eventsContainer = document.getElementById('eventsContainer');
+    if (eventsContainer) {
+        showEventsSlide(0);
         
-        // Start auto-advance for events slider
-        let eventsAutoInterval = setInterval(() => {
+        // Start auto-advance for events carousel
+        setInterval(() => {
             changeEventsSlide(1);
         }, 4000);
-        
-        // Pause auto-advance on hover for events slider
-        const eventsSlider = document.querySelector('.events-slider-container');
-        if (eventsSlider) {
-            eventsSlider.addEventListener('mouseenter', () => {
-                clearInterval(eventsAutoInterval);
-            });
-            
-            eventsSlider.addEventListener('mouseleave', () => {
-                eventsAutoInterval = setInterval(() => {
-                    changeEventsSlide(1);
-                }, 4000);
-            });
-        }
     }
 });
 
-// Keyboard navigation
+// Keyboard navigation for main carousel
 document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') {
         changeSlide(-1);

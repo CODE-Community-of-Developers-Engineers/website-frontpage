@@ -12,7 +12,8 @@ function filenameToName(filename) {
     const name = filename
         .replace(/\.(svg|jpg|jpeg|png|webp)$/i, '') // Remove extension
         .replace(/[-_]/g, ' ') // Replace hyphens and underscores with spaces
-        .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize first letter of each word
+        .replace(/\b\w/g, char => char.toUpperCase()) // Capitalize first letter of each word
+        .trim(); // Remove any leading/trailing spaces
     
     return name;
 }

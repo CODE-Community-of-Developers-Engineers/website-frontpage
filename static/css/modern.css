@@ -904,22 +904,21 @@ p {
     text-align: center;
     color: white;
     padding: 2rem;
-    background: transparent;
 }
 
 .slide-content h3 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
     font-family: 'Gloria Hallelujah', cursive;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .slide-content .event-date {
     font-size: 1.1rem;
     margin-bottom: 0;
     font-family: 'Vollkorn', serif;
-    opacity: 0.9;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    opacity: 0.95;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .carousel-btn {

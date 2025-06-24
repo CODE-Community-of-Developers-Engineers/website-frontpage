@@ -1,20 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
+    let isMenuOpen = false;
     
     if (mobileMenuBtn && mobileNav) {
         mobileMenuBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Hamburger clicked', mobileNav.classList.contains('active')); // Debug log
+            e.stopPropagation();
             
-            mobileNav.classList.toggle('active');
+            console.log('Hamburger clicked, current state:', isMenuOpen);
             
-            if (mobileNav.classList.contains('active')) {
-                console.log('Showing mobile menu');
+            if (!isMenuOpen) {
+                // Open menu
+                mobileNav.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                isMenuOpen = true;
+                console.log('Opening mobile menu');
             } else {
-                console.log('Hiding mobile menu');
+                // Close menu
+                mobileNav.classList.remove('active');
                 document.body.style.overflow = '';
+                isMenuOpen = false;
+                console.log('Closing mobile menu');
             }
         });
         
@@ -23,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target === mobileNav) {
                 mobileNav.classList.remove('active');
                 document.body.style.overflow = '';
+                isMenuOpen = false;
+                console.log('Closing menu via background click');
             }
         });
         
@@ -31,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.innerWidth > 1300) {
                 mobileNav.classList.remove('active');
                 document.body.style.overflow = '';
+                isMenuOpen = false;
             }
         });
     } else {

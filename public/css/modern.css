@@ -179,6 +179,7 @@ header {
     bottom: 0;
     background: rgba(59, 37, 33, 0.9);
     z-index: 9999;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 100vw;
@@ -186,6 +187,7 @@ header {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
 }
 
 .mobile-nav-content {
@@ -206,9 +208,9 @@ header {
 }
 
 .mobile-nav.active {
-    display: flex;
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .mobile-nav .nav-link {

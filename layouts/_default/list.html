@@ -2,10 +2,10 @@
 <div class="blog-layout-full">
     <div class="blog-content-full">
         <!-- Page Header -->
-        <div style="margin-bottom: 2rem;">
-            <h1>{{ .Title }}</h1>
+        <div class="blog-header-box">
+            <h1 class="blog-main-title">{{ .Title }}</h1>
             {{ with .Content }}
-            <p style="font-size: 1.125rem; color: var(--text-secondary);">{{ . }}</p>
+            <div class="blog-main-description">{{ . }}</div>
             {{ end }}
         </div>
 

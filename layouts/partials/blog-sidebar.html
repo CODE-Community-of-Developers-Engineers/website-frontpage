@@ -35,7 +35,7 @@
             {{ end }}
             {{ $sortedTags := sort (partial "functions/dictToSlice.html" $tagCounts) "Value" "desc" }}
             {{ range $index, $item := $sortedTags }}
-            <button class="tag-cloud-item tag-filter {{ if gt $index 7 }}tag-hidden{{ end }}" data-tag="{{ $item.Key }}">
+            <button class="compact-tag-item tag-filter {{ if gt $index 9 }}tag-hidden{{ end }}" data-tag="{{ $item.Key }}">
                 {{ $item.Key | title }} ({{ $item.Value }})
             </button>
             {{ end }}

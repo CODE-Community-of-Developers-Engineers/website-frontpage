@@ -1642,6 +1642,123 @@ p {
     gap: 0.5rem;
 }
 
+/* Compact Tag Display */
+.compact-tag-display {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.08);
+}
+
+.tag-cloud-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.compact-tag-item {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f8f9fa, white);
+    border: 2px solid var(--accent);
+    color: var(--text-primary);
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(89, 150, 155, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.compact-tag-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.compact-tag-item:hover::before {
+    left: 100%;
+}
+
+.compact-tag-item:hover {
+    background: linear-gradient(135deg, var(--accent), #4a8a8f);
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(89, 150, 155, 0.25);
+    border-color: var(--accent);
+}
+
+.compact-tag-item.active {
+    background: linear-gradient(135deg, var(--accent), #4a8a8f);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.3);
+    border-color: var(--accent);
+}
+
+.tag-hidden {
+    display: none !important;
+}
+
+.tag-expand-controls {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+}
+
+.tag-expand-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--accent), #4a8a8f);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(89, 150, 155, 0.2);
+    text-transform: none;
+    letter-spacing: 0.3px;
+}
+
+.tag-expand-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(89, 150, 155, 0.3);
+    background: linear-gradient(135deg, #4a8a8f, var(--accent));
+}
+
+.tag-expand-button:active {
+    transform: translateY(-1px);
+}
+
+.tag-expand-button .expand-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    margin-left: 0.25rem;
+}
+
+.tag-expand-button.expanded .expand-icon {
+    transform: rotate(180deg);
+}
+
+/* Legacy tag cloud styles */
 .tag-cloud-item {
     font-size: 0.875rem;
     padding: 0.375rem 0.75rem;

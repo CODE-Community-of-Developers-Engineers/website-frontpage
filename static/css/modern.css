@@ -106,6 +106,22 @@ header {
     height: auto;
 }
 
+.logo-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-main {
+    font-family: 'Vollkorn', serif;
+    font-weight: 600;
+}
+
+.logo-location {
+    font-family: 'Gloria Hallelujah', cursive;
+    color: var(--accent);
+}
+
 /* Navigation */
 .nav-desktop {
     display: flex;

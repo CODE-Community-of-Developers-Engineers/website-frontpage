@@ -170,13 +170,9 @@ header {
     background: var(--accent);
     color: white;
 }
-    cursor: pointer;
-    color: var(--text-primary);
-    padding: 0.5rem;
-}
 
 .mobile-nav {
-    display: none;
+    display: none !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -198,7 +194,7 @@ header {
 }
 
 .mobile-nav.active {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
 }

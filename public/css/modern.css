@@ -994,16 +994,10 @@ p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
-    align-items: start;
 }
 
 .blog-content {
     min-width: 0;
-}
-
-.blog-sidebar {
-    /* Remove sticky positioning to allow natural scrolling */
-}
 }
 
 /* Full-width Blog Layout */

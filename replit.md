@@ -103,12 +103,13 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 
 ## Recent Changes
 
-- June 24, 2025: Automated events carousel pipeline
+- June 24, 2025: Automated events carousel pipeline and deployment fixes
   - Created automated script to generate events data from image folder
-  - Added Node.js package.json with build scripts for automated workflow
   - Updated GitHub Actions to automatically scan events folder and build carousel data
+  - Added cache-busting deployment settings with --cleanDestinationDir and --forceSyncStatic
+  - Enhanced events generation with logging and debugging output in GitHub Actions
+  - Fixed GitHub Pages caching issues with .nojekyll file and proper static asset handling
   - Eliminated manual updates - carousel now dynamically reflects any new images added
-  - Enhanced deployment pipeline with events data generation step
 
 - June 24, 2025: Enhanced deployment and mobile improvements
   - Updated GitHub Actions workflow to use Hugo v0.126.1 and latest action versions

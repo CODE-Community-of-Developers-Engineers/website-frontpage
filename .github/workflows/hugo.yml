@@ -52,7 +52,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       - name: Generate Events Data
-        run: node scripts/generate-events-data.js
+        run: |
+          echo "Generating events data from images..."
+          node scripts/generate-events-data.js
+          echo "Events data generated successfully"
+          cat static/js/events-data.js
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build with Hugo
@@ -64,7 +68,13 @@ jobs:
           hugo \
             --gc \
             --minify \
+            --cleanDestinationDir \
+            --forceSyncStatic \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Copy .nojekyll to public
+        run: |
+          echo "Creating .nojekyll file to prevent Jekyll processing"
+          touch public/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

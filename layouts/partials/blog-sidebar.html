@@ -19,23 +19,25 @@
         <h3 style="margin: 0;">Filter by Tags (click multiple)</h3>
         <button id="clear-tags" class="btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Clear</button>
     </div>
-    <div class="tag-cloud">
-        {{ $tags := slice }}
-        {{ range where site.RegularPages "Section" "blog" }}
-            {{ range .Params.tags }}
-                {{ $tags = $tags | append . }}
+    <div class="tag-cloud-container">
+        <div class="tag-cloud">
+            {{ $tags := slice }}
+            {{ range where site.RegularPages "Section" "blog" }}
+                {{ range .Params.tags }}
+                    {{ $tags = $tags | append . }}
+                {{ end }}
             {{ end }}
-        {{ end }}
-        {{ $tagCounts := dict }}
-        {{ range $tags }}
-            {{ $count := index $tagCounts . | default 0 }}
-            {{ $tagCounts = merge $tagCounts (dict . (add $count 1)) }}
-        {{ end }}
-        {{ range $tag, $count := $tagCounts }}
-        <button class="tag-cloud-item tag-filter" data-tag="{{ $tag }}">
-            {{ $tag | title }} ({{ $count }})
-        </button>
-        {{ end }}
+            {{ $tagCounts := dict }}
+            {{ range $tags }}
+                {{ $count := index $tagCounts . | default 0 }}
+                {{ $tagCounts = merge $tagCounts (dict . (add $count 1)) }}
+            {{ end }}
+            {{ range $tag, $count := $tagCounts }}
+            <button class="tag-cloud-item tag-filter" data-tag="{{ $tag }}">
+                {{ $tag | title }} ({{ $count }})
+            </button>
+            {{ end }}
+        </div>
     </div>
     <div id="selected-tags" style="margin-top: 1rem; display: none;">
         <span style="color: var(--text-muted); font-size: 0.875rem; margin-right: 0.5rem;">Selected:</span>

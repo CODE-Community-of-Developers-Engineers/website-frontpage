@@ -1,0 +1,5 @@
+{{ $slice := slice }}
+{{ range $key, $value := . }}
+  {{ $slice = $slice | append (dict "Key" $key "Value" $value) }}
+{{ end }}
+{{ return $slice }}

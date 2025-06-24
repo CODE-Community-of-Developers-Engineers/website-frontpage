@@ -163,11 +163,12 @@
 
 <div class="sidebar-widget">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="margin: 0;">Filter by Tags (click multiple)</h3>
+        <h3 style="margin: 0;">Filter by Tags</h3>
         <button id="clear-tags" class="btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Clear</button>
     </div>
-    <div class="tag-cloud-container">
-        <div class="tag-cloud">
+    
+    <div class="compact-tag-display">
+        <div class="tag-cloud-compact" id="tag-cloud-compact">
             
             
                 
@@ -256,64 +257,74 @@
                 
             
             
-            <button class="tag-cloud-item tag-filter" data-tag="ai">
-                Ai (1)
-            </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="api">
-                Api (1)
-            </button>
-            
-            <button class="tag-cloud-item tag-filter" data-tag="backend">
-                Backend (1)
-            </button>
-            
-            <button class="tag-cloud-item tag-filter" data-tag="beginners">
+            <button class="tag-cloud-item tag-filter " data-tag="beginners">
                 Beginners (2)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="events">
+            <button class="tag-cloud-item tag-filter " data-tag="ai">
+                Ai (1)
+            </button>
+            
+            <button class="tag-cloud-item tag-filter " data-tag="api">
+                Api (1)
+            </button>
+            
+            <button class="tag-cloud-item tag-filter " data-tag="backend">
+                Backend (1)
+            </button>
+            
+            <button class="tag-cloud-item tag-filter " data-tag="events">
                 Events (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="express">
+            <button class="tag-cloud-item tag-filter " data-tag="express">
                 Express (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="gaming">
+            <button class="tag-cloud-item tag-filter " data-tag="gaming">
                 Gaming (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="hackathon">
+            <button class="tag-cloud-item tag-filter " data-tag="hackathon">
                 Hackathon (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="innovation">
+            <button class="tag-cloud-item tag-filter tag-hidden" data-tag="innovation">
                 Innovation (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="javascript">
+            <button class="tag-cloud-item tag-filter tag-hidden" data-tag="javascript">
                 Javascript (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="meetup">
+            <button class="tag-cloud-item tag-filter tag-hidden" data-tag="meetup">
                 Meetup (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="networking">
+            <button class="tag-cloud-item tag-filter tag-hidden" data-tag="networking">
                 Networking (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="nodejs">
+            <button class="tag-cloud-item tag-filter tag-hidden" data-tag="nodejs">
                 Nodejs (1)
             </button>
             
-            <button class="tag-cloud-item tag-filter" data-tag="startup">
+            <button class="tag-cloud-item tag-filter tag-hidden" data-tag="startup">
                 Startup (1)
             </button>
             
         </div>
+        
+        <div class="tag-expand-controls">
+            <button id="tag-expand-btn" class="tag-expand-button">
+                <span class="expand-text">Show More Tags</span>
+                <span class="collapse-text" style="display: none;">Show Fewer Tags</span>
+                <span class="expand-icon">▼</span>
+            </button>
+        </div>
     </div>
+    
     <div id="selected-tags" style="margin-top: 1rem; display: none;">
         <span style="color: var(--text-muted); font-size: 0.875rem; margin-right: 0.5rem;">Selected:</span>
         <div id="selected-tags-list" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;"></div>

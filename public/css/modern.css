@@ -410,14 +410,14 @@ p {
 }
 
 .coffee-cup-1 {
-    top: 25%;
-    right: 25%;
+    top: 15%;
+    left: 10%;
     animation: slowBounce 4s ease-in-out infinite;
 }
 
 .coffee-cup-2 {
-    top: 45%;
-    left: 20%;
+    top: 20%;
+    right: 12%;
     animation: slowBounce 5s ease-in-out infinite 1s;
 }
 

@@ -396,13 +396,13 @@ p {
 .coffee-cup-1 {
     top: 15%;
     left: 10%;
-    animation: float 6s ease-in-out infinite, rotate 12s linear infinite;
+    animation: slowBounce 4s ease-in-out infinite;
 }
 
 .coffee-cup-2 {
     top: 20%;
     right: 12%;
-    animation: float 8s ease-in-out infinite reverse, rotate 15s linear infinite reverse;
+    animation: slowBounce 5s ease-in-out infinite 1s;
 }
 
 .coffee-steam {
@@ -446,27 +446,7 @@ p {
     content: "1\A 1\A 0";
 }
 
-.code-brackets {
-    position: absolute;
-    top: 70%;
-    left: 8%;
-    font-size: 2rem;
-    color: var(--accent);
-    font-family: 'Space Mono', monospace;
-    opacity: 0.25;
-    animation: pulse 4s ease-in-out infinite;
-}
 
-.code-symbols {
-    position: absolute;
-    top: 75%;
-    right: 10%;
-    font-size: 1.8rem;
-    color: var(--accent);
-    font-family: 'Space Mono', monospace;
-    opacity: 0.25;
-    animation: pulse 4s ease-in-out infinite 2s;
-}
 
 .hero-content {
     position: relative;
@@ -598,14 +578,10 @@ p {
 
 
 /* Animations */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+@keyframes slowBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
 }
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
 
 @keyframes binaryStream {
@@ -658,17 +634,15 @@ p {
     }
     
     .hero-actions {
-        flex-direction: column;
-        align-items: center;
         gap: 0.75rem;
     }
     
     .hero-btn {
-        width: 100%;
-        max-width: 250px;
-        justify-content: center;
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
+        flex: 1;
+        max-width: 140px;
+        justify-content: center;
     }
     
 
@@ -685,9 +659,7 @@ p {
         font-size: 6px;
     }
     
-    .code-brackets, .code-symbols {
-        font-size: 1.3rem;
-    }
+
 }
 
 /* Tags */

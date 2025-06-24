@@ -199,6 +199,11 @@ header {
     justify-content: center;
 }
 
+/* Override the !important rule when active */
+.mobile-nav.active {
+    display: flex !important;
+}
+
 .mobile-nav .nav-link {
     padding: 1rem;
     text-align: center;

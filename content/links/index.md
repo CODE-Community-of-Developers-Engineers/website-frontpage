@@ -4,21 +4,38 @@ layout: "single"
 type: "page"
 ---
 
-# Our Links
-
 Connect with Code & Coffee Philadelphia across the web:
 
-## 📅 [Meetup Events](https://www.meetup.com/code-coffee-philly/)
-RSVP for our weekly coding sessions and community events
+<div class="links-container">
 
-## 💝 [Community Fund](https://bank.hackclub.com/donations/start/code-coffee-philadelphia)
-Support our events and activities through Hack Club Bank
+<div class="link-item">
+<h3>📅 Meetup Events</h3>
+<p>RSVP for our weekly coding sessions and community events</p>
+<a href="https://www.meetup.com/code-coffee-philly/" target="_blank" class="btn">Visit Meetup</a>
+</div>
 
-## 🛍️ [Merch Store](https://nol-kky-shop.fourthwall.com/)
-Get Code & Coffee branded gear and merchandise
+<div class="link-item">
+<h3>💝 Community Fund</h3>
+<p>Support our events and activities through Hack Club Bank</p>
+<a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" target="_blank" class="btn">Donate Now</a>
+</div>
 
-## 💼 [LinkedIn](https://www.linkedin.com/company/code-coffee-philadelphia)
-Professional networking and company updates
+<div class="link-item">
+<h3>🛍️ Merch Store</h3>
+<p>Get Code & Coffee branded gear and merchandise</p>
+<a href="https://nol-kky-shop.fourthwall.com/" target="_blank" class="btn">Shop Now</a>
+</div>
 
-## 📸 [Instagram](https://www.instagram.com/philly_codes/)
-Photos and stories from our events and community
+<div class="link-item">
+<h3>💼 LinkedIn</h3>
+<p>Professional networking and company updates</p>
+<a href="https://www.linkedin.com/company/code-coffee-philadelphia" target="_blank" class="btn">Follow Us</a>
+</div>
+
+<div class="link-item">
+<h3>📸 Instagram</h3>
+<p>Photos and stories from our events and community</p>
+<a href="https://www.instagram.com/philly_codes/" target="_blank" class="btn">Follow Us</a>
+</div>
+
+</div>

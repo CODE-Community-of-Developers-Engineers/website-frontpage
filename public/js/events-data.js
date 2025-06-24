@@ -3,48 +3,48 @@
 
 window.eventsImageData = [
     {
-        "filename": "AI Paper Talks.jpg",
+        "filename": "AI_Paper_Talks.jpg",
         "name": "AI Paper Talks",
         "date": "June 2025"
     },
     {
-        "filename": "DevShop.JPG",
-        "name": "Dev Shop",
+        "filename": "Dev_Workshop.jpeg",
+        "name": "Dev Workshop",
         "date": "July 2025"
     },
     {
-        "filename": "FounderCoworking.jpeg",
-        "name": "Founder Coworking",
+        "filename": "Founder_Fridays_Coworking.jpeg",
+        "name": "Founder Fridays Coworking",
         "date": "August 2025"
     },
     {
-        "filename": "LeetCode Practice.JPEG",
+        "filename": "LeetCode_Practice.jpeg",
         "name": "Leet Code Practice",
         "date": "September 2025"
     },
     {
-        "filename": "ML System Design.JPEG",
+        "filename": "ML_System_Design.jpeg",
         "name": "ML System Design",
         "date": "October 2025"
     },
     {
-        "filename": "Tap into the Code and Coffee Community.JPEG",
-        "name": "Tap Into The Code And Coffee Community",
+        "filename": "Our_Community.jpeg",
+        "name": "Our Community",
         "date": "November 2025"
     },
     {
-        "filename": "Web3workshops.JPG",
+        "filename": "Web3_Workshops.jpg",
         "name": "Web 3 Workshops",
         "date": "December 2025"
     },
     {
-        "filename": "hackathon.jpg",
-        "name": "Hackathon",
+        "filename": "Weekend_Coding_Crew.jpg",
+        "name": "Weekend Coding Crew",
         "date": "January 2026"
     },
     {
-        "filename": "weekendcodingsessions.jpg",
-        "name": "Weekend Coding Sessions",
+        "filename": "hackathon.jpg",
+        "name": "Hackathon",
         "date": "February 2026"
     }
 ];

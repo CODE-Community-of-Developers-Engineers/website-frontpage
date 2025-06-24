@@ -1,0 +1,40 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E9E3DC"/>
+      <stop offset="100%" style="stop-color:#D4C4B0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg3)"/>
+  
+  <!-- People networking (simplified figures) -->
+  <circle cx="120" cy="120" r="15" fill="#BB8D5F"/>
+  <rect x="110" y="135" width="20" height="40" fill="#59969B"/>
+  
+  <circle cx="180" cy="115" r="15" fill="#BB8D5F"/>
+  <rect x="170" y="130" width="20" height="40" fill="#3B2521"/>
+  
+  <circle cx="280" cy="125" r="15" fill="#BB8D5F"/>
+  <rect x="270" y="140" width="20" height="40" fill="#59969B"/>
+  
+  <!-- Conversation bubbles -->
+  <ellipse cx="150" cy="90" rx="25" ry="15" fill="white" stroke="#59969B" stroke-width="2"/>
+  <text x="150" y="95" font-family="Arial" font-size="10" fill="#3B2521" text-anchor="middle">Hello!</text>
+  
+  <ellipse cx="250" cy="100" rx="30" ry="15" fill="white" stroke="#59969B" stroke-width="2"/>
+  <text x="250" y="105" font-family="Arial" font-size="10" fill="#3B2521" text-anchor="middle">Nice to meet you</text>
+  
+  <!-- Coffee table -->
+  <ellipse cx="200" cy="200" rx="60" ry="20" fill="#8B4513"/>
+  
+  <!-- Coffee cups on table -->
+  <circle cx="180" cy="195" r="6" fill="#D2691E"/>
+  <circle cx="200" cy="198" r="6" fill="#D2691E"/>
+  <circle cx="220" cy="195" r="6" fill="#D2691E"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" font-family="Gloria Hallelujah" font-size="22" fill="#3B2521" text-anchor="middle">Networking Mixer</text>
+  <text x="200" y="55" font-family="Gloria Hallelujah" font-size="16" fill="#3B2521" text-anchor="middle">& Coffee Social</text>
+</svg>

@@ -16,7 +16,7 @@ function loadEventImages() {
     // Use the data from events-data.js if available, otherwise use fallback
     if (window.eventsImageData && window.eventsImageData.length > 0) {
         eventsData = window.eventsImageData.map(item => ({
-            image: `/images/events/${item.filename}`,
+            image: `${window.location.pathname.includes('/Code-And-Coffee-philidelphia-Website') ? '/Code-And-Coffee-philidelphia-Website' : ''}/images/events/${item.filename}`,
             name: item.name,
             date: item.date
         }));

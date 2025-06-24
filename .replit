@@ -22,11 +22,11 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000"
+args = "node scripts/generate-events-data.js && hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000"
 waitForPort = 5000
 
 [deployment]
-run = ["sh", "-c", "hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000"]
+run = ["sh", "-c", "node scripts/generate-events-data.js && hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000"]
 
 [[ports]]
 localPort = 5000

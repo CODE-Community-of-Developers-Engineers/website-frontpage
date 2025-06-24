@@ -178,10 +178,12 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(59, 37, 33, 0.8);
-    z-index: 1000;
+    background: rgba(59, 37, 33, 0.9);
+    z-index: 9999;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
 }
 
 .mobile-nav-content {
@@ -199,6 +201,8 @@ header {
 
 .mobile-nav.active {
     display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .mobile-nav .nav-link {
@@ -208,6 +212,15 @@ header {
     transition: all 0.2s ease;
     display: block;
     margin: 0;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: transparent;
+    border: 2px solid var(--accent);
+}
+
+.mobile-nav .nav-link:hover {
+    background: var(--accent);
+    color: white;
 }
 
 .mobile-nav .nav-link {

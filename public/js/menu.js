@@ -10,11 +10,16 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileNav.classList.toggle('active');
             
             if (mobileNav.classList.contains('active')) {
-                console.log('Showing mobile menu');
+                console.log('Showing mobile menu', 'Display style:', getComputedStyle(mobileNav).display);
                 document.body.style.overflow = 'hidden';
+                // Force visibility for debugging
+                mobileNav.style.display = 'flex';
+                mobileNav.style.opacity = '1';
+                mobileNav.style.visibility = 'visible';
             } else {
                 console.log('Hiding mobile menu');
                 document.body.style.overflow = '';
+                mobileNav.style.display = 'none';
             }
         });
         

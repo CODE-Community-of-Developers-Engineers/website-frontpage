@@ -15,7 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="{{ "css/modern.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "/css/modern.css" | relURL }}">
     
     {{ block "head" . }}{{ end }}
 </head>
@@ -29,11 +29,11 @@
     {{ partial "footer.html" . }}
     
     <!-- JavaScript -->
-    <script src="{{ "js/menu.js" | relURL }}"></script>
+    <script src="{{ "/js/menu.js" | relURL }}"></script>
     {{ if .IsHome }}
-    <script src="{{ "js/events-data.js" | relURL }}"></script>
-    <script src="{{ "js/carousel.js" | relURL }}"></script>
-    <script src="{{ "js/meetup.js" | relURL }}"></script>
+    <script src="{{ "/js/events-data.js" | relURL }}"></script>
+    <script src="{{ "/js/carousel.js" | relURL }}"></script>
+    <script src="{{ "/js/meetup.js" | relURL }}"></script>
     {{ end }}
     {{ block "scripts" . }}{{ end }}
 </body>

@@ -1,49 +1,54 @@
-<!-- Table of Contents -->
-<div class="sidebar-widget">
-    <h3>Table of Contents</h3>
-    <div class="table-of-contents">
-        <div id="toc-content">
-            <!-- Will be populated by JavaScript -->
-        </div>
-    </div>
-</div>
-
 <!-- Article Details -->
-<div class="sidebar-widget">
+<div class="sidebar-widget article-details-widget">
     <h3>Article Details</h3>
-    <div class="article-meta">
+    <div class="article-meta-box">
         <div class="meta-item">
-            <span class="meta-label">Published</span>
-            <span class="meta-value">{{ .Date.Format "January 2, 2006" }}</span>
+            <span class="meta-icon">📅</span>
+            <div class="meta-content">
+                <span class="meta-label">Published</span>
+                <span class="meta-value">{{ .Date.Format "January 2, 2006" }}</span>
+            </div>
         </div>
         
         {{ if .Params.author }}
         <div class="meta-item">
-            <span class="meta-label">Author</span>
-            <span class="meta-value">{{ .Params.author }}</span>
+            <span class="meta-icon">👤</span>
+            <div class="meta-content">
+                <span class="meta-label">Author</span>
+                <span class="meta-value">{{ .Params.author }}</span>
+            </div>
         </div>
         {{ end }}
         
         <div class="meta-item">
-            <span class="meta-label">Reading Time</span>
-            <span class="meta-value">{{ if .Params.readingTime }}{{ .Params.readingTime }}{{ else }}{{ math.Round (div (countwords .Content) 200.0) }}{{ end }} min read</span>
+            <span class="meta-icon">⏱️</span>
+            <div class="meta-content">
+                <span class="meta-label">Reading Time</span>
+                <span class="meta-value">{{ if .Params.readingTime }}{{ .Params.readingTime }}{{ else }}{{ math.Round (div (countwords .Content) 200.0) }}{{ end }} min read</span>
+            </div>
         </div>
         
         {{ if .Params.topic }}
         <div class="meta-item">
-            <span class="meta-label">Topic</span>
-            <span class="meta-value">
-                <span class="topic-badge-sidebar">{{ .Params.topic | title }}</span>
-            </span>
+            <span class="meta-icon">📂</span>
+            <div class="meta-content">
+                <span class="meta-label">Topic</span>
+                <span class="meta-value">
+                    <span class="topic-badge-sidebar">{{ .Params.topic | title }}</span>
+                </span>
+            </div>
         </div>
         {{ end }}
         
         {{ if .Params.featured }}
         <div class="meta-item">
-            <span class="meta-label">Status</span>
-            <span class="meta-value">
-                <span class="featured-badge-sidebar">⭐ Featured</span>
-            </span>
+            <span class="meta-icon">⭐</span>
+            <div class="meta-content">
+                <span class="meta-label">Status</span>
+                <span class="meta-value">
+                    <span class="featured-badge-sidebar">Featured</span>
+                </span>
+            </div>
         </div>
         {{ end }}
     </div>
@@ -60,6 +65,16 @@
     </div>
 </div>
 {{ end }}
+
+<!-- Table of Contents -->
+<div class="sidebar-widget">
+    <h3>Table of Contents</h3>
+    <div class="table-of-contents">
+        <div id="toc-content">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
 
 <!-- Share -->
 <div class="sidebar-widget">

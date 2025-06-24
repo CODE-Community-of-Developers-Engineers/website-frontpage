@@ -92,5 +92,30 @@ function showSlide(index) {
     showEventsSlide(index);
 }
 
+// Auto-advance carousel every 3 seconds
+let carouselInterval;
+
+function startCarouselAutoAdvance() {
+    carouselInterval = setInterval(() => {
+        changeSlide(1);
+    }, 3000);
+}
+
+function stopCarouselAutoAdvance() {
+    if (carouselInterval) {
+        clearInterval(carouselInterval);
+    }
+}
+
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeEventsCarousel);
+document.addEventListener('DOMContentLoaded', function() {
+    initializeEventsCarousel();
+    startCarouselAutoAdvance();
+    
+    // Pause auto-advance when user hovers over carousel
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', stopCarouselAutoAdvance);
+        carouselContainer.addEventListener('mouseleave', startCarouselAutoAdvance);
+    }
+});

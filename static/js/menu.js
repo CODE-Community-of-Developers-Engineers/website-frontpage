@@ -5,16 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuBtn && mobileNav) {
         mobileMenuBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Hamburger clicked'); // Debug log
+            console.log('Hamburger clicked', mobileNav.classList.contains('active')); // Debug log
+            
+            mobileNav.classList.toggle('active');
             
             if (mobileNav.classList.contains('active')) {
-                mobileNav.classList.remove('active');
-                mobileNav.style.display = 'none';
-                document.body.style.overflow = '';
-            } else {
-                mobileNav.classList.add('active');
-                mobileNav.style.display = 'flex';
+                console.log('Showing mobile menu');
                 document.body.style.overflow = 'hidden';
+            } else {
+                console.log('Hiding mobile menu');
+                document.body.style.overflow = '';
             }
         });
         
@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileNav.addEventListener('click', function(e) {
             if (e.target === mobileNav) {
                 mobileNav.classList.remove('active');
-                mobileNav.style.display = 'none';
                 document.body.style.overflow = '';
             }
         });
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', function() {
             if (window.innerWidth > 1300) {
                 mobileNav.classList.remove('active');
-                mobileNav.style.display = 'none';
                 document.body.style.overflow = '';
             }
         });

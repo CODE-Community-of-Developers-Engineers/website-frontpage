@@ -172,7 +172,7 @@ header {
 }
 
 .mobile-nav {
-    display: none !important;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -197,11 +197,6 @@ header {
     display: flex !important;
     align-items: center;
     justify-content: center;
-}
-
-/* Override the !important rule when active */
-.mobile-nav.active {
-    display: flex !important;
 }
 
 .mobile-nav .nav-link {

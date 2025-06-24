@@ -212,6 +212,79 @@
 <p>Questions? Feel free to reach out through any of our channels or just ask when you attend your first event. We&rsquo;re here to help you succeed and grow in your tech journey.</p>
 <p>Welcome to the Code &amp; Coffee family!</p>
             </div>
+
+            <script>
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                const tocContainer = document.getElementById('toc-content');
+                const headings = document.querySelectorAll('.blog-content-body h1, .blog-content-body h2, .blog-content-body h3, .blog-content-body h4, .blog-content-body h5, .blog-content-body h6');
+                
+                if (headings.length === 0) {
+                    tocContainer.innerHTML = '<p style="color: var(--text-secondary); font-style: italic;">No headings found</p>';
+                    return;
+                }
+                
+                let tocHtml = '';
+                headings.forEach((heading, index) => {
+                    
+                    const id = 'heading-' + index;
+                    heading.id = id;
+                    
+                    
+                    const level = heading.tagName.toLowerCase();
+                    
+                    
+                    tocHtml += `<div class="toc-item">
+                        <a href="#${id}" class="toc-link toc-${level}">${heading.textContent}</a>
+                    </div>`;
+                });
+                
+                tocContainer.innerHTML = tocHtml;
+                
+                
+                const tocLinks = document.querySelectorAll('.toc-link');
+                tocLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+                
+                
+                function updateActiveTocLink() {
+                    const scrollPosition = window.scrollY + 100;
+                    let currentHeading = null;
+                    
+                    headings.forEach(heading => {
+                        if (heading.offsetTop <= scrollPosition) {
+                            currentHeading = heading;
+                        }
+                    });
+                    
+                    
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    
+                    
+                    if (currentHeading) {
+                        const activeLink = document.querySelector(`a[href="#${currentHeading.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                }
+                
+                
+                window.addEventListener('scroll', updateActiveTocLink);
+                updateActiveTocLink(); 
+            });
+            </script>
             
             
             
@@ -247,6 +320,16 @@
     
     <div class="blog-sidebar">
         
+<div class="sidebar-widget">
+    <h3>Table of Contents</h3>
+    <div class="table-of-contents">
+        <div id="toc-content">
+            
+        </div>
+    </div>
+</div>
+
+
 <div class="sidebar-widget">
     <h3>Article Details</h3>
     <div class="article-meta">

@@ -290,195 +290,96 @@ hugo server -D
     <div class="blog-sidebar">
         
 <div class="sidebar-widget">
-    <h3>Recent Posts</h3>
-    <div class="recent-posts">
-        
-        <div class="recent-post">
-            <a href="/blog/getting-started-with-code-coffee/" class="recent-post-title">Getting Started with Code &amp; Coffee Philadelphia</a>
-            <div class="recent-post-meta">
-                Jun 23, 2025
-            </div>
+    <h3>Article Details</h3>
+    <div class="article-info">
+        <div class="article-info-item">
+            <span class="info-label">📅 Published</span>
+            <span class="info-value">January 1, 0001</span>
         </div>
         
-        <div class="recent-post">
-            <a href="/blog/example-tech-tutorial/" class="recent-post-title">Building Your First REST API with Node.js and Express</a>
-            <div class="recent-post-meta">
-                Jun 20, 2025
-            </div>
+        
+        
+        <div class="article-info-item">
+            <span class="info-label">⏱️ Reading Time</span>
+            <span class="info-value">4 min read</span>
         </div>
         
-        <div class="recent-post">
-            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Philly Tech Week Innovation Hackathon 2025</a>
-            <div class="recent-post-meta">
-                May 10, 2025
-            </div>
-        </div>
         
-        <div class="recent-post">
-            <a href="/blog/readme/" class="recent-post-title"></a>
-            <div class="recent-post-meta">
-                Jan 1, 0001
-            </div>
-        </div>
         
+        <div class="article-info-item">
+            <span class="info-label">📊 Word Count</span>
+            <span class="info-value">753 words</span>
+        </div>
     </div>
 </div>
 
 
+
+
+
+
 <div class="sidebar-widget">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="margin: 0;">Filter by Tags (click multiple)</h3>
-        <button id="clear-tags" class="btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Clear</button>
+    <h3>Table of Contents</h3>
+    <div class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#hugo-page-bundles">Hugo Page Bundles</a>
+      <ul>
+        <li><a href="#blog-post-structure">Blog Post Structure</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-a-new-blog-post">Creating a New Blog Post</a>
+      <ul>
+        <li><a href="#1-create-the-post-folder">1. Create the Post Folder</a></li>
+        <li><a href="#2-create-indexmd-with-front-matter">2. Create index.md with Front Matter</a></li>
+        <li><a href="#3-required-front-matter-fields">3. Required Front Matter Fields</a></li>
+        <li><a href="#4-optional-front-matter-fields">4. Optional Front Matter Fields</a></li>
+      </ul>
+    </li>
+    <li><a href="#topics-and-tags-system">Topics and Tags System</a>
+      <ul>
+        <li><a href="#available-topics-choose-one">Available Topics (choose one)</a></li>
+        <li><a href="#available-tags-choose-multiple">Available Tags (choose multiple)</a></li>
+      </ul>
+    </li>
+    <li><a href="#adding-images">Adding Images</a>
+      <ul>
+        <li><a href="#headerfeatured-images">Header/Featured Images</a></li>
+        <li><a href="#images-in-content">Images in Content</a></li>
+      </ul>
+    </li>
+    <li><a href="#content-features">Content Features</a>
+      <ul>
+        <li><a href="#summaryexcerpt">Summary/Excerpt</a></li>
+        <li><a href="#code-blocks">Code Blocks</a></li>
+        <li><a href="#2-publishing">2. Publishing</a></li>
+        <li><a href="#3-automatic-updates">3. Automatic Updates</a></li>
+      </ul>
+    </li>
+    <li><a href="#example-post-structure">Example Post Structure</a></li>
+    <li><a href="#best-practices">Best Practices</a></li>
+    <li><a href="#maintenance">Maintenance</a></li>
+  </ul>
+</nav>
     </div>
-    <div class="tag-cloud">
-        
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-        
-        
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-        
-        <button class="tag-cloud-item tag-filter" data-tag="ai">
-            Ai (1)
+</div>
+
+
+
+<div class="sidebar-widget">
+    <h3>Share Article</h3>
+    <div class="share-buttons">
+        <a href="https://twitter.com/intent/tweet?text=&url=http%3a%2f%2flocalhost%3a5000%2fblog%2freadme%2f" 
+           class="share-btn twitter-share" target="_blank" rel="noopener">
+            🐦 Twitter
+        </a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3a%2f%2flocalhost%3a5000%2fblog%2freadme%2f" 
+           class="share-btn linkedin-share" target="_blank" rel="noopener">
+            💼 LinkedIn
+        </a>
+        <button class="share-btn copy-link" onclick="copyToClipboard('http:\/\/localhost:5000\/blog\/readme\/')">
+            🔗 Copy Link
         </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="api">
-            Api (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="backend">
-            Backend (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="beginners">
-            Beginners (2)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="events">
-            Events (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="express">
-            Express (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="gaming">
-            Gaming (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="hackathon">
-            Hackathon (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="innovation">
-            Innovation (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="javascript">
-            Javascript (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="meetup">
-            Meetup (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="networking">
-            Networking (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="nodejs">
-            Nodejs (1)
-        </button>
-        
-        <button class="tag-cloud-item tag-filter" data-tag="startup">
-            Startup (1)
-        </button>
-        
-    </div>
-    <div id="selected-tags" style="margin-top: 1rem; display: none;">
-        <span style="color: var(--text-muted); font-size: 0.875rem; margin-right: 0.5rem;">Selected:</span>
-        <div id="selected-tags-list" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;"></div>
     </div>
 </div>
 
@@ -500,6 +401,20 @@ hugo server -D
         </a>
     </div>
 </div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => {
+            btn.textContent = originalText;
+        }, 2000);
+    });
+}
+</script>
     </div>
 </div>
 

@@ -1,0 +1,109 @@
+<!-- Article Information -->
+<div class="sidebar-widget">
+    <h3>Article Details</h3>
+    <div class="article-info">
+        <div class="article-info-item">
+            <span class="info-label">📅 Published</span>
+            <span class="info-value">{{ .Date.Format "January 2, 2006" }}</span>
+        </div>
+        
+        {{ if .Params.author }}
+        <div class="article-info-item">
+            <span class="info-label">👤 Author</span>
+            <span class="info-value">{{ .Params.author }}</span>
+        </div>
+        {{ end }}
+        
+        <div class="article-info-item">
+            <span class="info-label">⏱️ Reading Time</span>
+            <span class="info-value">{{ if .Params.readingTime }}{{ .Params.readingTime }}{{ else }}{{ math.Round (div (countwords .Content) 200.0) }}{{ end }} min read</span>
+        </div>
+        
+        {{ if .Params.topic }}
+        <div class="article-info-item">
+            <span class="info-label">📂 Topic</span>
+            <span class="info-value topic-value">{{ .Params.topic | title }}</span>
+        </div>
+        {{ end }}
+        
+        <div class="article-info-item">
+            <span class="info-label">📊 Word Count</span>
+            <span class="info-value">{{ .WordCount }} words</span>
+        </div>
+    </div>
+</div>
+
+<!-- Article Tags -->
+{{ if .Params.tags }}
+<div class="sidebar-widget">
+    <h3>Tags</h3>
+    <div class="article-tags">
+        {{ range .Params.tags }}
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="article-tag">
+            {{ title . }}
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+<!-- Table of Contents -->
+{{ if .TableOfContents }}
+<div class="sidebar-widget">
+    <h3>Table of Contents</h3>
+    <div class="toc">
+        {{ .TableOfContents }}
+    </div>
+</div>
+{{ end }}
+
+<!-- Share Article -->
+<div class="sidebar-widget">
+    <h3>Share Article</h3>
+    <div class="share-buttons">
+        <a href="https://twitter.com/intent/tweet?text={{ .Title | urlize }}&url={{ .Permalink }}" 
+           class="share-btn twitter-share" target="_blank" rel="noopener">
+            🐦 Twitter
+        </a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" 
+           class="share-btn linkedin-share" target="_blank" rel="noopener">
+            💼 LinkedIn
+        </a>
+        <button class="share-btn copy-link" onclick="copyToClipboard('{{ .Permalink }}')">
+            🔗 Copy Link
+        </button>
+    </div>
+</div>
+
+<!-- Community Links -->
+<div class="sidebar-widget">
+    <h3>Join Our Community</h3>
+    <div class="community-links">
+        <a href="https://www.meetup.com/code-coffee-philly/" class="community-link">
+            <strong>Meetup Events</strong>
+            <span>Join our weekly coding sessions</span>
+        </a>
+        <a href="{{ "project-request" | relURL }}" class="community-link">
+            <strong>Get Project Help</strong>
+            <span>Connect with experienced developers</span>
+        </a>
+        <a href="{{ "talent-matchboard" | relURL }}" class="community-link">
+            <strong>Find Opportunities</strong>
+            <span>Discover jobs and networking</span>
+        </a>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Show feedback
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => {
+            btn.textContent = originalText;
+        }, 2000);
+    });
+}
+</script>

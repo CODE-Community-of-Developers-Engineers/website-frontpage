@@ -661,6 +661,133 @@ p {
 
 }
 
+/* Article Info Sidebar */
+.article-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.article-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    background: var(--background-secondary);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.topic-value {
+    color: var(--accent);
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: 600;
+}
+
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.article-tag {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: var(--background-secondary);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--radius);
+    border: 2px solid var(--accent);
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.article-tag:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.toc {
+    font-size: 0.9rem;
+}
+
+.toc ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.toc ul ul {
+    padding-left: 1rem;
+    margin-top: 0.25rem;
+}
+
+.toc li {
+    margin: 0.25rem 0;
+}
+
+.toc a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+}
+
+.toc a:hover {
+    color: var(--accent);
+    background: var(--background-secondary);
+}
+
+.share-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--background-secondary);
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.share-btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.twitter-share:hover {
+    background: #1DA1F2;
+}
+
+.linkedin-share:hover {
+    background: #0077B5;
+}
+
 /* Tags */
 .tag {
     display: inline-flex;

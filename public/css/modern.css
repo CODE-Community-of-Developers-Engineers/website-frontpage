@@ -888,10 +888,9 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: brightness(0.9);
 }
 
 /* Removed hazy overlay per user request */
@@ -905,7 +904,7 @@ p {
     text-align: center;
     color: white;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .slide-content h3 {

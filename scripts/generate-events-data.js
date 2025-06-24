@@ -37,13 +37,22 @@ function filenameToName(filename) {
     return name;
 }
 
-// Function to generate a future date for events
+// Function to generate realistic dates for events
 function generateEventDate(index) {
     const today = new Date();
-    const futureDate = new Date(today);
-    futureDate.setMonth(today.getMonth() + index); // Monthly intervals
+    const eventDate = new Date(today);
     
-    return futureDate.toLocaleDateString('en-US', {
+    // Generate dates within the current year, starting from current month
+    // If we go past December, stay in current year
+    const targetMonth = today.getMonth() + (index % 12);
+    if (targetMonth > 11) {
+        eventDate.setMonth(targetMonth - 12);
+        eventDate.setFullYear(today.getFullYear() + 1);
+    } else {
+        eventDate.setMonth(targetMonth);
+    }
+    
+    return eventDate.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long'
     });

@@ -993,19 +993,20 @@ p {
     .carousel-container {
         height: 50vh;
         min-height: 400px;
-        margin: 1rem;
+        margin: 1rem auto;
         border-radius: var(--radius);
+        max-width: calc(100% - 2rem);
     }
     
     .slide-content {
         padding: 1.5rem;
     }
     
-    .slide-content h2 {
-        font-size: 2rem;
+    .slide-content h3 {
+        font-size: 1.5rem;
     }
     
-    .slide-content p {
+    .slide-content .event-date {
         font-size: 1rem;
     }
     

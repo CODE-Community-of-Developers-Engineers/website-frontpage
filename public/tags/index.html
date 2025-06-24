@@ -843,6 +843,39 @@
     
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    
+    const expandBtn = document.getElementById('tag-expand-btn');
+    if (expandBtn) {
+        const hiddenTags = document.querySelectorAll('.tag-hidden');
+        const expandText = expandBtn.querySelector('.expand-text');
+        const collapseText = expandBtn.querySelector('.collapse-text');
+        let isExpanded = false;
+        
+        
+        if (hiddenTags.length === 0) {
+            expandBtn.style.display = 'none';
+        }
+        
+        expandBtn.addEventListener('click', function() {
+            isExpanded = !isExpanded;
+            
+            hiddenTags.forEach(tag => {
+                tag.style.display = isExpanded ? 'inline-flex' : 'none';
+            });
+            
+            if (isExpanded) {
+                expandText.style.display = 'none';
+                collapseText.style.display = 'inline';
+                expandBtn.classList.add('expanded');
+            } else {
+                expandText.style.display = 'inline';
+                collapseText.style.display = 'none';
+                expandBtn.classList.remove('expanded');
+            }
+        });
+    }
+
+    
     const tagFilters = document.querySelectorAll('.tag-filter');
     const topicFilters = document.querySelectorAll('.topic-filter');
     const blogPosts = document.querySelectorAll('.blog-post');

@@ -31,8 +31,13 @@
     <!-- JavaScript -->
     <script src="{{ "/js/menu.js" | relURL }}"></script>
     {{ if .IsHome }}
-    <script src="{{ "/js/events-data.js" | relURL }}"></script>
-    <script src="{{ "/js/carousel.js" | relURL }}"></script>
+    <script>
+        // Add timestamp to prevent caching of events data
+        const timestamp = new Date().getTime();
+        console.log('Loading events data with timestamp:', timestamp);
+    </script>
+    <script src="{{ "/js/events-data.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "/js/carousel.js" | relURL }}?v={{ now.Unix }}"></script>
     <script src="{{ "/js/meetup.js" | relURL }}"></script>
     {{ end }}
     {{ block "scripts" . }}{{ end }}

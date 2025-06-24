@@ -21,12 +21,11 @@ function filenameToName(filename) {
 function generateEventDate(index) {
     const today = new Date();
     const futureDate = new Date(today);
-    futureDate.setDate(today.getDate() + (index * 7)); // Weekly intervals
+    futureDate.setMonth(today.getMonth() + index); // Monthly intervals
     
     return futureDate.toLocaleDateString('en-US', {
         year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+        month: 'long'
     });
 }
 

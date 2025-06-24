@@ -5,46 +5,46 @@ window.eventsImageData = [
     {
         "filename": "AI Paper Talks.jpg",
         "name": "AI Paper Talks",
-        "date": "June 24, 2025"
+        "date": "June 2025"
     },
     {
         "filename": "DevShop.JPG",
         "name": "DevShop",
-        "date": "July 1, 2025"
+        "date": "July 2025"
     },
     {
         "filename": "FounderCoworking.jpeg",
         "name": "FounderCoworking",
-        "date": "July 8, 2025"
+        "date": "August 2025"
     },
     {
         "filename": "LeetCode Practice.JPEG",
         "name": "LeetCode Practice",
-        "date": "July 15, 2025"
+        "date": "September 2025"
     },
     {
         "filename": "ML System Design.JPEG",
         "name": "ML System Design",
-        "date": "July 22, 2025"
+        "date": "October 2025"
     },
     {
         "filename": "Tap into the Code and Coffee Community.JPEG",
         "name": "Tap Into The Code And Coffee Community",
-        "date": "July 29, 2025"
+        "date": "November 2025"
     },
     {
         "filename": "Web3workshops.JPG",
         "name": "Web3workshops",
-        "date": "August 5, 2025"
+        "date": "December 2025"
     },
     {
         "filename": "hackathon.jpg",
         "name": "Hackathon",
-        "date": "August 12, 2025"
+        "date": "January 2026"
     },
     {
         "filename": "weekendcodingsessions.jpg",
         "name": "Weekendcodingsessions",
-        "date": "August 19, 2025"
+        "date": "February 2026"
     }
 ];

@@ -76,8 +76,8 @@
     
     <section style="margin-bottom: 4rem;">
         <h2 style="text-align: center; margin-bottom: 2rem;">Recent Events</h2>
-        <div class="events-slider-container">
-            <div class="events-slider" id="eventsSlider">
+        <div class="carousel-container">
+            <div class="carousel" id="eventsCarousel">
                 <div class="events-slide active">
                     <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNTk5NjlCO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNCQjhENUY7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8IS0tIEhhY2thdGhvbiBzY2VuZSAtLT4KICA8cmVjdCB4PSI1MCIgeT0iMzAwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjgwIiByeD0iMTAiIGZpbGw9IiNFOUUzREMiIG9wYWNpdHk9IjAuOSIvPgogIDxyZWN0IHg9IjEwMCIgeT0iMjAwIiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjEwMCIgcng9IjUiIGZpbGw9IiNFOUUzREMiIG9wYWNpdHk9IjAuOCIvPgogIDxyZWN0IHg9IjMwMCIgeT0iMjIwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiByeD0iNSIgZmlsbD0iI0U5RTNEQyIgb3BhY2l0eT0iMC44Ii8+CiAgPHJlY3QgeD0iNTUwIiB5PSIyMDAiIHdpZHRoPSIxNTAiIGhlaWdodD0iMTAwIiByeD0iNSIgZmlsbD0iI0U5RTNEQyIgb3BhY2l0eT0iMC44Ii8+CiAgPCEtLSBQZW9wbGUgY29kaW5nIC0tPgogIDxjaXJjbGUgY3g9IjE3NSIgY3k9IjE1MCIgcj0iMjAiIGZpbGw9IiNFOUUzREMiIG9wYWNpdHk9IjAuOSIvPgogIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjE3MCIgcj0iMjAiIGZpbGw9IiNFOUUzREMiIG9wYWNpdHk9IjAuOSIvPgogIDxjaXJjbGUgY3g9IjYyNSIgY3k9IjE1MCIgcj0iMjAiIGZpbGw9IiNFOUUzREMiIG9wYWNpdHk9IjAuOSIvPgogIDx0ZXh0IHg9IjQwMCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRTlFM0RDIiBmb250LWZhbWlseT0iVm9sbGtvcm4sIHNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iYm9sZCI+SGFja2F0aG9uIDIwMjQ8L3RleHQ+CiAgPHRleHQgeD0iNDAwIiB5PSI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0U5RTNEQyIgZm9udC1mYW1pbHk9IlZvbGxrb3JuLCBzZXJpZiIgZm9udC1zaXplPSIxOCI+UGhpbGx5IFRlY2ggV2VlayBJbm5vdmF0aW9uPC90ZXh0Pgo8L3N2Zz4=" alt="Philly Tech Week Hackathon 2024">
                     <div class="slide-caption">
@@ -92,11 +92,12 @@
                         <p>Collaborative coding and learning</p>
                     </div>
                 </div>
-                <div class="events-slide">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmczIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzU5OTY5QjtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNCQjhENUY7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzU5OTY5QjtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ1cmwoI2JnMykiLz4KICA8IS0tIFJlYWN0IGxvZ28gc3R5bGUgLS0+CiAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMjAwIiByPSI4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTlFM0RDIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuOCIvPgogIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIyMDAiIHJ4PSIxNDAiIHJ5PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTlFM0RDIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuOCIvPgogIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIyMDAiIHJ4PSIxNDAiIHJ5PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTlFM0RDIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuOCIgdHJhbnNmb3JtPSJyb3RhdGUoNjAgNDAwIDIwMCkiLz4KICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iMjAwIiByeD0iMTQwIiByeT0iNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0U5RTNEQyIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIwLjgiIHRyYW5zZm9ybT0icm90YXRlKC02MCA0MDAgMjAwKSIvPgogIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjIwMCIgcj0iMTUiIGZpbGw9IiNFOUUzREMiIG9wYWNpdHk9IjAuOSIvPgogIDx0ZXh0IHg9IjQwMCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRTlFM0RDIiBmb250LWZhbWlseT0iVm9sbGtvcm4sIHNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iYm9sZCI+UmVhY3QgV29ya3Nob3A8L3RleHQ+CiAgPHRleHQgeD0iNDAwIiB5PSIzNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNFOUUzREMiIGZvbnQtZmFtaWx5PSJWb2xsa29ybiwgc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPkJ1aWxkaW5nIE1vZGVybiBXZWIgQXBwczwvdGV4dD4KPC9zdmc+" alt="React Workshop">
-                    <div class="slide-caption">
-                        <h3>React Workshop</h3>
-                        <p>Building modern web applications</p>
+                <div class="carousel-slide">
+                    <div class="slide-background" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmczIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzU5OTY5QjtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNCQjhENUY7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzU5OTY5QjtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ1cmwoI2JnMykiLz4KICA8IS0tIFJlYWN0IGxvZ28gc3R5bGUgLS0+CiAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMjAwIiByPSI4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTlFM0RDIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuOCIvPgogIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIyMDAiIHJ4PSIxNDAiIHJ5PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTlFM0RDIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuOCIvPgogIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIyMDAiIHJ4PSIxNDAiIHJ5PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTlFM0RDIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuOCIgdHJhbnNmb3JtPSJyb3RhdGUoNjAgNDAwIDIwMCkiLz4KICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iMjAwIiByeD0iMTQwIiByeT0iNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0U5RTNEQyIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIwLjgiIHRyYW5zZm9ybT0icm90YXRlKC02MCA0MDAgMjAwKSIvPgogIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjIwMCIgcj0iMTUiIGZpbGw9IiNFOUUzREMiIG9wYWNpdHk9IjAuOSIvPgogIDx0ZXh0IHg9IjQwMCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRTlFM0RDIiBmb250LWZhbWlseT0iVm9sbGtvcm4sIHNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iYm9sZCI+UmVhY3QgV29ya3Nob3A8L3RleHQ+CiAgPHRleHQgeD0iNDAwIiB5PSIzNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNFOUUzREMiIGZvbnQtZmFtaWx5PSJWb2xsa29ybiwgc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPkJ1aWxkaW5nIE1vZGVybiBXZWIgQXBwczwvdGV4dD4KPC9zdmc=')"></div>
+                    <div class="slide-content">
+                        <h2>React Workshop</h2>
+                        <p>Building modern web applications with React - a hands-on workshop for developers of all skill levels.</p>
+                        <a href="/blog" class="btn-primary">Read More</a>
                     </div>
                 </div>
                 <div class="events-slide">
@@ -116,16 +117,16 @@
             </div>
             
             
-            <button class="events-slider-btn events-prev" onclick="changeEventsSlide(-1)">❮</button>
-            <button class="events-slider-btn events-next" onclick="changeEventsSlide(1)">❯</button>
+            <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">❮</button>
+            <button class="carousel-btn carousel-next" onclick="changeSlide(1)">❯</button>
             
             
-            <div class="events-indicators">
-                <button class="events-indicator active" onclick="currentEventsSlide(1)"></button>
-                <button class="events-indicator" onclick="currentEventsSlide(2)"></button>
-                <button class="events-indicator" onclick="currentEventsSlide(3)"></button>
-                <button class="events-indicator" onclick="currentEventsSlide(4)"></button>
-                <button class="events-indicator" onclick="currentEventsSlide(5)"></button>
+            <div class="carousel-indicators">
+                <button class="indicator active" onclick="currentSlide(1)"></button>
+                <button class="indicator" onclick="currentSlide(2)"></button>
+                <button class="indicator" onclick="currentSlide(3)"></button>
+                <button class="indicator" onclick="currentSlide(4)"></button>
+                <button class="indicator" onclick="currentSlide(5)"></button>
             </div>
         </div>
     </section>

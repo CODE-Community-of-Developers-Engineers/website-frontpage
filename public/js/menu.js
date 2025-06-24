@@ -10,20 +10,19 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileNav.classList.toggle('active');
             
             if (mobileNav.classList.contains('active')) {
-                console.log('Showing mobile menu', 'Display style:', getComputedStyle(mobileNav).display);
-                console.log('Mobile nav element:', mobileNav);
-                console.log('Mobile nav content:', mobileNav.querySelector('.mobile-nav-content'));
+                console.log('Showing mobile menu');
                 document.body.style.overflow = 'hidden';
-                // Force visibility for debugging
-                mobileNav.style.display = 'flex';
-                mobileNav.style.opacity = '1';
-                mobileNav.style.visibility = 'visible';
-                mobileNav.style.backgroundColor = 'rgba(255, 0, 0, 0.5)'; // Red background for debugging
+                // Force visibility with !important equivalent
+                mobileNav.style.setProperty('display', 'flex', 'important');
+                mobileNav.style.setProperty('opacity', '1', 'important');
+                mobileNav.style.setProperty('visibility', 'visible', 'important');
+                mobileNav.style.setProperty('background-color', 'rgba(255, 0, 0, 0.5)', 'important');
+                console.log('After setting styles:', getComputedStyle(mobileNav).display);
             } else {
                 console.log('Hiding mobile menu');
                 document.body.style.overflow = '';
-                mobileNav.style.display = 'none';
-                mobileNav.style.backgroundColor = '';
+                mobileNav.style.setProperty('display', 'none', 'important');
+                mobileNav.style.removeProperty('background-color');
             }
         });
         

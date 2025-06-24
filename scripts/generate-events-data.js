@@ -77,6 +77,8 @@ window.eventsImageData = ${JSON.stringify(eventsData, null, 4)};
         
         console.log(`✓ Generated events data for ${eventsData.length} images`);
         console.log('Events:', eventsData.map(e => e.name).join(', '));
+        console.log('Output file path:', OUTPUT_FILE);
+        console.log('File size:', fs.statSync(OUTPUT_FILE).size, 'bytes');
         
     } catch (error) {
         console.error('Error generating events data:', error);

@@ -53,10 +53,15 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Generate Events Data
         run: |
-          echo "Generating events data from images..."
+          echo "=== Checking events directory ==="
+          ls -la static/images/events/
+          echo "=== Generating events data from images ==="
           node scripts/generate-events-data.js
-          echo "Events data generated successfully"
+          echo "=== Events data generated successfully ==="
+          echo "Contents of generated file:"
           cat static/js/events-data.js
+          echo "=== Verifying file exists ==="
+          ls -la static/js/events-data.js
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build with Hugo
@@ -65,15 +70,32 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
+          echo "=== Pre-build verification ==="
+          echo "Checking events data file exists:"
+          ls -la static/js/events-data.js
+          echo "Content preview:"
+          head -20 static/js/events-data.js
+          echo "=== Starting Hugo build ==="
           hugo \
             --gc \
             --minify \
             --cleanDestinationDir \
             --forceSyncStatic \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
-      - name: Copy .nojekyll to public
+            --baseURL "${{ steps.pages.outputs.base_url }}/" \
+            --verbose
+          echo "=== Post-build verification ==="
+          echo "Checking public directory:"
+          ls -la public/js/events-data.js
+          echo "Checking public events images:"
+          ls -la public/images/events/
+      - name: Verify Build Output
         run: |
-          echo "Creating .nojekyll file to prevent Jekyll processing"
+          echo "=== Final verification before upload ==="
+          echo "Checking if events data made it to public:"
+          ls -la public/js/events-data.js || echo "MISSING: events-data.js not found in public"
+          echo "Checking events images in public:"
+          ls -la public/images/events/ | head -10
+          echo "=== Creating .nojekyll file ==="
           touch public/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

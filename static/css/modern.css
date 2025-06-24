@@ -1683,7 +1683,7 @@ p {
 }
 
 .tag-hidden {
-    display: none !important;
+    display: none;
 }
 
 .tag-expand-controls {

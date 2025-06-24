@@ -411,36 +411,31 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
         hiddenTags.forEach((tag, index) => {
-            console.log('Hiding tag:', index, tag.textContent);
-            tag.style.display = 'none';
+            tag.classList.add('tag-hidden');
         });
         
         
         if (hiddenTags.length === 0) {
-            console.log('No hidden tags, hiding button');
             expandBtn.style.display = 'none';
-        } else {
-            console.log('Showing expand button with', hiddenTags.length, 'hidden tags');
         }
         
         expandBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Expand button clicked, current state:', isExpanded);
             isExpanded = !isExpanded;
             
             hiddenTags.forEach((tag, index) => {
-                const newDisplay = isExpanded ? 'inline-flex' : 'none';
-                console.log('Setting tag', index, 'display to:', newDisplay);
-                tag.style.display = newDisplay;
+                if (isExpanded) {
+                    tag.classList.remove('tag-hidden');
+                } else {
+                    tag.classList.add('tag-hidden');
+                }
             });
             
             if (isExpanded) {
-                console.log('Expanding - showing collapse text');
                 expandText.style.display = 'none';
                 collapseText.style.display = 'inline';
                 expandBtn.classList.add('expanded');
             } else {
-                console.log('Collapsing - showing expand text');
                 expandText.style.display = 'inline';
                 collapseText.style.display = 'none';
                 expandBtn.classList.remove('expanded');

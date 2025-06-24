@@ -333,7 +333,7 @@ p {
 /* Hero Section */
 .hero-section {
     position: relative;
-    background: linear-gradient(135deg, var(--background-secondary) 0%, var(--background) 100%);
+    background: white;
     border: 3px solid var(--accent);
     border-radius: var(--radius-lg);
     padding: 2rem 2rem 1.5rem;

@@ -888,47 +888,40 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: brightness(0.9);
 }
 
-.slide-background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(89, 150, 155, 0.6), rgba(187, 141, 95, 0.6));
-}
+/* Removed hazy overlay per user request */
 
 .slide-content {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
     z-index: 2;
     text-align: center;
     color: white;
-    padding: 2rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 1rem;
+    pointer-events: none;
 }
 
 .slide-content h3 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
     font-family: 'Gloria Hallelujah', cursive;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
 }
 
 .slide-content .event-date {
     font-size: 1.1rem;
     margin-bottom: 0;
     font-family: 'Vollkorn', serif;
-    opacity: 0.9;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    color: white;
+    opacity: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 
 .carousel-btn {

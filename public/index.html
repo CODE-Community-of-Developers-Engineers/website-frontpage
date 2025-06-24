@@ -115,7 +115,16 @@
         <h2 style="text-align: center; margin-bottom: 2rem;">Recent Events</h2>
         <div class="carousel-container">
             <div class="carousel" id="eventsCarousel">
-
+                
+                <div class="carousel-slide active">
+                    <div class="hero-content" style="background: transparent; color: var(--text-primary); padding: 4rem 2rem; text-align: center; border-radius: 8px;">
+                        <div class="hero-text">
+                            <h1>Code & Coffee Philadelphia</h1>
+                            <p class="event-date">Loading events...</p>
+                            <a href="/blog" class="cta-button">Learn More</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             
@@ -124,11 +133,8 @@
             
             
             <div class="carousel-indicators">
+                
                 <button class="indicator active" onclick="currentSlide(1)"></button>
-                <button class="indicator" onclick="currentSlide(2)"></button>
-                <button class="indicator" onclick="currentSlide(3)"></button>
-                <button class="indicator" onclick="currentSlide(4)"></button>
-                <button class="indicator" onclick="currentSlide(5)"></button>
             </div>
         </div>
     </section>
@@ -336,8 +342,13 @@
     
     <script src="/js/menu.js"></script>
     
-    <script src="/js/events-data.js"></script>
-    <script src="/js/carousel.js"></script>
+    <script>
+        
+        const timestamp = new Date().getTime();
+        console.log('Loading events data with timestamp:', timestamp);
+    </script>
+    <script src="/js/events-data.js?v=1750736947"></script>
+    <script src="/js/carousel.js?v=1750736947"></script>
     <script src="/js/meetup.js"></script>
     
     

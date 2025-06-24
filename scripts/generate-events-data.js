@@ -12,7 +12,8 @@ function filenameToName(filename) {
     const name = filename
         .replace(/\.(svg|jpg|jpeg|png|webp)$/i, '') // Remove extension
         .replace(/[-_]/g, ' ') // Replace hyphens and underscores with spaces
-        .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize first letter of each word
+        .replace(/\b\w/g, char => char.toUpperCase()) // Capitalize first letter of each word
+        .trim(); // Remove any leading/trailing spaces
     
     return name;
 }
@@ -21,12 +22,11 @@ function filenameToName(filename) {
 function generateEventDate(index) {
     const today = new Date();
     const futureDate = new Date(today);
-    futureDate.setDate(today.getDate() + (index * 7)); // Weekly intervals
+    futureDate.setMonth(today.getMonth() + index); // Monthly intervals
     
     return futureDate.toLocaleDateString('en-US', {
         year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+        month: 'long'
     });
 }
 
@@ -77,6 +77,8 @@ window.eventsImageData = ${JSON.stringify(eventsData, null, 4)};
         
         console.log(`✓ Generated events data for ${eventsData.length} images`);
         console.log('Events:', eventsData.map(e => e.name).join(', '));
+        console.log('Output file path:', OUTPUT_FILE);
+        console.log('File size:', fs.statSync(OUTPUT_FILE).size, 'bytes');
         
     } catch (error) {
         console.error('Error generating events data:', error);

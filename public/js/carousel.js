@@ -13,50 +13,31 @@
     let carouselInterval;
 
 function loadEventImages() {
-    // Use the data from events-data.js if available, otherwise use fallback
+    console.log('Loading event images...');
+    console.log('window.eventsImageData:', window.eventsImageData);
+    
+    // Use the data from events-data.js if available
     if (window.eventsImageData && window.eventsImageData.length > 0) {
         eventsData = window.eventsImageData.map(item => {
             // Handle spaces and special characters in filenames
-            const encodedFilename = encodeURIComponent(item.filename).replace(/%20/g, '%20');
+            const encodedFilename = encodeURIComponent(item.filename);
             const baseURL = window.location.pathname.includes('/Code-And-Coffee-philidelphia-Website') 
                 ? '/Code-And-Coffee-philidelphia-Website' 
                 : '';
             
+            const imageUrl = `${baseURL}/images/events/${encodedFilename}`;
+            console.log(`Processing event: ${item.name} -> ${imageUrl}`);
+            
             return {
-                image: `${baseURL}/images/events/${encodedFilename}`,
+                image: imageUrl,
                 name: item.name,
                 date: item.date
             };
         });
+        console.log(`Loaded ${eventsData.length} events from events-data.js`);
     } else {
-        // Fallback data
-        eventsData = [
-            {
-                image: '/images/events/coffee-coding-session.svg',
-                name: 'Coffee Coding Session',
-                date: 'January 1, 2025'
-            },
-            {
-                image: '/images/events/tech-talk-evening.svg',
-                name: 'Tech Talk Evening',
-                date: 'January 8, 2025'
-            },
-            {
-                image: '/images/events/networking-mixer.svg',
-                name: 'Networking Mixer',
-                date: 'January 15, 2025'
-            },
-            {
-                image: '/images/events/hackathon-kickoff.svg',
-                name: 'Hackathon Kickoff',
-                date: 'January 22, 2025'
-            },
-            {
-                image: '/images/events/workshop-series.svg',
-                name: 'Workshop Series',
-                date: 'January 29, 2025'
-            }
-        ];
+        console.warn('No events data available from events-data.js - check if script loaded');
+        eventsData = [];
     }
     return eventsData;
 }
@@ -114,7 +95,7 @@ function updateCarouselIndicators() {
 }
 
 function showEventsSlide(index) {
-    const slides = document.querySelectorAll('#eventsCarousel .carousel-slide');
+    const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.carousel-indicators .indicator');
     
     if (slides.length === 0) return;

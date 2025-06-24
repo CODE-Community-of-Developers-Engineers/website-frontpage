@@ -1,0 +1,40 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E9E3DC"/>
+      <stop offset="100%" style="stop-color:#D4C4B0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg4)"/>
+  
+  <!-- Multiple laptops -->
+  <rect x="50" y="130" width="80" height="50" rx="3" fill="#2C2C2C"/>
+  <rect x="55" y="135" width="70" height="35" fill="#59969B"/>
+  
+  <rect x="160" y="140" width="80" height="50" rx="3" fill="#2C2C2C"/>
+  <rect x="165" y="145" width="70" height="35" fill="#59969B"/>
+  
+  <rect x="270" y="135" width="80" height="50" rx="3" fill="#2C2C2C"/>
+  <rect x="275" y="140" width="70" height="35" fill="#59969B"/>
+  
+  <!-- Code symbols -->
+  <text x="90" y="158" font-family="monospace" font-size="12" fill="white">&lt;/&gt;</text>
+  <text x="200" y="168" font-family="monospace" font-size="12" fill="white">{ }</text>
+  <text x="310" y="163" font-family="monospace" font-size="12" fill="white">++</text>
+  
+  <!-- Coffee cups -->
+  <circle cx="120" cy="210" r="8" fill="#8B4513"/>
+  <circle cx="200" cy="215" r="8" fill="#8B4513"/>
+  <circle cx="280" cy="208" r="8" fill="#8B4513"/>
+  
+  <!-- Energy lines -->
+  <path d="M100 100 L120 110 L100 120 L120 130" stroke="#BB8D5F" stroke-width="3" fill="none"/>
+  <path d="M200 90 L220 100 L200 110 L220 120" stroke="#BB8D5F" stroke-width="3" fill="none"/>
+  <path d="M300 100 L320 110 L300 120 L320 130" stroke="#BB8D5F" stroke-width="3" fill="none"/>
+  
+  <!-- Title -->
+  <text x="200" y="35" font-family="Gloria Hallelujah" font-size="22" fill="#3B2521" text-anchor="middle">Hackathon</text>
+  <text x="200" y="60" font-family="Gloria Hallelujah" font-size="22" fill="#3B2521" text-anchor="middle">Kickoff</text>
+</svg>

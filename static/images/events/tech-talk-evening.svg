@@ -1,0 +1,33 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E9E3DC"/>
+      <stop offset="100%" style="stop-color:#D4C4B0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg2)"/>
+  
+  <!-- Presentation screen -->
+  <rect x="80" y="60" width="240" height="140" rx="8" fill="#2C2C2C"/>
+  <rect x="85" y="65" width="230" height="130" fill="#59969B"/>
+  
+  <!-- Presentation content -->
+  <text x="200" y="100" font-family="Arial" font-size="20" fill="white" text-anchor="middle">Tech Talk:</text>
+  <text x="200" y="125" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Building Modern</text>
+  <text x="200" y="145" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Web Applications</text>
+  
+  <!-- Coffee cups for audience -->
+  <circle cx="120" cy="230" r="8" fill="#8B4513"/>
+  <circle cx="140" cy="235" r="8" fill="#8B4513"/>
+  <circle cx="180" cy="225" r="8" fill="#8B4513"/>
+  <circle cx="220" cy="240" r="8" fill="#8B4513"/>
+  <circle cx="280" cy="230" r="8" fill="#8B4513"/>
+  
+  <!-- Speaker podium -->
+  <rect x="180" y="210" width="40" height="30" fill="#BB8D5F"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" font-family="Gloria Hallelujah" font-size="22" fill="#3B2521" text-anchor="middle">Tech Talk Evening</text>
+</svg>

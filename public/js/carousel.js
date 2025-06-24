@@ -95,7 +95,7 @@ function updateCarouselIndicators() {
 }
 
 function showEventsSlide(index) {
-    const slides = document.querySelectorAll('#eventsCarousel .carousel-slide');
+    const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.carousel-indicators .indicator');
     
     if (slides.length === 0) return;

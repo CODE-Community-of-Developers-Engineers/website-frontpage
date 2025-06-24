@@ -93,8 +93,11 @@ jobs:
           echo "=== Final verification before upload ==="
           echo "Checking if events data made it to public:"
           ls -la public/js/events-data.js || echo "MISSING: events-data.js not found in public"
+          echo "Preview of events data in public:"
+          head -5 public/js/events-data.js || echo "Cannot read events data file"
           echo "Checking events images in public:"
           ls -la public/images/events/ | head -10
+          echo "Total images found:" $(ls public/images/events/ | wc -l)
           echo "=== Creating .nojekyll file ==="
           touch public/.nojekyll
       - name: Upload artifact

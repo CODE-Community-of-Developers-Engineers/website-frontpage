@@ -904,7 +904,7 @@ p {
     text-align: center;
     color: white;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.1);
+    background: transparent;
 }
 
 .slide-content h3 {

@@ -411,14 +411,22 @@ p {
 
 .coffee-cup-1 {
     top: 15%;
-    left: 10%;
+    left: 20%;
     animation: slowBounce 4s ease-in-out infinite;
 }
 
 .coffee-cup-2 {
     top: 20%;
-    right: 12%;
+    right: 20%;
     animation: slowBounce 5s ease-in-out infinite 1s;
+}
+
+/* Hide coffee cups on mobile devices */
+@media (max-width: 768px) {
+    .coffee-cup-1,
+    .coffee-cup-2 {
+        display: none;
+    }
 }
 
 .coffee-steam {

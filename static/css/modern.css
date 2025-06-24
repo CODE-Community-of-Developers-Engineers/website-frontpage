@@ -1338,14 +1338,11 @@ p {
 }
 
 .blog-sidebar {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--background-secondary);
     border: 2px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    padding: 2rem;
     height: fit-content;
-    position: sticky;
-    top: 120px;
-    backdrop-filter: blur(10px);
 }
 
 .blog-posts {
@@ -1392,9 +1389,201 @@ p {
 }
 
 .sidebar-widget h3 {
-    font-size: 1.125rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 1.25rem;
+}
+
+/* Article Meta */
+.article-details-widget {
+    border: 2px solid var(--accent);
+    background: linear-gradient(135deg, var(--background) 0%, var(--background-secondary) 100%);
+}
+
+.article-meta-box {
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.meta-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.meta-item:first-child {
+    padding-top: 0;
+}
+
+.meta-icon {
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.meta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.meta-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.meta-value {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.topic-badge-sidebar {
+    background: var(--accent);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    font-family: 'Gloria Hallelujah', cursive;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(89, 150, 155, 0.3);
+}
+
+.featured-badge-sidebar {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    font-family: 'Gloria Hallelujah', cursive;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.3);
+}
+
+/* Article Tags */
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.article-tag {
+    background: var(--background);
+    border: 2px solid var(--accent);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.article-tag:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Share Buttons */
+.share-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--background);
+    transition: all 0.3s ease;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.9rem;
+}
+
+.share-btn:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.share-btn span {
+    font-size: 1.1rem;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.toc-item {
+    margin-bottom: 0.5rem;
+}
+
+.toc-link {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+}
+
+.toc-link:hover {
+    background: var(--background);
+    color: var(--text-primary);
+    border-left-color: var(--accent);
+}
+
+.toc-link.active {
+    background: var(--accent);
+    color: white;
+    border-left-color: var(--accent);
+}
+
+.toc-h2 {
+    padding-left: 0.75rem;
+}
+
+.toc-h3 {
+    padding-left: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.toc-h4 {
+    padding-left: 2.25rem;
+    font-size: 0.8rem;
+}
+
+.toc-h5, .toc-h6 {
+    padding-left: 3rem;
+    font-size: 0.75rem;
 }
 
 .recent-post {

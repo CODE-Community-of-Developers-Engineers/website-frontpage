@@ -1,77 +1,87 @@
-<!-- Article Information -->
+<!-- Article Details -->
 <div class="sidebar-widget">
     <h3>Article Details</h3>
-    <div class="article-info">
-        <div class="article-info-item">
-            <span class="info-label">📅 Published</span>
-            <span class="info-value">{{ .Date.Format "January 2, 2006" }}</span>
+    <div class="article-meta">
+        <div class="meta-item">
+            <span class="meta-label">Published</span>
+            <span class="meta-value">{{ .Date.Format "January 2, 2006" }}</span>
         </div>
         
         {{ if .Params.author }}
-        <div class="article-info-item">
-            <span class="info-label">👤 Author</span>
-            <span class="info-value">{{ .Params.author }}</span>
+        <div class="meta-item">
+            <span class="meta-label">Author</span>
+            <span class="meta-value">{{ .Params.author }}</span>
         </div>
         {{ end }}
         
-        <div class="article-info-item">
-            <span class="info-label">⏱️ Reading Time</span>
-            <span class="info-value">{{ if .Params.readingTime }}{{ .Params.readingTime }}{{ else }}{{ math.Round (div (countwords .Content) 200.0) }}{{ end }} min read</span>
+        <div class="meta-item">
+            <span class="meta-label">Reading Time</span>
+            <span class="meta-value">{{ if .Params.readingTime }}{{ .Params.readingTime }}{{ else }}{{ math.Round (div (countwords .Content) 200.0) }}{{ end }} min read</span>
         </div>
         
         {{ if .Params.topic }}
-        <div class="article-info-item">
-            <span class="info-label">📂 Topic</span>
-            <span class="info-value topic-value">{{ .Params.topic | title }}</span>
+        <div class="meta-item">
+            <span class="meta-label">Topic</span>
+            <span class="meta-value">
+                <span class="topic-badge-sidebar">{{ .Params.topic | title }}</span>
+            </span>
         </div>
         {{ end }}
         
-        <div class="article-info-item">
-            <span class="info-label">📊 Word Count</span>
-            <span class="info-value">{{ .WordCount }} words</span>
+        {{ if .Params.featured }}
+        <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">
+                <span class="featured-badge-sidebar">⭐ Featured</span>
+            </span>
         </div>
+        {{ end }}
     </div>
 </div>
 
-<!-- Article Tags -->
+<!-- Tags -->
 {{ if .Params.tags }}
 <div class="sidebar-widget">
     <h3>Tags</h3>
     <div class="article-tags">
         {{ range .Params.tags }}
-        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="article-tag">
-            {{ title . }}
-        </a>
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag article-tag">{{ title . }}</a>
         {{ end }}
     </div>
 </div>
 {{ end }}
 
-<!-- Table of Contents -->
-{{ if .TableOfContents }}
-<div class="sidebar-widget">
-    <h3>Table of Contents</h3>
-    <div class="toc">
-        {{ .TableOfContents }}
-    </div>
-</div>
-{{ end }}
-
-<!-- Share Article -->
+<!-- Share -->
 <div class="sidebar-widget">
     <h3>Share Article</h3>
     <div class="share-buttons">
-        <a href="https://twitter.com/intent/tweet?text={{ .Title | urlize }}&url={{ .Permalink }}" 
-           class="share-btn twitter-share" target="_blank" rel="noopener">
-            🐦 Twitter
+        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" 
+           target="_blank" class="share-btn twitter">
+            <span>🐦</span> Twitter
         </a>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" 
-           class="share-btn linkedin-share" target="_blank" rel="noopener">
-            💼 LinkedIn
+           target="_blank" class="share-btn linkedin">
+            <span>💼</span> LinkedIn
         </a>
-        <button class="share-btn copy-link" onclick="copyToClipboard('{{ .Permalink }}')">
-            🔗 Copy Link
-        </button>
+        <a href="mailto:?subject={{ .Title }}&body=Check out this article: {{ .Permalink }}" 
+           class="share-btn email">
+            <span>📧</span> Email
+        </a>
+    </div>
+</div>
+
+<!-- Recent Posts -->
+<div class="sidebar-widget">
+    <h3>Recent Posts</h3>
+    <div class="recent-posts">
+        {{ range first 4 (where (where site.RegularPages "Section" "blog") ".Permalink" "!=" .Permalink) }}
+        <div class="recent-post">
+            <a href="{{ .RelPermalink }}" class="recent-post-title">{{ .Title }}</a>
+            <div class="recent-post-meta">
+                {{ .Date.Format "Jan 2, 2006" }}
+            </div>
+        </div>
+        {{ end }}
     </div>
 </div>
 
@@ -93,17 +103,3 @@
         </a>
     </div>
 </div>
-
-<script>
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-        // Show feedback
-        const btn = event.target;
-        const originalText = btn.textContent;
-        btn.textContent = '✅ Copied!';
-        setTimeout(() => {
-            btn.textContent = originalText;
-        }, 2000);
-    });
-}
-</script>

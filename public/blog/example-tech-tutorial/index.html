@@ -344,35 +344,34 @@
         
 <div class="sidebar-widget">
     <h3>Article Details</h3>
-    <div class="article-info">
-        <div class="article-info-item">
-            <span class="info-label">📅 Published</span>
-            <span class="info-value">June 20, 2025</span>
+    <div class="article-meta">
+        <div class="meta-item">
+            <span class="meta-label">Published</span>
+            <span class="meta-value">June 20, 2025</span>
         </div>
         
         
-        <div class="article-info-item">
-            <span class="info-label">👤 Author</span>
-            <span class="info-value">Alex Johnson</span>
+        <div class="meta-item">
+            <span class="meta-label">Author</span>
+            <span class="meta-value">Alex Johnson</span>
         </div>
         
         
-        <div class="article-info-item">
-            <span class="info-label">⏱️ Reading Time</span>
-            <span class="info-value">8 min read</span>
+        <div class="meta-item">
+            <span class="meta-label">Reading Time</span>
+            <span class="meta-value">8 min read</span>
         </div>
         
         
-        <div class="article-info-item">
-            <span class="info-label">📂 Topic</span>
-            <span class="info-value topic-value">Tutorial</span>
+        <div class="meta-item">
+            <span class="meta-label">Topic</span>
+            <span class="meta-value">
+                <span class="topic-badge-sidebar">Tutorial</span>
+            </span>
         </div>
         
         
-        <div class="article-info-item">
-            <span class="info-label">📊 Word Count</span>
-            <span class="info-value">776 words</span>
-        </div>
+        
     </div>
 </div>
 
@@ -382,54 +381,18 @@
     <h3>Tags</h3>
     <div class="article-tags">
         
-        <a href="/tags/javascript" class="article-tag">
-            Javascript
-        </a>
+        <a href="/tags/javascript" class="tag article-tag">Javascript</a>
         
-        <a href="/tags/nodejs" class="article-tag">
-            Nodejs
-        </a>
+        <a href="/tags/nodejs" class="tag article-tag">Nodejs</a>
         
-        <a href="/tags/api" class="article-tag">
-            Api
-        </a>
+        <a href="/tags/api" class="tag article-tag">Api</a>
         
-        <a href="/tags/express" class="article-tag">
-            Express
-        </a>
+        <a href="/tags/express" class="tag article-tag">Express</a>
         
-        <a href="/tags/beginners" class="article-tag">
-            Beginners
-        </a>
+        <a href="/tags/beginners" class="tag article-tag">Beginners</a>
         
-        <a href="/tags/backend" class="article-tag">
-            Backend
-        </a>
+        <a href="/tags/backend" class="tag article-tag">Backend</a>
         
-    </div>
-</div>
-
-
-
-
-<div class="sidebar-widget">
-    <h3>Table of Contents</h3>
-    <div class="toc">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#what-youll-learn">What You&rsquo;ll Learn</a></li>
-    <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#setting-up-the-project">Setting Up the Project</a></li>
-    <li><a href="#project-structure">Project Structure</a></li>
-    <li><a href="#creating-the-basic-server">Creating the Basic Server</a></li>
-    <li><a href="#building-the-api-routes">Building the API Routes</a></li>
-    <li><a href="#adding-middleware">Adding Middleware</a></li>
-    <li><a href="#putting-it-all-together">Putting It All Together</a></li>
-    <li><a href="#testing-your-api">Testing Your API</a></li>
-    <li><a href="#next-steps">Next Steps</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
     </div>
 </div>
 
@@ -438,17 +401,47 @@
 <div class="sidebar-widget">
     <h3>Share Article</h3>
     <div class="share-buttons">
-        <a href="https://twitter.com/intent/tweet?text=building-your-first-rest-api-with-node.js-and-express&url=http%3a%2f%2flocalhost%3a5000%2fblog%2fexample-tech-tutorial%2f" 
-           class="share-btn twitter-share" target="_blank" rel="noopener">
-            🐦 Twitter
+        <a href="https://twitter.com/intent/tweet?url=http%3a%2f%2flocalhost%3a5000%2fblog%2fexample-tech-tutorial%2f&text=Building%20Your%20First%20REST%20API%20with%20Node.js%20and%20Express" 
+           target="_blank" class="share-btn twitter">
+            <span>🐦</span> Twitter
         </a>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3a%2f%2flocalhost%3a5000%2fblog%2fexample-tech-tutorial%2f" 
-           class="share-btn linkedin-share" target="_blank" rel="noopener">
-            💼 LinkedIn
+           target="_blank" class="share-btn linkedin">
+            <span>💼</span> LinkedIn
         </a>
-        <button class="share-btn copy-link" onclick="copyToClipboard('http:\/\/localhost:5000\/blog\/example-tech-tutorial\/')">
-            🔗 Copy Link
-        </button>
+        <a href="mailto:?subject=Building%20Your%20First%20REST%20API%20with%20Node.js%20and%20Express&body=Check out this article: http%3a%2f%2flocalhost%3a5000%2fblog%2fexample-tech-tutorial%2f" 
+           class="share-btn email">
+            <span>📧</span> Email
+        </a>
+    </div>
+</div>
+
+
+<div class="sidebar-widget">
+    <h3>Recent Posts</h3>
+    <div class="recent-posts">
+        
+        <div class="recent-post">
+            <a href="/blog/getting-started-with-code-coffee/" class="recent-post-title">Getting Started with Code &amp; Coffee Philadelphia</a>
+            <div class="recent-post-meta">
+                Jun 23, 2025
+            </div>
+        </div>
+        
+        <div class="recent-post">
+            <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Philly Tech Week Innovation Hackathon 2025</a>
+            <div class="recent-post-meta">
+                May 10, 2025
+            </div>
+        </div>
+        
+        <div class="recent-post">
+            <a href="/blog/readme/" class="recent-post-title"></a>
+            <div class="recent-post-meta">
+                Jan 1, 0001
+            </div>
+        </div>
+        
     </div>
 </div>
 
@@ -470,20 +463,6 @@
         </a>
     </div>
 </div>
-
-<script>
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-        
-        const btn = event.target;
-        const originalText = btn.textContent;
-        btn.textContent = '✅ Copied!';
-        setTimeout(() => {
-            btn.textContent = originalText;
-        }, 2000);
-    });
-}
-</script>
     </div>
 </div>
 

@@ -500,6 +500,18 @@ p {
     font-weight: 600;
 }
 
+.hero-community-name {
+    color: var(--text-primary);
+    font-family: 'Vollkorn', serif;
+    font-weight: 600;
+}
+
+.hero-location {
+    color: var(--accent);
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: 600;
+}
+
 .subtitle-description {
     font-size: 1rem;
     color: var(--text-secondary);

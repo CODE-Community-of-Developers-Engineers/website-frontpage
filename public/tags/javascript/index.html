@@ -444,38 +444,52 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const expandBtn = document.getElementById('tag-expand-btn');
     if (expandBtn) {
+        console.log('Found expand button');
         const hiddenTags = document.querySelectorAll('.tag-hidden');
+        console.log('Found hidden tags:', hiddenTags.length);
         const expandText = expandBtn.querySelector('.expand-text');
         const collapseText = expandBtn.querySelector('.collapse-text');
         let isExpanded = false;
         
         
-        hiddenTags.forEach(tag => {
+        hiddenTags.forEach((tag, index) => {
+            console.log('Hiding tag:', index, tag.textContent);
             tag.style.display = 'none';
         });
         
         
         if (hiddenTags.length === 0) {
+            console.log('No hidden tags, hiding button');
             expandBtn.style.display = 'none';
+        } else {
+            console.log('Showing expand button with', hiddenTags.length, 'hidden tags');
         }
         
-        expandBtn.addEventListener('click', function() {
+        expandBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Expand button clicked, current state:', isExpanded);
             isExpanded = !isExpanded;
             
-            hiddenTags.forEach(tag => {
-                tag.style.display = isExpanded ? 'inline-flex' : 'none';
+            hiddenTags.forEach((tag, index) => {
+                const newDisplay = isExpanded ? 'inline-flex' : 'none';
+                console.log('Setting tag', index, 'display to:', newDisplay);
+                tag.style.display = newDisplay;
             });
             
             if (isExpanded) {
+                console.log('Expanding - showing collapse text');
                 expandText.style.display = 'none';
                 collapseText.style.display = 'inline';
                 expandBtn.classList.add('expanded');
             } else {
+                console.log('Collapsing - showing expand text');
                 expandText.style.display = 'inline';
                 collapseText.style.display = 'none';
                 expandBtn.classList.remove('expanded');
             }
         });
+    } else {
+        console.log('Expand button not found');
     }
 
     

@@ -490,7 +490,8 @@ p {
 }
 
 .title-line-2 {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
     font-size: 2.5rem;
     color: var(--text-primary);
     margin: 0 0.5rem;
@@ -498,7 +499,8 @@ p {
 }
 
 .title-accent {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
     font-size: 2rem;
     color: var(--accent);
     font-family: 'Gloria Hallelujah', cursive;

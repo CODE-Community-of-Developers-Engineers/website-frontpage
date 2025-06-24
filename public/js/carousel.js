@@ -1,6 +1,7 @@
 // Events carousel functionality
 let currentEventsIndex = 0;
 let eventsData = [];
+let carouselInterval;
 
 function loadEventImages() {
     // Use the data from events-data.js if available, otherwise use fallback
@@ -128,14 +129,6 @@ function currentSlide(index) {
     currentEventsIndex = index - 1;
     showEventsSlide(currentEventsIndex);
 }
-
-// Legacy function name for compatibility
-function showSlide(index) {
-    showEventsSlide(index);
-}
-
-// Auto-advance carousel every 3 seconds
-let carouselInterval;
 
 function startCarouselAutoAdvance() {
     carouselInterval = setInterval(() => {

@@ -15,11 +15,19 @@
 function loadEventImages() {
     // Use the data from events-data.js if available, otherwise use fallback
     if (window.eventsImageData && window.eventsImageData.length > 0) {
-        eventsData = window.eventsImageData.map(item => ({
-            image: `${window.location.pathname.includes('/Code-And-Coffee-philidelphia-Website') ? '/Code-And-Coffee-philidelphia-Website' : ''}/images/events/${item.filename}`,
-            name: item.name,
-            date: item.date
-        }));
+        eventsData = window.eventsImageData.map(item => {
+            // Handle spaces and special characters in filenames
+            const encodedFilename = encodeURIComponent(item.filename).replace(/%20/g, '%20');
+            const baseURL = window.location.pathname.includes('/Code-And-Coffee-philidelphia-Website') 
+                ? '/Code-And-Coffee-philidelphia-Website' 
+                : '';
+            
+            return {
+                image: `${baseURL}/images/events/${encodedFilename}`,
+                name: item.name,
+                date: item.date
+            };
+        });
     } else {
         // Fallback data
         eventsData = [

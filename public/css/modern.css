@@ -146,8 +146,19 @@ header {
 .mobile-menu-btn {
     display: none;
     background: none;
-    border: none;
-    font-size: 1.5rem;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+    background: var(--accent);
+    color: white;
+}
     cursor: pointer;
     color: var(--text-primary);
     padding: 0.5rem;
@@ -279,6 +290,36 @@ p {
 .btn-secondary:hover {
     background: var(--accent);
     color: white;
+}
+
+/* Hero Section */
+.hero-box {
+    background: var(--background-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 3rem 2rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23BB8D5F' fill-opacity='0.03'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-box > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* Tags */
@@ -1141,7 +1182,7 @@ footer {
 }
 
 /* Tablet and smaller laptop breakpoints */
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
     .nav-desktop {
         display: none !important;
     }

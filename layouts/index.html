@@ -1,48 +1,18 @@
 {{ define "main" }}
-<!-- Main Carousel -->
-<div class="carousel-container">
-    <div class="carousel" id="heroCarousel">
-        <div class="carousel-slide active">
-            <div class="slide-background" style="background-image: url('{{ "images/placeholder-community.svg" | relURL }}')"></div>
-            <div class="slide-content">
-                <h2>Welcome to Code & Coffee Philadelphia</h2>
-                <p>Your space to build, learn, and connect with fellow developers, designers, and tech enthusiasts in the City of Brotherly Love.</p>
-                <a href="{{ "blog" | relURL }}" class="btn-primary">Read Our Blog</a>
-            </div>
-        </div>
-        
-        <div class="carousel-slide">
-            <div class="slide-background" style="background-image: url('{{ "images/placeholder-events.svg" | relURL }}')"></div>
-            <div class="slide-content">
-                <h2>Join Our Community Events</h2>
-                <p>Regular meetups, hackathons, and workshops to grow your skills and network with amazing people in Philly's tech scene.</p>
-                <a href="https://www.meetup.com/code-coffee-philly/" class="btn-primary">Find Events</a>
-            </div>
-        </div>
-        
-        <div class="carousel-slide">
-            <div class="slide-background" style="background-image: url('{{ "images/placeholder-projects.svg" | relURL }}')"></div>
-            <div class="slide-content">
-                <h2>Get Help with Your Projects</h2>
-                <p>Stuck on a coding challenge? Working on something exciting? Our community is here to help and collaborate.</p>
-                <a href="{{ "project-request" | relURL }}" class="btn-primary">Request Help</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Carousel Navigation -->
-    <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">❮</button>
-    <button class="carousel-btn carousel-next" onclick="changeSlide(1)">❯</button>
-    
-    <!-- Carousel Indicators -->
-    <div class="carousel-indicators">
-        <button class="indicator active" onclick="currentSlide(1)"></button>
-        <button class="indicator" onclick="currentSlide(2)"></button>
-        <button class="indicator" onclick="currentSlide(3)"></button>
-    </div>
-</div>
-
 <div class="container" style="padding: 4rem 1.5rem;">
+    <!-- Hero Section -->
+    <div style="text-align: center; margin-bottom: 4rem;">
+        <h1 style="font-size: 3rem; font-weight: 400; margin-bottom: 1.5rem; color: var(--text-primary); font-family: var(--font-sans);">
+            Your Space to Build
+        </h1>
+        <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
+            Code & Coffee Philadelphia is where developers, designers, and tech enthusiasts come together to learn, build, and grow.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.meetup.com/code-coffee-philly/" class="btn">Join Our Events</a>
+            <a href="{{ "blog" | relURL }}" class="btn btn-secondary">Read Our Blog</a>
+        </div>
+    </div>
 
     <!-- Recent Events Image Slider -->
     <section style="margin-bottom: 4rem;">

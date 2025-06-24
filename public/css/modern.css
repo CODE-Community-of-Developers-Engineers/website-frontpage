@@ -1854,6 +1854,74 @@ p {
     box-shadow: 0 0 0 3px rgba(89, 150, 155, 0.1);
 }
 
+/* Links Page Styling */
+.link-card {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(89, 150, 155, 0.05);
+}
+
+.link-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(89, 150, 155, 0.15);
+    transform: translateY(-2px);
+}
+
+.link-button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.link-button:hover {
+    color: var(--text-primary);
+}
+
+.link-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.link-card:hover .link-icon {
+    background: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.link-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.link-title {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.link-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
 /* No results styling */
 #no-results {
     background: var(--background-secondary);

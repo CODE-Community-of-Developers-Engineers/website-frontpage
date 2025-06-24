@@ -9,17 +9,17 @@ window.eventsImageData = [
     },
     {
         "filename": "DevShop.JPG",
-        "name": "DevShop",
+        "name": "Dev Shop",
         "date": "July 2025"
     },
     {
         "filename": "FounderCoworking.jpeg",
-        "name": "FounderCoworking",
+        "name": "Founder Coworking",
         "date": "August 2025"
     },
     {
         "filename": "LeetCode Practice.JPEG",
-        "name": "LeetCode Practice",
+        "name": "Leet Code Practice",
         "date": "September 2025"
     },
     {
@@ -34,7 +34,7 @@ window.eventsImageData = [
     },
     {
         "filename": "Web3workshops.JPG",
-        "name": "Web3workshops",
+        "name": "Web 3 Workshops",
         "date": "December 2025"
     },
     {
@@ -44,7 +44,7 @@ window.eventsImageData = [
     },
     {
         "filename": "weekendcodingsessions.jpg",
-        "name": "Weekendcodingsessions",
+        "name": "Weekend Coding Sessions",
         "date": "February 2026"
     }
 ];

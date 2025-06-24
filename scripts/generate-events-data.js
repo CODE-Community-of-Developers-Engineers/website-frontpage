@@ -9,11 +9,30 @@ const OUTPUT_FILE = path.join(__dirname, '..', 'static', 'js', 'events-data.js')
 
 // Function to convert filename to readable name
 function filenameToName(filename) {
-    const name = filename
+    let name = filename
         .replace(/\.(svg|jpg|jpeg|png|webp)$/i, '') // Remove extension
-        .replace(/[-_]/g, ' ') // Replace hyphens and underscores with spaces
-        .replace(/\b\w/g, char => char.toUpperCase()) // Capitalize first letter of each word
-        .trim(); // Remove any leading/trailing spaces
+        .replace(/[-_]/g, ' '); // Replace hyphens and underscores with spaces
+    
+    // Handle camelCase and add spaces before capital letters (but not at the start)
+    name = name.replace(/([a-z])([A-Z])/g, '$1 $2');
+    
+    // Add spaces before numbers that follow letters
+    name = name.replace(/([a-zA-Z])(\d)/g, '$1 $2');
+    
+    // Add spaces after numbers that are followed by letters
+    name = name.replace(/(\d)([a-zA-Z])/g, '$1 $2');
+    
+    // Handle common compound words by adding spaces
+    name = name.replace(/weekend/gi, 'Weekend ');
+    name = name.replace(/coding/gi, 'Coding ');
+    name = name.replace(/sessions/gi, 'Sessions');
+    name = name.replace(/workshops/gi, 'Workshops');
+    name = name.replace(/hackathon/gi, 'Hackathon');
+    
+    // Clean up extra spaces and capitalize
+    name = name.replace(/\s+/g, ' ') // Replace multiple spaces with single space
+        .trim() // Remove leading/trailing spaces
+        .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize first letter of each word
     
     return name;
 }

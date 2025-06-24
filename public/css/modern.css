@@ -113,6 +113,17 @@ header {
     gap: 2rem;
 }
 
+/* Ensure desktop nav shows by default */
+@media (min-width: 1301px) {
+    .nav-desktop {
+        display: flex !important;
+    }
+    
+    .mobile-menu-btn {
+        display: none !important;
+    }
+}
+
 .nav-link {
     font-family: var(--font-display);
     color: var(--text-primary);

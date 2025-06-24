@@ -1,0 +1,187 @@
+{{ define "main" }}
+<div class="container blog-layout">
+    <div class="blog-content">
+        <!-- Tag Header -->
+        <div class="blog-header-box">
+            <h1 class="blog-main-title">{{ .Title | title }}</h1>
+            <div class="blog-main-description">
+                <p>All posts tagged with "{{ .Title }}"</p>
+            </div>
+        </div>
+
+        <!-- Search Box (filtered to this tag) -->
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Search in {{ .Title | title }} Posts</h3>
+            <input type="text" id="search-input" placeholder="Search posts in this tag..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 1rem; background: white; color: var(--text-primary);">
+        </div>
+        
+        <!-- Posts Grid -->
+        <div class="blog-posts" id="blog-posts">
+        {{ range .Pages.ByDate.Reverse }}
+        <div class="blog-post" data-tags="{{ delimit .Params.tags " " }}" data-topic="{{ .Params.topic }}" data-title="{{ .Title | lower }}" data-summary="{{ .Summary | lower }}">
+            {{ if .Params.topic }}
+            <div class="topic-badge">
+                {{ .Params.topic | title }}
+            </div>
+            {{ end }}
+            
+            {{ if .Params.featured }}
+            <div class="featured-badge">
+                <i class="star-icon">⭐</i>
+                Featured
+            </div>
+            {{ end }}
+            
+            <h2 style="margin-bottom: 0.75rem;">
+                <a href="{{ .RelPermalink }}" style="text-decoration: none; color: var(--text-primary);">
+                    {{ .Title }}
+                </a>
+            </h2>
+            
+            <div class="blog-meta">
+                {{ if .Date }}
+                <span>{{ .Date.Format "January 2, 2006" }}</span>
+                {{ end }}
+                {{ if .Params.author }}
+                <span>by {{ .Params.author }}</span>
+                {{ end }}
+                {{ if .Params.readingTime }}
+                <span>{{ .Params.readingTime }} min read</span>
+                {{ end }}
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                {{ if .Summary }}
+                    {{ .Summary }}
+                {{ else if .Description }}
+                    {{ .Description }}
+                {{ else }}
+                    {{ .Content | truncate 200 }}
+                {{ end }}
+            </div>
+            
+            {{ if .Params.tags }}
+            <div class="blog-tags">
+                {{ range .Params.tags }}
+                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ title . }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+            
+            <a href="{{ .RelPermalink }}" class="btn">Read More</a>
+        </div>
+        {{ else }}
+        <div id="no-results" style="text-align: center; padding: 3rem; background: var(--background-secondary); border-radius: var(--radius-lg); margin: 2rem 0;">
+            <h3>No posts found</h3>
+            <p>No posts are tagged with "{{ .Title }}".</p>
+            <a href="{{ "/blog" | relURL }}" class="btn">Browse All Posts</a>
+        </div>
+        {{ end }}
+        </div>
+    </div>
+    
+    </div>
+    
+    <!-- Simplified Sidebar -->
+    <div class="blog-sidebar">
+        <!-- Related Tags -->
+        {{ $currentTag := .Title }}
+        {{ $relatedTags := slice }}
+        {{ range where site.RegularPages "Section" "blog" }}
+            {{ if in .Params.tags $currentTag }}
+                {{ range .Params.tags }}
+                    {{ if ne . $currentTag }}
+                        {{ $relatedTags = $relatedTags | append . }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ $uniqueRelatedTags := $relatedTags | uniq | first 10 }}
+        
+        {{ if $uniqueRelatedTags }}
+        <div class="sidebar-widget">
+            <h3>Related Tags</h3>
+            <div class="tag-cloud">
+                {{ range $uniqueRelatedTags }}
+                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag-cloud-item">{{ title . }}</a>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+
+        <!-- Recent Posts -->
+        <div class="sidebar-widget">
+            <h3>Recent Posts</h3>
+            <div class="recent-posts">
+                {{ range first 5 (where site.RegularPages "Section" "blog") }}
+                <div class="recent-post">
+                    <a href="{{ .RelPermalink }}" class="recent-post-title">{{ .Title }}</a>
+                    <div class="recent-post-meta">
+                        {{ .Date.Format "Jan 2, 2006" }}
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+
+        <!-- Community Links -->
+        <div class="sidebar-widget">
+            <h3>Join Our Community</h3>
+            <div class="community-links">
+                <a href="https://www.meetup.com/code-coffee-philly/" class="community-link">
+                    <strong>Meetup Events</strong>
+                    <span>Join our weekly coding sessions</span>
+                </a>
+                <a href="{{ "project-request" | relURL }}" class="community-link">
+                    <strong>Get Project Help</strong>
+                    <span>Connect with experienced developers</span>
+                </a>
+                <a href="{{ "talent-matchboard" | relURL }}" class="community-link">
+                    <strong>Find Opportunities</strong>
+                    <span>Discover jobs and networking</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const blogPosts = document.querySelectorAll('.blog-post');
+    
+    function filterPosts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+        
+        blogPosts.forEach(post => {
+            const title = post.dataset.title || '';
+            const summary = post.dataset.summary || '';
+            
+            const matchesSearch = !searchTerm || 
+                title.includes(searchTerm) || 
+                summary.includes(searchTerm);
+            
+            if (matchesSearch) {
+                post.style.display = 'block';
+                visibleCount++;
+            } else {
+                post.style.display = 'none';
+            }
+        });
+        
+        // Show/hide no results message
+        const noResults = document.getElementById('no-results');
+        if (noResults) {
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', filterPosts);
+    }
+});
+</script>
+{{ end }}

@@ -409,41 +409,16 @@ p {
     opacity: 0.8;
 }
 
-.coffee-cup {
-    display: inline-block;
-    font-size: 1.2rem;
-    animation: slowBounce 3s ease-in-out infinite;
-    opacity: 0.8;
-    margin-left: 0.3rem;
-    vertical-align: middle;
-}
-
 .coffee-cup-1 {
-    animation-delay: 0s;
+    top: 25%;
+    right: 25%;
+    animation: slowBounce 4s ease-in-out infinite;
 }
 
 .coffee-cup-2 {
-    animation-delay: 0.5s;
-}
-
-/* Mobile optimization */
-@media (max-width: 768px) {
-    .coffee-cup {
-        font-size: 1rem;
-        margin-left: 0.2rem;
-    }
-    
-    .title-line-2, .title-accent {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .coffee-cup {
-        font-size: 0.9rem;
-        margin-left: 0.1rem;
-    }
+    top: 45%;
+    left: 20%;
+    animation: slowBounce 5s ease-in-out infinite 1s;
 }
 
 .coffee-steam {

@@ -442,6 +442,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let isExpanded = false;
         
         
+        hiddenTags.forEach(tag => {
+            tag.style.display = 'none';
+        });
+        
+        
         if (hiddenTags.length === 0) {
             expandBtn.style.display = 'none';
         }

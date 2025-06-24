@@ -1343,8 +1343,6 @@ p {
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     height: fit-content;
-    position: sticky;
-    top: 120px;
     backdrop-filter: blur(10px);
 }
 
@@ -1661,50 +1659,27 @@ p {
 .compact-tag-item {
     display: inline-flex;
     align-items: center;
-    background: linear-gradient(135deg, #f8f9fa, white);
-    border: 2px solid var(--accent);
+    background: var(--background);
+    border: 3px solid var(--accent);
     color: var(--text-primary);
     padding: 0.6rem 1.2rem;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     cursor: pointer;
     font-family: 'Gloria Hallelujah', cursive;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(89, 150, 155, 0.12);
-    position: relative;
-    overflow: hidden;
-}
-
-.compact-tag-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s ease;
-}
-
-.compact-tag-item:hover::before {
-    left: 100%;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
 }
 
 .compact-tag-item:hover {
-    background: linear-gradient(135deg, var(--accent), #4a8a8f);
+    background: var(--accent);
     color: white;
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(89, 150, 155, 0.25);
-    border-color: var(--accent);
+    transform: translateY(-2px);
 }
 
 .compact-tag-item.active {
-    background: linear-gradient(135deg, var(--accent), #4a8a8f);
+    background: var(--accent);
     color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.3);
-    border-color: var(--accent);
 }
 
 .tag-hidden {
@@ -1723,29 +1698,22 @@ p {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, var(--accent), #4a8a8f);
-    border: none;
-    color: white;
+    background: var(--background);
+    border: 3px solid var(--accent);
+    color: var(--text-primary);
     padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     cursor: pointer;
     font-family: 'Gloria Hallelujah', cursive;
     font-size: 0.9rem;
-    font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(89, 150, 155, 0.2);
-    text-transform: none;
-    letter-spacing: 0.3px;
+    box-shadow: var(--shadow);
 }
 
 .tag-expand-button:hover {
+    background: var(--accent);
+    color: white;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(89, 150, 155, 0.3);
-    background: linear-gradient(135deg, #4a8a8f, var(--accent));
-}
-
-.tag-expand-button:active {
-    transform: translateY(-1px);
 }
 
 .tag-expand-button .expand-icon {

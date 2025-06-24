@@ -121,6 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const collapseText = expandBtn.querySelector('.collapse-text');
         let isExpanded = false;
         
+        // Ensure hidden tags are properly hidden on load
+        hiddenTags.forEach(tag => {
+            tag.style.display = 'none';
+        });
+        
         // Hide expand button if there are 10 or fewer tags
         if (hiddenTags.length === 0) {
             expandBtn.style.display = 'none';

@@ -201,8 +201,7 @@ header {
     gap: 1rem;
     max-width: 300px;
     width: 90%;
-    border: 3px solid var(--accent);
-    min-height: 200px;
+    border: 2px solid var(--accent);
     position: relative;
     z-index: 10000;
 }

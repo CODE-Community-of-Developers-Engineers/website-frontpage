@@ -1,7 +1,16 @@
-// Events carousel functionality
-let currentEventsIndex = 0;
-let eventsData = [];
-let carouselInterval;
+// Events carousel functionality wrapped in IIFE to avoid global conflicts
+(function() {
+    'use strict';
+    
+    // Check if carousel is already initialized
+    if (window.carouselInitialized) {
+        return;
+    }
+    window.carouselInitialized = true;
+    
+    let currentEventsIndex = 0;
+    let eventsData = [];
+    let carouselInterval;
 
 function loadEventImages() {
     // Use the data from events-data.js if available, otherwise use fallback
@@ -144,15 +153,21 @@ function stopCarouselAutoAdvance() {
     }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initializeEventsCarousel();
-    startCarouselAutoAdvance();
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeEventsCarousel();
+        startCarouselAutoAdvance();
+        
+        // Pause auto-advance when user hovers over carousel
+        const carouselContainer = document.querySelector('.carousel-container');
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', stopCarouselAutoAdvance);
+            carouselContainer.addEventListener('mouseleave', startCarouselAutoAdvance);
+        }
+    });
+
+    // Expose necessary functions globally for onclick handlers
+    window.changeSlide = changeSlide;
+    window.currentSlide = currentSlide;
     
-    // Pause auto-advance when user hovers over carousel
-    const carouselContainer = document.querySelector('.carousel-container');
-    if (carouselContainer) {
-        carouselContainer.addEventListener('mouseenter', stopCarouselAutoAdvance);
-        carouselContainer.addEventListener('mouseleave', startCarouselAutoAdvance);
-    }
-});
+})(); // End IIFE

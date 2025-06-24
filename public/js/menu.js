@@ -8,20 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             e.stopPropagation();
             
-            console.log('Hamburger clicked, current state:', isMenuOpen);
-            
             if (!isMenuOpen) {
                 // Open menu
                 mobileNav.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 isMenuOpen = true;
-                console.log('Opening mobile menu');
             } else {
                 // Close menu
                 mobileNav.classList.remove('active');
                 document.body.style.overflow = '';
                 isMenuOpen = false;
-                console.log('Closing mobile menu');
             }
         });
         
@@ -31,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 mobileNav.classList.remove('active');
                 document.body.style.overflow = '';
                 isMenuOpen = false;
-                console.log('Closing menu via background click');
             }
         });
         

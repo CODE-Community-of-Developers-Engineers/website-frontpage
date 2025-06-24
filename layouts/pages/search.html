@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span style="background: ${item.type === 'blog' ? '#007acc' : '#666'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
                 </h3>
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: #666; font-size: 0.875rem;">
-                    <span>${new Date(item.date).toLocaleDateString()}</span>
+                    <span>${item.type === 'blog' ? 'Blog Post' : 'Page'}</span>
                     <span>by ${item.author}</span>
                     <span>${item.readingTime} min read</span>
                     ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}

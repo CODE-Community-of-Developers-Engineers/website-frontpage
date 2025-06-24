@@ -1338,6 +1338,17 @@ p {
 }
 
 .blog-sidebar {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+    backdrop-filter: blur(10px);
+}
+
+.blog-post-sidebar {
     background: var(--background-secondary);
     border: 2px solid var(--border-color);
     border-radius: var(--radius-lg);
@@ -1389,6 +1400,12 @@ p {
 }
 
 .sidebar-widget h3 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.blog-post-sidebar .sidebar-widget h3 {
     margin-bottom: 1rem;
     color: var(--text-primary);
     font-family: 'Gloria Hallelujah', cursive;

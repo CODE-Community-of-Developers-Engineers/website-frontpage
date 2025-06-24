@@ -897,28 +897,29 @@ p {
 
 .slide-content {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
     z-index: 2;
     text-align: center;
     color: white;
-    padding: 2rem;
+    padding: 1rem;
+    pointer-events: none;
 }
 
 .slide-content h3 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
     font-family: 'Gloria Hallelujah', cursive;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
 }
 
 .slide-content .event-date {
     font-size: 1.1rem;
     margin-bottom: 0;
     font-family: 'Vollkorn', serif;
-    opacity: 0.95;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+    opacity: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 
 .carousel-btn {

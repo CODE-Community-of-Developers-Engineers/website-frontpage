@@ -1015,6 +1015,35 @@ p {
     min-width: 0;
 }
 
+/* Blog Header Box */
+.blog-header-box {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.1);
+}
+
+.blog-main-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-family: 'Vollkorn', serif;
+    text-align: center;
+}
+
+.blog-main-description {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 /* Single blog post layout */
 .blog-layout .blog-post {
     background: rgba(255, 255, 255, 0.9);

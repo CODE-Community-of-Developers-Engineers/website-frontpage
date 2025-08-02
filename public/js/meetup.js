@@ -130,13 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             eventsContainer.appendChild(eventCard);
         }
-        
-        // Add a "View All" link
-        const viewAllLink = document.createElement('div');
-        viewAllLink.style.textAlign = 'center';
-        viewAllLink.style.marginTop = '15px';
-        viewAllLink.innerHTML = '<a href="https://www.meetup.com/code-coffee-philly/events/" target="_blank" style="color: #000000; text-decoration: none; font-weight: bold;">View All Events</a>';
-        eventsContainer.appendChild(viewAllLink);
+     
     }
     // Call the function to fetch and display events
     fetchMeetupEvents();

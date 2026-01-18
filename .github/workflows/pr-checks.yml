@@ -1,0 +1,80 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs when a new run is triggered
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.126.1'
+          extended: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate events data
+        run: node scripts/generate-events-data.js
+
+      - name: Validate events data
+        run: npm run validate:events
+
+      - name: Validate front matter
+        run: npm run validate:frontmatter
+
+      - name: Build Hugo site
+        run: hugo --gc --minify
+        env:
+          HUGO_ENVIRONMENT: production
+
+      - name: Check for build output
+        run: |
+          if [ ! -d "public" ]; then
+            echo "Error: public/ directory not created"
+            exit 1
+          fi
+          echo "Build output verified:"
+          ls -la public/
+
+      - name: Check internal links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --exclude-path './public/index.xml'
+            --exclude-path './public/blog/index.xml'
+            --exclude-path './public/tags/*/index.xml'
+            './public/**/*.html'
+          fail: true
+          jobSummary: true
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "## ✅ PR Checks Passed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All validation checks completed successfully:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ Events data generated and validated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ Front matter validated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ Hugo build succeeded" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ Internal links checked" >> $GITHUB_STEP_SUMMARY

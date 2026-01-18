@@ -62,7 +62,7 @@ jobs:
           args: >-
             --no-progress
             --offline
-            --base ./public
+            --root-dir ./public
             --exclude-path './public/index.xml'
             --exclude-path './public/blog/index.xml'
             --exclude-path './public/tags/*/index.xml'

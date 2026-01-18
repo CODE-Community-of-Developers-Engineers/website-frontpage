@@ -61,9 +61,12 @@ jobs:
         with:
           args: >-
             --no-progress
+            --offline
+            --base ./public
             --exclude-path './public/index.xml'
             --exclude-path './public/blog/index.xml'
             --exclude-path './public/tags/*/index.xml'
+            --exclude-path './public/sitemap.xml'
             './public/**/*.html'
           fail: true
           jobSummary: true

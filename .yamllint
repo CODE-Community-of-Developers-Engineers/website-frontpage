@@ -1,0 +1,66 @@
+# yamllint configuration for Hugo front matter validation
+# Documentation: https://yamllint.readthedocs.io/
+
+extends: default
+
+rules:
+  # Line length - disabled for Hugo
+  # Front matter often contains long URLs, descriptions, and paths
+  line-length: disable
+
+  # Truthy values - disabled for Hugo
+  # Hugo uses various truthy representations (yes/no, true/false, on/off)
+  truthy: disable
+
+  # Document start marker (---) - disabled
+  # Hugo front matter requires it, but standalone YAML files (config, workflows) don't
+  document-start: disable
+
+  # Document end marker (...) - not required for Hugo
+  document-end: disable
+
+  # Indentation - 2 spaces, consistent with Hugo conventions
+  indentation:
+    spaces: 2
+    indent-sequences: true
+
+  # Allow empty values (common in Hugo for optional fields)
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: false
+
+  # Comments - allow inline comments with space
+  comments:
+    require-starting-space: true
+    min-spaces-from-content: 1
+
+  # Braces - allow some flexibility
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+
+  # Brackets - for arrays in front matter
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 0
+
+  # Colons - standard spacing
+  colons:
+    max-spaces-before: 0
+    max-spaces-after: 1
+
+  # Commas - standard spacing
+  commas:
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
+
+# Ignore directories that shouldn't be linted
+ignore: |
+  themes/
+  public/
+  resources/
+  node_modules/
+  .git/
+  data/
+  attached_assets/

@@ -13,7 +13,7 @@ outputs:
 params:
   description: 'Your space to build.'
   author: 'Code & Coffee Philadelphia'
-  
+
 markup:
   goldmark:
     renderer:
@@ -45,8 +45,3 @@ menu:
     - name: "Community Fund"
       url: "https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia"
       weight: 70
-
-outputs:
-  home: ["HTML", "RSS"]
-  page: ["HTML"]
-  section: ["HTML", "RSS"]

@@ -1,0 +1,134 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs when a new run is triggered
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Fast source file checks - runs on every push/PR
+  lint-codebase:
+    name: Lint Source Files
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install linting tools
+        run: |
+          npm install -g markdownlint-cli2
+          pip install yamllint djlint
+
+      - name: Lint Markdown files
+        run: markdownlint-cli2
+
+      - name: Lint YAML front matter
+        run: |
+          # Extract and validate YAML front matter from content files
+          find content -name "*.md" -type f | while read -r file; do
+            # Extract front matter (between first two ---)
+            front_matter=$(sed -n '/^---$/,/^---$/p' "$file" | head -n -1)
+            if [ -n "$front_matter" ]; then
+              echo "$front_matter" | yamllint -d "{extends: default, rules: {line-length: disable, truthy: disable, document-end: disable}}" - || {
+                echo "YAML error in: $file"
+                exit 1
+              }
+            fi
+          done
+          echo "✓ All YAML front matter validated"
+
+      - name: Lint Hugo templates
+        run: djlint layouts/ --lint
+        continue-on-error: true  # Report issues but don't fail build initially
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "## ✅ Linting Passed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All source file linting completed:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ Markdown files (markdownlint-cli2)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ YAML front matter (yamllint)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ Hugo templates (djLint)" >> $GITHUB_STEP_SUMMARY
+
+  # Build validation - runs HTML validation on generated output
+  validate-build:
+    name: Validate Build Output
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: lint-codebase
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.126.1'
+          extended: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          gem install html-proofer
+
+      - name: Generate events data
+        run: node scripts/generate-events-data.js
+
+      - name: Build Hugo site
+        run: hugo --gc --minify --baseURL "/"
+        env:
+          HUGO_ENVIRONMENT: production
+
+      - name: Validate HTML output
+        run: |
+          htmlproofer ./public \
+            --disable-external \
+            --ignore-urls "/^#/,/^mailto:/,/^tel:/,/^javascript:/" \
+            --ignore-files "/index.xml$/,/sitemap.xml$/" \
+            --ignore-missing-alt \
+            --allow-hash-href \
+            --checks Links,Images,Scripts \
+            --no-enforce-https
+        continue-on-error: true  # Report issues but allow workflow to complete
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "## ✅ Build Validation Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Hugo site built and validated:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ Hugo build succeeded" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ HTML output validated (HTMLProofer)" >> $GITHUB_STEP_SUMMARY

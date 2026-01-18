@@ -116,3 +116,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Cache purge job - runs after successful deployment
+  purge-cache:
+    needs: deploy
+    uses: ./.github/workflows/cf_cache_purge.yml
+    secrets: inherit

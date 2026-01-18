@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             eventsContainer.appendChild(eventCard);
         }
-     
+        
     }
     // Call the function to fetch and display events
     fetchMeetupEvents();

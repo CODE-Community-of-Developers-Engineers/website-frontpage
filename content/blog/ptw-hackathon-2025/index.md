@@ -6,7 +6,7 @@ description: "Recap of our successful Philly Tech Week hackathon featuring AI, g
 topic: "events"
 tags: ["hackathon", "ai", "gaming", "startup", "innovation"]
 featured: true
-image: "hackathon-cover.jpg"
+image: "/images/blog/hackathon-cover.jpg"
 readingTime: 6
 ---
 

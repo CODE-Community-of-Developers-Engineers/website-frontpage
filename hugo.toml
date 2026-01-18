@@ -2,6 +2,7 @@ baseURL = 'https://www.codephilly.com/Code-And-Coffee-philidelphia-Website'
 languageCode = 'en-us'
 title = 'Code & Coffee Philadelphia'
 enableGitInfo = true
+ignoreFiles = ["README\\.md$"]
 
 [params]
 description = 'Your space to build.'

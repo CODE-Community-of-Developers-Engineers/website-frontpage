@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=5000&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building Your First REST API with Node.js and Express - Code &amp; Coffee Philadelphia</title>
@@ -153,17 +153,17 @@
 </span></span><span style="display:flex;"><span>npm install -D nodemon
 </span></span></code></pre></div><h2 id="project-structure">Project Structure</h2>
 <p>Let&rsquo;s organize our project with a clean structure:</p>
-<pre tabindex="0"><code>my-first-api/
-├── src/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   └── routes/
-├── .env
-├── .gitignore
-├── package.json
-└── server.js
-</code></pre><h2 id="creating-the-basic-server">Creating the Basic Server</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>my-first-api/
+</span></span><span style="display:flex;"><span>├── src/
+</span></span><span style="display:flex;"><span>│   ├── controllers/
+</span></span><span style="display:flex;"><span>│   ├── middleware/
+</span></span><span style="display:flex;"><span>│   ├── models/
+</span></span><span style="display:flex;"><span>│   └── routes/
+</span></span><span style="display:flex;"><span>├── .env
+</span></span><span style="display:flex;"><span>├── .gitignore
+</span></span><span style="display:flex;"><span>├── package.json
+</span></span><span style="display:flex;"><span>└── server.js
+</span></span></code></pre></div><h2 id="creating-the-basic-server">Creating the Basic Server</h2>
 <p>Start by creating the main server file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// server.js
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
@@ -500,15 +500,15 @@
 <div class="sidebar-widget">
     <h3>Share Article</h3>
     <div class="share-buttons">
-        <a href="https://twitter.com/intent/tweet?url=http%3a%2f%2flocalhost%3a1313%2fblog%2fexample-tech-tutorial%2f&text=Building%20Your%20First%20REST%20API%20with%20Node.js%20and%20Express" 
+        <a href="https://twitter.com/intent/tweet?url=http%3a%2f%2f127.0.0.1%3a5000%2fblog%2fexample-tech-tutorial%2f&text=Building%20Your%20First%20REST%20API%20with%20Node.js%20and%20Express" 
            target="_blank" class="share-btn twitter">
             <span>🐦</span> Twitter
         </a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3a%2f%2flocalhost%3a1313%2fblog%2fexample-tech-tutorial%2f" 
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3a%2f%2f127.0.0.1%3a5000%2fblog%2fexample-tech-tutorial%2f" 
            target="_blank" class="share-btn linkedin">
             <span>💼</span> LinkedIn
         </a>
-        <a href="mailto:?subject=Building%20Your%20First%20REST%20API%20with%20Node.js%20and%20Express&body=Check out this article: http%3a%2f%2flocalhost%3a1313%2fblog%2fexample-tech-tutorial%2f" 
+        <a href="mailto:?subject=Building%20Your%20First%20REST%20API%20with%20Node.js%20and%20Express&body=Check out this article: http%3a%2f%2f127.0.0.1%3a5000%2fblog%2fexample-tech-tutorial%2f" 
            class="share-btn email">
             <span>📧</span> Email
         </a>
@@ -531,13 +531,6 @@
             <a href="/blog/ptw-hackathon-2025/" class="recent-post-title">Philly Tech Week Innovation Hackathon 2025</a>
             <div class="recent-post-meta">
                 May 10, 2025
-            </div>
-        </div>
-        
-        <div class="recent-post">
-            <a href="/blog/readme/" class="recent-post-title"></a>
-            <div class="recent-post-meta">
-                Jan 1, 0001
             </div>
         </div>
         

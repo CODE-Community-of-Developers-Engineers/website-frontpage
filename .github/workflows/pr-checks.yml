@@ -62,7 +62,7 @@ jobs:
           args: >-
             --no-progress
             --offline
-            --root-dir ./public
+            --root-dir ${{ github.workspace }}/public
             --exclude-path './public/index.xml'
             --exclude-path './public/blog/index.xml'
             --exclude-path './public/tags/*/index.xml'

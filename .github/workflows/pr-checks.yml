@@ -67,6 +67,9 @@ jobs:
             --exclude-path './public/blog/index.xml'
             --exclude-path './public/tags/*/index.xml'
             --exclude-path './public/sitemap.xml'
+            --exclude '.*favicon\.ico$'
+            --exclude '.*-cover\.jpg$'
+            --exclude '.*hero-community\.jpg$'
             './public/**/*.html'
           fail: true
           jobSummary: true

@@ -1,6 +1,13 @@
+# macOS
 .DS_Store
-public/.DS_Store
-public/.DS_Store
-public/images/.DS_Store
+*/.DS_Store
+
+# Node.js
+node_modules/
+
+# Hugo build output
+public/
+
+# Temporary files
 diff_output.txt
-.DS_Store
+*.log

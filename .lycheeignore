@@ -1,0 +1,35 @@
+# Lychee Link Checker Ignore File
+# These URLs are excluded from link checking to avoid false positives
+
+# External services that may rate-limit or block CI bots
+https://www.meetup.com/*
+https://meetup.com/*
+https://api.allorigins.win/*
+https://tally.so/*
+https://nol-kky-shop.fourthwall.com/*
+https://hcb.hackclub.com/*
+
+# Social media links (often block automated requests)
+https://twitter.com/*
+https://x.com/*
+https://linkedin.com/*
+https://www.linkedin.com/*
+
+# Google services (require authentication or block bots)
+https://fonts.googleapis.com/*
+https://fonts.gstatic.com/*
+
+# CDN resources (always available, no need to check)
+https://cdn.jsdelivr.net/*
+https://cdnjs.cloudflare.com/*
+
+# Localhost URLs in documentation
+http://localhost:*
+http://127.0.0.1:*
+
+# GitHub API and raw content (rate limited)
+https://api.github.com/*
+https://raw.githubusercontent.com/*
+
+# Mail links
+mailto:*

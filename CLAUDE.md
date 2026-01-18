@@ -82,3 +82,105 @@ image: "/images/post-image.jpg"
 
 - **hugo.yml** - Deploys to GitHub Pages on push to main
 - **cf_cache_purge.yml** - Manual Cloudflare cache purge (requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID` secrets)
+
+## Coding Principles
+
+### LET IT CRASH
+- Log errors to console and let components fail visibly rather than silently degrading
+- Do not hide failures with empty catch blocks or silent fallbacks
+- Prefer clear error states over graceful degradation - users should know when something is broken
+
+### SOLID (Single Responsibility Focus)
+- Each function should do one thing and do it well
+- Each JS module should have a single, clear purpose (e.g., `menu.js` handles only navigation, `carousel.js` handles only the carousel)
+- Extract new functionality into separate functions/modules rather than expanding existing ones
+
+### KISS (Keep It Simple, Stupid)
+- Vanilla JavaScript only - no frameworks or unnecessary dependencies
+- Prefer readable, straightforward code over clever solutions
+- Don't abstract until you have concrete repetition (no premature abstractions)
+- Use the simplest approach that works
+
+### Pure Functions
+- Separate pure data transformations from DOM operations where reasonable
+- Pure functions: take inputs, return outputs, no side effects
+- Keep DOM manipulation at the boundaries (event handlers, render functions)
+- Example: Extract date formatting, data filtering, or text transformations into pure helper functions
+
+## Hugo Best Practices
+
+### Directory Structure
+| Directory | Purpose |
+|-----------|---------|
+| `assets/` | Resources processed through Hugo Pipes (CSS, Sass, JS) |
+| `content/` | Markdown content files organized as page bundles |
+| `data/` | Data files (JSON, TOML, YAML) for templates |
+| `layouts/` | Templates that transform content |
+| `static/` | Files copied verbatim (favicons, images, pre-built JS) |
+
+**Key Rules:**
+- Use `assets/` for CSS/JS needing processing; `static/` for files copied as-is
+- Never commit `public/` or `resources/` directories
+
+### Page Bundles
+- **Leaf bundles** (`index.md`): Single pages with their own resources
+- **Branch bundles** (`_index.md`): List pages that can have children
+- Keep images/resources with their content in the same bundle folder
+
+### Templates
+
+**Partials Best Practices:**
+- Use `{{ partialCached "name.html" . }}` for repeated partials (sidebars, menus)
+- Pass minimal context - only what the partial needs
+- Partials can return values for data transformations
+
+**Template Lookup Order (most to least specific):**
+1. Kind → Layout → Output format → Language → Type → Section
+2. Use `type` and `layout` in front matter for custom templates
+
+### Hugo Pipes (Asset Processing)
+```html
+{{ $css := resources.Get "css/main.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+```
+- Chain operations for efficiency (Hugo caches entire pipelines)
+- Use `resources.Fingerprint` for cache-busting in production
+
+### Image Processing
+```html
+{{ $img := .Resources.Get "hero.jpg" }}
+{{ $resized := $img.Resize "800x webp q85" }}
+<img src="{{ $resized.RelPermalink }}" alt="...">
+```
+- Methods: `Resize`, `Fit`, `Fill`, `Crop`, `Filter`
+- Options: dimensions, format (`webp`, `jpg`), quality (`q85`), anchor (`Smart`)
+- Cache processed images in `resources/` for faster CI builds
+
+### Taxonomies
+- Default: `tags` and `categories`
+- Assign in front matter: `tags: ["javascript", "hugo"]`
+- Hugo auto-generates taxonomy and term pages
+- Use `[taxonomy]_weight` for custom sort order per term
+
+### Multilingual Sites
+- Translation by filename: `about.en.md`, `about.fr.md`
+- Translation by directory: separate `contentDir` per language
+- Use `translationKey` in front matter to link non-matching pages
+- Access translations: `.IsTranslated`, `.Translations`, `.AllTranslations`
+
+### Performance
+- Run `hugo --templateMetrics` to profile slow templates
+- Use `partialCached` for any partial with 100% cache potential
+- Add Hugo to antivirus exclusions (can slow builds 400%+)
+- Production: `hugo --gc --minify --cleanDestinationDir`
+
+### Common Template Functions
+```html
+{{ if .Params.featured }}...{{ end }}           # Conditional
+{{ with .Params.author }}{{ . }}{{ end }}       # Conditional + rebind
+{{ range .Pages }}...{{ end }}                  # Loop
+{{ partial "header.html" . }}                   # Include partial
+{{ where .Pages "Params.featured" true }}       # Filter
+{{ sort .Pages "Date" "desc" }}                 # Sort
+{{ .Date.Format "January 2, 2006" }}            # Date format
+```

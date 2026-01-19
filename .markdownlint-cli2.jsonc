@@ -1,0 +1,58 @@
+{
+  // Markdownlint configuration for Hugo project
+  // Documentation: https://github.com/DavidAnson/markdownlint-cli2
+
+  "config": {
+    // MD001: Heading levels should only increment by one level at a time
+    "MD001": true,
+
+    // MD003: Heading style - use ATX style (#)
+    "MD003": { "style": "atx" },
+
+    // MD009: No trailing spaces
+    "MD009": true,
+
+    // MD010: No hard tabs (use spaces)
+    "MD010": true,
+
+    // MD012: No multiple consecutive blank lines
+    "MD012": { "maximum": 2 },
+
+    // MD013: Line length - DISABLED for Hugo
+    // Long links, shortcodes, and embedded content make this impractical
+    "MD013": false,
+
+    // MD024: No duplicate headings (allow in different sections)
+    "MD024": { "siblings_only": true },
+
+    // MD033: Inline HTML - DISABLED for Hugo
+    // Hugo shortcodes and raw HTML blocks are common
+    "MD033": false,
+
+    // MD034: Bare URLs - allow them (common in Hugo content)
+    "MD034": false,
+
+    // MD041: First line should be heading - DISABLED for Hugo
+    // Hugo uses front matter for titles, not h1 in content
+    "MD041": false,
+
+    // MD046: Code block style - fenced with backticks
+    "MD046": { "style": "fenced" },
+
+    // MD047: Files should end with a single newline
+    "MD047": true
+  },
+
+  // Files to lint
+  "globs": [
+    "content/**/*.md"
+  ],
+
+  // Files to ignore
+  "ignores": [
+    "public/**",
+    "themes/**",
+    "resources/**",
+    "node_modules/**"
+  ]
+}

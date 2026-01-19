@@ -15,6 +15,7 @@ Building REST APIs is a fundamental skill for modern web developers. In this tut
 ## What You'll Learn
 
 By the end of this tutorial, you'll have built a functional REST API that can:
+
 - Handle GET, POST, PUT, and DELETE requests
 - Manage data with proper error handling
 - Implement middleware for logging and validation
@@ -25,6 +26,7 @@ By the end of this tutorial, you'll have built a functional REST API that can:
 ## Prerequisites
 
 Before we start, make sure you have:
+
 - Node.js installed (version 14 or higher)
 - Basic understanding of JavaScript
 - A text editor (VS Code recommended)
@@ -46,7 +48,7 @@ npm install -D nodemon
 
 Let's organize our project with a clean structure:
 
-```
+```text
 my-first-api/
 ├── src/
 │   ├── controllers/

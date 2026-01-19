@@ -1,67 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Code &amp; Coffee Philadelphia</title>
-    <link>http://127.0.0.1:5000/</link>
-    <description>Recent content on Code &amp; Coffee Philadelphia</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <atom:link href="http://127.0.0.1:5000/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Getting Started with Code &amp; Coffee Philadelphia</title>
-      <link>http://127.0.0.1:5000/blog/getting-started-with-code-coffee/</link>
-      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/blog/getting-started-with-code-coffee/</guid>
-      <description>&lt;p&gt;Welcome to Code &amp;amp; Coffee Philadelphia! Whether you&amp;rsquo;re a seasoned developer, a designer, or someone just starting their tech journey, our community has something for everyone.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-were-all-about&#34;&gt;What We&amp;rsquo;re All About&lt;/h2&gt;&#xA;&lt;p&gt;Code &amp;amp; Coffee Philadelphia is more than just a meetup group – we&amp;rsquo;re a thriving community of tech enthusiasts who believe in the power of collaboration, learning, and good coffee. Our mission is to create an inclusive space where people can share ideas, work on projects, and grow their skills together.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Building Your First REST API with Node.js and Express</title>
-      <link>http://127.0.0.1:5000/blog/example-tech-tutorial/</link>
-      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/blog/example-tech-tutorial/</guid>
-      <description>&lt;p&gt;Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&amp;rsquo;ll create a complete REST API using Node.js and Express, perfect for beginners who want to understand backend development.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-youll-learn&#34;&gt;What You&amp;rsquo;ll Learn&lt;/h2&gt;&#xA;&lt;p&gt;By the end of this tutorial, you&amp;rsquo;ll have built a functional REST API that can:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Handle GET, POST, PUT, and DELETE requests&lt;/li&gt;&#xA;&lt;li&gt;Manage data with proper error handling&lt;/li&gt;&#xA;&lt;li&gt;Implement middleware for logging and validation&lt;/li&gt;&#xA;&lt;li&gt;Structure your project for scalability&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>Philly Tech Week Innovation Hackathon 2025</title>
-      <link>http://127.0.0.1:5000/blog/ptw-hackathon-2025/</link>
-      <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/blog/ptw-hackathon-2025/</guid>
-      <description>&lt;p&gt;Our Philly Tech Week Innovation Hackathon 2025 was an incredible success! Over three days, developers, designers, and entrepreneurs came together to build innovative solutions and push the boundaries of technology.&lt;/p&gt;&#xA;&lt;h2 id=&#34;event-highlights&#34;&gt;Event Highlights&lt;/h2&gt;&#xA;&lt;p&gt;The hackathon brought together Philadelphia&amp;rsquo;s brightest tech minds to collaborate on cutting-edge projects. With tracks focused on AI, generative gaming systems, and startup-oriented solutions, participants had the opportunity to work on truly innovative ideas.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Event Sponsorship Request</title>
-      <link>http://127.0.0.1:5000/event-sponsorship/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/event-sponsorship/</guid>
-      <description>&lt;p&gt;Interested in sponsoring Code &amp;amp; Coffee Philadelphia events? Your support helps us create meaningful experiences for our tech community while giving your organization visibility among talented developers, designers, and tech professionals.&lt;/p&gt;&#xA;&lt;p&gt;Fill out the form below to inquire about sponsorship opportunities, and we&amp;rsquo;ll get back to you with options that align with your goals and budget.&lt;/p&gt;&#xA;&lt;div class=&#34;form-container&#34; style=&#34;background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;&#34;&gt;&#xA;  &lt;div class=&#34;deftform&#34; data-form-id=&#34;ec22759c-6efb-47b0-9121-714f00a2c264&#34; data-form-width=&#34;100%&#34; data-form-align=&#34;center&#34; data-form-auto-height=&#34;1&#34;&gt;&lt;/div&gt;&lt;script src=&#34;https://cdn.deftform.com/embed.js&#34;&gt;&lt;/script&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Our Links</title>
-      <link>http://127.0.0.1:5000/links/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/links/</guid>
-      <description>&lt;p&gt;Connect with Code &amp;amp; Coffee Philadelphia across the web:&lt;/p&gt;&#xA;&lt;div class=&#34;links-container&#34;&gt;&#xA;&lt;div class=&#34;link-item&#34;&gt;&#xA;&lt;h3&gt;📅 Meetup Events&lt;/h3&gt;&#xA;&lt;p&gt;RSVP for our weekly coding sessions and community events&lt;/p&gt;&#xA;&lt;a href=&#34;https://www.meetup.com/code-coffee-philly/&#34; target=&#34;_blank&#34; class=&#34;btn&#34;&gt;Visit Meetup&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;link-item&#34;&gt;&#xA;&lt;h3&gt;💝 Community Fund&lt;/h3&gt;&#xA;&lt;p&gt;Support our events and activities through Hack Club Bank&lt;/p&gt;&#xA;&lt;a href=&#34;https://bank.hackclub.com/donations/start/code-coffee-philadelphia&#34; target=&#34;_blank&#34; class=&#34;btn&#34;&gt;Donate Now&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;link-item&#34;&gt;&#xA;&lt;h3&gt;🛍️ Merch Store&lt;/h3&gt;&#xA;&lt;p&gt;Get Code &amp; Coffee branded gear and merchandise&lt;/p&gt;&#xA;&lt;a href=&#34;https://nol-kky-shop.fourthwall.com/&#34; target=&#34;_blank&#34; class=&#34;btn&#34;&gt;Shop Now&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;link-item&#34;&gt;&#xA;&lt;h3&gt;💼 LinkedIn&lt;/h3&gt;&#xA;&lt;p&gt;Professional networking and company updates&lt;/p&gt;&#xA;&lt;a href=&#34;https://www.linkedin.com/company/code-coffee-philadelphia&#34; target=&#34;_blank&#34; class=&#34;btn&#34;&gt;Follow Us&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;link-item&#34;&gt;&#xA;&lt;h3&gt;📸 Instagram&lt;/h3&gt;&#xA;&lt;p&gt;Photos and stories from our events and community&lt;/p&gt;&#xA;&lt;a href=&#34;https://www.instagram.com/philly_codes/&#34; target=&#34;_blank&#34; class=&#34;btn&#34;&gt;Follow Us&lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Project Request</title>
-      <link>http://127.0.0.1:5000/project-request/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/project-request/</guid>
-      <description>&lt;p&gt;Got a coding challenge you&amp;rsquo;re stuck on? Working on an exciting project that could use some extra hands? Code &amp;amp; Coffee Philadelphia is here to help! Our community is full of talented developers, designers, and tech enthusiasts who love collaborating and sharing knowledge.&lt;/p&gt;&#xA;&lt;p&gt;Whether you&amp;rsquo;re a beginner looking for guidance or an experienced developer seeking feedback, we welcome project requests of all kinds. From debugging sessions to architectural advice, our community members are eager to contribute their expertise.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Search</title>
-      <link>http://127.0.0.1:5000/pages/search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/pages/search/</guid>
-      <description>&lt;p&gt;Search through our blog posts, community updates, and resources to find exactly what you&amp;rsquo;re looking for.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Tech Talent Matchboard</title>
-      <link>http://127.0.0.1:5000/talent-matchboard/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/talent-matchboard/</guid>
-      <description>&lt;p&gt;Looking to connect with talented developers, designers, and tech professionals in Philadelphia? Or maybe you&amp;rsquo;re seeking new opportunities in the local tech scene? Our Tech Talent Matchboard is designed to bring together the best minds in Philly&amp;rsquo;s growing technology ecosystem.&lt;/p&gt;&#xA;&lt;p&gt;Whether you&amp;rsquo;re a company looking for skilled professionals, a freelancer seeking projects, or a developer wanting to network and collaborate, this platform helps facilitate meaningful connections within our community.&lt;/p&gt;&#xA;&lt;div class=&#34;form-container&#34; style=&#34;background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;&#34;&gt;&#xA;&lt;div class=&#34;deftform&#34; data-form-id=&#34;a58b25c5-b8bd-44ea-be97-033d989f9e21&#34; data-form-width=&#34;100%&#34; data-form-align=&#34;center&#34; data-form-auto-height=&#34;1&#34;&gt;&lt;/div&gt;&lt;script src=&#34;https://cdn.deftform.com/embed.js&#34;&gt;&lt;/script&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code &amp; Coffee Philadelphia</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/</link><description>Recent content on Code &amp; Coffee Philadelphia</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting Started with Code &amp; Coffee Philadelphia</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/getting-started-with-code-coffee/</link><pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/getting-started-with-code-coffee/</guid><description>&lt;p&gt;Welcome to Code &amp;amp; Coffee Philadelphia! Whether you&amp;rsquo;re a seasoned developer, a designer, or someone just starting their tech journey, our community has something for everyone.&lt;/p&gt;
+&lt;h2 id="what-were-all-about"&gt;What We&amp;rsquo;re All About&lt;/h2&gt;
+&lt;p&gt;Code &amp;amp; Coffee Philadelphia is more than just a meetup group – we&amp;rsquo;re a thriving community of tech enthusiasts who believe in the power of collaboration, learning, and good coffee. Our mission is to create an inclusive space where people can share ideas, work on projects, and grow their skills together.&lt;/p&gt;</description></item><item><title>Building Your First REST API with Node.js and Express</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/example-tech-tutorial/</link><pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/example-tech-tutorial/</guid><description>&lt;p&gt;Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&amp;rsquo;ll create a complete REST API using Node.js and Express, perfect for beginners who want to understand backend development.&lt;/p&gt;
+&lt;h2 id="what-youll-learn"&gt;What You&amp;rsquo;ll Learn&lt;/h2&gt;
+&lt;p&gt;By the end of this tutorial, you&amp;rsquo;ll have built a functional REST API that can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Handle GET, POST, PUT, and DELETE requests&lt;/li&gt;
+&lt;li&gt;Manage data with proper error handling&lt;/li&gt;
+&lt;li&gt;Implement middleware for logging and validation&lt;/li&gt;
+&lt;li&gt;Structure your project for scalability&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Philly Tech Week Innovation Hackathon 2025</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/ptw-hackathon-2025/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/ptw-hackathon-2025/</guid><description>&lt;p&gt;Our Philly Tech Week Innovation Hackathon 2025 was an incredible success! Over three days, developers, designers, and entrepreneurs came together to build innovative solutions and push the boundaries of technology.&lt;/p&gt;
+&lt;h2 id="event-highlights"&gt;Event Highlights&lt;/h2&gt;
+&lt;p&gt;The hackathon brought together Philadelphia&amp;rsquo;s brightest tech minds to collaborate on cutting-edge projects. With tracks focused on AI, generative gaming systems, and startup-oriented solutions, participants had the opportunity to work on truly innovative ideas.&lt;/p&gt;</description></item><item><title>Event Sponsorship Request</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/event-sponsorship/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/event-sponsorship/</guid><description>&lt;p&gt;Interested in sponsoring Code &amp;amp; Coffee Philadelphia events? Your support helps us create meaningful experiences for our tech community while giving your organization visibility among talented developers, designers, and tech professionals.&lt;/p&gt;
+&lt;p&gt;Fill out the form below to inquire about sponsorship opportunities, and we&amp;rsquo;ll get back to you with options that align with your goals and budget.&lt;/p&gt;
+&lt;div class="form-container" style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;"&gt;
+ &lt;div class="deftform" data-form-id="ec22759c-6efb-47b0-9121-714f00a2c264" data-form-width="100%" data-form-align="center" data-form-auto-height="1"&gt;&lt;/div&gt;&lt;script src="https://cdn.deftform.com/embed.js"&gt;&lt;/script&gt;
+&lt;/div&gt;</description></item><item><title>Our Links</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/links/</guid><description>&lt;p&gt;Connect with Code &amp;amp; Coffee Philadelphia across the web:&lt;/p&gt;
+&lt;div class="links-container"&gt;
+&lt;div class="link-item"&gt;
+&lt;h3&gt;📅 Meetup Events&lt;/h3&gt;
+&lt;p&gt;RSVP for our weekly coding sessions and community events&lt;/p&gt;
+&lt;a href="https://www.meetup.com/code-coffee-philly/" target="_blank" class="btn"&gt;Visit Meetup&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="link-item"&gt;
+&lt;h3&gt;💝 Community Fund&lt;/h3&gt;
+&lt;p&gt;Support our events and activities through Hack Club Bank&lt;/p&gt;
+&lt;a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" target="_blank" class="btn"&gt;Donate Now&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="link-item"&gt;
+&lt;h3&gt;🛍️ Merch Store&lt;/h3&gt;
+&lt;p&gt;Get Code &amp; Coffee branded gear and merchandise&lt;/p&gt;
+&lt;a href="https://nol-kky-shop.fourthwall.com/" target="_blank" class="btn"&gt;Shop Now&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="link-item"&gt;
+&lt;h3&gt;💼 LinkedIn&lt;/h3&gt;
+&lt;p&gt;Professional networking and company updates&lt;/p&gt;
+&lt;a href="https://www.linkedin.com/company/code-coffee-philadelphia" target="_blank" class="btn"&gt;Follow Us&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="link-item"&gt;
+&lt;h3&gt;📸 Instagram&lt;/h3&gt;
+&lt;p&gt;Photos and stories from our events and community&lt;/p&gt;
+&lt;a href="https://www.instagram.com/philly_codes/" target="_blank" class="btn"&gt;Follow Us&lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>Project Request</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/project-request/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/project-request/</guid><description>&lt;p&gt;Got a coding challenge you&amp;rsquo;re stuck on? Working on an exciting project that could use some extra hands? Code &amp;amp; Coffee Philadelphia is here to help! Our community is full of talented developers, designers, and tech enthusiasts who love collaborating and sharing knowledge.&lt;/p&gt;
+&lt;p&gt;Whether you&amp;rsquo;re a beginner looking for guidance or an experienced developer seeking feedback, we welcome project requests of all kinds. From debugging sessions to architectural advice, our community members are eager to contribute their expertise.&lt;/p&gt;</description></item><item><title>Search</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/pages/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/pages/search/</guid><description>&lt;p&gt;Search through our blog posts, community updates, and resources to find exactly what you&amp;rsquo;re looking for.&lt;/p&gt;</description></item><item><title>Tech Talent Matchboard</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/talent-matchboard/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/talent-matchboard/</guid><description>&lt;p&gt;Looking to connect with talented developers, designers, and tech professionals in Philadelphia? Or maybe you&amp;rsquo;re seeking new opportunities in the local tech scene? Our Tech Talent Matchboard is designed to bring together the best minds in Philly&amp;rsquo;s growing technology ecosystem.&lt;/p&gt;
+&lt;p&gt;Whether you&amp;rsquo;re a company looking for skilled professionals, a freelancer seeking projects, or a developer wanting to network and collaborate, this platform helps facilitate meaningful connections within our community.&lt;/p&gt;
+&lt;div class="form-container" style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;"&gt;
+&lt;div class="deftform" data-form-id="a58b25c5-b8bd-44ea-be97-033d989f9e21" data-form-width="100%" data-form-align="center" data-form-auto-height="1"&gt;&lt;/div&gt;&lt;script src="https://cdn.deftform.com/embed.js"&gt;&lt;/script&gt;
+&lt;/div&gt;</description></item></channel></rss>

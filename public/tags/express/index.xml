@@ -1,19 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Express on Code &amp; Coffee Philadelphia</title>
-    <link>http://127.0.0.1:5000/tags/express/</link>
-    <description>Recent content in Express on Code &amp; Coffee Philadelphia</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 18 Jan 2026 17:16:48 -0500</lastBuildDate>
-    <atom:link href="http://127.0.0.1:5000/tags/express/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Building Your First REST API with Node.js and Express</title>
-      <link>http://127.0.0.1:5000/blog/example-tech-tutorial/</link>
-      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:5000/blog/example-tech-tutorial/</guid>
-      <description>&lt;p&gt;Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&amp;rsquo;ll create a complete REST API using Node.js and Express, perfect for beginners who want to understand backend development.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-youll-learn&#34;&gt;What You&amp;rsquo;ll Learn&lt;/h2&gt;&#xA;&lt;p&gt;By the end of this tutorial, you&amp;rsquo;ll have built a functional REST API that can:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Handle GET, POST, PUT, and DELETE requests&lt;/li&gt;&#xA;&lt;li&gt;Manage data with proper error handling&lt;/li&gt;&#xA;&lt;li&gt;Implement middleware for logging and validation&lt;/li&gt;&#xA;&lt;li&gt;Structure your project for scalability&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Express on Code &amp; Coffee Philadelphia</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/tags/express/</link><description>Recent content in Express on Code &amp; Coffee Philadelphia</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 18 Jan 2026 17:16:48 -0500</lastBuildDate><atom:link href="https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/tags/express/index.xml" rel="self" type="application/rss+xml"/><item><title>Building Your First REST API with Node.js and Express</title><link>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/example-tech-tutorial/</link><pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate><guid>https://www.codephilly.com/Code-And-Coffee-philidelphia-Website/blog/example-tech-tutorial/</guid><description>&lt;p&gt;Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&amp;rsquo;ll create a complete REST API using Node.js and Express, perfect for beginners who want to understand backend development.&lt;/p&gt;
+&lt;h2 id="what-youll-learn"&gt;What You&amp;rsquo;ll Learn&lt;/h2&gt;
+&lt;p&gt;By the end of this tutorial, you&amp;rsquo;ll have built a functional REST API that can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Handle GET, POST, PUT, and DELETE requests&lt;/li&gt;
+&lt;li&gt;Manage data with proper error handling&lt;/li&gt;
+&lt;li&gt;Implement middleware for logging and validation&lt;/li&gt;
+&lt;li&gt;Structure your project for scalability&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

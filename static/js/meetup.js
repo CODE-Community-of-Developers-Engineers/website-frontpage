@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.text();
             })
             .then(html => {
-                // Verify we got actual Meetup HTML, not an error page
-                if (!html.includes('meetup') && !html.includes('Meetup')) {
-                    throw new Error('Response does not appear to be from Meetup');
+                // Verify we got actual Meetup HTML with JSON-LD data we can parse
+                if (!html.includes('application/ld+json')) {
+                    throw new Error('Response does not contain expected JSON-LD data');
                 }
                 handleData(html);
             })
@@ -48,14 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Try next proxy
                 tryProxies(proxyIndex + 1);
             });
-    }
-
-    // Handle fetch response
-    function handleResponse(response) {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
     }
 
     // Handle errors

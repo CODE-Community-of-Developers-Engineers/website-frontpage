@@ -1,409 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=5000&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search - Code &amp; Coffee Philadelphia</title>
-    <meta name="description" content="Search through all Code &amp; Coffee Philadelphia content">
-    
-    
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="/css/modern.css">
-    
-    
-</head>
-<body>
-    <header>
-    <div class="header-container">
-        <a href="/" class="logo">
-            <img src="/media/logo.png" alt="Code & Coffee Philadelphia">
-            <span class="logo-text">
-                <span class="logo-main">Code & Coffee</span>
-                <span class="logo-location">Philadelphia</span>
-            </span>
-        </a>
-        
-        <nav class="nav-desktop">
-            <a href="/blog" class="nav-link">Blog</a>
-            <a href="/pages/search" class="nav-link">Search</a>
-            <a href="/project-request" class="nav-link">Get Help</a>
-            <a href="/event-sponsorship" class="nav-link">Sponsor</a>
-            <a href="/links" class="nav-link">Links</a>
-            <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
-            <a href="https://nol-kky-shop.fourthwall.com/" class="nav-link">Merch</a>
-            <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" class="nav-link donate">Donate</a>
-        </nav>
-        
-        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
-    </div>
-</header>
-
-<div class="mobile-nav" id="mobile-nav">
-    <div class="mobile-nav-content">
-        <a href="/blog" class="nav-link">Blog</a>
-        <a href="/pages/search" class="nav-link">Search</a>
-        <a href="/project-request" class="nav-link">Get Help</a>
-        <a href="/talent-matchboard" class="nav-link">Jobs</a>
-        <a href="/event-sponsorship" class="nav-link">Sponsor</a>
-        <a href="/links" class="nav-link">Links</a>
-        <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
-        <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate">Donate</a>
-    </div>
-</div>
-
-    
-    <main class="main-content">
-        
-<div class="container container-narrow" style="padding: 3rem 1.5rem;">
-    <div class="blog-post">
-        <h1>Search</h1>
-        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Search through all Code &amp; Coffee Philadelphia content</p>
-        
-        
-        <div style="margin-bottom: 3rem;">
-            <div style="position: relative; margin-bottom: 1.5rem;">
-                <input type="text" id="search-input" placeholder="Search blog posts, pages, tutorials, and community content..." 
-                       style="width: 100%; padding: 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-lg); font-size: 1.1rem; background: var(--background); color: var(--text-primary);">
-            </div>
-            
-            
-            <div style="margin-bottom: 2rem;">
-                <div id="search-stats" style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem; display: none;"></div>
-                <h3 style="margin-bottom: 1rem; font-size: 1rem;">Quick Filters</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    <button class="tag search-filter active" data-filter="all">All Content</button>
-                    <button class="tag search-filter" data-filter="tutorial">Tutorials</button>
-                    <button class="tag search-filter" data-filter="community">Community</button>
-                    <button class="tag search-filter" data-filter="events">Events</button>
-                    <button class="tag search-filter" data-filter="javascript">JavaScript</button>
-                    <button class="tag search-filter" data-filter="beginners">Beginners</button>
-                    <button class="tag search-filter" data-filter="nodejs">Node.js</button>
-                    <button class="tag search-filter" data-filter="ai">AI/ML</button>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div id="search-results">
-            <div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;">
-                <h3>Start typing to search</h3>
-                <p>Search through our blog posts, pages, tutorials, and community content.</p>
-                <div id="content-summary" style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; max-width: 600px; margin: 2rem auto 0;"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    let searchIndex = [];
-    let isLoading = true;
-    
-    
-    async function buildSearchIndex() {
-        try {
-            console.log('Fetching search index...');
-            const response = await fetch('/search.json');
-            if (!response.ok) {
-                throw new Error('Failed to fetch search index');
-            }
-            
-            const content = await response.json();
-            searchIndex = content.filter(item => item.title && item.title.trim());
-            isLoading = false;
-            
-            console.log(`Search index loaded with ${searchIndex.length} items (${searchIndex.filter(i => i.type === 'blog').length} blog posts, ${searchIndex.filter(i => i.type === 'page').length} pages)`);
-            console.log('Sample items:', searchIndex.slice(0, 3).map(i => ({ title: i.title, type: i.type, url: i.url })));
-            
-            
-            console.log('All URLs in search index:');
-            searchIndex.forEach((item, index) => {
-                if (index < 10) {
-                    console.log(`${index + 1}. "${item.title}" -> ${item.url}`);
-                }
-            });
-            
-        } catch (error) {
-            console.error('Error loading search index:', error);
-            isLoading = false;
-        }
-    }
-    
-    
-    function performSearch(query, filter = 'all') {
-        if (isLoading) {
-            console.log('Search index still loading...');
-            return [];
-        }
-        
-        const searchQuery = query.toLowerCase().trim();
-        if (!searchQuery) return [];
-        
-        console.log('Performing search for:', searchQuery, 'with filter:', filter);
-        
-        const results = searchIndex.filter(item => {
-            
-            if (filter !== 'all') {
-                if (filter === 'tutorial' || filter === 'community' || filter === 'events') {
-                    
-                    if (item.topic !== filter) return false;
-                } else {
-                    
-                    if (!Array.isArray(item.tags) || !item.tags.includes(filter)) return false;
-                }
-            }
-            
-            
-            const searchableText = [
-                item.title,
-                item.description,
-                item.content,
-                item.author,
-                item.topic,
-                ...(Array.isArray(item.tags) ? item.tags : [])
-            ].join(' ').toLowerCase();
-            
-            const matches = searchableText.includes(searchQuery);
-            if (matches) {
-                console.log('Match found:', item.title, item.type);
-            }
-            return matches;
-        });
-        
-        console.log('Filtered results:', results.length);
-        
-        return results.sort((a, b) => {
-            
-            const aTitle = a.title.toLowerCase().includes(searchQuery);
-            const bTitle = b.title.toLowerCase().includes(searchQuery);
-            
-            if (aTitle && !bTitle) return -1;
-            if (!aTitle && bTitle) return 1;
-            if (a.featured && !b.featured) return -1;
-            if (!a.featured && b.featured) return 1;
-            if (a.type === 'blog' && b.type === 'page') return -1;
-            if (a.type === 'page' && b.type === 'blog') return 1;
-            
-            return new Date(b.date) - new Date(a.date);
-        });
-    }
-    
-    
-    function renderResults(results, query) {
-        const resultsContainer = document.getElementById('search-results');
-        const statsContainer = document.getElementById('search-stats');
-        
-        if (!query.trim()) {
-            resultsContainer.innerHTML = `
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Search - Code & Coffee Philadelphia</title><meta name=description content="Search through all Code & Coffee Philadelphia content"><link rel=icon type=image/x-icon href=/favicon.ico><link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css integrity=sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css><link rel=stylesheet href=/css/modern.css></head><body><header><div class=header-container><a href=/ class=logo><img src=/media/logo.png alt="Code & Coffee Philadelphia">
+<span class=logo-text><span class=logo-main>Code & Coffee</span>
+<span class=logo-location>Philadelphia</span></span></a><nav class=nav-desktop><a href=/Code-And-Coffee-philidelphia-Website/blog class=nav-link>Blog</a>
+<a href=/Code-And-Coffee-philidelphia-Website/pages/search class=nav-link>Search</a>
+<a href=/Code-And-Coffee-philidelphia-Website/project-request class=nav-link>Get Help</a>
+<a href=/Code-And-Coffee-philidelphia-Website/event-sponsorship class=nav-link>Sponsor</a>
+<a href=/Code-And-Coffee-philidelphia-Website/links class=nav-link>Links</a>
+<a href=https://www.meetup.com/code-coffee-philly/ class=nav-link>Events</a>
+<a href=https://nol-kky-shop.fourthwall.com/ class=nav-link>Merch</a>
+<a href=https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia class="nav-link donate">Donate</a></nav><button class=mobile-menu-btn id=mobile-menu-btn>☰</button></div></header><div class=mobile-nav id=mobile-nav><div class=mobile-nav-content><a href=/Code-And-Coffee-philidelphia-Website/blog class=nav-link>Blog</a>
+<a href=/Code-And-Coffee-philidelphia-Website/pages/search class=nav-link>Search</a>
+<a href=/Code-And-Coffee-philidelphia-Website/project-request class=nav-link>Get Help</a>
+<a href=/Code-And-Coffee-philidelphia-Website/talent-matchboard class=nav-link>Jobs</a>
+<a href=/Code-And-Coffee-philidelphia-Website/event-sponsorship class=nav-link>Sponsor</a>
+<a href=/Code-And-Coffee-philidelphia-Website/links class=nav-link>Links</a>
+<a href=https://www.meetup.com/code-coffee-philly/ class=nav-link>Events</a>
+<a href=https://bank.hackclub.com/donations/start/code-coffee-philadelphia class="nav-link donate">Donate</a></div></div><main class=main-content><div class="container container-narrow" style="padding:3rem 1.5rem"><div class=blog-post><h1>Search</h1><p style=color:var(--text-secondary);margin-bottom:2rem>Search through all Code & Coffee Philadelphia content</p><div style=margin-bottom:3rem><div style=position:relative;margin-bottom:1.5rem><input type=text id=search-input placeholder="Search blog posts, pages, tutorials, and community content..." style="width:100%;padding:1rem;border:2px solid var(--border-color);border-radius:var(--radius-lg);font-size:1.1rem;background:var(--background);color:var(--text-primary)"></div><div style=margin-bottom:2rem><div id=search-stats style=margin-bottom:1rem;color:var(--text-muted);font-size:.875rem;display:none></div><h3 style=margin-bottom:1rem;font-size:1rem>Quick Filters</h3><div style=display:flex;flex-wrap:wrap;gap:.5rem><button class="tag search-filter active" data-filter=all>All Content</button>
+<button class="tag search-filter" data-filter=tutorial>Tutorials</button>
+<button class="tag search-filter" data-filter=community>Community</button>
+<button class="tag search-filter" data-filter=events>Events</button>
+<button class="tag search-filter" data-filter=javascript>JavaScript</button>
+<button class="tag search-filter" data-filter=beginners>Beginners</button>
+<button class="tag search-filter" data-filter=nodejs>Node.js</button>
+<button class="tag search-filter" data-filter=ai>AI/ML</button></div></div></div><div id=search-results><div id=search-placeholder style=text-align:center;color:var(--text-muted);padding:3rem><h3>Start typing to search</h3><p>Search through our blog posts, pages, tutorials, and community content.</p><div id=content-summary style="margin-top:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;max-width:600px;margin:2rem auto 0"></div></div></div></div></div><script>document.addEventListener("DOMContentLoaded",function(){let e=[],s=!0;async function c(){try{console.log("Fetching search index...");const t=await fetch("/search.json");if(!t.ok)throw new Error("Failed to fetch search index");const n=await t.json();e=n.filter(e=>e.title&&e.title.trim()),s=!1,console.log(`Search index loaded with ${e.length} items (${e.filter(e=>e.type==="blog").length} blog posts, ${e.filter(e=>e.type==="page").length} pages)`),console.log("Sample items:",e.slice(0,3).map(e=>({title:e.title,type:e.type,url:e.url}))),console.log("All URLs in search index:"),e.forEach((e,t)=>{t<10&&console.log(`${t+1}. "${e.title}" -> ${e.url}`)})}catch(e){console.error("Error loading search index:",e),s=!1}}function i(t,n="all"){if(s)return console.log("Search index still loading..."),[];const o=t.toLowerCase().trim();if(!o)return[];console.log("Performing search for:",o,"with filter:",n);const i=e.filter(e=>{if(n!=="all")if(n==="tutorial"||n==="community"||n==="events"){if(e.topic!==n)return!1}else if(!Array.isArray(e.tags)||!e.tags.includes(n))return!1;const s=[e.title,e.description,e.content,e.author,e.topic,...Array.isArray(e.tags)?e.tags:[]].join(" ").toLowerCase(),t=s.includes(o);return t&&console.log("Match found:",e.title,e.type),t});return console.log("Filtered results:",i.length),i.sort((e,t)=>{const n=e.title.toLowerCase().includes(o),s=t.title.toLowerCase().includes(o);return n&&!s?-1:!n&&s?1:e.featured&&!t.featured?-1:!e.featured&&t.featured?1:e.type==="blog"&&t.type==="page"?-1:e.type==="page"&&t.type==="blog"?1:new Date(t.date)-new Date(e.date)})}function o(e,t){const n=document.getElementById("search-results"),s=document.getElementById("search-stats");if(!t.trim()){n.innerHTML=`
                 <div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;">
                     <h3>Start typing to search</h3>
                     <p>Search through our blog posts, tutorials, and community content.</p>
                 </div>
-            `;
-            statsContainer.textContent = '';
-            return;
-        }
-        
-        statsContainer.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
-        
-        if (results.length === 0) {
-            resultsContainer.innerHTML = `
+            `,s.textContent="";return}if(s.textContent=`${e.length} result${e.length!==1?"s":""} found`,e.length===0){n.innerHTML=`
                 <div style="text-align: center; color: var(--text-muted); padding: 3rem;">
                     <h3>No results found</h3>
                     <p>Try different keywords or check your spelling.</p>
                 </div>
-            `;
-            return;
-        }
-        
-        const resultsHTML = results.map((item, index) => {
-            console.log(`Rendering result ${index + 1}:`, item.title, item.url);
-            return `
+            `;return}const o=e.map((e,t)=>(console.log(`Rendering result ${t+1}:`,e.title,e.url),`
             <div class="search-result" style="padding: 1.5rem; border: 2px solid #ccc; border-radius: 8px; margin-bottom: 1rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 <h3 style="margin-bottom: 0.5rem; color: #333;">
-                    <a href="#" style="text-decoration: none; color: #007acc;" onclick="navigateToPage('${item.url}'); return false;">${item.title}</a>
-                    ${item.featured ? '<span style="background: #ff6b6b; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
-                    <span style="background: ${item.type === 'blog' ? '#007acc' : '#666'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
+                    <a href="#" style="text-decoration: none; color: #007acc;" onclick="navigateToPage('${e.url}'); return false;">${e.title}</a>
+                    ${e.featured?'<span style="background: #ff6b6b; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>':""}
+                    <span style="background: ${e.type==="blog"?"#007acc":"#666"}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${e.type}</span>
                 </h3>
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: #666; font-size: 0.875rem;">
-                    <span>${item.type === 'blog' ? 'Blog Post' : 'Page'}</span>
-                    <span>by ${item.author}</span>
-                    <span>${item.readingTime} min read</span>
-                    ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}
+                    <span>${e.type==="blog"?"Blog Post":"Page"}</span>
+                    <span>by ${e.author}</span>
+                    <span>${e.readingTime} min read</span>
+                    ${e.topic?`<span>Topic: ${e.topic}</span>`:""}
                 </div>
-                <p style="color: #555; margin-bottom: 1rem; line-height: 1.6;">${item.description || 'No description available.'}</p>
-                ${(item.tags && Array.isArray(item.tags) && item.tags.length > 0) ? `
+                <p style="color: #555; margin-bottom: 1rem; line-height: 1.6;">${e.description||"No description available."}</p>
+                ${e.tags&&Array.isArray(e.tags)&&e.tags.length>0?`
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    ${item.tags.map(tag => `<span style="display: inline-block; padding: 0.25rem 0.5rem; background: #f0f0f0; border-radius: 12px; font-size: 0.75rem; color: #333;">${tag}</span>`).join('')}
+                    ${e.tags.map(e=>`<span style="display: inline-block; padding: 0.25rem 0.5rem; background: #f0f0f0; border-radius: 12px; font-size: 0.75rem; color: #333;">${e}</span>`).join("")}
                 </div>
-                ` : ''}
+                `:""}
             </div>
-        `;
-        }).join('');
-        
-        console.log('Setting results HTML:', resultsHTML.length, 'characters');
-        console.log('Results container:', resultsContainer);
-        resultsContainer.innerHTML = resultsHTML;
-        console.log('Results container after setting innerHTML:', resultsContainer.innerHTML.length, 'characters');
-        
-        
-        document.querySelectorAll('.search-result').forEach(result => {
-            result.addEventListener('mouseenter', function() {
-                this.style.borderColor = 'var(--primary-color)';
-                this.style.boxShadow = 'var(--shadow)';
-            });
-            result.addEventListener('mouseleave', function() {
-                this.style.borderColor = 'var(--border-color)';
-                this.style.boxShadow = 'none';
-            });
-        });
-    }
-    
-    
-    const searchInput = document.getElementById('search-input');
-    const searchFilters = document.querySelectorAll('.search-filter');
-    let currentFilter = 'all';
-    let searchTimeout;
-    
-    
-    window.currentFilter = currentFilter;
-    
-    searchInput.addEventListener('input', function() {
-        const query = this.value;
-        console.log('Search input:', query);
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            const results = performSearch(query, currentFilter);
-            console.log('Search results:', results.length, 'items found');
-            renderResults(results, query);
-        }, 300); 
-    });
-    
-    
-    searchFilters.forEach(filter => {
-        filter.addEventListener('click', function() {
-            searchFilters.forEach(f => f.classList.remove('active'));
-            this.classList.add('active');
-            currentFilter = this.getAttribute('data-filter');
-            window.currentFilter = currentFilter;
-            console.log('Filter changed to:', currentFilter);
-            
-            
-            if (currentFilter !== 'all') {
-                searchInput.value = currentFilter;
-                searchInput.focus();
-                
-                
-                const results = performSearch(currentFilter, 'all');
-                renderResults(results, currentFilter);
-            } else {
-                
-                searchInput.value = '';
-                renderResults([], '');
-            }
-        });
-    });
-    
-    
-    window.navigateToPage = function(url) {
-        console.log('Navigating to:', url);
-        console.log('Current location:', window.location.href);
-        
-        
-        let targetUrl = url;
-        if (!targetUrl.startsWith('/')) {
-            targetUrl = '/' + targetUrl;
-        }
-        
-        console.log('Final target URL:', targetUrl);
-        window.location.href = targetUrl;
-    };
-    
-    
-    buildSearchIndex();
-    
-    
-    function showContentSummary() {
-        if (searchIndex.length > 0) {
-            const blogCount = searchIndex.filter(i => i.type === 'blog').length;
-            const pageCount = searchIndex.filter(i => i.type === 'page').length;
-            const topics = [...new Set(searchIndex.map(i => i.topic))];
-            
-            document.getElementById('content-summary').innerHTML = `
+        `)).join("");console.log("Setting results HTML:",o.length,"characters"),console.log("Results container:",n),n.innerHTML=o,console.log("Results container after setting innerHTML:",n.innerHTML.length,"characters"),document.querySelectorAll(".search-result").forEach(e=>{e.addEventListener("mouseenter",function(){this.style.borderColor="var(--primary-color)",this.style.boxShadow="var(--shadow)"}),e.addEventListener("mouseleave",function(){this.style.borderColor="var(--border-color)",this.style.boxShadow="none"})})}const n=document.getElementById("search-input"),a=document.querySelectorAll(".search-filter");let t="all",r;window.currentFilter=t,n.addEventListener("input",function(){const e=this.value;console.log("Search input:",e),clearTimeout(r),r=setTimeout(()=>{const n=i(e,t);console.log("Search results:",n.length,"items found"),o(n,e)},300)}),a.forEach(e=>{e.addEventListener("click",function(){if(a.forEach(e=>e.classList.remove("active")),this.classList.add("active"),t=this.getAttribute("data-filter"),window.currentFilter=t,console.log("Filter changed to:",t),t!=="all"){n.value=t,n.focus();const e=i(t,"all");o(e,t)}else n.value="",o([],"")})}),window.navigateToPage=function(e){console.log("Navigating to:",e),console.log("Current location:",window.location.href);let t=e;t.startsWith("/")||(t="/"+t),console.log("Final target URL:",t),window.location.href=t},c();function l(){if(e.length>0){const t=e.filter(e=>e.type==="blog").length,n=e.filter(e=>e.type==="page").length,s=[...new Set(e.map(e=>e.topic))];document.getElementById("content-summary").innerHTML=`
                 <div style="text-align: center; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); border: 1px solid var(--border-color);">
-                    <strong>${blogCount}</strong><br>Blog Posts
+                    <strong>${t}</strong><br>Blog Posts
                 </div>
                 <div style="text-align: center; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); border: 1px solid var(--border-color);">
-                    <strong>${pageCount}</strong><br>Pages
+                    <strong>${n}</strong><br>Pages
                 </div>
                 <div style="text-align: center; padding: 1rem; background: var(--background-secondary); border-radius: var(--radius); border: 1px solid var(--border-color);">
-                    <strong>${topics.length}</strong><br>Topics
+                    <strong>${s.length}</strong><br>Topics
                 </div>
-            `;
-        }
-    }
-    
-    
-    setTimeout(showContentSummary, 100);
-    
-    
-    searchInput.focus();
-});
-</script>
-
-    </main>
-    
-    <footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Code & Coffee Philadelphia</h4>
-                <p>Building Philadelphia's tech community through collaboration, learning, and innovation.</p>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/project-request">Get Project Help</a></li>
-                    <li><a href="/talent-matchboard">Find Jobs</a></li>
-                    <li><a href="/links">Community Links</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Connect</h4>
-                <ul class="footer-links">
-                    <li><a href="https://www.meetup.com/code-coffee-philly/">Meetup Events</a></li>
-                    <li><a href="https://www.linkedin.com/company/code-coffee-philadelphia">LinkedIn</a></li>
-                    <li><a href="https://www.instagram.com/philly_codes/">Instagram</a></li>
-                    <li><a href="https://nol-kky-shop.fourthwall.com/">Merchandise</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>© 2026 Code & Coffee Philadelphia. Made with ❤️ for the tech community.</p>
-        </div>
-    </div>
-    
-    <script src="/js/menu.js"></script>
-    <script src="/js/meetup.js"></script>
-    <script src="/js/carousel.js"></script>
-</footer>
-
-    
-    
-    <script src="/js/menu.js"></script>
-    
-    
-</body>
-</html>
+            `}}setTimeout(l,100),n.focus()})</script></main><footer><div class=container><div class=footer-content><div class=footer-section><h4>Code & Coffee Philadelphia</h4><p>Building Philadelphia's tech community through collaboration, learning, and innovation.</p></div><div class=footer-section><h4>Quick Links</h4><ul class=footer-links><li><a href=/Code-And-Coffee-philidelphia-Website/blog>Blog</a></li><li><a href=/Code-And-Coffee-philidelphia-Website/project-request>Get Project Help</a></li><li><a href=/Code-And-Coffee-philidelphia-Website/talent-matchboard>Find Jobs</a></li><li><a href=/Code-And-Coffee-philidelphia-Website/links>Community Links</a></li></ul></div><div class=footer-section><h4>Connect</h4><ul class=footer-links><li><a href=https://www.meetup.com/code-coffee-philly/>Meetup Events</a></li><li><a href=https://www.linkedin.com/company/code-coffee-philadelphia>LinkedIn</a></li><li><a href=https://www.instagram.com/philly_codes/>Instagram</a></li><li><a href=https://nol-kky-shop.fourthwall.com/>Merchandise</a></li></ul></div></div><div class=footer-bottom><p>© 2026 Code & Coffee Philadelphia. Made with ❤️ for the tech community.</p></div></div><script src=/js/menu.js></script><script src=/js/meetup.js></script><script src=/js/carousel.js></script></footer><script src=/js/menu.js></script></body></html>

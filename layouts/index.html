@@ -149,7 +149,7 @@
     </section>
 
     <!-- Upcoming Events -->
-    <section>
+    <section style="margin-bottom: 4rem;">
         <h2 style="text-align: center; margin-bottom: 2rem;">Upcoming Events</h2>
         <div class="card" style="text-align: center;">
             <div id="upcoming-events">
@@ -158,6 +158,32 @@
             <div style="margin-top: 1.5rem;">
                 <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary">View All Events</a>
             </div>
+        </div>
+    </section>
+
+    <!-- Our Sponsors -->
+    <section style="margin-bottom: 4rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Our Sponsors</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
+            {{ range .Site.Data.sponsors.sponsors }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
+                <img src="{{ printf "/images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
+                <span>{{ .name }}</span>
+            </a>
+            {{ end }}
+        </div>
+    </section>
+
+    <!-- Collaborators -->
+    <section style="margin-bottom: 4rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Collaborators</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
+            {{ range .Site.Data.sponsors.collaborators }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
+                <img src="{{ printf "/images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
+                <span>{{ .name }}</span>
+            </a>
+            {{ end }}
         </div>
     </section>
 </div>

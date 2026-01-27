@@ -2219,6 +2219,11 @@ footer {
     color: var(--text-primary);
 }
 
+.team-member-social {
+    display: inline;
+    margin-left: 0.5rem;
+}
+
 .team-member-role {
     display: inline-block;
     font-size: 0.875rem;
@@ -2237,16 +2242,9 @@ footer {
     margin-bottom: 1rem;
 }
 
-.team-member-social {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 0.5rem;
-}
-
 .team-member-social a {
     color: var(--accent);
-    font-size: 1.35rem;
+    font-size: 1.1rem;
     transition: all 0.2s ease;
     padding: 0.25rem;
 }

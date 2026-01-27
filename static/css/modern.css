@@ -1960,6 +1960,12 @@ footer {
     color: var(--primary-color);
 }
 
+.footer-links i {
+    margin-right: 0.5rem;
+    width: 1rem;
+    text-align: center;
+}
+
 .footer-bottom {
     border-top: 1px solid var(--border-color);
     padding-top: 2rem;
@@ -2137,5 +2143,144 @@ footer {
 
     .sponsor-card span {
         font-size: 0.8rem;
+    }
+}
+
+/* =============================================================================
+   TEAM PAGE STYLES
+   ============================================================================= */
+
+.page-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(59, 37, 33, 0.08);
+}
+
+.team-member-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(89, 150, 155, 0.15);
+}
+
+.team-member-image-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.25rem;
+}
+
+.team-member-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    background: var(--background-secondary);
+}
+
+.team-member-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--background-secondary);
+    border: 3px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 3rem;
+}
+
+.team-member-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.team-member-role {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: white;
+    background: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.team-member-bio {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.team-member-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.team-member-social a {
+    color: var(--accent);
+    font-size: 1.35rem;
+    transition: all 0.2s ease;
+    padding: 0.25rem;
+}
+
+.team-member-social a:hover {
+    color: var(--button);
+    transform: translateY(-2px);
+}
+
+/* Team page responsive */
+@media (max-width: 768px) {
+    .team-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .team-member-card {
+        padding: 1.5rem;
+    }
+
+    .team-member-image-wrapper,
+    .team-member-image,
+    .team-member-placeholder {
+        width: 120px;
+        height: 120px;
+    }
+
+    .team-member-placeholder {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-container {
+        grid-template-columns: 1fr;
     }
 }

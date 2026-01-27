@@ -24,6 +24,9 @@ menu:
     - name: "Home"
       url: "/"
       weight: 10
+    - name: "About"
+      url: "/about/"
+      weight: 15
     - name: "Links"
       url: "/links/"
       weight: 20

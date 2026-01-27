@@ -1,0 +1,56 @@
+# =============================================================================
+# TEAM MEMBERS DATA
+# =============================================================================
+# Edit this file to update team member information.
+# Photos should be placed in: /static/images/team/
+# Leave social links as empty string "" if not applicable.
+# =============================================================================
+
+team:
+  - name: "Tony Siu"
+    role: "Founder"
+    bio: "Founding AI Engineer at A16z, Z-Fellows, 2048 Ventures backed startups. Lead Google Research for Computer Vision Pixel Device testing. Published in Top Peer reviewed Research Conferences. Former Google I/O Taiwan Speaker &  GDSC Lead - Passionate about building AI GirlFriends."
+    photo: "/images/team/member-1.jpg"
+    linkedin: "https://linkedin.com/in/pysolver"
+    github: "https://github.com/Tony363"
+    twitter: ""
+
+  - name: "Nolan Makatche"
+    role: "Co-Founder"
+    bio: "Senior Software Engineer at Orchid AI. Former Founding Engineer at Yellow Lab Ventures and Co-Founder of Keyword Genie. Started building alone during COVID and created this community to connect builders. Proven 0-to-1 product expertise."
+    photo: "/images/team/member-2.jpg"
+    linkedin: "https://linkedin.com/in/username2"
+    github: "https://github.com/nolanmak"
+    twitter: ""
+
+  - name: "Chris Crimi, CFA"
+    role: "Chief Finance Officer"
+    bio: "CFA charterholder with experience in financial and operational analysis across industries and businesses. Self-taught programmer building startup Caullie—understands founders' challenges firsthand. Former Treasurer and lead finance roles with proven budget and vendor management."
+    photo: "/images/team/member-3.jpg"
+    linkedin: "https://linkedin.com/in/username3"
+    github: ""
+    twitter: ""
+
+  - name: "Haluk Ghul"
+    role: "Chief Marketing Officer"
+    bio: "Led deal flow at investment network with 200+ deals analyzed and 40+ meetings booked. Built a Bogazici World community from 0 to 200+ members. Business Development Manager at Renovate AI driving B2B growth. Currently, pursuing Villanova MBA. Believes AI will create the next Renaissance."
+    photo: "/images/team/member-4.jpg"
+    linkedin: "https://linkedin.com/in/username4"
+    github: ""
+    twitter: ""
+
+  - name: "William Haesemeyer"
+    role: "Chief System Administrator"
+    bio: "Senior Security Engineer at Ro protecting healthcare infrastructure. 4+ years at Jamf in Security Operations. 3+ years infrastructure operations at ConnectiveRx. Enterprise-grade security and systems expertise. Passionate about building."
+    photo: "/images/team/member-5.jpg"
+    linkedin: ""
+    github: "https://github.com/username5"
+    twitter: ""
+
+  - name: "Christian Iosif"
+    role: "Chief Community Officer"
+    bio: "Software Engineer at Comcast for 3+ years building enterprise products. Former Developer at URBN. Code & Coffee regular deeply embedded in Philly startup ecosystem. Founder of SideJawn and Pokito. Full-stack skills with strong community connections."
+    photo: "/images/team/member-6.jpg"
+    linkedin: "https://linkedin.com/in/username6"
+    github: ""
+    twitter: ""

@@ -38,4 +38,16 @@ Connect with Code & Coffee Philadelphia across the web:
 <a href="https://www.instagram.com/philly_codes/" target="_blank" class="btn">Follow Us</a>
 </div>
 
+<div class="link-item">
+<h3>🔗 Linktree</h3>
+<p>All our links in one place</p>
+<a href="https://linktr.ee/codecoffeephilly" target="_blank" class="btn">View Links</a>
+</div>
+
+<div class="link-item">
+<h3>📰 Newsletter</h3>
+<p>Subscribe for community updates and tech articles</p>
+<a href="https://substack.com/@codecoffeephilly" target="_blank" class="btn">Subscribe</a>
+</div>
+
 </div>

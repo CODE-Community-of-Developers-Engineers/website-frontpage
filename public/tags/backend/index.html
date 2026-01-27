@@ -1,32 +1,256 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Backend - Code & Coffee Philadelphia</title><meta name=description content="Your space to build."><link rel=icon type=image/x-icon href=/favicon.ico><link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css integrity=sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css><link rel=stylesheet href=/css/modern.css></head><body><header><div class=header-container><a href=/ class=logo><img src=/media/logo.png alt="Code & Coffee Philadelphia">
-<span class=logo-text><span class=logo-main>Code & Coffee</span>
-<span class=logo-location>Philadelphia</span></span></a><nav class=nav-desktop><a href=/Code-And-Coffee-philidelphia-Website/blog class=nav-link>Blog</a>
-<a href=/Code-And-Coffee-philidelphia-Website/pages/search class=nav-link>Search</a>
-<a href=/Code-And-Coffee-philidelphia-Website/project-request class=nav-link>Get Help</a>
-<a href=/Code-And-Coffee-philidelphia-Website/event-sponsorship class=nav-link>Sponsor</a>
-<a href=/Code-And-Coffee-philidelphia-Website/links class=nav-link>Links</a>
-<a href=https://www.meetup.com/code-coffee-philly/ class=nav-link>Events</a>
-<a href=https://nol-kky-shop.fourthwall.com/ class=nav-link>Merch</a>
-<a href=https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia class="nav-link donate">Donate</a></nav><button class=mobile-menu-btn id=mobile-menu-btn>☰</button></div></header><div class=mobile-nav id=mobile-nav><div class=mobile-nav-content><a href=/Code-And-Coffee-philidelphia-Website/blog class=nav-link>Blog</a>
-<a href=/Code-And-Coffee-philidelphia-Website/pages/search class=nav-link>Search</a>
-<a href=/Code-And-Coffee-philidelphia-Website/project-request class=nav-link>Get Help</a>
-<a href=/Code-And-Coffee-philidelphia-Website/talent-matchboard class=nav-link>Jobs</a>
-<a href=/Code-And-Coffee-philidelphia-Website/event-sponsorship class=nav-link>Sponsor</a>
-<a href=/Code-And-Coffee-philidelphia-Website/links class=nav-link>Links</a>
-<a href=https://www.meetup.com/code-coffee-philly/ class=nav-link>Events</a>
-<a href=https://bank.hackclub.com/donations/start/code-coffee-philadelphia class="nav-link donate">Donate</a></div></div><main class=main-content><div class=container><div style="max-width:800px;margin:0 auto;padding:0 1.5rem"><div class=blog-header-box><h1 class=blog-main-title>Backend</h1><div class=blog-main-description><p>All posts tagged with "Backend"</p></div></div><div style=margin-bottom:1.5rem><h3 style=margin-bottom:1rem>Search in Backend Posts</h3><input type=text id=search-input placeholder="Search posts in this tag..." style="width:100%;padding:.75rem;border:2px solid var(--border-color);border-radius:var(--radius);font-size:1rem;background:#fff;color:var(--text-primary)"></div><div class=blog-posts id=blog-posts><div class=blog-post data-tags="javascript nodejs api express beginners backend" data-topic=tutorial data-title="building your first rest api with node.js and express" data-summary='<p>building rest apis is a fundamental skill for modern web developers. in this tutorial, we&amp;rsquo;ll create a complete rest api using node.js and express, perfect for beginners who want to understand backend development.</p>
-<h2 id="what-youll-learn">what you&amp;rsquo;ll learn</h2>
-<p>by the end of this tutorial, you&amp;rsquo;ll have built a functional rest api that can:</p>
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=5000&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend - Code &amp; Coffee Philadelphia</title>
+    <meta name="description" content="Your space to build.">
+    
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="/css/modern.css">
+    
+    
+</head>
+<body>
+    <header>
+    <div class="header-container">
+        <a href="/" class="logo">
+            <img src="/media/logo.png" alt="Code & Coffee Philadelphia">
+            <span class="logo-text">
+                <span class="logo-main">Code & Coffee</span>
+                <span class="logo-location">Philadelphia</span>
+            </span>
+        </a>
+        
+        <nav class="nav-desktop">
+            <a href="/blog" class="nav-link">Blog</a>
+            <a href="/pages/search" class="nav-link">Search</a>
+            <a href="/project-request" class="nav-link">Get Help</a>
+            <a href="/event-sponsorship" class="nav-link">Sponsor</a>
+            <a href="/links" class="nav-link">Links</a>
+            <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
+            <a href="https://nol-kky-shop.fourthwall.com/" class="nav-link">Merch</a>
+            <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" class="nav-link donate">Donate</a>
+        </nav>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+    </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-content">
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="/pages/search" class="nav-link">Search</a>
+        <a href="/project-request" class="nav-link">Get Help</a>
+        <a href="/talent-matchboard" class="nav-link">Jobs</a>
+        <a href="/event-sponsorship" class="nav-link">Sponsor</a>
+        <a href="/links" class="nav-link">Links</a>
+        <a href="https://www.meetup.com/code-coffee-philly/" class="nav-link">Events</a>
+        <a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" class="nav-link donate">Donate</a>
+    </div>
+</div>
+
+    
+    <main class="main-content">
+        
+<div class="container">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <div class="blog-header-box">
+            <h1 class="blog-main-title">Backend</h1>
+            <div class="blog-main-description">
+                <p>All posts tagged with "Backend"</p>
+            </div>
+        </div>
+
+        
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Search in Backend Posts</h3>
+            <input type="text" id="search-input" placeholder="Search posts in this tag..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 1rem; background: white; color: var(--text-primary);">
+        </div>
+        
+        
+        <div class="blog-posts" id="blog-posts">
+        
+        <div class="blog-post" data-tags="javascript nodejs api express beginners backend" data-topic="tutorial" data-title="building your first rest api with node.js and express" data-summary="&lt;p&gt;building rest apis is a fundamental skill for modern web developers. in this tutorial, we&amp;rsquo;ll create a complete rest api using node.js and express, perfect for beginners who want to understand backend development.&lt;/p&gt;
+&lt;h2 id=&#34;what-youll-learn&#34;&gt;what you&amp;rsquo;ll learn&lt;/h2&gt;
+&lt;p&gt;by the end of this tutorial, you&amp;rsquo;ll have built a functional rest api that can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;handle get, post, put, and delete requests&lt;/li&gt;
+&lt;li&gt;manage data with proper error handling&lt;/li&gt;
+&lt;li&gt;implement middleware for logging and validation&lt;/li&gt;
+&lt;li&gt;structure your project for scalability&lt;/li&gt;
+&lt;/ul&gt;">
+            
+            <div class="topic-badge">
+                Tutorial
+            </div>
+            
+            
+            
+            
+            <h2 style="margin-bottom: 0.75rem;">
+                <a href="/blog/example-tech-tutorial/" style="text-decoration: none; color: var(--text-primary);">
+                    Building Your First REST API with Node.js and Express
+                </a>
+            </h2>
+            
+            <div class="blog-meta">
+                
+                <span>June 20, 2025</span>
+                
+                
+                <span>by Alex Johnson</span>
+                
+                
+                <span>8 min read</span>
+                
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                
+                    <p>Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&rsquo;ll create a complete REST API using Node.js and Express, perfect for beginners who want to understand backend development.</p>
+<h2 id="what-youll-learn">What You&rsquo;ll Learn</h2>
+<p>By the end of this tutorial, you&rsquo;ll have built a functional REST API that can:</p>
 <ul>
-<li>handle get, post, put, and delete requests</li>
-<li>manage data with proper error handling</li>
-<li>implement middleware for logging and validation</li>
-<li>structure your project for scalability</li>
-</ul>'><div class=topic-badge>Tutorial</div><h2 style=margin-bottom:.75rem><a href=/Code-And-Coffee-philidelphia-Website/blog/example-tech-tutorial/ style=text-decoration:none;color:var(--text-primary)>Building Your First REST API with Node.js and Express</a></h2><div class=blog-meta><span>June 20, 2025</span>
-<span>by Alex Johnson</span>
-<span>8 min read</span></div><div style=margin-bottom:1.5rem><p>Building REST APIs is a fundamental skill for modern web developers. In this tutorial, we&rsquo;ll create a complete REST API using Node.js and Express, perfect for beginners who want to understand backend development.</p><h2 id=what-youll-learn>What You&rsquo;ll Learn</h2><p>By the end of this tutorial, you&rsquo;ll have built a functional REST API that can:</p><ul><li>Handle GET, POST, PUT, and DELETE requests</li><li>Manage data with proper error handling</li><li>Implement middleware for logging and validation</li><li>Structure your project for scalability</li></ul></div><div class=blog-tags><a href=/tags/javascript class=tag>Javascript</a>
-<a href=/tags/nodejs class=tag>Nodejs</a>
-<a href=/tags/api class=tag>Api</a>
-<a href=/tags/express class=tag>Express</a>
-<a href=/tags/beginners class=tag>Beginners</a>
-<a href=/tags/backend class=tag>Backend</a></div><a href=/Code-And-Coffee-philidelphia-Website/blog/example-tech-tutorial/ class=btn>Read More</a></div></div></div></div></main><footer><div class=container><div class=footer-content><div class=footer-section><h4>Code & Coffee Philadelphia</h4><p>Building Philadelphia's tech community through collaboration, learning, and innovation.</p></div><div class=footer-section><h4>Quick Links</h4><ul class=footer-links><li><a href=/Code-And-Coffee-philidelphia-Website/blog>Blog</a></li><li><a href=/Code-And-Coffee-philidelphia-Website/project-request>Get Project Help</a></li><li><a href=/Code-And-Coffee-philidelphia-Website/talent-matchboard>Find Jobs</a></li><li><a href=/Code-And-Coffee-philidelphia-Website/links>Community Links</a></li></ul></div><div class=footer-section><h4>Connect</h4><ul class=footer-links><li><a href=https://www.meetup.com/code-coffee-philly/>Meetup Events</a></li><li><a href=https://www.linkedin.com/company/code-coffee-philadelphia>LinkedIn</a></li><li><a href=https://www.instagram.com/philly_codes/>Instagram</a></li><li><a href=https://nol-kky-shop.fourthwall.com/>Merchandise</a></li></ul></div></div><div class=footer-bottom><p>© 2026 Code & Coffee Philadelphia. Made with ❤️ for the tech community.</p></div></div><script src=/js/menu.js></script><script src=/js/meetup.js></script><script src=/js/carousel.js></script></footer><script src=/js/menu.js></script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("search-input"),t=document.querySelectorAll(".blog-post");function n(){const n=e.value.toLowerCase();let s=0;t.forEach(e=>{const t=e.dataset.title||"",o=e.dataset.summary||"",i=!n||t.includes(n)||o.includes(n);i?(e.style.display="block",s++):e.style.display="none"});const o=document.getElementById("no-results");o&&(o.style.display=s===0?"block":"none")}e&&e.addEventListener("input",n)})</script></body></html>
+<li>Handle GET, POST, PUT, and DELETE requests</li>
+<li>Manage data with proper error handling</li>
+<li>Implement middleware for logging and validation</li>
+<li>Structure your project for scalability</li>
+</ul>
+                
+            </div>
+            
+            
+            <div class="blog-tags">
+                
+                <a href="/tags/javascript" class="tag">Javascript</a>
+                
+                <a href="/tags/nodejs" class="tag">Nodejs</a>
+                
+                <a href="/tags/api" class="tag">Api</a>
+                
+                <a href="/tags/express" class="tag">Express</a>
+                
+                <a href="/tags/beginners" class="tag">Beginners</a>
+                
+                <a href="/tags/backend" class="tag">Backend</a>
+                
+            </div>
+            
+            
+            <a href="/blog/example-tech-tutorial/" class="btn">Read More</a>
+        </div>
+        
+        </div>
+        
+        
+        
+        
+        
+            
+        
+            
+        
+            
+        
+        
+        
+        
+    </div>
+</div>
+
+    </main>
+    
+    <footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Code & Coffee Philadelphia</h4>
+                <p>Building Philadelphia's tech community through collaboration, learning, and innovation.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/project-request">Get Project Help</a></li>
+                    <li><a href="/talent-matchboard">Find Jobs</a></li>
+                    <li><a href="/links">Community Links</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="https://www.meetup.com/code-coffee-philly/">Meetup Events</a></li>
+                    <li><a href="https://www.linkedin.com/company/code-coffee-philadelphia">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com/philly_codes/">Instagram</a></li>
+                    <li><a href="https://nol-kky-shop.fourthwall.com/">Merchandise</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 Code & Coffee Philadelphia. Made with ❤️ for the tech community.</p>
+        </div>
+    </div>
+    
+    <script src="/js/menu.js"></script>
+    <script src="/js/meetup.js"></script>
+    <script src="/js/carousel.js"></script>
+</footer>
+
+    
+    
+    <script src="/js/menu.js"></script>
+    
+    
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const blogPosts = document.querySelectorAll('.blog-post');
+    
+    function filterPosts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+        
+        blogPosts.forEach(post => {
+            const title = post.dataset.title || '';
+            const summary = post.dataset.summary || '';
+            
+            const matchesSearch = !searchTerm || 
+                title.includes(searchTerm) || 
+                summary.includes(searchTerm);
+            
+            if (matchesSearch) {
+                post.style.display = 'block';
+                visibleCount++;
+            } else {
+                post.style.display = 'none';
+            }
+        });
+        
+        
+        const noResults = document.getElementById('no-results');
+        if (noResults) {
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', filterPosts);
+    }
+});
+</script>
+
+</body>
+</html>

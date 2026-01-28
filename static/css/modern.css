@@ -2205,7 +2205,7 @@ footer {
     border-radius: 50%;
     background: var(--background-secondary);
     border: 3px solid var(--accent);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     color: var(--text-muted);

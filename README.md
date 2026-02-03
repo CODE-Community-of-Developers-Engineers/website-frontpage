@@ -112,6 +112,8 @@ hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
 rm -rf public && node scripts/generate-events-data.js && hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
 ```
 
+Quick version (does the same thing): `npm start`
+
 ### Production Build
 
 ```bash

@@ -120,6 +120,8 @@ Quick version (does the same thing): `npm start`
 node scripts/generate-events-data.js && hugo --gc --minify --cleanDestinationDir --forceSyncStatic
 ```
 
+To run a local test copy of the prod build use: `npm run prod`
+
 ## Build & Deployment Pipeline
 
 ```mermaid

@@ -7,6 +7,7 @@ topic: "community"
 tags: ["ai", "community", "interview", "machine-learning", "research"]
 featured: true
 readingTime: 2
+image: "ibtimes-feature.png"
 ---
 
 Tony Siu, founder of Code & Coffee Philadelphia, was recently featured in the International Business Times for his work in AI research and community building.

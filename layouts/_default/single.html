@@ -7,7 +7,19 @@
             <header class="blog-post-header">
                 {{ if .Params.image }}
                 <div class="blog-hero-image">
-                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+                    {{ if hasPrefix .Params.image "/" }}
+                        {{/* Absolute path - use relURL */}}
+                        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+                    {{ else }}
+                        {{/* Page bundle resource - use Resources.GetMatch */}}
+                        {{ $img := .Resources.GetMatch .Params.image }}
+                        {{ if $img }}
+                            <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}">
+                        {{ else }}
+                            {{/* Fallback for missing resources */}}
+                            <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+                        {{ end }}
+                    {{ end }}
                 </div>
                 {{ end }}
                 

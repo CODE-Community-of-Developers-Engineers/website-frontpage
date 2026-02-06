@@ -112,11 +112,15 @@ hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
 rm -rf public && node scripts/generate-events-data.js && hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
 ```
 
+Quick version (does the same thing): `npm start`
+
 ### Production Build
 
 ```bash
 node scripts/generate-events-data.js && hugo --gc --minify --cleanDestinationDir --forceSyncStatic
 ```
+
+To run a local test copy of the prod build use: `npm run prod`
 
 ## Build & Deployment Pipeline
 

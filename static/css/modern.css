@@ -269,6 +269,10 @@ header {
     max-width: 800px;
 }
 
+.container-sponsorship {
+    max-width: 960px;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
@@ -2925,5 +2929,334 @@ footer {
 
     .cta-banner {
         padding: 1.5rem 1rem;
+    }
+}
+
+/* ================================================
+   SPONSORSHIP PAGE VISUAL ENHANCEMENTS
+   ================================================ */
+
+/* --- Hero Banner --- */
+.sponsor-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 3px solid var(--accent);
+    box-shadow: 0 8px 24px rgba(89, 150, 155, 0.2);
+}
+
+.sponsor-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.sponsor-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(59, 37, 33, 0.85));
+    display: flex;
+    align-items: flex-end;
+}
+
+.sponsor-hero-text {
+    width: 100%;
+    text-align: center;
+}
+
+.sponsor-hero-tagline {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 1.8rem;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Stats Strip --- */
+.sponsor-stats-strip {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.1);
+}
+
+.sponsor-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    min-width: 120px;
+}
+
+.sponsor-stat-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(89, 150, 155, 0.1);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+.sponsor-stat:hover .sponsor-stat-icon {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.1);
+}
+
+.sponsor-stat-label {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+/* --- Photo Grid --- */
+.sponsor-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.sponsor-photo-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.sponsor-photo-item {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    aspect-ratio: 4 / 3;
+    transition: all 0.3s ease;
+}
+
+.sponsor-photo-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(89, 150, 155, 0.2);
+}
+
+.sponsor-photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.sponsor-photo-item:hover img {
+    transform: scale(1.05);
+}
+
+.sponsor-photo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(transparent, rgba(59, 37, 33, 0.8));
+    color: white;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.8rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Tab Icons --- */
+.sponsorship-tab-btn .tab-icon {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    margin-right: 0.25rem;
+}
+
+/* --- Benefit Cards Grid --- */
+.sponsor-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.sponsor-benefit-card {
+    background: rgba(89, 150, 155, 0.04);
+    border: 2px solid rgba(89, 150, 155, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.sponsor-benefit-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.12);
+}
+
+.sponsor-benefit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+.sponsor-benefit-card strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+}
+
+.sponsor-benefit-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* --- Community Banner --- */
+.sponsor-community-banner {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 2.5rem;
+    border: 3px solid var(--accent);
+}
+
+.sponsor-community-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.sponsor-community-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(89, 150, 155, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.sponsor-community-overlay span {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Sponsorship Page Responsive --- */
+@media (max-width: 768px) {
+    .sponsor-hero-banner {
+        height: 200px;
+    }
+
+    .sponsor-hero-tagline {
+        font-size: 1.3rem;
+    }
+
+    .sponsor-stats-strip {
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .sponsor-stat {
+        min-width: 100px;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .sponsor-stat-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+
+    .sponsor-photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .sponsor-photo-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sponsor-photo-grid-3 .sponsor-photo-item:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .sponsor-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sponsor-community-banner {
+        height: 150px;
+    }
+
+    .sponsor-community-overlay span {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sponsor-hero-banner {
+        height: 160px;
+    }
+
+    .sponsor-hero-tagline {
+        font-size: 1.1rem;
+    }
+
+    .sponsor-stats-strip {
+        gap: 0.5rem;
+    }
+
+    .sponsor-stat {
+        min-width: 80px;
+    }
+
+    .sponsor-stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .sponsor-stat-label {
+        font-size: 0.75rem;
+    }
+
+    .sponsor-photo-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }

@@ -186,7 +186,7 @@
 </div>
 {{ else }}
 <!-- Non-blog content -->
-<div class="container container-narrow" style="padding: 3rem 1.5rem;">
+<div class="container {{ if in .RelPermalink "/event-sponsorship/" }}container-sponsorship{{ else }}container-narrow{{ end }}" style="padding: 3rem 1.5rem;">
     <article class="blog-post">
         <h1>{{ .Title }}</h1>
         {{ .Content }}

@@ -1883,9 +1883,163 @@ p {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .link-item {
         padding: 1.5rem;
+    }
+}
+
+/* Onboarding Page Styling */
+.onboarding-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.onboarding-section {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.1);
+}
+
+.onboarding-section-title {
+    font-family: 'Gloria Hallelujah', cursive;
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--accent);
+}
+
+.onboarding-step {
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.onboarding-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.step-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.step-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.step-title {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.step-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.step-desc a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+.step-desc a:hover {
+    text-decoration: underline;
+}
+
+.step-checkbox input:checked + .step-content .step-title {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.step-checkbox input:checked + .step-content .step-desc {
+    color: var(--text-muted);
+}
+
+/* Resources Page Styling */
+.resources-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.resource-item {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(89, 150, 155, 0.1);
+}
+
+.resource-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(89, 150, 155, 0.15);
+    border-color: var(--primary-color);
+}
+
+.resource-item h3 {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.resource-item p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.resources-extra {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--accent);
+}
+
+.resources-extra h2 {
+    font-family: 'Gloria Hallelujah', cursive;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .resources-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .resource-item {
+        padding: 1.5rem;
+    }
+
+    .onboarding-section {
+        padding: 1.5rem;
+    }
+
+    .onboarding-section-title {
+        font-size: 1.25rem;
     }
 }
 

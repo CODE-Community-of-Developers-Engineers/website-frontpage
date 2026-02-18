@@ -90,7 +90,22 @@
         </h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
             {{ range first 3 (where site.RegularPages "Section" "blog") }}
-            <article class="card blog-card-home">
+            <article class="card blog-card-home" style="padding: 0; overflow: hidden;">
+                {{ if .Params.image }}
+                    {{ if hasPrefix .Params.image "/" }}
+                <a href="{{ .RelPermalink }}" style="display: block;">
+                    <img src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                </a>
+                    {{ else }}
+                        {{ $imgResource := .Resources.GetMatch .Params.image }}
+                        {{ with $imgResource }}
+                <a href="{{ $.RelPermalink }}" style="display: block;">
+                    <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                </a>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                <div style="padding: 1.5rem;">
                 {{ if .Params.featured }}
                 <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
                     Featured
@@ -124,6 +139,7 @@
                 <a href="{{ .RelPermalink }}" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
                     Read more →
                 </a>
+                </div>
             </article>
             {{ end }}
         </div>

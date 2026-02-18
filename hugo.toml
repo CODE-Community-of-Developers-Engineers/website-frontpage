@@ -19,9 +19,9 @@ url = "/"
 weight = 10
 
 [[menus.main]]
-name = "Links"
-url = "/links/"
-weight = 20
+name = "Get Started"
+url = "/onboarding/"
+weight = 15
 
 [[menus.main]]
 name = "Blog"
@@ -42,6 +42,11 @@ weight = 40
 name = "Event Sponsorship"
 url = "/event-sponsorship/"
 weight = 50
+
+[[menus.main]]
+name = "Resources"
+url = "/resources/"
+weight = 55
 
 [[menus.main]]
 name = "Merch"

@@ -40,15 +40,31 @@
         <!-- Blog Posts -->
         <div class="blog-posts">
             {{ range .Pages.ByDate.Reverse }}
-            <article class="blog-post{{ if .Params.featured }} featured{{ end }}" 
-                     data-tags="{{ if .Params.tags }}{{ delimit .Params.tags " " }}{{ end }}" 
-                     data-topic="{{ .Params.topic | default "general" }}">
+            <article class="blog-post{{ if .Params.featured }} featured{{ end }}"
+                     data-tags="{{ if .Params.tags }}{{ delimit .Params.tags " " }}{{ end }}"
+                     data-topic="{{ .Params.topic | default "general" }}"
+                     style="padding: 0; overflow: hidden;">
+                {{ if .Params.image }}
+                    {{ if hasPrefix .Params.image "/" }}
+                <a href="{{ .RelPermalink }}" style="display: block;">
+                    <img src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                </a>
+                    {{ else }}
+                        {{ $imgResource := .Resources.GetMatch .Params.image }}
+                        {{ with $imgResource }}
+                <a href="{{ $.RelPermalink }}" style="display: block;">
+                    <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                </a>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                <div style="padding: 1.5rem;">
                 {{ if .Params.featured }}
                 <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
                     Featured
                 </div>
                 {{ end }}
-                
+
                 <h2 style="margin-bottom: 0.75rem;">
                     <a href="{{ .RelPermalink }}" style="text-decoration: none; color: var(--text-primary);">
                         {{ .Title }}
@@ -88,6 +104,7 @@
                 <a href="{{ .RelPermalink }}" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
                     Read full article →
                 </a>
+                </div>
             </article>
             {{ end }}
         </div>

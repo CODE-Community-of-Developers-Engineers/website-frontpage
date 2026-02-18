@@ -6,11 +6,14 @@ description: "Technical.ly profiles Tony Siu and the story behind building Code 
 topic: "press"
 tags: ["press", "community", "meetup", "networking", "startup"]
 featured: true
+image: "technically-feature.png"
 ---
 
 Technical.ly published a profile on Tony Siu, founder of Code and Coffee Philadelphia, as part of their "How I Got Here" series.
 
 <!--more-->
+
+![Technical.ly feature on Code & Coffee Philadelphia](technically-feature.png)
 
 ## The Story
 

@@ -5,7 +5,7 @@ author: "Code & Coffee Team"
 description: "IBTimes profiles Tony Siu on his long-term approach to AI research, projects, and community work."
 topic: "community"
 tags: ["ai", "community", "interview", "machine-learning", "research"]
-featured: true
+featured: false
 readingTime: 2
 image: "ibtimes-feature.png"
 ---

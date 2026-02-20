@@ -89,7 +89,10 @@
             Latest from Our Community
         </h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-            {{ range first 3 (where site.RegularPages "Section" "blog") }}
+            {{ $featured := where (where site.RegularPages "Section" "blog") "Params.featured" true }}
+            {{ $notFeatured := where (where site.RegularPages "Section" "blog") "Params.featured" "!=" true }}
+            {{ $sorted := union $featured $notFeatured }}
+            {{ range first 3 $sorted }}
             <article class="card blog-card-home" style="padding: 0; overflow: hidden;">
                 {{ if .Params.image }}
                     {{ if hasPrefix .Params.image "/" }}

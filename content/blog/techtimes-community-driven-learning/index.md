@@ -6,11 +6,14 @@ description: "Tech Times covers Code & Coffee Philadelphia's mission to revive c
 topic: "press"
 tags: ["press", "community", "meetup", "networking"]
 featured: true
+image: "techtimes-feature.png"
 ---
 
 Tech Times published a feature on Code & Coffee Philadelphia's mission to revive community-driven learning and strengthen Philadelphia's tech culture.
 
 <!--more-->
+
+![Tech Times feature on Code & Coffee Philadelphia](techtimes-feature.png)
 
 The article covers how our community is working to build an inclusive, collaborative space for developers, designers, and tech enthusiasts across Philadelphia.
 

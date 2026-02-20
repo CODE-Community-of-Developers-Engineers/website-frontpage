@@ -131,7 +131,7 @@ Welcome! Complete these 14 steps to get fully plugged into the Code & Coffee Phi
 <input type="checkbox" data-step="11">
 <span class="step-content">
 <span class="step-title">11. Explore our GitHub org</span>
-<span class="step-desc">Star repos, browse community projects, or make your first contribution: <a href="https://github.com/CodeandCoffeeCommunity" target="_blank">github.com/CodeandCoffeeCommunity</a></span>
+<span class="step-desc">Star repos, browse community projects, or make your first contribution: <a href="https://github.com/Coffee-Code-Philly-Accelerator" target="_blank">github.com/Coffee-Code-Philly-Accelerator</a></span>
 </span>
 </label>
 </div>

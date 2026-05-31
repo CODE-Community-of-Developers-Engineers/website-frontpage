@@ -153,6 +153,46 @@
 
     <div class="section-divider section-divider-flip"></div>
 
+    <!-- Tech Pulse - Live Feeds -->
+    <section class="homepage-section fade-in-section">
+        <h2 class="section-heading">
+            <span class="section-heading-icon"><i class="fa-solid fa-bolt"></i></span>
+            Tech Pulse
+        </h2>
+        <div class="feeds-grid">
+            <div class="feed-column">
+                <div class="feed-column-header">
+                    <i class="fa-solid fa-city"></i> Philly Tech News
+                </div>
+                <div class="feed-column-body" id="feed-philly-news">
+                    <div class="feed-item"><p style="color: var(--text-muted);">Loading...</p></div>
+                </div>
+            </div>
+            <div class="feed-column">
+                <div class="feed-column-header">
+                    <i class="fa-brands fa-github"></i> Trending on GitHub
+                </div>
+                <div class="feed-column-body" id="feed-github-trending">
+                    <div class="feed-item"><p style="color: var(--text-muted);">Loading...</p></div>
+                </div>
+            </div>
+            <div class="feed-column">
+                <div class="feed-column-header">
+                    <i class="fa-solid fa-microscope"></i> AI Paper Highlights
+                </div>
+                <div class="feed-column-body" id="feed-ai-papers">
+                    <div class="feed-item"><p style="color: var(--text-muted);">Loading...</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="feeds-updated">
+            <i class="fa-solid fa-robot"></i>
+            <span id="feeds-last-updated">Curated daily by our AI agents</span>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
     <!-- Community Features -->
     <section class="homepage-section fade-in-section">
         <h2 class="section-heading">
@@ -185,19 +225,17 @@
 
     <div class="section-divider"></div>
 
-    <!-- Upcoming Events -->
+    <!-- Upcoming Events (powered by dispatch agent) -->
     <section class="homepage-section section-tinted fade-in-section">
         <h2 class="section-heading">
             <span class="section-heading-icon"><i class="fa-solid fa-calendar-days"></i></span>
             Upcoming Events
         </h2>
-        <div class="card" style="text-align: center;">
-            <div id="upcoming-events">
-                <div style="color: var(--text-muted);">Loading upcoming events...</div>
-            </div>
-            <div style="margin-top: 1.5rem;">
-                <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary cta-pulse">View All Events</a>
-            </div>
+        <div class="events-feed-list" id="feed-upcoming-events">
+            <div style="text-align: center; color: var(--text-muted); padding: 2rem;">Loading events...</div>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary cta-pulse">View All on Meetup</a>
         </div>
     </section>
 

@@ -1,8 +1,8 @@
-# Code & Coffee Philadelphia - Replit Configuration
+# Coffee & Code Philadelphia - Replit Configuration
 
 ## Overview
 
-Code & Coffee Philadelphia is a community-focused static website built with Hugo, designed to bring together developers, designers, and tech enthusiasts in the Philadelphia area. The site serves as a central hub for event information, community resources, project requests, and talent matchmaking within the local tech ecosystem.
+Coffee & Code Philadelphia is a community-focused static website built with Hugo, designed to bring together developers, designers, and tech enthusiasts in the Philadelphia area. The site serves as a central hub for event information, community resources, project requests, and talent matchmaking within the local tech ecosystem.
 
 ## System Architecture
 
@@ -125,7 +125,7 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
   - Added tag-specific search functionality that only searches within that tag
   - Implemented related tags section showing tags from posts in the current tag
   - Added white backgrounds to hero section, search boxes, and blog headers
-  - Updated header logo with mixed fonts: "Code & Coffee" (serif) and "Philadelphia" (cursive)
+  - Updated header logo with mixed fonts: "Coffee & Code" (serif) and "Philadelphia" (cursive)
   
 - June 24, 2025: Implemented compact tag display with expandable/collapsible functionality
   - Created compact tag display showing 10 most popular tags initially (sorted by usage frequency)
@@ -187,7 +187,7 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
   - Added example blog posts demonstrating proper structure and formatting
 
 - June 23, 2025: Complete modern blog-focused redesign with original branding
-  - Redesigned entire site with modern layout while preserving original Code & Coffee aesthetics
+  - Redesigned entire site with modern layout while preserving original Coffee & Code aesthetics
   - Restored original color scheme (coffee tones, #59969B accent, #E9E3DC background)
   - Kept original button styles with Gloria Hallelujah font and bordered design
   - Maintained Vollkorn typography and subtle grid background pattern
@@ -221,7 +221,7 @@ Code & Coffee Philadelphia is a community-focused static website built with Hugo
 ## User Preferences
 
 - **Communication style**: Simple, everyday language
-- **Design preferences**: Modern blog-focused layout with original Code & Coffee branding maintained
+- **Design preferences**: Modern blog-focused layout with original Coffee & Code branding maintained
 - **Color scheme**: Original coffee-tone palette (#E9E3DC background, #59969B accent, warm earth tones)
 - **Typography**: Vollkorn serif for body text, Gloria Hallelujah for buttons/headings, original button styles with borders
 - **Filtering preferences**: Multi-tag selection capability, separate topic categories, clear filter options

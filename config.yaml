@@ -1,6 +1,6 @@
 baseURL: 'https://www.codephilly.com/Code-And-Coffee-philidelphia-Website'
 languageCode: 'en-us'
-title: 'Code & Coffee Philadelphia'
+title: 'Coffee & Code Philadelphia'
 theme: ''
 
 # Output formats
@@ -12,7 +12,7 @@ outputs:
 
 params:
   description: 'Your space to build.'
-  author: 'Code & Coffee Philadelphia'
+  author: 'Coffee & Code Philadelphia'
 
 markup:
   goldmark:

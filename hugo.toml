@@ -34,11 +34,6 @@ url = "/project-request/"
 weight = 30
 
 [[menus.main]]
-name = "Tech Talent Matchboard"
-url = "/talent-matchboard/"
-weight = 40
-
-[[menus.main]]
 name = "Event Sponsorship"
 url = "/event-sponsorship/"
 weight = 50

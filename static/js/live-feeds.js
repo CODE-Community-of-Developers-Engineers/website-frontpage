@@ -77,7 +77,7 @@
             '<span><i class="fa-solid fa-clock"></i> ' + time + '</span>' +
             '<span><i class="fa-solid fa-location-dot"></i> ' + item.location + '</span>' +
           '</div>' +
-          '<span class="event-feed-rsvp"><i class="fa-solid fa-users"></i> ' + item.rsvpCount + ' attending</span>' +
+          (item.rsvpCount ? '<span class="event-feed-rsvp"><i class="fa-solid fa-users"></i> ' + item.rsvpCount + ' attending</span>' : '') +
         '</div>' +
       '</a>';
     }).join('');
@@ -101,9 +101,21 @@
     var papersContainer = document.getElementById('feed-ai-papers');
     var eventsContainer = document.getElementById('feed-upcoming-events');
 
-    if (newsContainer) renderPhillyNews(data.phillyNews, newsContainer);
-    if (githubContainer) renderGithubTrending(data.githubTrending, githubContainer);
-    if (papersContainer) renderAiPapers(data.aiPapers, papersContainer);
+    if (newsContainer && data.phillyNews && data.phillyNews.length) {
+      renderPhillyNews(data.phillyNews, newsContainer);
+    } else if (newsContainer) {
+      newsContainer.closest('.feed-column').style.display = 'none';
+    }
+    if (githubContainer && data.githubTrending && data.githubTrending.length) {
+      renderGithubTrending(data.githubTrending, githubContainer);
+    } else if (githubContainer) {
+      githubContainer.closest('.feed-column').style.display = 'none';
+    }
+    if (papersContainer && data.aiPapers && data.aiPapers.length) {
+      renderAiPapers(data.aiPapers, papersContainer);
+    } else if (papersContainer) {
+      papersContainer.closest('.feed-column').style.display = 'none';
+    }
     if (eventsContainer && data.upcomingEvents) renderUpcomingEvents(data.upcomingEvents, eventsContainer);
     if (data.lastUpdated) renderLastUpdated(data.lastUpdated);
   }

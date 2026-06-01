@@ -56,6 +56,31 @@
     }).join('');
   }
 
+  function renderHackerNews(items, container) {
+    container.innerHTML = items.map(function (item) {
+      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
+        '<h4 class="feed-item-title">' + item.title + '</h4>' +
+        '<div class="feed-item-meta">' +
+          '<span class="feed-item-hn-score"><i class="fa-solid fa-arrow-up"></i> ' + item.score + '</span>' +
+          '<span><a href="' + item.hnUrl + '" target="_blank" rel="noopener noreferrer" class="feed-item-comments" onclick="event.stopPropagation()"><i class="fa-solid fa-comment"></i> ' + item.comments + '</a></span>' +
+          '<span>' + item.author + '</span>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+  }
+
+  function renderProductHunt(items, container) {
+    container.innerHTML = items.map(function (item) {
+      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
+        '<h4 class="feed-item-title">' + item.title + '</h4>' +
+        (item.description ? '<p class="feed-item-desc">' + item.description + '</p>' : '') +
+        '<div class="feed-item-meta">' +
+          '<span><i class="fa-solid fa-user"></i> ' + item.author + '</span>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+  }
+
   function renderUpcomingEvents(items, container) {
     var sorted = items.slice().sort(function (a, b) {
       return new Date(a.date) - new Date(b.date);
@@ -99,6 +124,8 @@
     var newsContainer = document.getElementById('feed-philly-news');
     var githubContainer = document.getElementById('feed-github-trending');
     var papersContainer = document.getElementById('feed-ai-papers');
+    var hnContainer = document.getElementById('feed-hacker-news');
+    var phContainer = document.getElementById('feed-product-hunt');
     var eventsContainer = document.getElementById('feed-upcoming-events');
 
     if (newsContainer && data.phillyNews && data.phillyNews.length) {
@@ -115,6 +142,16 @@
       renderAiPapers(data.aiPapers, papersContainer);
     } else if (papersContainer) {
       papersContainer.closest('.feed-column').style.display = 'none';
+    }
+    if (hnContainer && data.hackerNews && data.hackerNews.length) {
+      renderHackerNews(data.hackerNews, hnContainer);
+    } else if (hnContainer) {
+      hnContainer.closest('.feed-column').style.display = 'none';
+    }
+    if (phContainer && data.productHunt && data.productHunt.length) {
+      renderProductHunt(data.productHunt, phContainer);
+    } else if (phContainer) {
+      phContainer.closest('.feed-column').style.display = 'none';
     }
     if (eventsContainer && data.upcomingEvents) renderUpcomingEvents(data.upcomingEvents, eventsContainer);
     if (data.lastUpdated) renderLastUpdated(data.lastUpdated);

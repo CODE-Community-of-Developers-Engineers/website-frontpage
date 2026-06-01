@@ -6,6 +6,10 @@ const https = require('https');
 const http = require('http');
 
 const MEETUP_RSS_URL = 'https://www.meetup.com/code-coffee-philly/events/rss/';
+const HN_TOP_URL = 'https://hacker-news.firebaseio.com/v0/topstories.json';
+const HN_ITEM_URL = 'https://hacker-news.firebaseio.com/v0/item/';
+const HN_ALGOLIA_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=5';
+const PH_FEED_URL = 'https://www.producthunt.com/feed';
 const OUTPUT_FILE = path.join(__dirname, '..', 'static', 'js', 'live-feeds-data.js');
 
 // --- RSS XML parsing (same approach as SonOfAnton) ---
@@ -121,6 +125,97 @@ function fetchUrl(url) {
   });
 }
 
+// --- Hacker News fetcher (same approach as ccp-discord-daily) ---
+
+async function fetchHackerNews(count) {
+  count = count || 5;
+  let stories = [];
+
+  // Try Firebase first
+  try {
+    const topJson = await fetchUrl(HN_TOP_URL);
+    const topIds = JSON.parse(topJson).slice(0, count);
+    for (const id of topIds) {
+      try {
+        const itemJson = await fetchUrl(`${HN_ITEM_URL}${id}.json`);
+        const item = JSON.parse(itemJson);
+        if (item && item.title) {
+          stories.push({
+            title: item.title,
+            url: item.url || `https://news.ycombinator.com/item?id=${item.id}`,
+            score: item.score || 0,
+            comments: item.descendants || 0,
+            author: item.by || 'unknown',
+            hnId: item.id,
+            hnUrl: `https://news.ycombinator.com/item?id=${item.id}`
+          });
+        }
+      } catch (e) { /* skip individual item failures */ }
+    }
+    return stories;
+  } catch (e) {
+    console.warn('  Firebase HN failed:', e.message, '— trying Algolia');
+  }
+
+  // Fallback to Algolia
+  try {
+    const algoliaJson = await fetchUrl(HN_ALGOLIA_URL);
+    const data = JSON.parse(algoliaJson);
+    for (const hit of (data.hits || []).slice(0, count)) {
+      stories.push({
+        title: hit.title || '',
+        url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+        score: hit.points || 0,
+        comments: hit.num_comments || 0,
+        author: hit.author || 'unknown',
+        hnId: hit.objectID,
+        hnUrl: `https://news.ycombinator.com/item?id=${hit.objectID}`
+      });
+    }
+  } catch (e) {
+    console.warn('  Algolia HN also failed:', e.message);
+  }
+
+  return stories;
+}
+
+// --- Product Hunt fetcher (Atom feed, same as ccp-discord-daily) ---
+
+function parseAtomFeed(xml, count) {
+  count = count || 5;
+  const products = [];
+  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
+  let match;
+
+  while ((match = entryRegex.exec(xml)) !== null && products.length < count) {
+    const entry = match[1];
+    const title = extractTag(entry, 'title') || extractCDATA(entry, 'title') || 'Untitled';
+    const linkMatch = entry.match(/<link[^>]*href="([^"]*)"[^>]*\/?\s*>/);
+    const url = linkMatch ? linkMatch[1] : '';
+    const authorMatch = entry.match(/<author>\s*<name>([^<]*)<\/name>/);
+    const author = authorMatch ? authorMatch[1] : 'Unknown';
+    const published = extractTag(entry, 'published') || '';
+    const content = extractCDATA(entry, 'content') || extractTag(entry, 'content') || '';
+    const description = stripHtml(content).slice(0, 200);
+
+    products.push({ title: title.trim(), url, author, published, description });
+  }
+
+  return products;
+}
+
+async function fetchProductHunt(count) {
+  count = count || 5;
+  try {
+    const xml = await fetchUrl(PH_FEED_URL);
+    if (!xml.includes('<entry>')) return [];
+    return parseAtomFeed(xml, count);
+  } catch (e) {
+    console.warn('  Product Hunt fetch failed:', e.message);
+    return [];
+  }
+}
+
 // --- Seed data (shown until dispatch agents populate real data) ---
 
 const SEED_PHILLY_NEWS = [
@@ -149,26 +244,37 @@ const SEED_AI_PAPERS = [
 // --- Main ---
 
 async function generateLiveFeeds() {
-  console.log('Fetching Meetup events from RSS...');
+  console.log('Fetching live feeds...\n');
+
+  // Fetch all sources in parallel
+  const [meetupResult, hnResult, phResult] = await Promise.allSettled([
+    fetchUrl(MEETUP_RSS_URL).then(xml => xml.includes('<item>') ? parseMeetupRSS(xml) : []),
+    fetchHackerNews(5),
+    fetchProductHunt(5)
+  ]);
 
   let meetupEvents = [];
-  try {
-    const xml = await fetchUrl(MEETUP_RSS_URL);
-    if (xml.includes('<item>')) {
-      meetupEvents = parseMeetupRSS(xml);
-      console.log(`✓ Fetched ${meetupEvents.length} events from Meetup RSS`);
-    } else {
-      console.warn('⚠ No items found in Meetup RSS feed');
-    }
-  } catch (err) {
-    console.error('⚠ Failed to fetch Meetup RSS:', err.message);
-    console.log('  Falling back to existing data if available...');
+  if (meetupResult.status === 'fulfilled') {
+    meetupEvents = meetupResult.value;
+    console.log(`✓ Meetup: ${meetupEvents.length} events`);
+  } else {
+    console.warn('⚠ Meetup RSS failed:', meetupResult.reason?.message);
+  }
 
-    // Try to preserve existing event data
-    if (fs.existsSync(OUTPUT_FILE)) {
-      console.log('  Keeping existing live-feeds-data.js');
-      return;
-    }
+  let hnStories = [];
+  if (hnResult.status === 'fulfilled') {
+    hnStories = hnResult.value;
+    console.log(`✓ Hacker News: ${hnStories.length} stories`);
+  } else {
+    console.warn('⚠ HN fetch failed:', hnResult.reason?.message);
+  }
+
+  let phProducts = [];
+  if (phResult.status === 'fulfilled') {
+    phProducts = phResult.value;
+    console.log(`✓ Product Hunt: ${phProducts.length} products`);
+  } else {
+    console.warn('⚠ Product Hunt fetch failed:', phResult.reason?.message);
   }
 
   // Sort events by date
@@ -198,6 +304,8 @@ async function generateLiveFeeds() {
       url: e.url,
       description: e.description
     })),
+    hackerNews: hnStories,
+    productHunt: phProducts,
     // Preserve other feeds from existing data (agents update these separately)
     // Seed with sample data until agents are deployed
     phillyNews: existingData.phillyNews && existingData.phillyNews.length ? existingData.phillyNews : SEED_PHILLY_NEWS,

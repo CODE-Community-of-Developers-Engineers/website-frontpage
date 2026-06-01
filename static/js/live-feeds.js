@@ -153,7 +153,14 @@
     } else if (phContainer) {
       phContainer.closest('.feed-column').style.display = 'none';
     }
-    if (eventsContainer && data.upcomingEvents) renderUpcomingEvents(data.upcomingEvents, eventsContainer);
+    if (eventsContainer && data.upcomingEvents && data.upcomingEvents.length) {
+      renderUpcomingEvents(data.upcomingEvents, eventsContainer);
+    } else if (eventsContainer) {
+      eventsContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 2rem;">' +
+        '<p>No upcoming events right now.</p>' +
+        '<p style="font-size: 0.9rem;">Check <a href="https://www.meetup.com/code-coffee-philly/events/" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color);">our Meetup page</a> for the latest schedule.</p>' +
+        '</div>';
+    }
     if (data.lastUpdated) renderLastUpdated(data.lastUpdated);
   }
 

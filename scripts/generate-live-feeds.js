@@ -277,7 +277,10 @@ async function generateLiveFeeds() {
     console.warn('⚠ Product Hunt fetch failed:', phResult.reason?.message);
   }
 
-  // Sort events by date
+  // Filter out past events and sort by date
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  meetupEvents = meetupEvents.filter(e => new Date(e.date) >= now);
   meetupEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   // Read existing file to preserve non-event feed data

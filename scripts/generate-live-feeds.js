@@ -5,14 +5,14 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 
-const MEETUP_RSS_URL = 'https://www.meetup.com/code-coffee-philly/events/rss/';
+const MEETUP_EVENTS_URL = 'https://www.meetup.com/code-coffee-philly/events/';
 const HN_TOP_URL = 'https://hacker-news.firebaseio.com/v0/topstories.json';
 const HN_ITEM_URL = 'https://hacker-news.firebaseio.com/v0/item/';
 const HN_ALGOLIA_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=5';
 const PH_FEED_URL = 'https://www.producthunt.com/feed';
 const OUTPUT_FILE = path.join(__dirname, '..', 'static', 'js', 'live-feeds-data.js');
 
-// --- RSS XML parsing (same approach as SonOfAnton) ---
+// --- XML parsing helpers (for Product Hunt Atom feed) ---
 
 function extractTag(xml, tag) {
   const regex = new RegExp(`<${tag}[^>]*>([^<]*)</${tag}>`);
@@ -43,62 +43,69 @@ function stripHtml(text) {
     .trim();
 }
 
-function parseMeetupRSS(xml) {
+// --- Meetup events page scraper (extracts Apollo GraphQL state) ---
+
+function parseMeetupEventsPage(html) {
   const events = [];
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-  let match;
 
-  while ((match = itemRegex.exec(xml)) !== null) {
-    const itemXml = match[1];
+  // Extract __NEXT_DATA__ script containing Apollo state
+  const nextDataMatch = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+  if (!nextDataMatch) {
+    console.warn('  Could not find __NEXT_DATA__ in Meetup page');
+    return events;
+  }
 
-    const title = extractCDATA(itemXml, 'title') || extractTag(itemXml, 'title');
-    const link = extractTag(itemXml, 'link');
-    const guid = extractTag(itemXml, 'guid');
-    const pubDate = extractTag(itemXml, 'pubDate');
-    const description = extractCDATA(itemXml, 'description') || extractTag(itemXml, 'description');
+  let nextData;
+  try {
+    nextData = JSON.parse(nextDataMatch[1]);
+  } catch (e) {
+    console.warn('  Failed to parse __NEXT_DATA__:', e.message);
+    return events;
+  }
 
-    if (!title) continue;
+  const apolloState = nextData?.props?.pageProps?.__APOLLO_STATE__;
+  if (!apolloState) {
+    console.warn('  Could not find __APOLLO_STATE__ in __NEXT_DATA__');
+    return events;
+  }
 
-    // Extract location from description if available
-    const location = extractLocationFromDescription(description || '');
+  // Find all Event objects in the Apollo cache
+  for (const [key, value] of Object.entries(apolloState)) {
+    if (!key.startsWith('Event:') || value.__typename !== 'Event') continue;
+    if (value.status !== 'ACTIVE') continue;
 
-    // Extract event date/time from description
-    const eventDateTime = extractDateTimeFromDescription(description || '', pubDate);
+    const title = value.title || '';
+    const dateTime = value.dateTime || '';
+    const eventUrl = value.eventUrl || `https://www.meetup.com/code-coffee-philly/events/${value.id}/`;
+
+    // Resolve venue reference
+    let location = 'Philadelphia, PA';
+    if (value.venue && value.venue.__ref) {
+      const venue = apolloState[value.venue.__ref];
+      if (venue && venue.name) {
+        location = venue.name;
+        if (venue.address) location += ', ' + venue.address;
+      }
+    } else if (value.venue && value.venue.name) {
+      location = value.venue.name;
+    }
+
+    // Get RSVP count
+    let rsvpCount = 0;
+    if (value.going && value.going.totalCount != null) {
+      rsvpCount = value.going.totalCount;
+    }
 
     events.push({
-      name: title.trim(),
-      url: link ? link.trim() : '',
-      guid: guid ? guid.trim() : '',
-      date: eventDateTime,
-      location: location || 'Philadelphia, PA',
-      description: description ? stripHtml(description).slice(0, 200) : ''
+      name: title,
+      date: dateTime ? new Date(dateTime).toISOString() : new Date().toISOString(),
+      location: location,
+      url: eventUrl,
+      rsvpCount: rsvpCount
     });
   }
 
   return events;
-}
-
-function extractLocationFromDescription(desc) {
-  const plain = stripHtml(desc);
-  // Meetup descriptions often contain location after certain patterns
-  const locationPatterns = [
-    /(?:Location|Where|Venue):\s*(.+?)(?:\n|$)/i,
-    /(?:at|@)\s+([A-Z][^,\n]+(?:,\s*[A-Z][^,\n]+)?)/,
-  ];
-  for (const pattern of locationPatterns) {
-    const match = plain.match(pattern);
-    if (match) return match[1].trim().slice(0, 100);
-  }
-  return null;
-}
-
-function extractDateTimeFromDescription(desc, pubDate) {
-  // Use pubDate as fallback - Meetup RSS pubDate is the event date
-  if (pubDate) {
-    const d = new Date(pubDate);
-    if (!isNaN(d.getTime())) return d.toISOString();
-  }
-  return new Date().toISOString();
 }
 
 // --- HTTP fetch with redirect following ---
@@ -248,7 +255,7 @@ async function generateLiveFeeds() {
 
   // Fetch all sources in parallel
   const [meetupResult, hnResult, phResult] = await Promise.allSettled([
-    fetchUrl(MEETUP_RSS_URL).then(xml => xml.includes('<item>') ? parseMeetupRSS(xml) : []),
+    fetchUrl(MEETUP_EVENTS_URL).then(html => parseMeetupEventsPage(html)),
     fetchHackerNews(5),
     fetchProductHunt(5)
   ]);
@@ -258,7 +265,7 @@ async function generateLiveFeeds() {
     meetupEvents = meetupResult.value;
     console.log(`✓ Meetup: ${meetupEvents.length} events`);
   } else {
-    console.warn('⚠ Meetup RSS failed:', meetupResult.reason?.message);
+    console.warn('⚠ Meetup events page failed:', meetupResult.reason?.message);
   }
 
   let hnStories = [];
@@ -277,11 +284,12 @@ async function generateLiveFeeds() {
     console.warn('⚠ Product Hunt fetch failed:', phResult.reason?.message);
   }
 
-  // Filter out past events and sort by date
+  // Keep only future events, sorted soonest first, limit to 5
   const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  meetupEvents = meetupEvents.filter(e => new Date(e.date) >= now);
-  meetupEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+  meetupEvents = meetupEvents
+    .filter(e => new Date(e.date) >= now)
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .slice(0, 5);
 
   // Read existing file to preserve non-event feed data
   let existingData = {};
@@ -305,7 +313,7 @@ async function generateLiveFeeds() {
       date: e.date,
       location: e.location,
       url: e.url,
-      description: e.description
+      rsvpCount: e.rsvpCount || 0
     })),
     hackerNews: hnStories,
     productHunt: phProducts,
@@ -316,7 +324,7 @@ async function generateLiveFeeds() {
     aiPapers: existingData.aiPapers && existingData.aiPapers.length ? existingData.aiPapers : SEED_AI_PAPERS
   };
 
-  const jsContent = `// Live feeds data - events fetched from Meetup RSS, other feeds populated by dispatch agents
+  const jsContent = `// Live feeds data - events from Meetup, other feeds populated by dispatch agents
 // Auto-generated by scripts/generate-live-feeds.js
 window.LIVE_FEEDS = ${JSON.stringify(feedsData, null, 2)};
 `;

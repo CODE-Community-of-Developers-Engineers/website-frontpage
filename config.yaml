@@ -36,9 +36,6 @@ menu:
     - name: "Project Request"
       url: "/project-request/"
       weight: 30
-    - name: "Tech Talent Matchboard"
-      url: "/talent-matchboard/"
-      weight: 40
     - name: "Event Sponsorship"
       url: "/event-sponsorship/"
       weight: 50

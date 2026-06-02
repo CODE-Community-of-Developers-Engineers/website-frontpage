@@ -28,13 +28,15 @@ function extractCDATA(xml, tag) {
 
 function stripHtml(text) {
   return text
-    .replace(/<[^>]+>/g, '')
+    // Decode HTML entities first, before stripping tags
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&nbsp;/g, ' ')
     .replace(/&quot;/g, '"')
     .replace(/&#\d+;/g, '')
+    // Now strip HTML tags
+    .replace(/<[^>]+>/g, '')
     .replace(/#{1,6}\s*/g, '')
     .replace(/\*{1,2}([^*]+)\*{1,2}/g, '$1')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
@@ -203,7 +205,10 @@ function parseAtomFeed(xml, count) {
     const author = authorMatch ? authorMatch[1] : 'Unknown';
     const published = extractTag(entry, 'published') || '';
     const content = extractCDATA(entry, 'content') || extractTag(entry, 'content') || '';
-    const description = stripHtml(content).slice(0, 200);
+    const description = stripHtml(content)
+      .replace(/\s*Discussion\s*\|\s*Link.*$/s, '')
+      .trim()
+      .slice(0, 200);
 
     products.push({ title: title.trim(), url, author, published, description });
   }

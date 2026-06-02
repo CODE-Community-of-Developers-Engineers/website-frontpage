@@ -4,7 +4,7 @@ subtitle: "💻 Need help with your coding project? We're here to assist!"
 attention_line: true
 ---
 
-Got a coding challenge you're stuck on? Working on an exciting project that could use some extra hands? Code & Coffee Philadelphia is here to help! Our community is full of talented developers, designers, and tech enthusiasts who love collaborating and sharing knowledge.
+Got a coding challenge you're stuck on? Working on an exciting project that could use some extra hands? Coffee & Code Philadelphia is here to help! Our community is full of talented developers, designers, and tech enthusiasts who love collaborating and sharing knowledge.
 
 Whether you're a beginner looking for guidance or an experienced developer seeking feedback, we welcome project requests of all kinds. From debugging sessions to architectural advice, our community members are eager to contribute their expertise.
 

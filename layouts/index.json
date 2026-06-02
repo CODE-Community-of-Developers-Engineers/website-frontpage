@@ -6,7 +6,7 @@
     "content" .Plain
     "url" .RelPermalink
     "date" (.Date.Format "2006-01-02")
-    "author" (.Params.author | default "Code & Coffee Team")
+    "author" (.Params.author | default "Coffee & Code Team")
     "tags" (.Params.tags | default slice)
     "topic" (.Params.topic | default "blog")
     "featured" (.Params.featured | default false)
@@ -24,7 +24,7 @@
       "content" .Plain
       "url" .RelPermalink
       "date" (.Date.Format "2006-01-02")
-      "author" "Code & Coffee Team"
+      "author" "Coffee & Code Team"
       "tags" slice
       "topic" (.Section | default "page")
       "featured" false

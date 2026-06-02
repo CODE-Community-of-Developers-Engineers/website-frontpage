@@ -5,7 +5,7 @@ attention_line: true
 ---
 
 <div class="sponsor-hero-banner">
-  <img src="/images/events/hackathon.jpg" alt="Code & Coffee hackathon event" class="sponsor-hero-img">
+  <img src="/images/events/hackathon.jpg" alt="Coffee & Code hackathon event" class="sponsor-hero-img">
   <div class="sponsor-hero-overlay">
     <div class="sponsor-hero-text">
       <span class="sponsor-hero-tagline">Fuel the builders. Fund the future.</span>
@@ -13,7 +13,7 @@ attention_line: true
   </div>
 </div>
 
-Code & Coffee Philadelphia is where engineers, researchers, and builders come to do real work. Every week, our members ship side projects, grind LeetCode, prototype AI systems, pair on open-source contributions, and push each other to get better. This isn't a networking happy hour — it's a working community.
+Coffee & Code Philadelphia is where engineers, researchers, and builders come to do real work. Every week, our members ship side projects, grind LeetCode, prototype AI systems, pair on open-source contributions, and push each other to get better. This isn't a networking happy hour — it's a working community.
 
 <div class="sponsor-stats-strip">
   <div class="sponsor-stat">
@@ -55,7 +55,7 @@ We run hackathons, dev workshops, AI paper reading groups, ML system design sess
   </div>
 </div>
 
-Code & Coffee Philly is growing into an incubator for technology, engineering, and applied AI research in the Philadelphia region. When you sponsor us, you're investing in the infrastructure that turns ideas into working software and connects talented people who would never have met otherwise.
+Coffee & Code Philly is growing into an incubator for technology, engineering, and applied AI research in the Philadelphia region. When you sponsor us, you're investing in the infrastructure that turns ideas into working software and connects talented people who would never have met otherwise.
 
 <div class="sponsor-photo-grid sponsor-photo-grid-3">
   <div class="sponsor-photo-item">
@@ -80,7 +80,7 @@ Code & Coffee Philly is growing into an incubator for technology, engineering, a
   <div class="sponsorship-tab-panel active" role="tabpanel" id="panel-event" aria-labelledby="tab-event">
     <div class="sponsorship-tab-copy">
       <h3>Put your brand in the room where it happens</h3>
-      <p>Event sponsors power individual Code & Coffee meetups, hackathons, and workshops. In return, you get direct access to a concentrated audience of developers, engineers, and tech professionals actively building and learning.</p>
+      <p>Event sponsors power individual Coffee & Code meetups, hackathons, and workshops. In return, you get direct access to a concentrated audience of developers, engineers, and tech professionals actively building and learning.</p>
       <div class="sponsor-benefits-grid">
         <div class="sponsor-benefit-card">
           <div class="sponsor-benefit-icon">
@@ -118,7 +118,7 @@ Code & Coffee Philly is growing into an incubator for technology, engineering, a
   <div class="sponsorship-tab-panel" role="tabpanel" id="panel-partner" aria-labelledby="tab-partner" hidden>
     <div class="sponsorship-tab-copy">
       <h3>Invest in Philadelphia's tech incubator</h3>
-      <p>Partner sponsorship is for organizations that see the bigger picture. Code & Coffee Philly is more than a meetup — it's an incubator where engineers sharpen skills, AI researchers prototype ideas, and early-stage projects find their first collaborators. Partners get embedded in that ecosystem.</p>
+      <p>Partner sponsorship is for organizations that see the bigger picture. Coffee & Code Philly is more than a meetup — it's an incubator where engineers sharpen skills, AI researchers prototype ideas, and early-stage projects find their first collaborators. Partners get embedded in that ecosystem.</p>
       <div class="sponsor-benefits-grid">
         <div class="sponsor-benefit-card">
           <div class="sponsor-benefit-icon">
@@ -163,7 +163,7 @@ Code & Coffee Philly is growing into an incubator for technology, engineering, a
 </div>
 
 <div class="sponsor-community-banner">
-  <img src="/images/events/Our_Community.jpeg" alt="Our Code & Coffee community">
+  <img src="/images/events/Our_Community.jpeg" alt="Our Coffee & Code community">
   <div class="sponsor-community-overlay">
     <span>Join the companies investing in Philadelphia's builders</span>
   </div>

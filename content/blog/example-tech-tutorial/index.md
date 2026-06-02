@@ -260,4 +260,4 @@ Congratulations! You've built your first REST API. Here are some improvements yo
 
 Building REST APIs with Node.js and Express is straightforward once you understand the fundamentals. This tutorial covered the basics, but there's much more to explore in backend development.
 
-Keep practicing, and don't hesitate to ask questions in our Code & Coffee meetups!
+Keep practicing, and don't hesitate to ask questions in our Coffee & Code meetups!

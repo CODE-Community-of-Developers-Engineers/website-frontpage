@@ -4,7 +4,7 @@ layout: "single"
 type: "page"
 ---
 
-Welcome! Complete these 14 steps to get fully plugged into the Code & Coffee Philadelphia community.
+Welcome! Complete these 14 steps to get fully plugged into the Coffee & Code Philadelphia community.
 
 <div class="onboarding-container">
 
@@ -26,7 +26,7 @@ Welcome! Complete these 14 steps to get fully plugged into the Code & Coffee Phi
 <input type="checkbox" data-step="2">
 <span class="step-content">
 <span class="step-title">2. Join us on Meetup & enable notifications</span>
-<span class="step-desc">Join <a href="https://www.meetup.com/code-coffee-philly/" target="_blank">Code & Coffee Philly on Meetup</a> and turn on the bell icon so you never miss an RSVP.</span>
+<span class="step-desc">Join <a href="https://www.meetup.com/code-coffee-philly/" target="_blank">Coffee & Code Philly on Meetup</a> and turn on the bell icon so you never miss an RSVP.</span>
 </span>
 </label>
 </div>

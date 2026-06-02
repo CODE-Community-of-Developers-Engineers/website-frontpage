@@ -4,7 +4,7 @@ layout: "single"
 type: "page"
 ---
 
-Connect with Code & Coffee Philadelphia across the web:
+Connect with Coffee & Code Philadelphia across the web:
 
 <div class="links-container">
 
@@ -22,7 +22,7 @@ Connect with Code & Coffee Philadelphia across the web:
 
 <div class="link-item">
 <h3>🛍️ Merch Store</h3>
-<p>Get Code & Coffee branded gear and merchandise</p>
+<p>Get Coffee & Code branded gear and merchandise</p>
 <a href="https://nol-kky-shop.fourthwall.com/" target="_blank" class="btn">Shop Now</a>
 </div>
 

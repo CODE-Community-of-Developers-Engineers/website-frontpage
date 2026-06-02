@@ -1,6 +1,6 @@
 ---
 title: "Search"
-description: "Search through all Code & Coffee Philadelphia content"
+description: "Search through all Coffee & Code Philadelphia content"
 layout: "search"
 ---
 

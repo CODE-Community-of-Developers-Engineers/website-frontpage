@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Code & Coffee Philadelphia community website built with Hugo static site generator. Hosted on GitHub Pages with Cloudflare CDN.
+Coffee & Code Philadelphia community website built with Hugo static site generator. Hosted on GitHub Pages with Cloudflare CDN.
 
 ## Build Commands
 

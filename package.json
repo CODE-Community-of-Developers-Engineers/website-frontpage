@@ -1,7 +1,7 @@
 {
   "name": "code-coffee-philly",
   "version": "1.0.0",
-  "description": "Code & Coffee Philadelphia community website",
+  "description": "Coffee & Code Philadelphia community website",
   "scripts": {
     "generate:events": "node scripts/generate-events-data.js",
     "validate:frontmatter": "node scripts/validate-frontmatter.js",

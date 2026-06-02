@@ -1,6 +1,6 @@
 # Blog Content Management Guide
 
-This guide explains how to create and manage blog posts for the Code & Coffee Philadelphia website using Hugo's page bundles.
+This guide explains how to create and manage blog posts for the Coffee & Code Philadelphia website using Hugo's page bundles.
 
 ## Hugo Page Bundles
 
@@ -137,7 +137,7 @@ Use fenced code blocks with syntax highlighting:
 ```markdown
 ```javascript
 function hello() {
-    console.log("Hello, Code & Coffee!");
+    console.log("Hello, Coffee & Code!");
 }
 ```
 

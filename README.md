@@ -1,4 +1,4 @@
-# Code & Coffee Philadelphia
+# Coffee & Code Philadelphia
 
 [![Hugo](https://img.shields.io/badge/Hugo-0.126.1-ff4088?logo=hugo)](https://gohugo.io/)
 [![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-222?logo=github)](https://pages.github.com/)
@@ -8,7 +8,7 @@
 
 ## About
 
-Code & Coffee Philadelphia is a welcoming community for anyone interested in technology, coding, and building projects. Whether you're a seasoned developer or just starting your journey, you'll find a supportive environment to learn, collaborate, and grow.
+Coffee & Code Philadelphia is a welcoming community for anyone interested in technology, coding, and building projects. Whether you're a seasoned developer or just starting your journey, you'll find a supportive environment to learn, collaborate, and grow.
 
 We host regular events including:
 - **Weekend Coding Crew** - Casual coding sessions
@@ -32,7 +32,7 @@ We host regular events including:
 | Resource | Link |
 |----------|------|
 | Live Site | [codephilly.com](https://www.codephilly.com/Code-And-Coffee-philidelphia-Website) |
-| Meetup Group | [Code & Coffee Philadelphia](https://www.meetup.com/code-and-coffee-philadelphia/) |
+| Meetup Group | [Coffee & Code Philadelphia](https://www.meetup.com/code-and-coffee-philadelphia/) |
 | Merch Store | [Fourth Wall Shop](https://nol-kky-shop.fourthwall.com/) |
 | Community Fund | [Hack Club Bank](https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia) |
 
@@ -266,7 +266,7 @@ We welcome contributions! Here's how to get involved:
 
 ## Community
 
-- **Meetup**: [Code & Coffee Philadelphia](https://www.meetup.com/code-and-coffee-philadelphia/)
+- **Meetup**: [Coffee & Code Philadelphia](https://www.meetup.com/code-and-coffee-philadelphia/)
 - **Website**: [codephilly.com](https://www.codephilly.com/Code-And-Coffee-philidelphia-Website)
 
 Join us for events, ask questions, and connect with fellow developers!
@@ -277,4 +277,4 @@ This project is open source and available for community use.
 
 ---
 
-Built with caffeine and code by the Code & Coffee Philadelphia community.
+Built with caffeine and code by the Coffee & Code Philadelphia community.

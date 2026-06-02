@@ -1,12 +1,12 @@
 baseURL = 'https://www.codephilly.com/Code-And-Coffee-philidelphia-Website'
 languageCode = 'en-us'
-title = 'Code & Coffee Philadelphia'
+title = 'Coffee & Code Philadelphia'
 enableGitInfo = true
 ignoreFiles = ["README\\.md$"]
 
 [params]
 description = 'Your space to build.'
-author = 'Code & Coffee Philadelphia'
+author = 'Coffee & Code Philadelphia'
 
 [markup]
   [markup.goldmark]
@@ -32,11 +32,6 @@ weight = 25
 name = "Project Request"
 url = "/project-request/"
 weight = 30
-
-[[menus.main]]
-name = "Tech Talent Matchboard"
-url = "/talent-matchboard/"
-weight = 40
 
 [[menus.main]]
 name = "Event Sponsorship"

@@ -26,7 +26,7 @@
 
             <div class="hero-subtitle">
                 <p class="subtitle-description">
-                    <span class="community-name">Code & Coffee Philadelphia</span> - Where developers, designers, and tech enthusiasts come together to
+                    <span class="community-name">Coffee & Code Philadelphia</span> - Where developers, designers, and tech enthusiasts come together to
                     <span class="highlight-word">learn</span>,
                     <span class="highlight-word">build</span>, and
                     <span class="highlight-word">grow</span>
@@ -60,7 +60,7 @@
                 <div class="carousel-slide active">
                     <div class="hero-content" style="background: transparent; color: var(--text-primary); padding: 4rem 2rem; text-align: center; border-radius: 8px;">
                         <div class="hero-text">
-                            <h1>Code & Coffee Philadelphia</h1>
+                            <h1>Coffee & Code Philadelphia</h1>
                             <p>Loading events...</p>
                             <a href="/blog" class="cta-button">Learn More</a>
                         </div>
@@ -220,6 +220,49 @@
         </div>
         <div style="text-align: center; margin-top: 2rem;">
             <a href="{{ "blog" | relURL }}" class="btn btn-secondary cta-pulse">View All Posts</a>
+        </div>
+    </section>
+
+    <div class="section-divider section-divider-flip"></div>
+
+    <!-- Community Features -->
+    <section class="homepage-section fade-in-section">
+        <h2 class="section-heading">
+            <span class="section-heading-icon"><i class="fa-solid fa-handshake"></i></span>
+            How We Help
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="card feature-card">
+                <div class="feature-card-icon"><i class="fa-solid fa-code"></i></div>
+                <h3>Project Help</h3>
+                <p>Stuck on a coding challenge? Connect with experienced developers who can provide guidance and mentorship.</p>
+                <a href="{{ "project-request" | relURL }}" class="btn">Get Help</a>
+            </div>
+
+            <div class="card feature-card">
+                <div class="feature-card-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                <h3>Weekly Events</h3>
+                <p>Join our regular meetups for hands-on coding, workshops, and networking with fellow developers.</p>
+                <a href="https://www.meetup.com/code-coffee-philly/" class="btn">Join Events</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Upcoming Events -->
+    <section class="homepage-section section-tinted fade-in-section">
+        <h2 class="section-heading">
+            <span class="section-heading-icon"><i class="fa-solid fa-calendar-days"></i></span>
+            Upcoming Events
+        </h2>
+        <div class="card" style="text-align: center;">
+            <div id="upcoming-events">
+                <div style="color: var(--text-muted);">Loading upcoming events...</div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary cta-pulse">View All Events</a>
+            </div>
         </div>
     </section>
 

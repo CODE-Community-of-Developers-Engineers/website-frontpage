@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="{{ "/css/modern.css" | relURL }}?v={{ now.Unix }}">
-    
+    {{ if .IsHome }}<link rel="stylesheet" href="{{ "/css/live-feeds.css" | relURL }}?v={{ now.Unix }}">{{ end }}
+
     {{ block "head" . }}{{ end }}
 </head>
 <body>
@@ -44,8 +45,9 @@
     </script>
     <script src="{{ "/js/events-data.js" | relURL }}?v={{ now.Unix }}"></script>
     <script src="{{ "/js/carousel.js" | relURL }}?v={{ now.Unix }}"></script>
-    <script src="{{ "/js/meetup.js" | relURL }}"></script>
     <script src="{{ "/js/scroll-animations.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "/js/live-feeds-data.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "/js/live-feeds.js" | relURL }}?v={{ now.Unix }}"></script>
     {{ end }}
     {{ block "scripts" . }}{{ end }}
 </body>

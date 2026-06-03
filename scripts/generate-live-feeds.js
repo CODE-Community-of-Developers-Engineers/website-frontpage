@@ -11,9 +11,11 @@ const HN_ITEM_URL = 'https://hacker-news.firebaseio.com/v0/item/';
 const HN_ALGOLIA_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=5';
 const PH_FEED_URL = 'https://www.producthunt.com/feed';
 const GITHUB_SEARCH_URL = 'https://api.github.com/search/repositories';
+const GITHUB_TRENDING_URL = 'https://github.com/trending?since=daily';
 const ARXIV_API_URL = 'https://export.arxiv.org/api/query';
 const GOOGLE_NEWS_RSS_URL = 'https://news.google.com/rss/search';
 const OUTPUT_FILE = path.join(__dirname, '..', 'static', 'js', 'live-feeds-data.js');
+const PHILLY_NEWS_MAX_AGE_DAYS = 45;
 
 // --- XML parsing helpers (for Product Hunt Atom feed) ---
 
@@ -115,7 +117,7 @@ function parseMeetupEventsPage(html) {
 
 // --- HTTP fetch with redirect following ---
 
-function fetchUrl(url) {
+function fetchUrlOnce(url) {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('https') ? https : http;
     const req = client.get(url, {
@@ -135,6 +137,22 @@ function fetchUrl(url) {
     req.on('error', reject);
     req.setTimeout(15000, () => { req.destroy(); reject(new Error('Request timeout')); });
   });
+}
+
+async function fetchUrl(url, attempts) {
+  attempts = attempts || 2;
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      return await fetchUrlOnce(url);
+    } catch (e) {
+      lastError = e;
+      if (attempt < attempts) {
+        console.warn(`  Request failed (${attempt}/${attempts}) for ${url}: ${e.message}`);
+      }
+    }
+  }
+  throw lastError;
 }
 
 // --- Hacker News fetcher (same approach as ccp-discord-daily) ---
@@ -233,14 +251,63 @@ async function fetchProductHunt(count) {
 
 // --- GitHub Trending fetcher (same approach as ccp-discord-daily agent) ---
 
+function parseNumber(text) {
+  const normalized = String(text || '').replace(/[^\d]/g, '');
+  return normalized ? Number(normalized) : 0;
+}
+
+function parseGithubTrendingHtml(html, count) {
+  count = count || 5;
+  const repos = [];
+  const articleRegex = /<article[\s\S]*?<\/article>/g;
+  let match;
+
+  while ((match = articleRegex.exec(html)) !== null && repos.length < count) {
+    const article = match[0];
+    const repoMatch = article.match(/<h2[\s\S]*?<a[^>]*href="\/([^"]+)"[\s\S]*?<\/a>/);
+    if (!repoMatch) continue;
+    const repoPath = repoMatch[1].replace(/^\/+|\/+$/g, '');
+    if (repoPath.split('/').length !== 2) continue;
+
+    const descMatch = article.match(/<p[^>]*class="[^"]*col-9[^"]*"[^>]*>([\s\S]*?)<\/p>/);
+    const languageMatch = article.match(/itemprop="programmingLanguage"[^>]*>([^<]*)<\/span>/);
+    const starsMatch = article.match(/href="\/[^"]+\/stargazers"[\s\S]*?>([\s\S]*?)<\/a>/);
+    const todayMatch = article.match(/(\d[\d,]*)\s+stars?\s+today/i);
+
+    repos.push({
+      name: repoPath,
+      description: descMatch ? stripHtml(descMatch[1]).slice(0, 200) : 'No description',
+      language: languageMatch ? stripHtml(languageMatch[1]) : 'Unknown',
+      stars: parseNumber(starsMatch ? stripHtml(starsMatch[1]) : ''),
+      todayStars: parseNumber(todayMatch ? todayMatch[1] : ''),
+      url: `https://github.com/${repoPath}`
+    });
+  }
+
+  return repos;
+}
+
 async function fetchGithubTrending(count) {
   count = count || 5;
   try {
+    const html = await fetchUrl(GITHUB_TRENDING_URL);
+    const repos = parseGithubTrendingHtml(html, count);
+    if (repos.length) return repos;
+    console.warn('  GitHub Trending page returned no repos; trying Search API fallback');
+  } catch (e) {
+    console.warn('  GitHub Trending page failed:', e.message, '— trying Search API fallback');
+  }
+
+  try {
     const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-    const url = `${GITHUB_SEARCH_URL}?q=created:>${yesterday}&sort=stars&order=desc&per_page=${count}`;
+    const query = encodeURIComponent(`pushed:>${yesterday} stars:>1000 archived:false`);
+    const url = `${GITHUB_SEARCH_URL}?q=${query}&sort=updated&order=desc&per_page=${count * 3}`;
     const json = await fetchUrl(url);
     const data = JSON.parse(json);
-    return (data.items || []).slice(0, count).map(item => ({
+    return (data.items || [])
+      .filter(item => item && item.html_url && item.full_name)
+      .slice(0, count)
+      .map(item => ({
       name: item.full_name || '',
       description: (item.description || 'No description').slice(0, 200),
       language: item.language || 'Unknown',
@@ -304,9 +371,9 @@ async function fetchArxivPapers(count) {
 // --- Philly Tech News fetcher (Google News RSS, same as philly-tech-news agent) ---
 
 const PHILLY_NEWS_QUERIES = [
-  'Philadelphia technology startup',
-  'Philadelphia AI machine learning',
-  'Philly tech scene innovation',
+  'Philadelphia technology startup when:30d',
+  'Philadelphia AI machine learning when:30d',
+  'Philly tech scene innovation when:30d',
 ];
 
 const PHILLY_CATEGORY_MAP = {
@@ -317,12 +384,23 @@ const PHILLY_CATEGORY_MAP = {
   'biotech': 'Biotech', 'health': 'Biotech',
 };
 
+const PHILLY_TECH_KEYWORDS = [
+  'technology', 'tech', 'startup', 'start-up', 'software', 'developer',
+  'ai ', 'artificial intelligence', 'machine learning', 'data', 'cyber',
+  'innovation', 'biotech', 'digital', 'venture', 'funding'
+];
+
 function categorizeArticle(title) {
   const lower = title.toLowerCase();
   for (const [keyword, category] of Object.entries(PHILLY_CATEGORY_MAP)) {
     if (lower.includes(keyword)) return category;
   }
   return 'Innovation';
+}
+
+function isPhillyTechArticle(item) {
+  const text = `${item.title || ''} ${item.source || ''}`.toLowerCase();
+  return PHILLY_TECH_KEYWORDS.some(keyword => text.includes(keyword));
 }
 
 function parseGoogleNewsRss(xml) {
@@ -349,6 +427,7 @@ async function fetchPhillyNews(count) {
   count = count || 5;
   const seen = new Set();
   const articles = [];
+  const newestAllowed = Date.now() - (PHILLY_NEWS_MAX_AGE_DAYS * 86400000);
 
   for (const query of PHILLY_NEWS_QUERIES) {
     if (articles.length >= count) break;
@@ -359,6 +438,9 @@ async function fetchPhillyNews(count) {
       const items = parseGoogleNewsRss(xml);
       for (const item of items) {
         if (articles.length >= count) break;
+        const publishedAt = item.pubDate ? new Date(item.pubDate) : null;
+        if (!publishedAt || Number.isNaN(publishedAt.getTime()) || publishedAt.getTime() < newestAllowed) continue;
+        if (!isPhillyTechArticle(item)) continue;
         // Deduplicate by title similarity
         const key = item.title.toLowerCase().slice(0, 60);
         if (seen.has(key)) continue;
@@ -368,7 +450,7 @@ async function fetchPhillyNews(count) {
           source: item.source || new URL(item.url).hostname.replace('www.', ''),
           url: item.url,
           category: categorizeArticle(item.title),
-          date: item.pubDate ? new Date(item.pubDate).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10)
+          date: publishedAt.toISOString().slice(0, 10)
         });
       }
     } catch (e) {
@@ -377,6 +459,12 @@ async function fetchPhillyNews(count) {
   }
 
   return articles;
+}
+
+function requireItems(name, items) {
+  if (!Array.isArray(items) || items.length === 0) {
+    throw new Error(`${name} returned no items; refusing to write empty live feed data`);
+  }
 }
 
 // --- Main ---
@@ -448,6 +536,13 @@ async function generateLiveFeeds() {
     .filter(e => new Date(e.date) >= now)
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .slice(0, 5);
+
+  requireItems('Meetup', meetupEvents);
+  requireItems('Hacker News', hnStories);
+  requireItems('Product Hunt', phProducts);
+  requireItems('Philly News', phillyNews);
+  requireItems('GitHub Trending', githubTrending);
+  requireItems('arXiv Papers', aiPapers);
 
   // Build the feeds data - all feeds fetched live
   const feedsData = {

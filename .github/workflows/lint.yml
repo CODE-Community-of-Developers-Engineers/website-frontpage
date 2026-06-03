@@ -104,8 +104,8 @@ jobs:
           npm ci
           gem install html-proofer
 
-      - name: Generate events data
-        run: node scripts/generate-events-data.js
+      - name: Generate static data
+        run: npm run generate:data
 
       - name: Build Hugo site
         run: hugo --gc --minify --baseURL "/"

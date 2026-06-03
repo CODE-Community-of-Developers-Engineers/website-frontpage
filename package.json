@@ -4,6 +4,8 @@
   "description": "Coffee & Code Philadelphia community website",
   "scripts": {
     "generate:events": "node scripts/generate-events-data.js",
+    "generate:live-feeds": "node scripts/generate-live-feeds.js",
+    "generate:data": "npm run generate:events && npm run generate:live-feeds",
     "validate:frontmatter": "node scripts/validate-frontmatter.js",
     "validate:events": "node scripts/validate-events-data.js",
     "validate": "npm run validate:events && npm run validate:frontmatter",
@@ -11,8 +13,8 @@
     "devserver": "hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000",
     "prod:build": "hugo --gc --minify --cleanDestinationDir --forceSyncStatic",
     "prod:local": "./scripts/servepublic.sh",
-    "prod": "npm run clean && npm run generate:events && npm run prod:build && npm run prod:local",
-    "start": "npm run clean && npm run generate:events && npm run devserver"
+    "prod": "npm run clean && npm run generate:data && npm run prod:build && npm run prod:local",
+    "start": "npm run clean && npm run generate:data && npm run devserver"
   },
   "devDependencies": {
     "gray-matter": "^4.0.3"

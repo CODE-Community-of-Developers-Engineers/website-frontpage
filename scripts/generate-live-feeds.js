@@ -10,6 +10,9 @@ const HN_TOP_URL = 'https://hacker-news.firebaseio.com/v0/topstories.json';
 const HN_ITEM_URL = 'https://hacker-news.firebaseio.com/v0/item/';
 const HN_ALGOLIA_URL = 'https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=5';
 const PH_FEED_URL = 'https://www.producthunt.com/feed';
+const GITHUB_SEARCH_URL = 'https://api.github.com/search/repositories';
+const ARXIV_API_URL = 'https://export.arxiv.org/api/query';
+const GOOGLE_NEWS_RSS_URL = 'https://news.google.com/rss/search';
 const OUTPUT_FILE = path.join(__dirname, '..', 'static', 'js', 'live-feeds-data.js');
 
 // --- XML parsing helpers (for Product Hunt Atom feed) ---
@@ -228,30 +231,153 @@ async function fetchProductHunt(count) {
   }
 }
 
-// --- Seed data (shown until dispatch agents populate real data) ---
+// --- GitHub Trending fetcher (same approach as ccp-discord-daily agent) ---
 
-const SEED_PHILLY_NEWS = [
-  { title: "Comcast RISE Awards $10K Grants to 100 Philly Small Businesses", source: "Technical.ly", url: "https://technical.ly/startups/", category: "Startup Funding", date: new Date().toISOString().slice(0, 10) },
-  { title: "Drexel AI Lab Partners with Jefferson Health on Diagnostic Models", source: "Philadelphia Business Journal", url: "https://www.bizjournals.com/philadelphia/", category: "AI Research", date: new Date(Date.now() - 86400000).toISOString().slice(0, 10) },
-  { title: "Philly Named Top 10 City for Tech Job Growth in 2026", source: "Built In", url: "https://builtin.com/", category: "Jobs & Careers", date: new Date(Date.now() - 172800000).toISOString().slice(0, 10) },
-  { title: "UPenn CIS Launches Open-Source LLM Benchmark for Healthcare", source: "Penn Today", url: "https://penntoday.upenn.edu/", category: "Open Source", date: new Date(Date.now() - 259200000).toISOString().slice(0, 10) },
-  { title: "Pennovation Works Welcomes 5 New Deep-Tech Startups", source: "Technical.ly", url: "https://technical.ly/startups/", category: "Startups", date: new Date(Date.now() - 345600000).toISOString().slice(0, 10) }
+async function fetchGithubTrending(count) {
+  count = count || 5;
+  try {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const url = `${GITHUB_SEARCH_URL}?q=created:>${yesterday}&sort=stars&order=desc&per_page=${count}`;
+    const json = await fetchUrl(url);
+    const data = JSON.parse(json);
+    return (data.items || []).slice(0, count).map(item => ({
+      name: item.full_name || '',
+      description: (item.description || 'No description').slice(0, 200),
+      language: item.language || 'Unknown',
+      stars: item.stargazers_count || 0,
+      todayStars: item.stargazers_count || 0,
+      url: item.html_url || ''
+    }));
+  } catch (e) {
+    console.warn('  GitHub Trending fetch failed:', e.message);
+    return [];
+  }
+}
+
+// --- arXiv AI Papers fetcher (same approach as ccp-discord-daily agent) ---
+
+function parseArxivXml(xml, count) {
+  count = count || 5;
+  const papers = [];
+  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
+  let match;
+
+  while ((match = entryRegex.exec(xml)) !== null && papers.length < count) {
+    const entry = match[1];
+    const title = (extractTag(entry, 'title') || 'Untitled').replace(/\s+/g, ' ').trim();
+    const id = extractTag(entry, 'id') || '';
+    const url = id.replace('http://', 'https://');
+    const published = (extractTag(entry, 'published') || '').slice(0, 10);
+    const summary = (extractTag(entry, 'summary') || '').replace(/\s+/g, ' ').trim().slice(0, 300);
+
+    // Extract authors
+    const authorRegex = /<author>\s*<name>([^<]*)<\/name>/g;
+    const authors = [];
+    let authorMatch;
+    while ((authorMatch = authorRegex.exec(entry)) !== null && authors.length < 5) {
+      authors.push(authorMatch[1].trim());
+    }
+    const authorsStr = authors.length > 3
+      ? authors.slice(0, 1).join(', ') + ' et al.'
+      : authors.join(', ');
+
+    papers.push({ title, authors: authorsStr, summary, url, date: published });
+  }
+
+  return papers;
+}
+
+async function fetchArxivPapers(count) {
+  count = count || 5;
+  try {
+    const query = 'cat:cs.AI+OR+cat:cs.CL+OR+cat:cs.LG';
+    const url = `${ARXIV_API_URL}?search_query=${query}&sortBy=submittedDate&sortOrder=descending&max_results=${count * 2}`;
+    const xml = await fetchUrl(url);
+    if (!xml.includes('<entry>')) return [];
+    return parseArxivXml(xml, count);
+  } catch (e) {
+    console.warn('  arXiv fetch failed:', e.message);
+    return [];
+  }
+}
+
+// --- Philly Tech News fetcher (Google News RSS, same as philly-tech-news agent) ---
+
+const PHILLY_NEWS_QUERIES = [
+  'Philadelphia technology startup',
+  'Philadelphia AI machine learning',
+  'Philly tech scene innovation',
 ];
 
-const SEED_GITHUB_TRENDING = [
-  { name: "anthropics/claude-code", description: "An agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster.", language: "TypeScript", stars: 30200, todayStars: 1250, url: "https://github.com/anthropics/claude-code" },
-  { name: "browser-use/browser-use", description: "Make websites accessible for AI agents.", language: "Python", stars: 18400, todayStars: 890, url: "https://github.com/browser-use/browser-use" },
-  { name: "julep-ai/julep", description: "A new DSL and server for multi-step AI workflows.", language: "Python", stars: 9200, todayStars: 620, url: "https://github.com/julep-ai/julep" },
-  { name: "pydantic/pydantic-ai", description: "Agent Framework / shim to use Pydantic with LLMs.", language: "Python", stars: 12800, todayStars: 450, url: "https://github.com/pydantic/pydantic-ai" },
-  { name: "vercel/ai", description: "Build AI-powered applications with React, Svelte, Vue, and Solid.", language: "TypeScript", stars: 15600, todayStars: 380, url: "https://github.com/vercel/ai" }
-];
+const PHILLY_CATEGORY_MAP = {
+  'startup': 'Startups', 'funding': 'Startup Funding', 'venture': 'Startup Funding',
+  'ai ': 'AI Research', 'machine learning': 'AI Research', 'research': 'AI Research',
+  'job': 'Jobs & Careers', 'hiring': 'Jobs & Careers', 'career': 'Jobs & Careers',
+  'open source': 'Open Source', 'github': 'Open Source',
+  'biotech': 'Biotech', 'health': 'Biotech',
+};
 
-const SEED_AI_PAPERS = [
-  { title: "ReasonFlux: Hierarchical LLM Reasoning with Scaled Thought Templates", authors: "Yang et al.", summary: "Proposes a hierarchical reasoning framework that decomposes complex problems into structured thought templates, achieving state-of-the-art on MATH and AIME benchmarks.", url: "https://arxiv.org/", date: new Date().toISOString().slice(0, 10) },
-  { title: "Scaling Test-Time Compute with Open Models Gives Better Results Than Scaling Parameters", authors: "Snell et al.", summary: "Demonstrates that smaller models with more test-time compute can outperform 14x larger models, challenging the scaling paradigm.", url: "https://arxiv.org/", date: new Date(Date.now() - 86400000).toISOString().slice(0, 10) },
-  { title: "Multimodal Mixture-of-Experts for Real-Time Video Understanding", authors: "Chen et al.", summary: "A sparse MoE architecture that processes video streams in real-time by routing visual and temporal tokens to specialized experts.", url: "https://arxiv.org/", date: new Date(Date.now() - 172800000).toISOString().slice(0, 10) },
-  { title: "Constitutional AI Without RLHF: Direct Preference Alignment at Scale", authors: "Park et al.", summary: "Shows that constitutional principles can be applied through supervised fine-tuning alone, matching RLHF quality with 10x less compute.", url: "https://arxiv.org/", date: new Date(Date.now() - 259200000).toISOString().slice(0, 10) }
-];
+function categorizeArticle(title) {
+  const lower = title.toLowerCase();
+  for (const [keyword, category] of Object.entries(PHILLY_CATEGORY_MAP)) {
+    if (lower.includes(keyword)) return category;
+  }
+  return 'Innovation';
+}
+
+function parseGoogleNewsRss(xml) {
+  const articles = [];
+  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+  let match;
+
+  while ((match = itemRegex.exec(xml)) !== null) {
+    const item = match[1];
+    const title = extractTag(item, 'title') || '';
+    const link = extractTag(item, 'link') || '';
+    const pubDate = extractTag(item, 'pubDate') || '';
+    const sourceMatch = item.match(/<source[^>]*>([^<]*)<\/source>/);
+    const source = sourceMatch ? sourceMatch[1] : '';
+
+    if (!link || !title) continue;
+    articles.push({ title, url: link, source, pubDate });
+  }
+
+  return articles;
+}
+
+async function fetchPhillyNews(count) {
+  count = count || 5;
+  const seen = new Set();
+  const articles = [];
+
+  for (const query of PHILLY_NEWS_QUERIES) {
+    if (articles.length >= count) break;
+    try {
+      const encoded = encodeURIComponent(query);
+      const url = `${GOOGLE_NEWS_RSS_URL}?q=${encoded}&hl=en-US&gl=US&ceid=US:en`;
+      const xml = await fetchUrl(url);
+      const items = parseGoogleNewsRss(xml);
+      for (const item of items) {
+        if (articles.length >= count) break;
+        // Deduplicate by title similarity
+        const key = item.title.toLowerCase().slice(0, 60);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        articles.push({
+          title: item.title,
+          source: item.source || new URL(item.url).hostname.replace('www.', ''),
+          url: item.url,
+          category: categorizeArticle(item.title),
+          date: item.pubDate ? new Date(item.pubDate).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10)
+        });
+      }
+    } catch (e) {
+      console.warn(`  Google News RSS failed for "${query}":`, e.message);
+    }
+  }
+
+  return articles;
+}
 
 // --- Main ---
 
@@ -259,10 +385,13 @@ async function generateLiveFeeds() {
   console.log('Fetching live feeds...\n');
 
   // Fetch all sources in parallel
-  const [meetupResult, hnResult, phResult] = await Promise.allSettled([
+  const [meetupResult, hnResult, phResult, ghResult, arxivResult, phillyResult] = await Promise.allSettled([
     fetchUrl(MEETUP_EVENTS_URL).then(html => parseMeetupEventsPage(html)),
     fetchHackerNews(5),
-    fetchProductHunt(5)
+    fetchProductHunt(5),
+    fetchGithubTrending(5),
+    fetchArxivPapers(5),
+    fetchPhillyNews(5)
   ]);
 
   let meetupEvents = [];
@@ -289,6 +418,30 @@ async function generateLiveFeeds() {
     console.warn('⚠ Product Hunt fetch failed:', phResult.reason?.message);
   }
 
+  let githubTrending = [];
+  if (ghResult.status === 'fulfilled') {
+    githubTrending = ghResult.value;
+    console.log(`✓ GitHub Trending: ${githubTrending.length} repos`);
+  } else {
+    console.warn('⚠ GitHub Trending fetch failed:', ghResult.reason?.message);
+  }
+
+  let aiPapers = [];
+  if (arxivResult.status === 'fulfilled') {
+    aiPapers = arxivResult.value;
+    console.log(`✓ arXiv Papers: ${aiPapers.length} papers`);
+  } else {
+    console.warn('⚠ arXiv fetch failed:', arxivResult.reason?.message);
+  }
+
+  let phillyNews = [];
+  if (phillyResult.status === 'fulfilled') {
+    phillyNews = phillyResult.value;
+    console.log(`✓ Philly News: ${phillyNews.length} articles`);
+  } else {
+    console.warn('⚠ Philly News fetch failed:', phillyResult.reason?.message);
+  }
+
   // Keep only future events, sorted soonest first, limit to 5
   const now = new Date();
   meetupEvents = meetupEvents
@@ -296,21 +449,7 @@ async function generateLiveFeeds() {
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .slice(0, 5);
 
-  // Read existing file to preserve non-event feed data
-  let existingData = {};
-  if (fs.existsSync(OUTPUT_FILE)) {
-    try {
-      const content = fs.readFileSync(OUTPUT_FILE, 'utf8');
-      const jsonMatch = content.match(/window\.LIVE_FEEDS\s*=\s*(\{[\s\S]*\});?\s*$/);
-      if (jsonMatch) {
-        existingData = JSON.parse(jsonMatch[1]);
-      }
-    } catch (e) {
-      // Ignore parse errors, will regenerate
-    }
-  }
-
-  // Build the feeds data - update events, preserve other feeds
+  // Build the feeds data - all feeds fetched live
   const feedsData = {
     lastUpdated: new Date().toISOString(),
     upcomingEvents: meetupEvents.map(e => ({
@@ -322,20 +461,18 @@ async function generateLiveFeeds() {
     })),
     hackerNews: hnStories,
     productHunt: phProducts,
-    // Preserve other feeds from existing data (agents update these separately)
-    // Seed with sample data until agents are deployed
-    phillyNews: existingData.phillyNews && existingData.phillyNews.length ? existingData.phillyNews : SEED_PHILLY_NEWS,
-    githubTrending: existingData.githubTrending && existingData.githubTrending.length ? existingData.githubTrending : SEED_GITHUB_TRENDING,
-    aiPapers: existingData.aiPapers && existingData.aiPapers.length ? existingData.aiPapers : SEED_AI_PAPERS
+    phillyNews: phillyNews,
+    githubTrending: githubTrending,
+    aiPapers: aiPapers
   };
 
-  const jsContent = `// Live feeds data - events from Meetup, other feeds populated by dispatch agents
+  const jsContent = `// Live feeds data - all feeds fetched from real APIs at build time
 // Auto-generated by scripts/generate-live-feeds.js
 window.LIVE_FEEDS = ${JSON.stringify(feedsData, null, 2)};
 `;
 
   fs.writeFileSync(OUTPUT_FILE, jsContent);
-  console.log(`✓ Wrote live feeds data to ${OUTPUT_FILE}`);
+  console.log(`\n✓ Wrote live feeds data to ${OUTPUT_FILE}`);
   console.log(`  Events: ${feedsData.upcomingEvents.length}`);
   console.log(`  File size: ${fs.statSync(OUTPUT_FILE).size} bytes`);
 }

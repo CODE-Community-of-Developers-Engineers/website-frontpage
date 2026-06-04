@@ -16,14 +16,35 @@
     return n.toString();
   }
 
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char];
+    });
+  }
+
+  function safeUrl(value) {
+    var url = String(value || '');
+    return /^https?:\/\//i.test(url) ? url : '#';
+  }
+
+  function safeClassPart(value) {
+    return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+  }
+
   function renderPhillyNews(items, container) {
     container.innerHTML = items.map(function (item) {
-      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<span class="feed-item-category">' + item.category + '</span>' +
-        '<h4 class="feed-item-title">' + item.title + '</h4>' +
+      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
+        '<span class="feed-item-category">' + escapeHtml(item.category) + '</span>' +
+        '<h4 class="feed-item-title">' + escapeHtml(item.title) + '</h4>' +
         '<div class="feed-item-meta">' +
-          '<span>' + item.source + '</span>' +
-          '<span>' + formatDate(item.date) + '</span>' +
+          '<span>' + escapeHtml(item.source) + '</span>' +
+          '<span>' + escapeHtml(formatDate(item.date)) + '</span>' +
         '</div>' +
       '</a>';
     }).join('');
@@ -31,13 +52,13 @@
 
   function renderGithubTrending(items, container) {
     container.innerHTML = items.map(function (item) {
-      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<h4 class="feed-item-title feed-item-repo">' + item.name + '</h4>' +
-        '<p class="feed-item-desc">' + item.description + '</p>' +
+      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
+        '<h4 class="feed-item-title feed-item-repo">' + escapeHtml(item.name) + '</h4>' +
+        '<p class="feed-item-desc">' + escapeHtml(item.description) + '</p>' +
         '<div class="feed-item-meta">' +
-          '<span class="feed-item-lang"><span class="lang-dot lang-' + item.language.toLowerCase() + '"></span>' + item.language + '</span>' +
-          '<span><i class="fa-solid fa-star"></i> ' + formatStars(item.stars) + '</span>' +
-          '<span class="feed-item-today">+' + formatStars(item.todayStars) + ' today</span>' +
+          '<span class="feed-item-lang"><span class="lang-dot lang-' + safeClassPart(item.language) + '"></span>' + escapeHtml(item.language) + '</span>' +
+          '<span><i class="fa-solid fa-star"></i> ' + escapeHtml(formatStars(item.stars)) + '</span>' +
+          '<span class="feed-item-today">+' + escapeHtml(formatStars(item.todayStars)) + ' today</span>' +
         '</div>' +
       '</a>';
     }).join('');
@@ -45,12 +66,12 @@
 
   function renderAiPapers(items, container) {
     container.innerHTML = items.map(function (item) {
-      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<h4 class="feed-item-title">' + item.title + '</h4>' +
-        '<p class="feed-item-desc">' + item.summary + '</p>' +
+      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
+        '<h4 class="feed-item-title">' + escapeHtml(item.title) + '</h4>' +
+        '<p class="feed-item-desc">' + escapeHtml(item.summary) + '</p>' +
         '<div class="feed-item-meta">' +
-          '<span>' + item.authors + '</span>' +
-          '<span>' + formatDate(item.date) + '</span>' +
+          '<span>' + escapeHtml(item.authors) + '</span>' +
+          '<span>' + escapeHtml(formatDate(item.date)) + '</span>' +
         '</div>' +
       '</a>';
     }).join('');
@@ -58,24 +79,24 @@
 
   function renderHackerNews(items, container) {
     container.innerHTML = items.map(function (item) {
-      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<h4 class="feed-item-title">' + item.title + '</h4>' +
+      return '<div class="feed-item">' +
+        '<h4 class="feed-item-title"><a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(item.title) + '</a></h4>' +
         '<div class="feed-item-meta">' +
-          '<span class="feed-item-hn-score"><i class="fa-solid fa-arrow-up"></i> ' + item.score + '</span>' +
-          '<span><a href="' + item.hnUrl + '" target="_blank" rel="noopener noreferrer" class="feed-item-comments" onclick="event.stopPropagation()"><i class="fa-solid fa-comment"></i> ' + item.comments + '</a></span>' +
-          '<span>' + item.author + '</span>' +
+          '<span class="feed-item-hn-score"><i class="fa-solid fa-arrow-up"></i> ' + escapeHtml(item.score) + '</span>' +
+          '<span><a href="' + escapeHtml(safeUrl(item.hnUrl)) + '" target="_blank" rel="noopener noreferrer" class="feed-item-comments"><i class="fa-solid fa-comment"></i> ' + escapeHtml(item.comments) + '</a></span>' +
+          '<span>' + escapeHtml(item.author) + '</span>' +
         '</div>' +
-      '</a>';
+      '</div>';
     }).join('');
   }
 
   function renderProductHunt(items, container) {
     container.innerHTML = items.map(function (item) {
-      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<h4 class="feed-item-title">' + item.title + '</h4>' +
-        (item.description ? '<p class="feed-item-desc">' + item.description + '</p>' : '') +
+      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
+        '<h4 class="feed-item-title">' + escapeHtml(item.title) + '</h4>' +
+        (item.description ? '<p class="feed-item-desc">' + escapeHtml(item.description) + '</p>' : '') +
         '<div class="feed-item-meta">' +
-          '<span><i class="fa-solid fa-user"></i> ' + item.author + '</span>' +
+          '<span><i class="fa-solid fa-user"></i> ' + escapeHtml(item.author) + '</span>' +
         '</div>' +
       '</a>';
     }).join('');
@@ -90,19 +111,19 @@
       var weekday = d.toLocaleDateString('en-US', { weekday: 'short' });
       var month = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
       var time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-      return '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="event-feed-card">' +
+      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="event-feed-card">' +
         '<div class="event-feed-date">' +
-          '<span class="event-feed-weekday">' + weekday + '</span>' +
-          '<span class="event-feed-day">' + d.getDate() + '</span>' +
-          '<span class="event-feed-month">' + d.toLocaleDateString('en-US', { month: 'short' }) + '</span>' +
+          '<span class="event-feed-weekday">' + escapeHtml(weekday) + '</span>' +
+          '<span class="event-feed-day">' + escapeHtml(d.getDate()) + '</span>' +
+          '<span class="event-feed-month">' + escapeHtml(d.toLocaleDateString('en-US', { month: 'short' })) + '</span>' +
         '</div>' +
         '<div class="event-feed-details">' +
-          '<h4 class="event-feed-name">' + item.name + '</h4>' +
+          '<h4 class="event-feed-name">' + escapeHtml(item.name) + '</h4>' +
           '<div class="event-feed-meta">' +
-            '<span><i class="fa-solid fa-clock"></i> ' + time + '</span>' +
-            '<span><i class="fa-solid fa-location-dot"></i> ' + item.location + '</span>' +
+            '<span><i class="fa-solid fa-clock"></i> ' + escapeHtml(time) + '</span>' +
+            '<span><i class="fa-solid fa-location-dot"></i> ' + escapeHtml(item.location) + '</span>' +
           '</div>' +
-          (item.rsvpCount ? '<span class="event-feed-rsvp"><i class="fa-solid fa-users"></i> ' + item.rsvpCount + ' attending</span>' : '') +
+          (item.rsvpCount ? '<span class="event-feed-rsvp"><i class="fa-solid fa-users"></i> ' + escapeHtml(item.rsvpCount) + ' attending</span>' : '') +
         '</div>' +
       '</a>';
     }).join('');

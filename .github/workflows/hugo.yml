@@ -51,17 +51,18 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-      - name: Generate Events Data
+      - name: Generate Static Data
         run: |
           echo "=== Checking events directory ==="
           ls -la static/images/events/
-          echo "=== Generating events data from images ==="
-          node scripts/generate-events-data.js
-          echo "=== Events data generated successfully ==="
-          echo "Contents of generated file:"
+          echo "=== Generating static data from live sources ==="
+          npm run generate:data
+          echo "=== Static data generated successfully ==="
+          echo "Contents of generated events file:"
           cat static/js/events-data.js
           echo "=== Verifying file exists ==="
           ls -la static/js/events-data.js
+          ls -la static/js/live-feeds-data.js
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build with Hugo
@@ -73,8 +74,11 @@ jobs:
           echo "=== Pre-build verification ==="
           echo "Checking events data file exists:"
           ls -la static/js/events-data.js
+          echo "Checking live feeds data file exists:"
+          ls -la static/js/live-feeds-data.js
           echo "Content preview:"
           head -20 static/js/events-data.js
+          head -20 static/js/live-feeds-data.js
           echo "=== Starting Hugo build ==="
           hugo \
             --gc \
@@ -86,6 +90,7 @@ jobs:
           echo "=== Post-build verification ==="
           echo "Checking public directory:"
           ls -la public/js/events-data.js
+          ls -la public/js/live-feeds-data.js
           echo "Checking public events images:"
           ls -la public/images/events/
       - name: Verify Build Output
@@ -93,6 +98,8 @@ jobs:
           echo "=== Final verification before upload ==="
           echo "Checking if events data made it to public:"
           ls -la public/js/events-data.js || echo "MISSING: events-data.js not found in public"
+          echo "Checking if live feeds data made it to public:"
+          ls -la public/js/live-feeds-data.js || echo "MISSING: live-feeds-data.js not found in public"
           echo "Preview of events data in public:"
           head -5 public/js/events-data.js || echo "Cannot read events data file"
           echo "Checking events images in public:"

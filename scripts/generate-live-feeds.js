@@ -463,8 +463,10 @@ async function fetchPhillyNews(count) {
 
 function requireItems(name, items) {
   if (!Array.isArray(items) || items.length === 0) {
-    throw new Error(`${name} returned no items; refusing to write empty live feed data`);
+    console.warn(`  ⚠ ${name} returned no items; continuing with an empty feed`);
+    return false;
   }
+  return true;
 }
 
 // --- Main ---

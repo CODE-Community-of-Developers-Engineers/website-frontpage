@@ -79,14 +79,14 @@
 
   function renderHackerNews(items, container) {
     container.innerHTML = items.map(function (item) {
-      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<h4 class="feed-item-title">' + escapeHtml(item.title) + '</h4>' +
+      return '<div class="feed-item">' +
+        '<h4 class="feed-item-title"><a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(item.title) + '</a></h4>' +
         '<div class="feed-item-meta">' +
           '<span class="feed-item-hn-score"><i class="fa-solid fa-arrow-up"></i> ' + escapeHtml(item.score) + '</span>' +
-          '<span><a href="' + escapeHtml(safeUrl(item.hnUrl)) + '" target="_blank" rel="noopener noreferrer" class="feed-item-comments" onclick="event.stopPropagation()"><i class="fa-solid fa-comment"></i> ' + escapeHtml(item.comments) + '</a></span>' +
+          '<span><a href="' + escapeHtml(safeUrl(item.hnUrl)) + '" target="_blank" rel="noopener noreferrer" class="feed-item-comments"><i class="fa-solid fa-comment"></i> ' + escapeHtml(item.comments) + '</a></span>' +
           '<span>' + escapeHtml(item.author) + '</span>' +
         '</div>' +
-      '</a>';
+      '</div>';
     }).join('');
   }
 

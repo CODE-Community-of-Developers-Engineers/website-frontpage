@@ -6,7 +6,7 @@ on:
   push:
     branches: ["main"]
 
-  # Refresh Tech Pulse data daily before East Coast morning traffic
+  # Refresh Tech Pulse data daily at 10:17 UTC (~6:17 ET during DST; ~5:17 ET during standard time)
   schedule:
     - cron: '17 10 * * *'
 

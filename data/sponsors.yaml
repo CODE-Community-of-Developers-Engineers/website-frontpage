@@ -8,9 +8,9 @@ sponsors:
   - name: "Pennovation"
     logo: "pennovation.png"
     url: "https://pennovation.upenn.edu"
-  - name: "SaaS Talent"
-    logo: "saas-talent.png"
-    url: "https://www.saas-talent.com/"
+  - name: "Composio"
+    logo: "composio.png"
+    url: "https://composio.dev/"
   - name: "One Six One Ventures"
     logo: "one-six-one.png"
     url: "https://www.onesixone.ventures/"
@@ -26,6 +26,9 @@ sponsors:
   - name: "Long View Partners"
     logo: "long-view-partners.png"
     url: "https://longviewpartners.co/"
+  - name: "Datadog"
+    logo: "Datadog-Logo.png"
+    url: "https://www.datadoghq.com/"
 
 collaborators:
   - name: "Foundry"

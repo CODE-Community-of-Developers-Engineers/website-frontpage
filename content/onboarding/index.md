@@ -35,8 +35,8 @@ Welcome! Complete these 14 steps to get fully plugged into the Coffee & Code Phi
 <label class="step-checkbox">
 <input type="checkbox" data-step="3">
 <span class="step-content">
-<span class="step-title">3. Follow our socials</span>
-<span class="step-desc"><a href="https://www.instagram.com/philly_codes/" target="_blank">Instagram</a> · <a href="https://www.linkedin.com/company/code-coffee-philadelphia" target="_blank">LinkedIn</a> · <a href="https://www.codephiladelphia.com/" target="_blank">Website</a></span>
+<span class="step-title">3. Follow our updates</span>
+<span class="step-desc"><a href="https://www.linkedin.com/company/code-coffee-philadelphia" target="_blank">LinkedIn</a> · <a href="https://www.codephiladelphia.com/" target="_blank">Website</a></span>
 </span>
 </label>
 </div>

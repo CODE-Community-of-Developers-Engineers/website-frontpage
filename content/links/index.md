@@ -35,7 +35,7 @@ Connect with Coffee & Code Philadelphia across the web:
 <div class="link-item">
 <h3>📸 Instagram</h3>
 <p>Photos and stories from our events and community</p>
-<a href="https://www.instagram.com/philly_codes/" target="_blank" class="btn">Follow Us</a>
+<a href="https://www.instagram.com/coffeecodephilly/" target="_blank" class="btn">Follow Us</a>
 </div>
 
 <div class="link-item">

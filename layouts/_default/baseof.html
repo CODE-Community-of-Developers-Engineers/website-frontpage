@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="{{ "/css/modern.css" | relURL }}?v={{ now.Unix }}">
+    <link rel="stylesheet" href="{{ "/css/drive-chat.css" | relURL }}?v={{ now.Unix }}">
     {{ if .IsHome }}<link rel="stylesheet" href="{{ "/css/live-feeds.css" | relURL }}?v={{ now.Unix }}">{{ end }}
 
     {{ block "head" . }}{{ end }}
@@ -34,6 +35,23 @@
     </main>
     
     {{ partial "footer.html" . }}
+
+    <aside class="drive-chat-widget" id="drive-chat-widget" aria-label="Ask the Coffee & Code docs">
+        <button class="drive-chat-toggle" type="button" id="drive-chat-toggle" aria-expanded="true">
+            <i class="fa-solid fa-comments" aria-hidden="true"></i>
+            <span>Ask the Docs</span>
+        </button>
+        <div class="drive-chat-panel" aria-live="polite">
+            <div class="drive-chat-messages" id="drive-chat-messages"></div>
+            <form class="drive-chat-form" id="drive-chat-form">
+                <label for="drive-chat-question" class="sr-only">Question</label>
+                <textarea id="drive-chat-question" name="question" maxlength="500" rows="2" placeholder="Ask the community docs..." required></textarea>
+                <button type="submit" aria-label="Ask">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+    </aside>
     
     <!-- JavaScript -->
     <script src="{{ "/js/menu.js" | relURL }}"></script>
@@ -49,6 +67,7 @@
     <script src="{{ "/js/live-feeds-data.js" | relURL }}?v={{ now.Unix }}"></script>
     <script src="{{ "/js/live-feeds.js" | relURL }}?v={{ now.Unix }}"></script>
     {{ end }}
+    <script src="{{ "/js/drive-chat.js" | relURL }}?v={{ now.Unix }}"></script>
     {{ block "scripts" . }}{{ end }}
 </body>
 </html>

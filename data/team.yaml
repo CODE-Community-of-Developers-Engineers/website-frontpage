@@ -14,3 +14,11 @@ team:
     linkedin: "https://linkedin.com/in/pysolver"
     github: "https://github.com/Tony363"
     twitter: ""
+
+  - name: "Satya Vegulla"
+    role: "Principal Architect & Project Manager"
+    bio: "Leads architecture and project management for Coffee & Code Philadelphia initiatives."
+    photo: "/images/team/satya-vegulla.jpg"
+    linkedin: "https://www.linkedin.com/in/satyaveerendra-vegulla/"
+    github: ""
+    twitter: ""

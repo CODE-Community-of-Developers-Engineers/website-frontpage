@@ -5,7 +5,7 @@ attention_line: true
 ---
 
 <div class="sponsor-hero-banner">
-  <img src="/images/events/hackathon.jpg" alt="Coffee & Code hackathon event" class="sponsor-hero-img">
+  <img src="../images/events/hackathon.jpg" alt="Coffee & Code hackathon event" class="sponsor-hero-img">
   <div class="sponsor-hero-overlay">
     <div class="sponsor-hero-text">
       <span class="sponsor-hero-tagline">Fuel the builders. Fund the future.</span>
@@ -38,19 +38,19 @@ We run hackathons, dev workshops, AI paper reading groups, ML system design sess
 
 <div class="sponsor-photo-grid">
   <div class="sponsor-photo-item">
-    <img src="/images/events/Dev_Workshop.jpeg" alt="Developer workshop in action">
+    <img src="../images/events/Dev_Workshop.jpeg" alt="Developer workshop in action">
     <span class="sponsor-photo-caption">Dev Workshops</span>
   </div>
   <div class="sponsor-photo-item">
-    <img src="/images/events/AI_Paper_Talks.jpg" alt="AI paper reading group">
+    <img src="../images/events/AI_Paper_Talks.jpg" alt="AI paper reading group">
     <span class="sponsor-photo-caption">AI Paper Talks</span>
   </div>
   <div class="sponsor-photo-item">
-    <img src="/images/events/LeetCode_Practice.jpeg" alt="LeetCode practice session">
+    <img src="../images/events/LeetCode_Practice.jpeg" alt="LeetCode practice session">
     <span class="sponsor-photo-caption">LeetCode Practice</span>
   </div>
   <div class="sponsor-photo-item">
-    <img src="/images/events/ML_System_Design.jpeg" alt="ML system design session">
+    <img src="../images/events/ML_System_Design.jpeg" alt="ML system design session">
     <span class="sponsor-photo-caption">ML System Design</span>
   </div>
 </div>
@@ -59,15 +59,15 @@ Coffee & Code Philly is growing into an incubator for technology, engineering, a
 
 <div class="sponsor-photo-grid sponsor-photo-grid-3">
   <div class="sponsor-photo-item">
-    <img src="/images/events/Weekend_Coding_Crew.jpg" alt="Weekend coding crew">
+    <img src="../images/events/Weekend_Coding_Crew.jpg" alt="Weekend coding crew">
     <span class="sponsor-photo-caption">Weekend Coding Crew</span>
   </div>
   <div class="sponsor-photo-item">
-    <img src="/images/events/Web3_Workshops.jpg" alt="Web3 workshops">
+    <img src="../images/events/Web3_Workshops.jpg" alt="Web3 workshops">
     <span class="sponsor-photo-caption">Web3 Workshops</span>
   </div>
   <div class="sponsor-photo-item">
-    <img src="/images/events/Founder_Fridays_Coworking.jpeg" alt="Founder Fridays coworking">
+    <img src="../images/events/Founder_Fridays_Coworking.jpeg" alt="Founder Fridays coworking">
     <span class="sponsor-photo-caption">Founder Fridays</span>
   </div>
 </div>
@@ -163,7 +163,7 @@ Coffee & Code Philly is growing into an incubator for technology, engineering, a
 </div>
 
 <div class="sponsor-community-banner">
-  <img src="/images/events/Our_Community.jpeg" alt="Our Coffee & Code community">
+  <img src="../images/events/Our_Community.jpeg" alt="Our Coffee & Code community">
   <div class="sponsor-community-overlay">
     <span>Join the companies investing in Philadelphia's builders</span>
   </div>
@@ -193,4 +193,3 @@ Coffee & Code Philly is growing into an incubator for technology, engineering, a
     });
   })();
 </script>
-

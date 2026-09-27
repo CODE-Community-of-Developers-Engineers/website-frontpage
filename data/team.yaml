@@ -22,3 +22,11 @@ team:
     linkedin: "https://www.linkedin.com/in/satyaveerendra-vegulla/"
     github: ""
     twitter: ""
+
+  - name: "Jacob Gold"
+    role: "Chief Operating Officer"
+    bio: "Leads operations for Coffee & Code Philadelphia."
+    photo: "/images/team/jacob-gold.jpg"
+    linkedin: "https://www.linkedin.com/in/jacob-gold-896732197/"
+    github: ""
+    twitter: ""

@@ -7,10 +7,10 @@
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ "/favicon.ico" | relURL }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32x32.png" | relURL }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon-16x16.png" | relURL }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ "/apple-touch-icon.png" | relURL }}">
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="{{ "/css/modern.css" | relURL }}?v={{ now.Unix }}">
-    {{ if .IsHome }}<link rel="stylesheet" href="{{ "/css/live-feeds.css" | relURL }}?v={{ now.Unix }}">{{ end }}
+    <link rel="stylesheet" href="{{ "css/modern.css" | relURL }}?v={{ now.Unix }}">
+    {{ if .IsHome }}<link rel="stylesheet" href="{{ "css/live-feeds.css" | relURL }}?v={{ now.Unix }}">{{ end }}
 
     {{ block "head" . }}{{ end }}
 </head>
@@ -36,18 +36,19 @@
     {{ partial "footer.html" . }}
     
     <!-- JavaScript -->
-    <script src="{{ "/js/menu.js" | relURL }}"></script>
+    <script>window.siteBasePath = '{{ "" | relURL }}'.replace(/\/$/, '');</script>
+    <script src="{{ "js/menu.js" | relURL }}"></script>
     {{ if .IsHome }}
     <script>
         // Add timestamp to prevent caching of events data
         const timestamp = new Date().getTime();
         console.log('Loading events data with timestamp:', timestamp);
     </script>
-    <script src="{{ "/js/events-data.js" | relURL }}?v={{ now.Unix }}"></script>
-    <script src="{{ "/js/carousel.js" | relURL }}?v={{ now.Unix }}"></script>
-    <script src="{{ "/js/scroll-animations.js" | relURL }}?v={{ now.Unix }}"></script>
-    <script src="{{ "/js/live-feeds-data.js" | relURL }}?v={{ now.Unix }}"></script>
-    <script src="{{ "/js/live-feeds.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "js/events-data.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "js/carousel.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "js/scroll-animations.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "js/live-feeds-data.js" | relURL }}?v={{ now.Unix }}"></script>
+    <script src="{{ "js/live-feeds.js" | relURL }}?v={{ now.Unix }}"></script>
     {{ end }}
     {{ block "scripts" . }}{{ end }}
 </body>

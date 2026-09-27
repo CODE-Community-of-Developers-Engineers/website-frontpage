@@ -38,7 +38,7 @@
                     <span class="btn-icon">☕</span>
                     Join Our Events
                 </a>
-                <a href="{{ "/blog" | relURL }}" class="hero-btn secondary">
+                <a href="{{ "blog" | relURL }}" class="hero-btn secondary">
                     <span class="btn-icon">📖</span>
                     Read Our Blog
                 </a>
@@ -62,7 +62,7 @@
                         <div class="hero-text">
                             <h1>Coffee & Code Philadelphia</h1>
                             <p>Loading events...</p>
-                            <a href="/blog" class="cta-button">Learn More</a>
+                            <a href="{{ "blog" | relURL }}" class="cta-button">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -203,7 +203,7 @@
                 {{ if .Params.image }}
                     {{ if hasPrefix .Params.image "/" }}
                 <a href="{{ .RelPermalink }}" style="display: block;">
-                    <img src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                    <img src="{{ replaceRE "^/" "" .Params.image | relURL }}" alt="{{ .Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
                 </a>
                     {{ else }}
                         {{ $imgResource := .Resources.GetMatch .Params.image }}
@@ -293,7 +293,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
             {{ range .Site.Data.sponsors.sponsors }}
             <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
-                <img src="{{ printf "/images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
+                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
                 <span>{{ .name }}</span>
             </a>
             {{ end }}
@@ -319,7 +319,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
             {{ range .Site.Data.sponsors.collaborators }}
             <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
-                <img src="{{ printf "/images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
+                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
                 <span>{{ .name }}</span>
             </a>
             {{ end }}

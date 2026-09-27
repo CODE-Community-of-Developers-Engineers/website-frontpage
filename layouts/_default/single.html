@@ -9,7 +9,7 @@
                 <div class="blog-hero-image">
                     {{ if hasPrefix .Params.image "/" }}
                         {{/* Absolute path - use relURL */}}
-                        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+                        <img src="{{ replaceRE "^/" "" .Params.image | relURL }}" alt="{{ .Title }}">
                     {{ else }}
                         {{/* Page bundle resource - use Resources.GetMatch */}}
                         {{ $img := .Resources.GetMatch .Params.image }}
@@ -17,7 +17,7 @@
                             <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}">
                         {{ else }}
                             {{/* Fallback for missing resources */}}
-                            <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+                            <img src="{{ replaceRE "^/" "" .Params.image | relURL }}" alt="{{ .Title }}">
                         {{ end }}
                     {{ end }}
                 </div>
@@ -63,7 +63,7 @@
                     {{ if .Params.tags }}
                     <div class="blog-tags">
                         {{ range .Params.tags }}
-                        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag blog-tag">{{ title . }}</a>
+                        <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="tag blog-tag">{{ title . }}</a>
                         {{ end }}
                     </div>
                     {{ end }}

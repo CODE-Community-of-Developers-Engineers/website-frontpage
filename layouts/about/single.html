@@ -15,7 +15,7 @@
             {{ range .Site.Data.team.team }}
             <div class="team-member-card">
                 <div class="team-member-image-wrapper">
-                    <img src="{{ .photo | relURL }}" alt="{{ .name }}" class="team-member-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="{{ replaceRE "^/" "" .photo | relURL }}" alt="{{ .name }}" class="team-member-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="team-member-placeholder">
                         <i class="fas fa-user"></i>
                     </div>

@@ -21,11 +21,8 @@ function loadEventImages() {
         eventsData = window.eventsImageData.map(item => {
             // Handle spaces and special characters in filenames
             const encodedFilename = encodeURIComponent(item.filename);
-            const baseURL = window.location.pathname.includes('/Code-And-Coffee-philidelphia-Website') 
-                ? '/Code-And-Coffee-philidelphia-Website' 
-                : '';
-            
-            const imageUrl = `${baseURL}/images/events/${encodedFilename}`;
+            const basePath = window.siteBasePath || '';
+            const imageUrl = `${basePath}/images/events/${encodedFilename}`;
             console.log(`Processing event: ${item.name} -> ${imageUrl}`);
             
             return {

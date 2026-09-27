@@ -60,7 +60,7 @@
     <h3>Tags</h3>
     <div class="article-tags">
         {{ range .Params.tags }}
-        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag article-tag">{{ title . }}</a>
+        <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="tag article-tag">{{ title . }}</a>
         {{ end }}
     </div>
 </div>

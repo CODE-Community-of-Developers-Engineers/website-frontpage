@@ -63,7 +63,7 @@
             {{ if .Params.tags }}
             <div class="blog-tags">
                 {{ range .Params.tags }}
-                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ title . }}</a>
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="tag">{{ title . }}</a>
                 {{ end }}
             </div>
             {{ end }}
@@ -74,7 +74,7 @@
         <div id="no-results" style="text-align: center; padding: 3rem; background: var(--background-secondary); border-radius: var(--radius-lg); margin: 2rem 0;">
             <h3>No posts found</h3>
             <p>No posts are tagged with "{{ .Title }}".</p>
-            <a href="{{ "/blog" | relURL }}" class="btn">Browse All Posts</a>
+            <a href="{{ "blog" | relURL }}" class="btn">Browse All Posts</a>
         </div>
         {{ end }}
         </div>
@@ -98,7 +98,7 @@
             <h3 style="margin-bottom: 1rem; text-align: center;">Related Tags</h3>
             <div class="tag-cloud" style="justify-content: center;">
                 {{ range $uniqueRelatedTags }}
-                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag-cloud-item">{{ title . }}</a>
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="tag-cloud-item">{{ title . }}</a>
                 {{ end }}
             </div>
         </div>

@@ -112,9 +112,17 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
 
+      - name: Check GitHub Pages asset paths
+        run: |
+          if grep -RInE "(src|href)=[\"']/((css|js|images)/|search\\.json)" public --include="*.html"; then
+            echo "Found root-relative asset path(s); use relURL so GitHub Pages project paths work."
+            exit 1
+          fi
+
       - name: Validate HTML output
         run: |
           htmlproofer ./public \
+            --swap-urls '^/website-frontpage/:/' \
             --disable-external \
             --ignore-urls "/^#/,/^mailto:/,/^tel:/,/^javascript:/" \
             --ignore-files "/index.xml$/,/sitemap.xml$/" \

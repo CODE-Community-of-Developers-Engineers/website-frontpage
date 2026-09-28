@@ -43,7 +43,7 @@ jobs:
         run: npm run validate:frontmatter
 
       - name: Build Hugo site
-        run: hugo --gc --minify --baseURL "/"
+        run: hugo --gc --minify --baseURL "/website-frontpage/"
         env:
           HUGO_ENVIRONMENT: production
 

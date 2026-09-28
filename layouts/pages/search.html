@@ -42,14 +42,28 @@
 <!-- Search Index Script -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const basePath = window.siteBasePath || '';
     let searchIndex = [];
     let isLoading = true;
+
+    function resolveSiteUrl(url) {
+        if (/^https?:\/\//.test(url)) {
+            return url;
+        }
+
+        const cleanUrl = url.startsWith('/') ? url : `/${url}`;
+        if (!basePath || cleanUrl === basePath || cleanUrl.startsWith(`${basePath}/`)) {
+            return cleanUrl;
+        }
+
+        return `${basePath}${cleanUrl}`;
+    }
     
     // Build search index from Hugo-generated JSON
     async function buildSearchIndex() {
         try {
             console.log('Fetching search index...');
-            const response = await fetch('/search.json');
+            const response = await fetch(resolveSiteUrl('/index.json'));
             if (!response.ok) {
                 throw new Error('Failed to fetch search index');
             }
@@ -254,13 +268,8 @@ document.addEventListener('DOMContentLoaded', function() {
     window.navigateToPage = function(url) {
         console.log('Navigating to:', url);
         console.log('Current location:', window.location.href);
-        
-        // Ensure proper URL formatting
-        let targetUrl = url;
-        if (!targetUrl.startsWith('/')) {
-            targetUrl = '/' + targetUrl;
-        }
-        
+
+        const targetUrl = resolveSiteUrl(url);
         console.log('Final target URL:', targetUrl);
         window.location.href = targetUrl;
     };

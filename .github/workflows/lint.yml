@@ -108,7 +108,7 @@ jobs:
         run: npm run generate:data
 
       - name: Build Hugo site
-        run: hugo --gc --minify --baseURL "/"
+        run: hugo --gc --minify --baseURL "/website-frontpage/"
         env:
           HUGO_ENVIRONMENT: production
 
@@ -122,7 +122,6 @@ jobs:
             --allow-hash-href \
             --checks Links,Images,Scripts \
             --no-enforce-https
-        continue-on-error: true  # Report issues but allow workflow to complete
 
       - name: Summary
         if: success()

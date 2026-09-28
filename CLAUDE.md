@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Coffee & Code Philadelphia community website built with Hugo static site generator. Hosted on GitHub Pages with Cloudflare CDN.
+Coffee & Code Philadelphia community website built with Hugo static site generator. Hosted on Cloudflare Pages.
 
 ## Build Commands
 
@@ -94,15 +94,13 @@ image: "/images/post-image.jpg"
 
 - **Tally.so** - Form handling (project requests, talent matchboard)
 - **Meetup.com API** - Event display
-- **Cloudflare** - CDN and cache (manual purge via GitHub Actions)
-- **GitHub Pages** - Hosting
+- **Cloudflare Pages** - Hosting and CDN; builds and deploys every push to main
 
 ## CI/CD
 
-- **hugo.yml** - Deploys to GitHub Pages on push to main
+- **hugo.yml** - Triggers the daily Cloudflare Pages rebuild through the `CLOUDFLARE_PAGES_DEPLOY_HOOK` secret
 - **lint.yml** - Runs markdown, YAML, and template linting
 - **pr-checks.yml** - Validates events data, front matter, and internal links on PRs
-- **cf_cache_purge.yml** - Manual Cloudflare cache purge (requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID` secrets)
 
 ## Coding Principles
 

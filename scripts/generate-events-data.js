@@ -118,4 +118,4 @@ if (require.main === module) {
     generateEventsData();
 }
 
-module.exports = { generateEventsData };
+module.exports = { filenameToName, generateEventsData };

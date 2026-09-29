@@ -35,8 +35,12 @@ jobs:
 
       - name: Install linting tools
         run: |
+          npm ci
           npm install -g markdownlint-cli2
           pip install yamllint djlint
+
+      - name: Run unit and integration tests
+        run: npm test
 
       - name: Lint Markdown files
         run: markdownlint-cli2
@@ -118,6 +122,9 @@ jobs:
             echo "Found root-relative asset path(s); use relURL so GitHub Pages project paths work."
             exit 1
           fi
+
+      - name: Run end-to-end smoke tests
+        run: npm run test:e2e
 
       - name: Validate HTML output
         run: |

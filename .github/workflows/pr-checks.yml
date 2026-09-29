@@ -42,6 +42,9 @@ jobs:
       - name: Validate front matter
         run: npm run validate:frontmatter
 
+      - name: Run unit and integration tests
+        run: npm test
+
       - name: Build Hugo site
         run: hugo --gc --minify --baseURL "/website-frontpage/"
         env:
@@ -53,6 +56,9 @@ jobs:
             echo "Found root-relative asset path(s); use relURL so GitHub Pages project paths work."
             exit 1
           fi
+
+      - name: Run end-to-end smoke tests
+        run: npm run test:e2e
 
       - name: Check for build output
         run: |

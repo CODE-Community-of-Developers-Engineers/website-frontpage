@@ -1,6 +1,6 @@
 ---
 title: "Search"
-description: "Search through all Coffee & Code Philadelphia content"
+description: "Search through all C.O.D.E content"
 layout: "search"
 url: "/search/"
 ---

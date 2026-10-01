@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Coffee & Code Philadelphia community website built with Hugo static site generator. Hosted on GitHub Pages with Cloudflare CDN.
+C.O.D.E (Community of Developers & Engineers) Philadelphia community website built with Hugo static site generator. Hosted on GitHub Pages with Cloudflare CDN.
 
 ## Build Commands
 
@@ -19,7 +19,7 @@ rm -rf public && node scripts/generate-events-data.js && hugo server --bind 0.0.
 node scripts/generate-events-data.js && hugo --gc --minify --cleanDestinationDir --forceSyncStatic
 ```
 
-**Important:** Always run `node scripts/generate-events-data.js` before building - the events carousel depends on the generated `/static/js/events-data.js` file.
+**Important:** Always run `node scripts/generate-events-data.js` before building - the events gallery depends on the generated `/static/js/events-data.js` file.
 
 ## Validation & Linting
 
@@ -45,24 +45,25 @@ CI runs these checks on every PR via `.github/workflows/lint.yml` and `.github/w
 ### Content Structure (Hugo Page Bundles)
 - `/content/blog/` - Blog posts, each in a folder with `index.md` and optional images
 - `/content/_index.md` - Homepage
-- `/content/links/`, `/content/project-request/`, `/content/talent-matchboard/`, `/content/event-sponsorship/` - Static pages
+- `/content/links/`, `/content/onboarding/`, `/content/event-sponsorship/` - Static pages
 
 ### Templates
 - `/layouts/_default/baseof.html` - Base template
-- `/layouts/_default/list.html` - Blog listing with search/filtering
+- `/layouts/blog/list.html` - Media page (`/blog/`): posts with `topic: "press"` appear under "See us in the press", the rest under "From the blog"
+- `/layouts/_default/list.html` - Generic listing with search/filtering
 - `/layouts/_default/single.html` - Individual blog post
-- `/layouts/partials/` - Reusable components (header, footer, sidebars)
+- `/layouts/partials/` - Reusable components (header, footer, post-card, sidebars)
 
 ### Frontend
 - **CSS:** PureCSS grid framework + custom styles in `/static/css/`
 - **JavaScript:** Vanilla JS modules in `/static/js/`
-  - `menu.js` - Responsive navigation (breakpoint: 1300px)
-  - `carousel.js` - Auto-rotating events carousel
+  - `menu.js` - Responsive navigation (breakpoint: 960px)
+  - `events-gallery.js` - Photo grid of events on the homepage
   - `meetup.js` - Meetup.com API integration with CORS proxy fallback
   - `events-data.js` - Auto-generated from `/static/images/events/` filenames
 
 ### Data Flow
-- **Events carousel:** Image files in `/static/images/events/` → `generate-events-data.js` → `events-data.js` → carousel display
+- **Events gallery:** Image files in `/static/images/events/` → `generate-events-data.js` → `events-data.js` → gallery tiles (filename becomes the caption)
 - **Forms:** Embedded Tally.so iframes
 - **Event info:** Meetup.com API → client-side rendering
 
@@ -81,13 +82,13 @@ image: "/images/post-image.jpg"
 ## Design System
 
 ```css
---background: #E9E3DC  /* cream */
---accent: #59969B      /* teal */
---button: #3B2521      /* brown */
---text-primary: #3B2521
---font-sans: 'Vollkorn', serif
---font-display: 'Gloria Hallelujah', cursive
---font-mono: 'Space Mono', monospace
+--background: #ffffff
+--surface-alt: #f7f5f2   /* warm off-white for alternating sections */
+--ink: #2a1c18           /* espresso, matches the logo */
+--accent: #1f7a80        /* teal */
+--text-primary: #2a1c18
+--font-sans: 'Inter', sans-serif
+--font-mono: 'JetBrains Mono', monospace  /* wordmark, eyebrow labels */
 ```
 
 ## External Services
@@ -113,7 +114,7 @@ image: "/images/post-image.jpg"
 
 ### SOLID (Single Responsibility Focus)
 - Each function should do one thing and do it well
-- Each JS module should have a single, clear purpose (e.g., `menu.js` handles only navigation, `carousel.js` handles only the carousel)
+- Each JS module should have a single, clear purpose (e.g., `menu.js` handles only navigation, `events-gallery.js` handles only the events gallery)
 - Extract new functionality into separate functions/modules rather than expanding existing ones
 
 ### KISS (Keep It Simple, Stupid)

@@ -1,7 +1,7 @@
 {
-  "name": "code-coffee-philly",
+  "name": "code-philly-website",
   "version": "1.0.0",
-  "description": "Coffee & Code Philadelphia community website",
+  "description": "C.O.D.E (Community of Developers & Engineers) Philadelphia community website",
   "scripts": {
     "generate:events": "node scripts/generate-events-data.js",
     "generate:live-feeds": "node scripts/generate-live-feeds.js",

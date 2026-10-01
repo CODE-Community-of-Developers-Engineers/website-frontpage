@@ -1,6 +1,6 @@
-baseURL: 'https://www.codephilly.com/Code-And-Coffee-philidelphia-Website'
+baseURL: 'https://www.codephilly.com/'
 languageCode: 'en-us'
-title: 'Coffee & Code Philadelphia'
+title: 'C.O.D.E - Community of Developers & Engineers'
 theme: ''
 
 # Output formats
@@ -12,7 +12,7 @@ outputs:
 
 params:
   description: 'Your space to build.'
-  author: 'Coffee & Code Philadelphia'
+  author: 'C.O.D.E Philadelphia'
 
 markup:
   goldmark:
@@ -33,9 +33,6 @@ menu:
     - name: "Blog"
       url: "/blog/"
       weight: 25
-    - name: "Project Request"
-      url: "/project-request/"
-      weight: 30
     - name: "Event Sponsorship"
       url: "/event-sponsorship/"
       weight: 50
@@ -43,5 +40,5 @@ menu:
       url: "https://nol-kky-shop.fourthwall.com/"
       weight: 60
     - name: "Community Fund"
-      url: "https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia"
+      url: "https://givebutter.com/c_o_d_e"
       weight: 70

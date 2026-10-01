@@ -1,109 +1,153 @@
 {{ define "main" }}
-<div class="container" style="padding: 4rem 1.5rem;">
-    <!-- Hero Section -->
-    <div class="hero-section">
-        <div class="hero-coffee-elements">
-            <div class="coffee-cup coffee-cup-1">
-                <div class="coffee-steam"></div>
-                <div class="coffee-steam steam-2"></div>
-                <div class="coffee-steam steam-3"></div>
-            </div>
-            <div class="coffee-cup coffee-cup-2">
-                <div class="coffee-steam"></div>
-                <div class="coffee-steam steam-2"></div>
-            </div>
-
-        </div>
-
-        <div class="hero-content">
-            <div class="hero-title-container">
-                <h1 class="hero-title">
-                    <span class="title-line-1">Your Space to</span>
-                    <span class="title-line-2">Build</span>
-                    <span class="title-accent">& Brew</span>
-                </h1>
-            </div>
-
-            <div class="hero-subtitle">
-                <p class="subtitle-description">
-                    <span class="community-name">Coffee & Code Philadelphia</span> - Where developers, designers, and tech enthusiasts come together to
-                    <span class="highlight-word">learn</span>,
-                    <span class="highlight-word">build</span>, and
-                    <span class="highlight-word">grow</span>
-                </p>
-            </div>
-
+<!-- Hero -->
+<section class="home-hero">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <span class="eyebrow">Community of Developers &amp; Engineers</span>
+            <h1 class="hero-title">Philadelphia's community for people who <em>build software</em>.</h1>
+            <p class="hero-lead">
+                {{ .Site.Params.shortName }} is a volunteer-run nonprofit community of 5,700+ developers, engineers, and builders.
+                We meet every week to code side by side, and we run a hackathon every quarter.
+            </p>
             <div class="hero-actions">
-                <a href="https://www.meetup.com/code-coffee-philly/" class="hero-btn primary">
-                    <span class="btn-icon">☕</span>
-                    Join Our Events
+                <a href="https://www.meetup.com/code-coffee-philly/" class="btn btn-lg">
+                    <i class="fa-brands fa-meetup"></i> Join us on Meetup
                 </a>
-                <a href="{{ "blog" | relURL }}" class="hero-btn secondary">
-                    <span class="btn-icon">📖</span>
-                    Read Our Blog
+                <a href="https://discord.gg/ts75yERD5q" class="btn btn-lg btn-secondary">
+                    <i class="fa-brands fa-discord"></i> Join the Discord
                 </a>
             </div>
+            <p class="hero-note">
+                New here? <a href="{{ "onboarding/" | relURL }}" class="text-link">Get started in three steps →</a>
+            </p>
         </div>
-
-
+        <figure class="hero-media">
+            <video autoplay muted loop playsinline preload="metadata" poster="{{ "images/community/hackathon-2026-video-poster.jpg" | relURL }}" aria-label="Silent footage of members building together at the AI Agent Hackathon">
+                <source src="{{ "media/hackathon-2026.mp4" | relURL }}" type="video/mp4">
+            </video>
+        </figure>
     </div>
+</section>
 
-    <!-- Recent Events Carousel -->
-    <section class="homepage-section fade-in-section">
-        <h2 class="section-heading">
-            <span class="section-heading-icon"><i class="fa-solid fa-images"></i></span>
-            Recent Events
-        </h2>
-        <div class="carousel-container">
-            <div class="carousel" id="eventsCarousel">
-                <!-- Default content while JavaScript loads -->
-                <div class="carousel-slide active">
-                    <div class="hero-content" style="background: transparent; color: var(--text-primary); padding: 4rem 2rem; text-align: center; border-radius: 8px;">
-                        <div class="hero-text">
-                            <h1>Coffee & Code Philadelphia</h1>
-                            <p>Loading events...</p>
-                            <a href="{{ "blog" | relURL }}" class="cta-button">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Stats -->
+<section class="stats-band">
+    <div class="container">
+        <ul class="stats-grid">
+            {{ range .Site.Data.stats.stats }}
+            <li>
+                <span class="stat-value">{{ .value }}</span>
+                <span class="stat-label">{{ .label }}</span>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</section>
 
-            <!-- Carousel Navigation -->
-            <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">❮</button>
-            <button class="carousel-btn carousel-next" onclick="changeSlide(1)">❯</button>
-
-            <!-- Carousel Indicators -->
-            <div class="carousel-indicators">
-                <!-- Will be dynamically generated by JavaScript -->
-                <button class="indicator active" onclick="currentSlide(1)"></button>
-            </div>
+<!-- Recent highlight -->
+<section class="home-section fade-in-section">
+    <div class="container section-split">
+        <div class="section-head">
+            <span class="eyebrow">Quarterly hackathons</span>
+            <h2>AI Agent Hackathon</h2>
+            <p>We run a hackathon every quarter. The latest was two days in two locations: a full build day at Pennovation Works on September 20, 2026, followed by demos, awards, and community night at Cesium on September 22.</p>
         </div>
-    </section>
+        <div class="photo-mosaic">
+            <img src="{{ "images/community/hackathon-2026-crowd.jpg" | relURL }}" alt="Hackathon participants gathered for the opening session" loading="lazy">
+            <img src="{{ "images/community/hackathon-2026-check-in.jpg" | relURL }}" alt="Participants checking in at the hackathon" loading="lazy">
+            <img src="{{ "images/community/hackathon-2026-team.jpg" | relURL }}" alt="A team working on laptops" loading="lazy">
+            <img src="{{ "images/community/hackathon-2026-coding.jpg" | relURL }}" alt="Two participants coding side by side" loading="lazy">
+        </div>
+    </div>
+</section>
 
-    <div class="section-divider"></div>
+<!-- What we do (photos from /static/images/events/) -->
+<section class="home-section home-section-alt fade-in-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">What we do</span>
+            <h2>A working community, not a networking happy hour.</h2>
+            <p>Weekly coding sessions, LeetCode Wednesdays, AI paper discussions, workshops, and a hackathon every quarter. Bring a laptop and work on whatever you want.</p>
+        </div>
+        <div class="events-gallery" id="eventsGallery"></div>
+    </div>
+</section>
 
-    <!-- Upcoming Events (powered by Meetup) -->
-    <section class="homepage-section section-tinted fade-in-section">
-        <h2 class="section-heading">
-            <span class="section-heading-icon"><i class="fa-solid fa-calendar-days"></i></span>
-            Upcoming Events
-        </h2>
+<!-- Upcoming Events (powered by Meetup) -->
+<section class="home-section fade-in-section" id="events">
+    <div class="container section-split">
+        <div class="section-head">
+            <span class="eyebrow">Upcoming events</span>
+            <h2>Pick a session and show up.</h2>
+            <p>Every event is listed on Meetup. RSVP there so we know you're coming.</p>
+            <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary">View all on Meetup</a>
+        </div>
         <div class="events-feed-list" id="feed-upcoming-events">
-            <div style="text-align: center; color: var(--text-muted); padding: 2rem;">Loading events...</div>
+            <p class="events-feed-empty">Our schedule lives on Meetup. Follow the link to see what's coming up.</p>
         </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-            <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary cta-pulse">View All on Meetup</a>
+    </div>
+</section>
+
+<!-- Get involved -->
+<section class="home-section home-section-alt fade-in-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Get involved</span>
+            <h2>Three ways in.</h2>
         </div>
-    </section>
+        <div class="card-grid">
+            <div class="card feature-card">
+                <div class="feature-card-icon"><i class="fa-solid fa-list-check"></i></div>
+                <h3>New here? Start here</h3>
+                <p>Three steps: join the Discord, RSVP on Meetup, and show up with a laptop.</p>
+                <a href="{{ "onboarding/" | relURL }}" class="text-link">Get started →</a>
+            </div>
 
-    <div class="section-divider section-divider-flip"></div>
+            <div class="card feature-card">
+                <div class="feature-card-icon"><i class="fa-brands fa-discord"></i></div>
+                <h3>Join the conversation</h3>
+                <p>Discord is home base between events. Drop an intro and share what you're building.</p>
+                <a href="https://discord.gg/ts75yERD5q" class="text-link">Join the Discord →</a>
+            </div>
 
-    <!-- Tech Pulse - Live Feeds -->
-    <section class="homepage-section fade-in-section">
-        <h2 class="section-heading">
-            <span class="section-heading-icon"><i class="fa-solid fa-bolt"></i></span>
-            Tech Pulse
-        </h2>
+            <div class="card feature-card">
+                <div class="feature-card-icon"><i class="fa-solid fa-heart"></i></div>
+                <h3>Sponsor or donate</h3>
+                <p>Back a quarterly hackathon or help cover the operating costs behind our weekly sessions.</p>
+                <a href="{{ "event-sponsorship/" | relURL }}" class="text-link">See how to sponsor →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Media: featured press and blog posts -->
+<section class="home-section fade-in-section">
+    <div class="container">
+        <div class="section-head-row">
+            <div class="section-head">
+                <span class="eyebrow">Media</span>
+                <h2>In the press and on the blog</h2>
+            </div>
+            <a href="{{ "blog/" | relURL }}" class="btn btn-secondary">See all media</a>
+        </div>
+        <div class="card-grid">
+            {{ $featured := where (where site.RegularPages "Section" "blog") "Params.featured" true }}
+            {{ $notFeatured := where (where site.RegularPages "Section" "blog") "Params.featured" "!=" true }}
+            {{ $sorted := union $featured $notFeatured }}
+            {{ range first 3 $sorted }}
+            {{ partial "post-card.html" . }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Tech Pulse - Live Feeds -->
+<section class="home-section home-section-alt fade-in-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Tech pulse</span>
+            <h2>What the community is reading.</h2>
+            <p>Headlines, launches, trending repos, and papers, refreshed every day.</p>
+        </div>
         <div class="feeds-grid">
             <div class="feed-column">
                 <div class="feed-column-header">
@@ -184,146 +228,72 @@
             <i class="fa-solid fa-robot"></i>
             <span id="feeds-last-updated">Curated daily by our AI agents</span>
         </div>
-    </section>
+    </div>
+</section>
 
-    <div class="section-divider"></div>
-
-    <!-- Featured Blog Posts -->
-    <section class="homepage-section section-tinted fade-in-section">
-        <h2 class="section-heading">
-            <span class="section-heading-icon"><i class="fa-solid fa-pen-nib"></i></span>
-            Latest from Our Community
-        </h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-            {{ $featured := where (where site.RegularPages "Section" "blog") "Params.featured" true }}
-            {{ $notFeatured := where (where site.RegularPages "Section" "blog") "Params.featured" "!=" true }}
-            {{ $sorted := union $featured $notFeatured }}
-            {{ range first 3 $sorted }}
-            <article class="card blog-card-home" style="padding: 0; overflow: hidden;">
-                {{ if .Params.image }}
-                    {{ if hasPrefix .Params.image "/" }}
-                <a href="{{ .RelPermalink }}" style="display: block;">
-                    <img src="{{ replaceRE "^/" "" .Params.image | relURL }}" alt="{{ .Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                </a>
-                    {{ else }}
-                        {{ $imgResource := .Resources.GetMatch .Params.image }}
-                        {{ with $imgResource }}
-                <a href="{{ $.RelPermalink }}" style="display: block;">
-                    <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                </a>
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-                <div style="padding: 1.5rem;">
-                {{ if .Params.featured }}
-                <div style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; display: inline-block;">
-                    Featured
-                </div>
-                {{ end }}
-                <h3 style="margin-bottom: 0.75rem;">
-                    <a href="{{ .RelPermalink }}" style="text-decoration: none; color: var(--text-primary);">
-                        {{ .Title }}
-                    </a>
-                </h3>
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
-                    <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-                    {{ if .Params.author }}
-                    <span>by {{ .Params.author }}</span>
-                    {{ end }}
-                </div>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    {{ if .Summary }}
-                        {{ .Summary | truncate 120 }}
-                    {{ else }}
-                        {{ .Description | truncate 120 }}
-                    {{ end }}
-                </p>
-                {{ if .Params.tags }}
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                    {{ range first 3 .Params.tags }}
-                    <span class="tag">{{ . | title }}</span>
-                    {{ end }}
-                </div>
-                {{ end }}
-                <a href="{{ .RelPermalink }}" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
-                    Read more →
-                </a>
-                </div>
-            </article>
-            {{ end }}
+<!-- Sponsors and Collaborators -->
+<section class="home-section fade-in-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Sponsors</span>
+            <h2>Backed by companies that invest in Philadelphia's builders.</h2>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="{{ "blog" | relURL }}" class="btn btn-secondary cta-pulse">View All Posts</a>
-        </div>
-    </section>
-
-    <div class="section-divider section-divider-flip"></div>
-
-    <!-- Community Features -->
-    <section class="homepage-section fade-in-section">
-        <h2 class="section-heading">
-            <span class="section-heading-icon"><i class="fa-solid fa-handshake"></i></span>
-            How We Help
-        </h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <div class="card feature-card">
-                <div class="feature-card-icon"><i class="fa-solid fa-code"></i></div>
-                <h3>Project Help</h3>
-                <p>Stuck on a coding challenge? Connect with experienced developers who can provide guidance and mentorship.</p>
-                <a href="{{ "project-request" | relURL }}" class="btn">Get Help</a>
-            </div>
-
-            <div class="card feature-card">
-                <div class="feature-card-icon"><i class="fa-solid fa-mug-hot"></i></div>
-                <h3>Weekly Events</h3>
-                <p>Join our regular meetups for hands-on coding, workshops, and networking with fellow developers.</p>
-                <a href="https://www.meetup.com/code-coffee-philly/" class="btn">Join Events</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider section-divider-flip"></div>
-
-    <!-- Our Sponsors -->
-    <section class="homepage-section fade-in-section">
-        <h2 class="section-heading">
-            <span class="section-heading-icon"><i class="fa-solid fa-heart"></i></span>
-            Our Sponsors
-        </h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
+        <div class="logo-grid">
             {{ range .Site.Data.sponsors.sponsors }}
             <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
-                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
+                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo" loading="lazy">
                 <span>{{ .name }}</span>
             </a>
             {{ end }}
         </div>
 
-        <!-- CTA Banner -->
-        <div class="cta-banner">
-            <span class="cta-banner-icon"><i class="fa-solid fa-handshake"></i></span>
-            <h3>Become a Sponsor</h3>
-            <p>Support Philadelphia's growing tech community and get your brand in front of passionate developers.</p>
-            <a href="{{ "event-sponsorship" | relURL }}" class="btn-cta">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+        <h3 class="logo-grid-label">Hackathon sponsors</h3>
+        <div class="logo-grid">
+            {{ range .Site.Data.sponsors.hackathon_sponsors }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
+                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo" loading="lazy">
+                <span>{{ .name }}</span>
+            </a>
+            {{ end }}
         </div>
-    </section>
 
-    <div class="section-divider"></div>
-
-    <!-- Collaborators -->
-    <section class="homepage-section section-tinted fade-in-section">
-        <h2 class="section-heading">
-            <span class="section-heading-icon"><i class="fa-solid fa-people-group"></i></span>
-            Collaborators
-        </h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
+        <h3 class="logo-grid-label">Collaborators</h3>
+        <div class="logo-grid">
             {{ range .Site.Data.sponsors.collaborators }}
             <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
-                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo">
+                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo" loading="lazy">
                 <span>{{ .name }}</span>
             </a>
             {{ end }}
         </div>
-    </section>
-</div>
+
+        <div class="cta-banner">
+            <div>
+                <h3>Become a sponsor</h3>
+                <p>Sponsor a quarterly hackathon or fund the operating costs behind our weekly sessions.</p>
+            </div>
+            <div class="hero-actions">
+                <a href="{{ "event-sponsorship/" | relURL }}#hackathons" class="btn">Sponsor a hackathon</a>
+                <a href="{{ "event-sponsorship/" | relURL }}#operations" class="btn btn-secondary">Fund operating costs</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Join -->
+<section class="join-band">
+    <div class="container">
+        <span class="eyebrow">Join {{ .Site.Params.shortName }}</span>
+        <h2>Come build with us.</h2>
+        <p>Bring your laptop, grab a coffee, and introduce yourself to at least one person. That's the whole onboarding.</p>
+        <div class="hero-actions">
+            <a href="https://www.meetup.com/code-coffee-philly/" class="btn btn-lg">
+                <i class="fa-brands fa-meetup"></i> Join us on Meetup
+            </a>
+            <a href="https://discord.gg/ts75yERD5q" class="btn btn-lg btn-on-dark">
+                <i class="fa-brands fa-discord"></i> Join the Discord
+            </a>
+        </div>
+    </div>
+</section>
 {{ end }}

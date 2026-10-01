@@ -247,6 +247,16 @@
             {{ end }}
         </div>
 
+        <h3 class="logo-grid-label">Hackathon sponsors</h3>
+        <div class="logo-grid">
+            {{ range .Site.Data.sponsors.hackathon_sponsors }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="sponsor-card">
+                <img src="{{ printf "images/sponsors/%s" .logo | relURL }}" alt="{{ .name }} logo" loading="lazy">
+                <span>{{ .name }}</span>
+            </a>
+            {{ end }}
+        </div>
+
         <h3 class="logo-grid-label">Collaborators</h3>
         <div class="logo-grid">
             {{ range .Site.Data.sponsors.collaborators }}

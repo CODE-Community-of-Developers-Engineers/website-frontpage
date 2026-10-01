@@ -76,7 +76,7 @@ jobs:
             --no-progress
             --offline
             --root-dir ${{ github.workspace }}/public
-            --remap 'file://${{ github.workspace }}/public/website-frontpage/(.*) file://${{ github.workspace }}/public/$1'
+            --remap 'file://${{ github.workspace }}/public/website-frontpage/?(.*) file://${{ github.workspace }}/public/$1'
             --exclude-path './public/index.xml'
             --exclude-path './public/blog/index.xml'
             --exclude-path './public/tags/*/index.xml'

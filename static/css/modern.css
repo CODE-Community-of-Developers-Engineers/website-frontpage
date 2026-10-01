@@ -418,6 +418,33 @@ p {
     margin: 1.5rem 0 0;
 }
 
+.hero-sponsor {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.btn-sponsor {
+    background: var(--ink);
+    border-color: var(--ink);
+    border-radius: 999px;
+    padding: 0.85rem 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-sponsor i {
+    color: #7fc4c9;
+}
+
+.btn-sponsor:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+}
+
+.btn-sponsor:hover i {
+    color: white;
+}
+
 .hero-media {
     position: relative;
     margin: 0;

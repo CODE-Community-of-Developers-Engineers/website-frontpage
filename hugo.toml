@@ -1,12 +1,13 @@
-baseURL = 'https://www.codephilly.com/Code-And-Coffee-philidelphia-Website'
+baseURL = 'https://www.codephilly.com/'
 languageCode = 'en-us'
-title = 'Coffee & Code Philadelphia'
+title = 'C.O.D.E - Community of Developers & Engineers'
 enableGitInfo = true
 ignoreFiles = ["README\\.md$"]
 
 [params]
-description = 'Your space to build.'
-author = 'Coffee & Code Philadelphia'
+shortName = 'C.O.D.E'
+description = "Philadelphia's community of developers and engineers. Weekly meetups, workshops, and hackathons."
+author = 'C.O.D.E Philadelphia'
 
 [markup]
   [markup.goldmark]
@@ -24,24 +25,14 @@ url = "/onboarding/"
 weight = 15
 
 [[menus.main]]
-name = "Blog"
+name = "Media"
 url = "/blog/"
 weight = 25
-
-[[menus.main]]
-name = "Project Request"
-url = "/project-request/"
-weight = 30
 
 [[menus.main]]
 name = "Event Sponsorship"
 url = "/event-sponsorship/"
 weight = 50
-
-[[menus.main]]
-name = "Resources"
-url = "/resources/"
-weight = 55
 
 [[menus.main]]
 name = "Merch"
@@ -50,7 +41,7 @@ weight = 60
 
 [[menus.main]]
 name = "Community Fund"
-url = "https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia"
+url = "https://givebutter.com/c_o_d_e"
 weight = 70
 
 [outputs]

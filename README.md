@@ -1,4 +1,4 @@
-# Coffee & Code Philadelphia
+# C.O.D.E
 
 [![Hugo](https://img.shields.io/badge/Hugo-0.126.1-ff4088?logo=hugo)](https://gohugo.io/)
 [![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-222?logo=github)](https://pages.github.com/)
@@ -8,7 +8,7 @@
 
 ## About
 
-Coffee & Code Philadelphia is a welcoming community for anyone interested in technology, coding, and building projects. Whether you're a seasoned developer or just starting your journey, you'll find a supportive environment to learn, collaborate, and grow.
+C.O.D.E is a welcoming community for anyone interested in technology, coding, and building projects. Whether you're a seasoned developer or just starting your journey, you'll find a supportive environment to learn, collaborate, and grow.
 
 We host regular events including:
 - **Weekend Coding Crew** - Casual coding sessions
@@ -23,7 +23,6 @@ We host regular events including:
 - **Blog Platform** - Tech tutorials, event recaps, and community stories
 - **Events Carousel** - Rotating display of upcoming community events
 - **Meetup Integration** - Live event data from Meetup.com
-- **Project Request Portal** - Get help with your coding projects
 - **Tech Talent Matchboard** - Connect job seekers with opportunities
 - **Event Sponsorship** - Support our community events
 
@@ -32,9 +31,9 @@ We host regular events including:
 | Resource | Link |
 |----------|------|
 | Live Site | [codephilly.com](https://www.codephilly.com/Code-And-Coffee-philidelphia-Website) |
-| Meetup Group | [Coffee & Code Philadelphia](https://www.meetup.com/code-and-coffee-philadelphia/) |
+| Meetup Group | [C.O.D.E](https://www.meetup.com/code-and-coffee-philadelphia/) |
 | Merch Store | [Fourth Wall Shop](https://nol-kky-shop.fourthwall.com/) |
-| Community Fund | [Hack Club Bank](https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia) |
+| Community Fund | [Givebutter](https://givebutter.com/c_o_d_e) |
 
 ## Tech Stack
 
@@ -65,7 +64,7 @@ flowchart TB
 
     subgraph Runtime["Browser Runtime"]
         Menu[menu.js]
-        Carousel[carousel.js]
+        Carousel[events-gallery.js]
         MeetupJS[meetup.js]
     end
 
@@ -198,8 +197,6 @@ Add an iframe in your markdown:
 │   ├── _index.md              # Homepage
 │   ├── blog/                  # Blog posts (page bundles)
 │   ├── links/                 # Community links page
-│   ├── project-request/       # Project help form
-│   ├── talent-matchboard/     # Job matching form
 │   └── event-sponsorship/     # Sponsorship form
 ├── layouts/
 │   ├── _default/
@@ -210,7 +207,7 @@ Add an iframe in your markdown:
 ├── static/
 │   ├── css/                   # Stylesheets
 │   ├── js/                    # JavaScript modules
-│   └── images/events/         # Event carousel images
+│   └── images/events/         # Event gallery images
 ├── scripts/
 │   └── generate-events-data.js # Build script
 ├── hugo.toml                  # Hugo configuration
@@ -223,7 +220,7 @@ Add an iframe in your markdown:
 sequenceDiagram
     participant Browser
     participant EventsData as events-data.js
-    participant Carousel as carousel.js
+    participant Carousel as events-gallery.js
     participant Menu as menu.js
     participant MeetupJS as meetup.js
     participant API as Meetup API
@@ -231,7 +228,7 @@ sequenceDiagram
     Browser->>EventsData: Load (sets window.eventsImageData)
     Browser->>Carousel: Initialize IIFE
     Carousel->>EventsData: Read eventsImageData
-    Carousel->>Browser: Render carousel slides
+    Carousel->>Browser: Render gallery tiles
     Note over Carousel: Auto-advance every 3s
     Browser->>Menu: Setup event listeners
     Note over Menu: Mobile nav toggle at 1300px
@@ -244,7 +241,7 @@ sequenceDiagram
 | Module | Purpose |
 |--------|---------|
 | `menu.js` | Responsive mobile navigation toggle (breakpoint: 1300px) |
-| `carousel.js` | Events carousel with auto-rotation (3s interval) |
+| `events-gallery.js` | Events photo grid (one tile per image) |
 | `meetup.js` | Fetches live events from Meetup.com via CORS proxy |
 | `events-data.js` | Auto-generated event data from image filenames |
 
@@ -266,7 +263,7 @@ We welcome contributions! Here's how to get involved:
 
 ## Community
 
-- **Meetup**: [Coffee & Code Philadelphia](https://www.meetup.com/code-and-coffee-philadelphia/)
+- **Meetup**: [C.O.D.E](https://www.meetup.com/code-and-coffee-philadelphia/)
 - **Website**: [codephilly.com](https://www.codephilly.com/Code-And-Coffee-philidelphia-Website)
 
 Join us for events, ask questions, and connect with fellow developers!
@@ -277,4 +274,4 @@ This project is open source and available for community use.
 
 ---
 
-Built with caffeine and code by the Coffee & Code Philadelphia community.
+Built with caffeine and code by the C.O.D.E community.

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Close mobile menu on window resize if screen becomes large
         window.addEventListener('resize', function() {
-            if (window.innerWidth > 1300) {
+            if (window.innerWidth > 960) {
                 mobileNav.classList.remove('active');
                 document.body.style.overflow = '';
                 isMenuOpen = false;

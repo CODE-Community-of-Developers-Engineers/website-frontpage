@@ -11,9 +11,22 @@
     }
 }
 
+/* On phones the feeds become one swipeable row instead of six stacked cards */
 @media (max-width: 700px) {
     .feeds-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        gap: 0.75rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin: 0 -1.25rem;
+        padding: 0 1.25rem 0.5rem;
+        scroll-padding: 0 1.25rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .feed-column {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
     }
 }
 
@@ -265,14 +278,16 @@
 
 @media (max-width: 600px) {
     .event-feed-card {
-        flex-direction: column;
-        align-items: flex-start;
+        gap: 0.9rem;
+        padding: 1rem;
     }
 
     .event-feed-date {
-        flex-direction: row;
-        gap: 0.5rem;
-        min-width: auto;
+        min-width: 56px;
+    }
+
+    .event-feed-meta {
+        gap: 0.25rem 0.75rem;
     }
 }
 

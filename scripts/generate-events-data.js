@@ -68,8 +68,8 @@ function generateEventsData() {
             
             // Create a default SVG if no images exist
             const defaultSvg = `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="300" fill="#E9E3DC"/>
-                <text x="200" y="150" text-anchor="middle" font-family="Arial" font-size="24" fill="#59969B">Coffee & Code Event</text>
+                <rect width="400" height="300" fill="#f7f5f2"/>
+                <text x="200" y="150" text-anchor="middle" font-family="Arial" font-size="24" fill="#1f7a80">C.O.D.E Event</text>
             </svg>`;
             
             fs.writeFileSync(path.join(EVENTS_DIR, 'default-event.svg'), defaultSvg);
@@ -118,4 +118,4 @@ if (require.main === module) {
     generateEventsData();
 }
 
-module.exports = { generateEventsData };
+module.exports = { filenameToName, generateEventsData };

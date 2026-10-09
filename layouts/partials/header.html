@@ -1,34 +1,35 @@
 <header>
     <div class="header-container">
-        <a href="{{ "/" | relURL }}" class="logo">
-            <img src="{{ "/media/logo.png" | relURL }}" alt="Coffee & Code Philadelphia">
+        <a href="{{ "" | relURL }}" class="logo" aria-label="{{ .Site.Params.shortName }} home">
+            <img src="{{ "media/logo.png" | relURL }}" alt="">
             <span class="logo-text">
-                <span class="logo-main">Coffee & Code</span>
+                <span class="logo-main">{{ .Site.Params.shortName }}</span>
                 <span class="logo-location">Philadelphia</span>
             </span>
         </a>
 
         <nav class="nav-desktop">
-            <a href="{{ "/onboarding/" | relURL }}" class="nav-link">Get Started</a>
-            <a href="{{ "/blog/" | relURL }}" class="nav-link">Blog</a>
-            <a href="https://philly.ue.community/signals" class="nav-link">Signals</a>
-            <a href="{{ "/project-request/" | relURL }}" class="nav-link">Get Help</a>
-            <a href="{{ "/event-sponsorship/" | relURL }}" class="nav-link">Sponsor</a>
-            <a href="https://nol-kky-shop.fourthwall.com/" class="nav-link">Merch</a>
-            <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" class="nav-link donate">Donate</a>
+            <a href="{{ "onboarding/" | relURL }}" class="nav-link">Get Started</a>
+            <a href="{{ "" | relURL }}#events" class="nav-link">Events</a>
+            <a href="{{ "blog/" | relURL }}" class="nav-link">Media</a>
+            <a href="{{ "event-sponsorship/" | relURL }}" class="nav-link">Sponsor</a>
+            <a href="{{ "about/" | relURL }}" class="nav-link">About</a>
+            <a href="https://givebutter.com/c_o_d_e" class="nav-link donate">Donate</a>
+            <a href="https://www.meetup.com/code-coffee-philly/" class="btn nav-cta">Join us</a>
         </nav>
 
-        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">☰</button>
     </div>
 </header>
 
 <div class="mobile-nav" id="mobile-nav">
     <div class="mobile-nav-content">
-        <a href="{{ "/onboarding/" | relURL }}" class="nav-link">Get Started</a>
-        <a href="{{ "/blog/" | relURL }}" class="nav-link">Blog</a>
-        <a href="https://philly.ue.community/signals" class="nav-link">Signals</a>
-        <a href="{{ "/project-request/" | relURL }}" class="nav-link">Get Help</a>
-        <a href="{{ "/event-sponsorship/" | relURL }}" class="nav-link">Sponsor</a>
-        <a href="https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia" class="nav-link donate">Donate</a>
+        <a href="{{ "onboarding/" | relURL }}" class="nav-link">Get Started</a>
+        <a href="{{ "" | relURL }}#events" class="nav-link">Events</a>
+        <a href="{{ "blog/" | relURL }}" class="nav-link">Media</a>
+        <a href="{{ "event-sponsorship/" | relURL }}" class="nav-link">Sponsor</a>
+        <a href="{{ "about/" | relURL }}" class="nav-link">About</a>
+        <a href="https://givebutter.com/c_o_d_e" class="nav-link donate">Donate</a>
+        <a href="https://www.meetup.com/code-coffee-philly/" class="btn nav-cta">Join us</a>
     </div>
 </div>

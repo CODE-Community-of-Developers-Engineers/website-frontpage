@@ -42,10 +42,23 @@ jobs:
       - name: Validate front matter
         run: npm run validate:frontmatter
 
+      - name: Run unit and integration tests
+        run: npm test
+
       - name: Build Hugo site
-        run: hugo --gc --minify --baseURL "/"
+        run: hugo --gc --minify --baseURL "/website-frontpage/"
         env:
           HUGO_ENVIRONMENT: production
+
+      - name: Check GitHub Pages asset paths
+        run: |
+          if grep -RInE "(src|href)=[\"']/((css|js|images)/|search\\.json)" public --include="*.html"; then
+            echo "Found root-relative asset path(s); use relURL so GitHub Pages project paths work."
+            exit 1
+          fi
+
+      - name: Run end-to-end smoke tests
+        run: npm run test:e2e
 
       - name: Check for build output
         run: |
@@ -63,6 +76,7 @@ jobs:
             --no-progress
             --offline
             --root-dir ${{ github.workspace }}/public
+            --remap 'file://${{ github.workspace }}/public/website-frontpage/?(.*) file://${{ github.workspace }}/public/$1'
             --exclude-path './public/index.xml'
             --exclude-path './public/blog/index.xml'
             --exclude-path './public/tags/*/index.xml'

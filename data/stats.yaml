@@ -1,0 +1,19 @@
+# =============================================================================
+# COMMUNITY STATS (homepage stats band)
+# =============================================================================
+# Edit these by hand when the numbers change. Round down so they stay true.
+# Last checked 2026-09-30: Meetup 5,781 members, LinkedIn 2,237 followers,
+# Discord 490 members.
+# =============================================================================
+
+stats:
+  - value: "5,700+"
+    label: "members on Meetup"
+  - value: "2,200+"
+    label: "followers on LinkedIn"
+  - value: "490+"
+    label: "builders on Discord"
+  - value: "Weekly"
+    label: "coding sessions"
+  - value: "Quarterly"
+    label: "hackathons"

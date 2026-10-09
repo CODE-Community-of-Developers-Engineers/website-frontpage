@@ -35,8 +35,12 @@ jobs:
 
       - name: Install linting tools
         run: |
+          npm ci
           npm install -g markdownlint-cli2
           pip install yamllint djlint
+
+      - name: Run unit and integration tests
+        run: npm test
 
       - name: Lint Markdown files
         run: markdownlint-cli2
@@ -108,13 +112,24 @@ jobs:
         run: npm run generate:data
 
       - name: Build Hugo site
-        run: hugo --gc --minify --baseURL "/"
+        run: hugo --gc --minify --baseURL "/website-frontpage/"
         env:
           HUGO_ENVIRONMENT: production
+
+      - name: Check GitHub Pages asset paths
+        run: |
+          if grep -RInE "(src|href)=[\"']/((css|js|images)/|search\\.json)" public --include="*.html"; then
+            echo "Found root-relative asset path(s); use relURL so GitHub Pages project paths work."
+            exit 1
+          fi
+
+      - name: Run end-to-end smoke tests
+        run: npm run test:e2e
 
       - name: Validate HTML output
         run: |
           htmlproofer ./public \
+            --swap-urls '^/website-frontpage/:/' \
             --disable-external \
             --ignore-urls "/^#/,/^mailto:/,/^tel:/,/^javascript:/" \
             --ignore-files "/index.xml$/,/sitemap.xml$/" \
@@ -122,7 +137,6 @@ jobs:
             --allow-hash-href \
             --checks Links,Images,Scripts \
             --no-enforce-https
-        continue-on-error: true  # Report issues but allow workflow to complete
 
       - name: Summary
         if: success()

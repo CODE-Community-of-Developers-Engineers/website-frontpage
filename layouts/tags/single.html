@@ -64,7 +64,7 @@
             {{ if .Params.tags }}
             <div class="blog-tags">
                 {{ range .Params.tags }}
-                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ title . }}</a>
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="tag">{{ title . }}</a>
                 {{ end }}
             </div>
             {{ end }}
@@ -75,7 +75,7 @@
         <div id="no-results" style="text-align: center; padding: 3rem; background: var(--background-secondary); border-radius: var(--radius-lg); margin: 2rem 0;">
             <h3>No posts found</h3>
             <p>No posts are tagged with "{{ .Title }}".</p>
-            <a href="{{ "/blog" | relURL }}" class="btn">Browse All Posts</a>
+            <a href="{{ "blog" | relURL }}" class="btn">Browse All Posts</a>
         </div>
         {{ end }}
         </div>
@@ -102,7 +102,7 @@
             <h3>Related Tags</h3>
             <div class="tag-cloud">
                 {{ range $uniqueRelatedTags }}
-                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag-cloud-item">{{ title . }}</a>
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="tag-cloud-item">{{ title . }}</a>
                 {{ end }}
             </div>
         </div>
@@ -131,9 +131,9 @@
                     <strong>Meetup Events</strong>
                     <span>Join our weekly coding sessions</span>
                 </a>
-                <a href="{{ "project-request" | relURL }}" class="community-link">
-                    <strong>Get Project Help</strong>
-                    <span>Connect with experienced developers</span>
+                <a href="https://discord.gg/ts75yERD5q" class="community-link">
+                    <strong>Discord</strong>
+                    <span>Chat with the community between events</span>
                 </a>
             </div>
         </div>

@@ -3,6 +3,10 @@
 
 window.eventsImageData = [
     {
+        "filename": "AI_Agent_Hackathon.jpg",
+        "name": "AI Agent Hackathon"
+    },
+    {
         "filename": "AI_Paper_Talks.jpg",
         "name": "AI Paper Talks"
     },
@@ -21,10 +25,6 @@ window.eventsImageData = [
     {
         "filename": "ML_System_Design.jpeg",
         "name": "ML System Design"
-    },
-    {
-        "filename": "Our_Community.jpeg",
-        "name": "Our Community"
     },
     {
         "filename": "Web3_Workshops.jpg",

@@ -1,50 +1,54 @@
 <footer>
-    <div class="footer-gradient-bar"></div>
     <div class="container">
         <div class="footer-content">
-            <div class="footer-section">
-                <h4>Coffee & Code Philadelphia</h4>
-                <p>Building Philadelphia's tech community through collaboration, learning, and innovation.</p>
+            <div class="footer-section footer-brand">
+                <a href="{{ "" | relURL }}" class="logo" aria-label="{{ .Site.Params.shortName }} home">
+                    <img src="{{ "media/logo.png" | relURL }}" alt="">
+                    <span class="logo-text">
+                        <span class="logo-main">{{ .Site.Params.shortName }}</span>
+                    </span>
+                </a>
+                <p>Community of Developers &amp; Engineers. Building Philadelphia's tech community through collaboration, learning, and innovation.</p>
+                <div class="footer-social">
+                    <a href="https://www.meetup.com/code-coffee-philly/" aria-label="Meetup"><i class="fa-brands fa-meetup"></i></a>
+                    <a href="https://discord.gg/ts75yERD5q" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://www.linkedin.com/company/c-o-d-ee" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/coffeecodephilly/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
             </div>
 
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4>Community</h4>
                 <ul class="footer-links">
-                    <li><a href="{{ "/blog/" | relURL }}">Blog</a></li>
-                    <li><a href="https://philly.ue.community/signals">Philly Signals</a></li>
-                    <li><a href="{{ "/project-request/" | relURL }}">Get Project Help</a></li>
-                    <li><a href="{{ "/onboarding/" | relURL }}">Get Started</a></li>
-                    <li><a href="{{ "/resources/" | relURL }}">Resources</a></li>
+                    <li><a href="{{ "onboarding/" | relURL }}">Get Started</a></li>
+                    <li><a href="https://www.meetup.com/code-coffee-philly/events/">Events</a></li>
+                    <li><a href="{{ "blog/" | relURL }}">Media</a></li>
+                    <li><a href="{{ "about/" | relURL }}">About Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Get Involved</h4>
+                <ul class="footer-links">
+                    <li><a href="{{ "event-sponsorship/" | relURL }}#hackathons">Sponsor a Hackathon</a></li>
+                    <li><a href="{{ "event-sponsorship/" | relURL }}#operations">Fund Operating Costs</a></li>
+                    <li><a href="https://givebutter.com/c_o_d_e">Community Fund</a></li>
+                    <li><a href="https://nol-kky-shop.fourthwall.com/">Merch</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
                 <h4>Connect</h4>
                 <ul class="footer-links">
-                    <li><a href="https://www.meetup.com/code-coffee-philly/"><i class="fa-brands fa-meetup"></i> Meetup</a></li>
-                    <li><a href="https://www.linkedin.com/company/code-coffee-philadelphia"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
-                    <li><a href="https://www.instagram.com/coffeecodephilly/"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                    <li><a href="https://linktr.ee/codecoffeephilly"><i class="fa-solid fa-link"></i> Linktree</a></li>
-                    <li><a href="https://discord.gg/ts75yERD5q"><i class="fa-brands fa-discord"></i> Discord</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Support Us</h4>
-                <ul class="footer-links">
-                    <li><a href="{{ "/about/" | relURL }}"><i class="fa-solid fa-users"></i> About Us</a></li>
-                    <li><a href="https://substack.com/@codecoffeephilly"><i class="fa-solid fa-newspaper"></i> Newsletter</a></li>
-                    <li><a href="https://nol-kky-shop.fourthwall.com/"><i class="fa-solid fa-shirt"></i> Merchandise</a></li>
+                    <li><a href="https://substack.com/@codecoffeephilly">Newsletter</a></li>
+                    <li><a href="https://linktr.ee/codecoffeephilly">Linktree</a></li>
+                    <li><a href="https://philly.ue.community/signals">Philly Signals</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>© {{ now.Format "2006" }} Coffee & Code Philadelphia. Made with ❤️ for the tech community.</p>
+            <p>© {{ now.Format "2006" }} {{ .Site.Title }}. Made in Philadelphia for the tech community.</p>
         </div>
     </div>
-
-    <script src="{{ "/js/menu.js" | relURL }}"></script>
-    <script src="{{ "/js/carousel.js" | relURL }}"></script>
-    <script src="{{ "/js/scroll-animations.js" | relURL }}"></script>
 </footer>

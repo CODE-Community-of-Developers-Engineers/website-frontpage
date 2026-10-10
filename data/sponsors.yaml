@@ -2,9 +2,6 @@ sponsors:
   - name: "Pinecone"
     logo: "pinecone.png"
     url: "https://pinecone.io"
-  - name: "Ben Franklin Technology Partners"
-    logo: "ben-franklin.png"
-    url: "https://benfranklin.org"
   - name: "Pennovation"
     logo: "pennovation.png"
     url: "https://pennovation.upenn.edu"
@@ -37,6 +34,9 @@ collaborators:
   - name: "Data Philly"
     logo: "data-philly.png"
     url: "https://dataphilly.com"
+  - name: "Cursor Philadelphia"
+    logo: "cursor-philadelphia.png"
+    url: "https://cursorphilly.com"
 
 # Sponsors of our most recent hackathon (AI Agent Hackathon, September 2026)
 hackathon_sponsors:
@@ -55,9 +55,6 @@ hackathon_sponsors:
   - name: "DataPhilly"
     logo: "data-philly.png"
     url: "https://dataphilly.com"
-  - name: "Cursor Philadelphia"
-    logo: "cursor-philadelphia.png"
-    url: "https://cursorphilly.com"
   - name: "Cesium"
     logo: "cesium.png"
     url: "https://cesium.com"

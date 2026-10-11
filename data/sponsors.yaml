@@ -1,7 +1,4 @@
 sponsors:
-  - name: "Pinecone"
-    logo: "pinecone.png"
-    url: "https://pinecone.io"
   - name: "Pennovation"
     logo: "pennovation.png"
     url: "https://pennovation.upenn.edu"
@@ -20,9 +17,6 @@ sponsors:
   - name: "Long View Partners"
     logo: "long-view-partners.png"
     url: "https://longviewpartners.co/"
-  - name: "Datadog"
-    logo: "Datadog-Logo.png"
-    url: "https://www.datadoghq.com/"
   - name: "Runpod"
     logo: "runpod.png"
     url: "https://www.runpod.io/"

@@ -548,6 +548,119 @@ p {
     box-shadow: var(--shadow-lg);
 }
 
+/* Hackathon countdown */
+.hackathon-countdown {
+    padding: 2.5rem 0;
+    background: var(--ink);
+    color: #ffffff;
+}
+
+.hackathon-countdown .eyebrow {
+    color: #7fc4c9;
+}
+
+.hackathon-countdown-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.75fr);
+    gap: 2.25rem;
+    align-items: center;
+}
+
+.hackathon-countdown h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin: 0 0 0.75rem;
+}
+
+.hackathon-countdown p {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.hackathon-countdown-copy > p {
+    max-width: 42rem;
+    margin: 0 0 1.25rem;
+}
+
+.hackathon-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
+}
+
+.hackathon-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.hackathon-meta i {
+    color: #7fc4c9;
+}
+
+.countdown-panel {
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.countdown-kicker {
+    margin: 0 0 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.countdown-unit {
+    min-width: 0;
+    padding: 0.9rem 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.countdown-value {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+.countdown-label {
+    display: block;
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.countdown-status {
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+}
+
 /* Stats band */
 .stats-band {
     border-top: 1px solid var(--border-color);
@@ -865,7 +978,8 @@ p {
 /* Homepage responsive */
 @media (max-width: 960px) {
     .hero-grid,
-    .section-split {
+    .section-split,
+    .hackathon-countdown-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
     }
@@ -906,6 +1020,10 @@ p {
     .hero-actions .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 

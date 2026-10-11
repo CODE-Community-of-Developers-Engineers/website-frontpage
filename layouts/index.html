@@ -35,6 +35,54 @@
     </div>
 </section>
 
+<!-- Next Hackathon Countdown -->
+{{ with .Site.Data.next_hackathon }}
+<section class="hackathon-countdown fade-in-section" id="next-hackathon" aria-labelledby="next-hackathon-title">
+    <div class="container hackathon-countdown-grid">
+        <div class="hackathon-countdown-copy">
+            <span class="eyebrow">Next hackathon</span>
+            <h2 id="next-hackathon-title">{{ .title }}</h2>
+            <p>{{ .subtitle }} lands {{ .date_label }} at {{ .location }}. Join builders shipping real projects in one focused day.</p>
+            <div class="hackathon-meta">
+                <span><i class="fa-regular fa-calendar"></i> {{ .date_label }}</span>
+                <span><i class="fa-regular fa-clock"></i> {{ .time_label }}</span>
+                <span><i class="fa-solid fa-location-dot"></i> {{ .location }}</span>
+            </div>
+            <div class="hero-actions">
+                <a href="{{ .register_url }}" class="btn btn-lg" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Join hackathon
+                </a>
+                <a href="{{ .devpost_url }}" class="btn btn-lg btn-on-dark" target="_blank" rel="noopener noreferrer">
+                    View Devpost
+                </a>
+            </div>
+        </div>
+        <div class="countdown-panel" data-countdown data-countdown-start="{{ .starts_at }}" data-countdown-end="{{ .ends_at }}" aria-live="polite">
+            <p class="countdown-kicker" data-countdown-heading>Hackathon starts in</p>
+            <div class="countdown-grid">
+                <div class="countdown-unit">
+                    <span class="countdown-value" data-countdown-days>00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="countdown-value" data-countdown-hours>00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="countdown-value" data-countdown-minutes>00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="countdown-value" data-countdown-seconds>00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+            <p class="countdown-status" data-countdown-status>January 23 at 10:00 AM EST</p>
+        </div>
+    </div>
+</section>
+{{ end }}
+
 <!-- Stats -->
 <section class="stats-band">
     <div class="container">

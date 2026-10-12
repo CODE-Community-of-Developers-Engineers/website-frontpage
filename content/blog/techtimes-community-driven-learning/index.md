@@ -4,6 +4,7 @@ date: 2026-02-12
 author: "Tech Times"
 description: "Tech Times covers our mission to revive community-driven learning and strengthen the city's tech culture."
 topic: "press"
+pressOrder: 2
 tags: ["press", "community", "meetup", "networking"]
 featured: true
 image: "cover.jpg"

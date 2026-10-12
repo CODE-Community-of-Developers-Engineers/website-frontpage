@@ -4,6 +4,7 @@ date: 2026-10-09
 author: "Tony Siu and Jacob Gold"
 description: "Technical.ly shares why focused hackathons can help Philadelphia connect talent, test ideas, and strengthen the region's innovation economy."
 topic: "press"
+pressOrder: 1
 tags: ["press", "hackathon", "community", "civic-tech", "ai"]
 featured: true
 readingTime: 2

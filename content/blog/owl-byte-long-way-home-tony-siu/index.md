@@ -4,6 +4,7 @@ date: 2026-06-11
 author: "Moulishka Sawant"
 description: "Temple University's Owl Byte podcast interviews Tony Siu about his path from exchange student to AI engineer and Philadelphia community builder."
 topic: "press"
+pressOrder: 5
 tags: ["press", "podcast", "ai", "community", "temple"]
 featured: true
 readingTime: 2

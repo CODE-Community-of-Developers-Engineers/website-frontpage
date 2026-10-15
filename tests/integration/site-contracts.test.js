@@ -40,7 +40,7 @@ test('homepage exposes the next hackathon countdown contract', () => {
   const baseTemplate = read('layouts/_default/baseof.html');
   const hackathonData = read('data/next_hackathon.yaml');
 
-  assert.match(hackathonData, /title:\s*"GSD Hackathon"/);
+  assert.match(hackathonData, /title:\s*"January Hackathon"/);
   assert.match(hackathonData, /starts_at:\s*"2027-01-23T10:00:00-05:00"/);
   assert.match(hackathonData, /register_url:\s*"https:\/\/tbd-hackathon\.devpost\.com\/register/);
   assert.match(homeTemplate, /id="next-hackathon"/);

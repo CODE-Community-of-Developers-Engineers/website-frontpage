@@ -25,8 +25,8 @@
 
     const now = Date.now();
     let remaining = start - now;
-    let heading = 'Hackathon starts in';
-    let status = 'January 23 at 10:00 AM EST';
+    let heading = 'Time to next hackathon!';
+    let status = '';
 
     if (now >= start && now < end) {
       remaining = end - now;
@@ -49,6 +49,7 @@
     setText(widget, '[data-countdown-seconds]', pad(seconds));
     setText(widget, '[data-countdown-heading]', heading);
     setText(widget, '[data-countdown-status]', status);
+    widget.querySelector('[data-countdown-status]').hidden = !status;
   }
 
   widgets.forEach(function (widget) {

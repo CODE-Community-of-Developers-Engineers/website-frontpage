@@ -4,6 +4,7 @@ date: 2026-02-12
 author: "Sarah Huffman"
 description: "Technical.ly profiles Tony Siu and the story behind building our community to 3,500+ members."
 topic: "press"
+pressOrder: 3
 tags: ["press", "community", "meetup", "networking", "startup"]
 featured: true
 image: "cover.jpg"

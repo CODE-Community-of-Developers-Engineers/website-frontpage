@@ -11,12 +11,12 @@ window.eventsImageData = [
         "name": "AI Paper Talks"
     },
     {
-        "filename": "Dev_Workshop.jpeg",
-        "name": "Dev Workshop"
+        "filename": "Claude_Code_Philly.jpeg",
+        "name": "Claude Code Philly"
     },
     {
-        "filename": "Founder_Fridays_Coworking.jpeg",
-        "name": "Founder Fridays Coworking"
+        "filename": "Dev_Workshop.jpeg",
+        "name": "Dev Workshop"
     },
     {
         "filename": "LeetCode_Practice.jpeg",

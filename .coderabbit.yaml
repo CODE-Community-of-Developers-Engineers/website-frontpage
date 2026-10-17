@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+language: en-US
+tone_instructions: >-
+  Be concise, constructive, and practical. Focus on issues that can break the
+  static site, deployment, accessibility, responsive behavior, SEO, content
+  validity, or contributor experience. Avoid nitpicks that are already covered
+  by formatting and lint checks.
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  review_status: true
+  review_info: true
+  changed_files_summary: true
+  estimate_code_review_effort: true
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    ignore_title_keywords:
+      - wip
+      - draft
+
+  path_filters:
+    - "**/*"
+    - "!public/**"
+    - "!node_modules/**"
+    - "!static/js/events-data.js"
+    - "!static/js/live-feeds-data.js"
+    - "!static/images/**"
+    - "!static/media/**"
+    - "!static/favicon*"
+    - "!static/apple-touch-icon.png"
+
+  path_instructions:
+    - path: "layouts/**/*.html"
+      instructions: >-
+        Review Hugo templates for valid template syntax, correct partial usage,
+        safe data access, accessibility-friendly markup, and URL handling that
+        works when the site is served from a GitHub Pages project path. Flag
+        root-relative asset links such as /css, /js, /images, or /search.json
+        unless they are intentionally transformed by Hugo helpers.
+    - path: "static/js/**/*.js"
+      instructions: >-
+        Review browser JavaScript for runtime errors, progressive enhancement,
+        defensive DOM access where elements may be absent on some pages, and
+        compatibility with the existing no-bundler static-site setup.
+    - path: "scripts/**/*.js"
+      instructions: >-
+        Review Node scripts for deterministic generated output, clear validation
+        failures, cross-platform path handling, and consistency with the npm
+        scripts in package.json.
+    - path: "content/**/*.md"
+      instructions: >-
+        Review Markdown content for valid front matter, broken internal links,
+        placeholder copy, missing descriptions, missing alt text context, and
+        user-facing clarity. Do not suggest broad copy rewrites unless the
+        wording is confusing, inaccurate, or inconsistent with the site.
+    - path: "data/**/*.yaml"
+      instructions: >-
+        Review data files for schema consistency, missing required fields,
+        broken URLs, invalid dates, and ordering/formatting that could break
+        templates or generated data scripts.
+    - path: "static/css/**/*.css"
+      instructions: >-
+        Review CSS for responsive regressions, accessibility issues such as
+        contrast/focus states, duplicate or dead selectors, and interactions
+        with existing layout classes.
+    - path: ".github/workflows/**/*.yml"
+      instructions: >-
+        Review workflows for least-privilege permissions, deterministic installs,
+        correct Hugo/Node setup, preserved validation gates, and safe handling of
+        secrets. Keep PR checks fast and focused.
+
+  pre_merge_checks:
+    title:
+      mode: warning
+      requirements: >-
+        PR titles should be concise and describe the user-visible or maintenance
+        outcome.
+    description:
+      mode: warning
+    custom_checks:
+      - name: Static site safety
+        mode: warning
+        instructions: >-
+          If the PR changes layouts, static assets, content, data files, npm
+          scripts, or workflows, verify that the existing validation path remains
+          intact: npm run generate:data, npm run validate, npm test, Hugo build,
+          e2e smoke tests, and internal link checks.
+
+  tools:
+    github-checks:
+      enabled: true
+    markdownlint:
+      enabled: true
+    yamllint:
+      enabled: true
+    actionlint:
+      enabled: true
+    shellcheck:
+      enabled: true
+    gitleaks:
+      enabled: true
+    zizmor:
+      enabled: true
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - AGENTS.md
+      - CLAUDE.md
+      - README.md
+
+chat:
+  auto_reply: true

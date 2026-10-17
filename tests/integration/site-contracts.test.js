@@ -35,6 +35,20 @@ test('root-relative content image paths are normalized through relURL', () => {
   assert.doesNotMatch(listTemplate, /src="{{ \.Params\.image }}"/);
 });
 
+test('homepage exposes the next hackathon countdown contract', () => {
+  const homeTemplate = read('layouts/index.html');
+  const baseTemplate = read('layouts/_default/baseof.html');
+  const hackathonData = read('data/next_hackathon.yaml');
+
+  assert.match(hackathonData, /title:\s*"January Hackathon"/);
+  assert.match(hackathonData, /starts_at:\s*"2027-01-23T10:00:00-05:00"/);
+  assert.match(hackathonData, /register_url:\s*"https:\/\/tbd-hackathon\.devpost\.com\/register/);
+  assert.match(homeTemplate, /id="next-hackathon"/);
+  assert.match(homeTemplate, /data-countdown-start="{{ \.starts_at }}"/);
+  assert.match(homeTemplate, /data-countdown-end="{{ \.ends_at }}"/);
+  assert.match(baseTemplate, /js\/countdown\.js/);
+});
+
 test('configured team photos either exist or intentionally use placeholders', () => {
   const teamData = read('data/team.yaml');
   const photoMatches = [...teamData.matchAll(/photo:\s*"([^"]*)"/g)];

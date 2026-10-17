@@ -16,16 +16,60 @@
                 <a href="https://discord.gg/ts75yERD5q" class="btn btn-lg btn-secondary">
                     <i class="fa-brands fa-discord"></i> Join the Discord
                 </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9TUdqdyFWqwnnrEUvE3IO3GM7cBBFJ6LayZs8l4FNgl2eDw/viewform?usp=dialog" class="btn btn-lg btn-secondary" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-hand-holding-heart"></i> Hackathon Volunteer
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd_hoOjvw-rZ4C1scrXZzUk5CwBmtb1Dtq2Vr5qvERr3TXXGg/viewform?usp=dialog" class="btn btn-lg btn-secondary" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-handshake"></i> Hackathon Sponsor
+                </a>
             </div>
             <p class="hero-note">
                 New here? <a href="{{ "onboarding/" | relURL }}" class="text-link">Get started in three steps →</a>
             </p>
         </div>
-        <figure class="hero-media">
-            <video autoplay muted loop playsinline preload="metadata" poster="{{ "images/community/hackathon-2026-video-poster.jpg" | relURL }}" aria-label="Silent footage of members building together at the AI Agent Hackathon">
-                <source src="{{ "media/hackathon-2026.mp4" | relURL }}" type="video/mp4">
-            </video>
-        </figure>
+        <div class="hero-side">
+            <figure class="hero-media">
+                <video autoplay muted loop playsinline preload="metadata" poster="{{ "images/community/hackathon-2026-video-poster.jpg" | relURL }}" aria-label="Silent footage of members building together at the AI Agent Hackathon">
+                    <source src="{{ "media/hackathon-2026.mp4" | relURL }}" type="video/mp4">
+                </video>
+            </figure>
+
+            <!-- Next hackathon: condensed countdown card under the video -->
+            {{ with .Site.Data.next_hackathon }}
+            <div class="hero-hackathon" id="next-hackathon" data-countdown data-countdown-start="{{ .starts_at }}" data-countdown-end="{{ .ends_at }}" aria-live="polite">
+                <h2 class="hero-hackathon-title">{{ .title }}</h2>
+                <p class="hero-hackathon-kicker" data-countdown-heading>Time to next hackathon!</p>
+                <div class="countdown-grid">
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-countdown-days>00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-countdown-hours>00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-countdown-minutes>00</span>
+                        <span class="countdown-label">Min</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-value" data-countdown-seconds>00</span>
+                        <span class="countdown-label">Sec</span>
+                    </div>
+                </div>
+                <dl class="hero-hackathon-facts">
+                    <div><dt>Date:</dt><dd>{{ .date_label }}</dd></div>
+                    <div><dt>Location:</dt><dd>{{ .location }}</dd></div>
+                    <div><dt>Theme:</dt><dd>{{ .theme_label }}</dd></div>
+                </dl>
+                <p class="countdown-status" data-countdown-status hidden></p>
+                <div class="hero-hackathon-actions">
+                    <a href="{{ .register_url }}" class="btn btn-hot" target="_blank" rel="noopener noreferrer">Join hackathon</a>
+                    <a href="{{ .devpost_url }}" class="btn btn-on-dark" target="_blank" rel="noopener noreferrer">View Devpost</a>
+                </div>
+            </div>
+            {{ end }}
+        </div>
     </div>
     <div class="container hero-sponsor">
         <a href="{{ "event-sponsorship/" | relURL }}" class="btn btn-lg btn-sponsor">
@@ -135,9 +179,11 @@
             <a href="{{ "blog/" | relURL }}" class="btn btn-secondary">See all media</a>
         </div>
         <div class="card-grid">
-            {{ $featured := where (where site.RegularPages "Section" "blog") "Params.featured" true }}
-            {{ $notFeatured := where (where site.RegularPages "Section" "blog") "Params.featured" "!=" true }}
-            {{ $sorted := union $featured $notFeatured }}
+            {{ $posts := where site.RegularPages "Section" "blog" }}
+            {{ $press := sort (where $posts "Params.topic" "press") "Params.pressOrder" }}
+            {{ $featured := where (where $posts "Params.topic" "!=" "press") "Params.featured" true }}
+            {{ $notFeatured := where (where $posts "Params.topic" "!=" "press") "Params.featured" "!=" true }}
+            {{ $sorted := union $press (union $featured $notFeatured) }}
             {{ range first 3 $sorted }}
             {{ partial "post-card.html" . }}
             {{ end }}

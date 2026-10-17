@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ $posts := .Pages.ByDate.Reverse }}
-{{ $press := where $posts "Params.topic" "press" }}
+{{ $press := sort (where $posts "Params.topic" "press") "Params.pressOrder" }}
 {{ $blog := where $posts "Params.topic" "!=" "press" }}
 <section class="home-section">
     <div class="container">

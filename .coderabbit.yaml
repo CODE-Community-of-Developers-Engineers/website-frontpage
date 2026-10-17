@@ -2,10 +2,7 @@
 
 language: en-US
 tone_instructions: >-
-  Be concise, constructive, and practical. Focus on issues that can break the
-  static site, deployment, accessibility, responsive behavior, SEO, content
-  validity, or contributor experience. Avoid nitpicks that are already covered
-  by formatting and lint checks.
+  Be concise and practical. Focus on static-site breakage, deployment, accessibility, responsive behavior, SEO, content validity, and contributor experience. Avoid lint-covered nitpicks.
 
 reviews:
   profile: chill

@@ -6,7 +6,8 @@ tone_instructions: >-
 
 reviews:
   profile: chill
-  request_changes_workflow: false
+  request_changes_workflow: true
+  allow_author_approval: false
   high_level_summary: true
   review_status: true
   review_info: true
@@ -73,8 +74,9 @@ reviews:
         secrets. Keep PR checks fast and focused.
 
   pre_merge_checks:
+    override_requested_reviewers_only: true
     title:
-      mode: warning
+      mode: error
       requirements: >-
         PR titles should be concise and describe the user-visible or maintenance
         outcome.
@@ -82,7 +84,7 @@ reviews:
       mode: warning
     custom_checks:
       - name: Static site safety
-        mode: warning
+        mode: error
         instructions: >-
           If the PR changes layouts, static assets, content, data files, npm
           scripts, or workflows, verify that the existing validation path remains

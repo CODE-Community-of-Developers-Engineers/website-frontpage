@@ -524,6 +524,33 @@ p {
     margin: 1.5rem 0 0;
 }
 
+.hero-sponsor {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.btn-sponsor {
+    background: var(--ink);
+    border-color: var(--ink);
+    border-radius: 999px;
+    padding: 0.85rem 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-sponsor i {
+    color: #7fc4c9;
+}
+
+.btn-sponsor:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+}
+
+.btn-sponsor:hover i {
+    color: white;
+}
+
 .hero-side {
     display: flex;
     flex-direction: column;
@@ -3442,5 +3469,89 @@ footer {
 
     .sponsor-photo-grid {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ================================================
+   MOBILE REFINEMENTS
+   ================================================ */
+
+/* The sticky header must not cover the section an in-page link jumps to */
+section[id] {
+    scroll-margin-top: var(--header-height);
+}
+
+/* Wrapper for plain content pages (Get Started, Sponsor, About, Links) */
+.page-container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.page-container > .blog-post:hover {
+    transform: none;
+}
+
+.mobile-nav-content {
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+}
+
+.mobile-menu-btn {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+@media (max-width: 768px) {
+    .page-container {
+        padding-top: 1.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    /* Drop the outer card on content pages so the text gets the full width */
+    .page-container > .blog-post {
+        background: none;
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+        backdrop-filter: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 0;
+    }
+
+    .footer-links a {
+        display: inline-block;
+        padding: 0.4rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .events-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+
+    .events-gallery-tile figcaption {
+        font-size: 0.8rem;
+        padding: 1.75rem 0.6rem 0.5rem;
+    }
+
+    .logo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+
+    .sponsor-card {
+        min-height: 104px;
+        padding: 0.75rem;
+    }
+
+    .blog-title {
+        font-size: 1.6rem;
+    }
+
+    .blog-header-content {
+        padding: 1.25rem;
     }
 }

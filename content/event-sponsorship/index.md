@@ -18,7 +18,7 @@ C.O.D.E is a volunteer-run nonprofit, so sponsors are what keep it going. There 
     <li>A chance to demo your product to people who will use it</li>
   </ul>
   <a href="mailto:jkobygold@gmail.com?subject=Hackathon%20sponsorship" class="btn btn-lg">Email us to sponsor</a>
-  <p class="sponsor-option-note">Write to <a href="mailto:jkobygold@gmail.com?subject=Hackathon%20sponsorship">jkobygold@gmail.com</a></p>
+  <p class="sponsor-option-note">Nothing opened? <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=jkobygold@gmail.com&amp;su=Hackathon%20sponsorship" target="_blank" rel="noopener">Write to us in Gmail</a></p>
 </section>
 
 <section class="card sponsor-option" id="operations">

@@ -50,7 +50,8 @@ test('search page loads generated search index', async ({ page }) => {
 
   const searchIndex = await response.json();
   expect(searchIndex.some(item => item.type === 'blog')).toBe(true);
-  expect(searchIndex.every(item => item.url.startsWith('/website-frontpage/'))).toBe(true);
+  const siteBasePath = new URL('../', page.url()).pathname;
+  expect(searchIndex.every(item => item.url.startsWith(siteBasePath))).toBe(true);
 
   const blogItem = searchIndex.find(item => item.type === 'blog');
   expect(blogItem).toBeTruthy();
@@ -65,7 +66,10 @@ test('blog page uses project-relative image paths', async ({ page }) => {
   await page.goto('./blog/');
 
   await expect(page.getByRole('heading', { name: /Media/i })).toBeVisible();
-  const coverImages = page.locator('img[src*="/website-frontpage/images/"], img[src*="/website-frontpage/blog/"]');
+  const siteBasePath = new URL('../', page.url()).pathname;
+  const coverImages = page.locator(
+    `img[src*="${siteBasePath}images/"], img[src*="${siteBasePath}blog/"]`
+  );
   await expect(coverImages.first()).toBeVisible();
   await expect.poll(() => coverImages.first().evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
 

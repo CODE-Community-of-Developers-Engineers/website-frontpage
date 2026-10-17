@@ -1,8 +1,9 @@
 const { defineConfig, devices } = require('@playwright/test');
 
 const port = Number(process.env.PLAYWRIGHT_TEST_PORT || 4173);
-const basePath = process.env.SITE_BASE_PATH || '/website-frontpage';
+const basePath = (process.env.SITE_BASE_PATH || '/website-frontpage').replace(/\/+$/, '');
 const origin = `http://127.0.0.1:${port}`;
+const siteUrl = `${origin}${basePath}/`;
 
 module.exports = defineConfig({
   testDir: './tests/e2e',
@@ -17,12 +18,12 @@ module.exports = defineConfig({
     timeout: 5_000
   },
   use: {
-    baseURL: `${origin}${basePath}`,
+    baseURL: siteUrl,
     trace: 'on-first-retry'
   },
   webServer: {
     command: `node tests/e2e/serve-built-site.cjs --port ${port}`,
-    url: `${origin}${basePath}/`,
+    url: siteUrl,
     reuseExistingServer: !process.env.CI,
     timeout: 10_000
   },

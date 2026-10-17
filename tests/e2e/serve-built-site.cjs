@@ -4,7 +4,7 @@ const path = require('node:path');
 
 const repoRoot = path.join(__dirname, '..', '..');
 const publicDir = path.join(repoRoot, 'public');
-const basePath = process.env.SITE_BASE_PATH || '/website-frontpage';
+const basePath = (process.env.SITE_BASE_PATH || '/website-frontpage').replace(/\/+$/, '');
 
 const portArgIndex = process.argv.indexOf('--port');
 const port = Number(
@@ -32,6 +32,8 @@ function publicPathFor(requestUrl) {
     pathname = pathname.slice(basePath.length);
   } else if (basePath && pathname === basePath) {
     pathname = '/';
+  } else if (basePath) {
+    return null;
   }
 
   if (pathname.endsWith('/')) pathname += 'index.html';
@@ -44,7 +46,12 @@ if (!fs.existsSync(path.join(publicDir, 'index.html'))) {
 
 const server = http.createServer((req, res) => {
   const filePath = publicPathFor(req.url);
-  if (!filePath.startsWith(publicDir) || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+  if (
+    !filePath ||
+    (filePath !== publicDir && !filePath.startsWith(`${publicDir}${path.sep}`)) ||
+    !fs.existsSync(filePath) ||
+    fs.statSync(filePath).isDirectory()
+  ) {
     res.writeHead(404);
     res.end('Not found');
     return;

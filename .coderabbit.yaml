@@ -2,14 +2,12 @@
 
 language: en-US
 tone_instructions: >-
-  Be concise, constructive, and practical. Focus on issues that can break the
-  static site, deployment, accessibility, responsive behavior, SEO, content
-  validity, or contributor experience. Avoid nitpicks that are already covered
-  by formatting and lint checks.
+  Be concise and practical. Focus on static-site breakage, deployment, accessibility, responsive behavior, SEO, content validity, and contributor experience. Avoid lint-covered nitpicks.
 
 reviews:
   profile: chill
-  request_changes_workflow: false
+  request_changes_workflow: true
+  allow_author_approval: false
   high_level_summary: true
   review_status: true
   review_info: true
@@ -76,8 +74,9 @@ reviews:
         secrets. Keep PR checks fast and focused.
 
   pre_merge_checks:
+    override_requested_reviewers_only: true
     title:
-      mode: warning
+      mode: error
       requirements: >-
         PR titles should be concise and describe the user-visible or maintenance
         outcome.
@@ -85,7 +84,7 @@ reviews:
       mode: warning
     custom_checks:
       - name: Static site safety
-        mode: warning
+        mode: error
         instructions: >-
           If the PR changes layouts, static assets, content, data files, npm
           scripts, or workflows, verify that the existing validation path remains

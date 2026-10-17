@@ -11,6 +11,7 @@
 C.O.D.E is a welcoming community for anyone interested in technology, coding, and building projects. Whether you're a seasoned developer or just starting your journey, you'll find a supportive environment to learn, collaborate, and grow.
 
 We host regular events including:
+
 - **Weekend Coding Crew** - Casual coding sessions
 - **LeetCode Practice** - Algorithm and interview prep
 - **AI Paper Talks** - Discussions on latest AI research
@@ -29,7 +30,7 @@ We host regular events including:
 ## Quick Links
 
 | Resource | Link |
-|----------|------|
+| ---------- | ------ |
 | Live Site | [codephilly.com](https://www.codephilly.com/Code-And-Coffee-philidelphia-Website) |
 | Meetup Group | [C.O.D.E](https://www.meetup.com/code-and-coffee-philadelphia/) |
 | Merch Store | [Fourth Wall Shop](https://nol-kky-shop.fourthwall.com/) |
@@ -38,7 +39,7 @@ We host regular events including:
 ## Tech Stack
 
 | Category | Technology |
-|----------|------------|
+| ---------- | ------------ |
 | Static Site Generator | [Hugo](https://gohugo.io/) v0.126.1 |
 | Hosting | [GitHub Pages](https://pages.github.com/) |
 | CDN | [Cloudflare](https://www.cloudflare.com/) |
@@ -136,6 +137,7 @@ flowchart LR
 ```
 
 Deployment is automated via GitHub Actions. Every push to `main` triggers:
+
 1. Installation of Hugo v0.126.1 and Node.js 20
 2. Events data generation from image files
 3. Hugo build with minification
@@ -147,11 +149,13 @@ Deployment is automated via GitHub Actions. Every push to `main` triggers:
 ### Adding a Blog Post
 
 1. Create a new folder in `content/blog/`:
+
    ```bash
    mkdir content/blog/my-new-post
    ```
 
 2. Create `index.md` with front matter:
+
    ```yaml
    ---
    title: "My New Post Title"
@@ -186,13 +190,14 @@ Edit `content/links/index.md` to add or modify community resource links.
 ### Embedding a Tally Form
 
 Add an iframe in your markdown:
+
 ```html
 <iframe src="https://tally.so/embed/YOUR_FORM_ID" width="100%" height="500" frameborder="0"></iframe>
 ```
 
 ## Project Structure
 
-```
+```text
 ├── content/
 │   ├── _index.md              # Homepage
 │   ├── blog/                  # Blog posts (page bundles)
@@ -239,7 +244,7 @@ sequenceDiagram
 ```
 
 | Module | Purpose |
-|--------|---------|
+| -------- | --------- |
 | `menu.js` | Responsive mobile navigation toggle (breakpoint: 1300px) |
 | `events-gallery.js` | Events photo grid (one tile per image) |
 | `meetup.js` | Fetches live events from Meetup.com via CORS proxy |
@@ -260,6 +265,12 @@ We welcome contributions! Here's how to get involved:
 - **CSS**: Use CSS custom properties (variables) defined in `static/css/modern.css`
 - **JavaScript**: Vanilla JS, IIFE pattern for modules
 - **Hugo**: Follow existing template patterns in `layouts/`
+
+### Pull Request Checks
+
+Every pull request targeting `main` runs the documented GitHub Actions validation checks in `.github/workflows/`. Before opening a PR, run `npm run generate:data`, `npm run validate`, and `npm test` locally when your change touches content, data, scripts, templates, or generated static data. PR checks also build the Hugo site, run end-to-end smoke tests, guard against root-relative asset paths that break project-page deployments, and check internal links in the generated output.
+
+CodeRabbit is installed for this repository and reviews PRs using `.coderabbit.yaml`. It focuses on static-site safety, Hugo templates, content/front matter quality, responsive CSS, browser JavaScript, GitHub Actions, secrets checks, and accessibility-impacting changes. If automatic reviews are paused and an existing PR needs a fresh review, comment `@coderabbitai review`; incremental reviews do not revisit commits that CodeRabbit has already reviewed.
 
 ## Community
 

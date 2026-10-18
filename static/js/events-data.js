@@ -3,16 +3,20 @@
 
 window.eventsImageData = [
     {
+        "filename": "AI_Agent_Hackathon.jpg",
+        "name": "AI Agent Hackathon"
+    },
+    {
         "filename": "AI_Paper_Talks.jpg",
         "name": "AI Paper Talks"
     },
     {
-        "filename": "Dev_Workshop.jpeg",
-        "name": "Dev Workshop"
+        "filename": "Claude_Code_Philly.jpeg",
+        "name": "Claude Code Philly"
     },
     {
-        "filename": "Founder_Fridays_Coworking.jpeg",
-        "name": "Founder Fridays Coworking"
+        "filename": "Dev_Workshop.jpeg",
+        "name": "Dev Workshop"
     },
     {
         "filename": "LeetCode_Practice.jpeg",
@@ -21,10 +25,6 @@ window.eventsImageData = [
     {
         "filename": "ML_System_Design.jpeg",
         "name": "ML System Design"
-    },
-    {
-        "filename": "Our_Community.jpeg",
-        "name": "Our Community"
     },
     {
         "filename": "Web3_Workshops.jpg",

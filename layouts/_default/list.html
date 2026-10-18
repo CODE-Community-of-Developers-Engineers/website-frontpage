@@ -12,7 +12,7 @@
         <!-- Search Box -->
         <div style="margin-bottom: 1.5rem;">
             <h3 style="margin-bottom: 1rem;">Search Posts</h3>
-            <input type="text" id="search-input" placeholder="Search posts..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 1rem; background: white; color: var(--text-primary);">
+            <input type="text" id="search-input" placeholder="Search posts..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 1rem; background: var(--surface-raised); color: var(--text-primary);">
         </div>
         
         <!-- Browse by Topic -->
@@ -243,8 +243,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             selectedTagsDiv.style.display = 'block';
             selectedTagsList.innerHTML = selectedTags.map(tag => 
-                `<span class="tag" style="background: var(--primary-color); color: white;">
-                    ${tag} <button onclick="removeTag('${tag}')" style="background: none; border: none; color: white; margin-left: 0.25rem; cursor: pointer;">×</button>
+                `<span class="tag" style="background: var(--primary-color); color: var(--on-accent);">
+                    ${tag} <button onclick="removeTag('${tag}')" style="background: none; border: none; color: var(--on-accent); margin-left: 0.25rem; cursor: pointer;">×</button>
                 </span>`
             ).join('');
         }

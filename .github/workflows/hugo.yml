@@ -20,4 +20,6 @@ jobs:
       - name: Trigger Cloudflare Pages deploy hook
         env:
           DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
-        run: curl -fsS -X POST "$DEPLOY_HOOK_URL"
+        run: |
+          : "${DEPLOY_HOOK_URL:?CLOUDFLARE_PAGES_DEPLOY_HOOK secret is not set}"
+          curl -fsS -X POST "$DEPLOY_HOOK_URL"

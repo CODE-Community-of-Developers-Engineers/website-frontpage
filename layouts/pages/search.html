@@ -179,22 +179,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultsHTML = results.map((item, index) => {
             console.log(`Rendering result ${index + 1}:`, item.title, item.url);
             return `
-            <div class="search-result" style="padding: 1.5rem; border: 2px solid #ccc; border-radius: 8px; margin-bottom: 1rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                <h3 style="margin-bottom: 0.5rem; color: #333;">
-                    <a href="#" style="text-decoration: none; color: #007acc;" onclick="navigateToPage('${item.url}'); return false;">${item.title}</a>
-                    ${item.featured ? '<span style="background: #ff6b6b; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem;">FEATURED</span>' : ''}
-                    <span style="background: ${item.type === 'blog' ? '#007acc' : '#666'}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-left: 0.5rem; text-transform: uppercase;">${item.type}</span>
+            <div class="search-result search-result-card">
+                <h3 class="search-result-heading">
+                    <a href="#" class="search-result-title" onclick="navigateToPage('${item.url}'); return false;">${item.title}</a>
+                    ${item.featured ? '<span class="search-result-badge search-result-badge-featured">FEATURED</span>' : ''}
+                    <span class="search-result-badge">${item.type}</span>
                 </h3>
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: #666; font-size: 0.875rem;">
+                <div class="search-result-meta">
                     <span>${item.type === 'blog' ? 'Blog Post' : 'Page'}</span>
                     <span>by ${item.author}</span>
                     <span>${item.readingTime} min read</span>
                     ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}
                 </div>
-                <p style="color: #555; margin-bottom: 1rem; line-height: 1.6;">${item.description || 'No description available.'}</p>
+                <p class="search-result-description">${item.description || 'No description available.'}</p>
                 ${(item.tags && Array.isArray(item.tags) && item.tags.length > 0) ? `
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    ${item.tags.map(tag => `<span style="display: inline-block; padding: 0.25rem 0.5rem; background: #f0f0f0; border-radius: 12px; font-size: 0.75rem; color: #333;">${tag}</span>`).join('')}
+                <div class="search-result-tags">
+                    ${item.tags.map(tag => `<span class="search-result-tag">${tag}</span>`).join('')}
                 </div>
                 ` : ''}
             </div>

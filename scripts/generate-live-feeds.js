@@ -121,7 +121,7 @@ function fetchUrlOnce(url) {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('https') ? https : http;
     const req = client.get(url, {
-      headers: { 'User-Agent': 'CodeAndCoffeePhilly/1.0 (Website Build)' }
+      headers: { 'User-Agent': 'CodePhilly/1.0 (Website Build)' }
     }, (res) => {
       // Follow redirects
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {

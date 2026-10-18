@@ -4,7 +4,7 @@ layout: "single"
 type: "page"
 ---
 
-Connect with Coffee & Code Philadelphia across the web:
+Connect with C.O.D.E across the web:
 
 <div class="links-container">
 
@@ -16,20 +16,20 @@ Connect with Coffee & Code Philadelphia across the web:
 
 <div class="link-item">
 <h3>💝 Community Fund</h3>
-<p>Support our events and activities through Hack Club Bank</p>
-<a href="https://bank.hackclub.com/donations/start/code-coffee-philadelphia" target="_blank" class="btn">Donate Now</a>
+<p>Support our events and activities with a donation</p>
+<a href="https://givebutter.com/c_o_d_e" target="_blank" class="btn">Donate Now</a>
 </div>
 
 <div class="link-item">
 <h3>🛍️ Merch Store</h3>
-<p>Get Coffee & Code branded gear and merchandise</p>
+<p>Get C.O.D.E branded gear and merchandise</p>
 <a href="https://nol-kky-shop.fourthwall.com/" target="_blank" class="btn">Shop Now</a>
 </div>
 
 <div class="link-item">
 <h3>💼 LinkedIn</h3>
 <p>Professional networking and company updates</p>
-<a href="https://www.linkedin.com/company/code-coffee-philadelphia" target="_blank" class="btn">Follow Us</a>
+<a href="https://www.linkedin.com/company/c-o-d-ee" target="_blank" class="btn">Follow Us</a>
 </div>
 
 <div class="link-item">

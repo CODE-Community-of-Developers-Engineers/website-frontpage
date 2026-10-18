@@ -1,0 +1,30 @@
+{{/* Card for one blog or press post. Context: the post page. */}}
+<article class="card post-card">
+    {{ if .Params.image }}
+        {{ if hasPrefix .Params.image "/" }}
+    <a href="{{ .RelPermalink }}" class="post-card-image">
+        <img src="{{ replaceRE "^/" "" .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+    </a>
+        {{ else }}
+            {{ with .Resources.GetMatch .Params.image }}
+    <a href="{{ $.RelPermalink }}" class="post-card-image">
+        <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+    </a>
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    <div class="post-card-body">
+        <p class="post-card-meta">
+            {{ .Date.Format "Jan 2, 2006" }}{{ if .Params.author }} · {{ .Params.author }}{{ end }}
+        </p>
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p class="post-card-excerpt">
+            {{ if .Summary }}
+                {{ .Summary | plainify | htmlUnescape | truncate 120 }}
+            {{ else }}
+                {{ .Description | truncate 120 }}
+            {{ end }}
+        </p>
+        <a href="{{ .RelPermalink }}" class="text-link">Read more →</a>
+    </div>
+</article>

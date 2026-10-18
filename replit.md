@@ -1,8 +1,8 @@
-# Coffee & Code Philadelphia - Replit Configuration
+# C.O.D.E - Replit Configuration
 
 ## Overview
 
-Coffee & Code Philadelphia is a community-focused static website built with Hugo, designed to bring together developers, designers, and tech enthusiasts in the Philadelphia area. The site serves as a central hub for event information, community resources, project requests, and talent matchmaking within the local tech ecosystem.
+C.O.D.E is a community-focused static website built with Hugo, designed to bring together developers, designers, and tech enthusiasts in the Philadelphia area. The site serves as a central hub for event information, community resources, project requests, and talent matchmaking within the local tech ecosystem.
 
 ## System Architecture
 
@@ -77,7 +77,7 @@ Coffee & Code Philadelphia is a community-focused static website built with Hugo
 - **Meetup.com**: Event information and RSVP management
 - **Fourth Wall**: Merchandise store integration
 - **Hack Club Bank**: Community fund donation processing
-- **GitHub Pages**: Website hosting and deployment
+- **Cloudflare Pages**: Website hosting and deployment
 
 ### Development Tools
 - **Express.js**: Local development server for API proxying
@@ -85,11 +85,11 @@ Coffee & Code Philadelphia is a community-focused static website built with Hugo
 
 ## Deployment Strategy
 
-### GitHub Actions Workflow
-- **Trigger**: Push to main branch or manual workflow dispatch
+### Cloudflare Pages Deployment
+- **Trigger**: Cloudflare Pages builds and deploys pushes to main; GitHub Actions triggers the scheduled deploy hook refresh
 - **Build Process**: Hugo static site generation with extended features
-- **Deployment Target**: GitHub Pages
-- **Dependencies**: Automated installation of Hugo CLI and Dart Sass
+- **Deployment Target**: Cloudflare Pages
+- **Dependencies**: Cloudflare Pages build variables provide Hugo and Node.js versions
 
 ### Development Workflow
 - **Local Development**: Hugo development server on port 5000
@@ -125,7 +125,7 @@ Coffee & Code Philadelphia is a community-focused static website built with Hugo
   - Added tag-specific search functionality that only searches within that tag
   - Implemented related tags section showing tags from posts in the current tag
   - Added white backgrounds to hero section, search boxes, and blog headers
-  - Updated header logo with mixed fonts: "Coffee & Code" (serif) and "Philadelphia" (cursive)
+  - Updated header logo with mixed fonts: "C.O.D.E" (serif) and "Philadelphia" (cursive)
   
 - June 24, 2025: Implemented compact tag display with expandable/collapsible functionality
   - Created compact tag display showing 10 most popular tags initially (sorted by usage frequency)
@@ -187,7 +187,7 @@ Coffee & Code Philadelphia is a community-focused static website built with Hugo
   - Added example blog posts demonstrating proper structure and formatting
 
 - June 23, 2025: Complete modern blog-focused redesign with original branding
-  - Redesigned entire site with modern layout while preserving original Coffee & Code aesthetics
+  - Redesigned entire site with modern layout while preserving original C.O.D.E aesthetics
   - Restored original color scheme (coffee tones, #59969B accent, #E9E3DC background)
   - Kept original button styles with Gloria Hallelujah font and bordered design
   - Maintained Vollkorn typography and subtle grid background pattern
@@ -212,7 +212,7 @@ Coffee & Code Philadelphia is a community-focused static website built with Hugo
   - Converted static HTML site to Hugo static site generator
   - Implemented responsive navigation with mobile menu
   - Created blog functionality with Hugo content management
-  - Set up GitHub Pages deployment workflow
+  - Set up the original GitHub Pages deployment workflow
 
 ## Changelog
 
@@ -221,7 +221,7 @@ Coffee & Code Philadelphia is a community-focused static website built with Hugo
 ## User Preferences
 
 - **Communication style**: Simple, everyday language
-- **Design preferences**: Modern blog-focused layout with original Coffee & Code branding maintained
+- **Design preferences**: Modern blog-focused layout with original C.O.D.E branding maintained
 - **Color scheme**: Original coffee-tone palette (#E9E3DC background, #59969B accent, warm earth tones)
 - **Typography**: Vollkorn serif for body text, Gloria Hallelujah for buttons/headings, original button styles with borders
 - **Filtering preferences**: Multi-tag selection capability, separate topic categories, clear filter options

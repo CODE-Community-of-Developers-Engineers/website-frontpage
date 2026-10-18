@@ -35,8 +35,12 @@ jobs:
 
       - name: Install linting tools
         run: |
+          npm ci
           npm install -g markdownlint-cli2
           pip install yamllint djlint
+
+      - name: Run unit and integration tests
+        run: npm test
 
       - name: Lint Markdown files
         run: markdownlint-cli2
@@ -104,6 +108,9 @@ jobs:
           npm ci
           gem install html-proofer
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
       - name: Generate static data
         run: npm run generate:data
 
@@ -112,12 +119,15 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
 
-      - name: Check GitHub Pages asset paths
+      - name: Check base-path asset paths
         run: |
           if grep -RInE "(src|href)=[\"']/((css|js|images)/|search\\.json)" public --include="*.html"; then
-            echo "Found root-relative asset path(s); use relURL so GitHub Pages project paths work."
+            echo "Found root-relative asset path(s); use relURL so the configured site base path works."
             exit 1
           fi
+
+      - name: Run end-to-end smoke tests
+        run: npm run test:e2e
 
       - name: Validate HTML output
         run: |

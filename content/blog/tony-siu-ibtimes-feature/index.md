@@ -1,18 +1,19 @@
 ---
 title: "Tony Siu Featured in IBTimes: Building Impactful AI Systems Through Research and Community"
 date: 2026-01-29
-author: "Coffee & Code Team"
+author: "C.O.D.E Team"
 description: "IBTimes profiles Tony Siu on his long-term approach to AI research, projects, and community work."
-topic: "community"
+topic: "press"
+pressOrder: 6
 tags: ["ai", "community", "interview", "machine-learning", "research"]
 featured: false
 readingTime: 2
 image: "ibtimes-feature.png"
 ---
 
-Tony Siu, founder of Coffee & Code Philadelphia, was recently featured in the International Business Times for his work in AI research and community building.
+Tony Siu, founder of C.O.D.E, was recently featured in the International Business Times for his work in AI research and community building.
 
-The article explores Tony's long-term approach to developing impactful AI systems, combining academic research in multimodal generative systems and optimization with hands-on community work through Coffee & Code.
+The article explores Tony's long-term approach to developing impactful AI systems, combining academic research in multimodal generative systems and optimization with hands-on community work through C.O.D.E.
 
 > "Many meaningful movements come from accumulating small, deliberate steps. You don't need to solve everything at once to move somewhere worthwhile."
 

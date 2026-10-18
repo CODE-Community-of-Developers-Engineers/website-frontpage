@@ -1,11 +1,8 @@
-# Sample workflow for building and deploying a Hugo site to GitHub Pages
-name: Deploy Hugo site to Pages
+# Cloudflare Pages builds and deploys every push to main through its GitHub integration.
+# This workflow only triggers the daily rebuild that refreshes the Tech Pulse data.
+name: Daily Cloudflare Pages rebuild
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
   # Refresh Tech Pulse data daily at 10:17 UTC (~6:17 ET during DST; ~5:17 ET during standard time)
   schedule:
     - cron: '17 10 * * *'
@@ -13,117 +10,17 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-# Default to bash
-defaults:
-  run:
-    shell: bash
 
 jobs:
-  # Build job
-  build:
+  rebuild:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.126.1
+    timeout-minutes: 5
     steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v4
-      - name: Generate Static Data
-        run: |
-          echo "=== Checking events directory ==="
-          ls -la static/images/events/
-          echo "=== Generating static data from live sources ==="
-          npm run generate:data
-          echo "=== Static data generated successfully ==="
-          echo "Contents of generated events file:"
-          cat static/js/events-data.js
-          echo "=== Verifying file exists ==="
-          ls -la static/js/events-data.js
-          ls -la static/js/live-feeds-data.js
-      - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: Build with Hugo
+      - name: Trigger Cloudflare Pages deploy hook
         env:
-          # For maximum backward compatibility with Hugo modules
-          HUGO_ENVIRONMENT: production
-          HUGO_ENV: production
+          DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
         run: |
-          echo "=== Pre-build verification ==="
-          echo "Checking events data file exists:"
-          ls -la static/js/events-data.js
-          echo "Checking live feeds data file exists:"
-          ls -la static/js/live-feeds-data.js
-          echo "Content preview:"
-          head -20 static/js/events-data.js
-          head -20 static/js/live-feeds-data.js
-          echo "=== Starting Hugo build ==="
-          hugo \
-            --gc \
-            --minify \
-            --cleanDestinationDir \
-            --forceSyncStatic \
-            --baseURL "${{ steps.pages.outputs.base_url }}/" \
-            --verbose
-          echo "=== Post-build verification ==="
-          echo "Checking public directory:"
-          ls -la public/js/events-data.js
-          ls -la public/js/live-feeds-data.js
-          echo "Checking public events images:"
-          ls -la public/images/events/
-      - name: Verify Build Output
-        run: |
-          echo "=== Final verification before upload ==="
-          echo "Checking if events data made it to public:"
-          ls -la public/js/events-data.js || echo "MISSING: events-data.js not found in public"
-          echo "Checking if live feeds data made it to public:"
-          ls -la public/js/live-feeds-data.js || echo "MISSING: live-feeds-data.js not found in public"
-          echo "Preview of events data in public:"
-          head -5 public/js/events-data.js || echo "Cannot read events data file"
-          echo "Checking events images in public:"
-          ls -la public/images/events/ | head -10
-          echo "Total images found:" $(ls public/images/events/ | wc -l)
-          echo "=== Creating .nojekyll file ==="
-          touch public/.nojekyll
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          : "${DEPLOY_HOOK_URL:?CLOUDFLARE_PAGES_DEPLOY_HOOK secret is not set}"
+          curl -fsS --connect-timeout 10 --max-time 60 -X POST "$DEPLOY_HOOK_URL"

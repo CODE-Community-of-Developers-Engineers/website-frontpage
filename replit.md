@@ -77,7 +77,7 @@ C.O.D.E is a community-focused static website built with Hugo, designed to bring
 - **Meetup.com**: Event information and RSVP management
 - **Fourth Wall**: Merchandise store integration
 - **Hack Club Bank**: Community fund donation processing
-- **GitHub Pages**: Website hosting and deployment
+- **Cloudflare Pages**: Website hosting and deployment
 
 ### Development Tools
 - **Express.js**: Local development server for API proxying
@@ -85,11 +85,11 @@ C.O.D.E is a community-focused static website built with Hugo, designed to bring
 
 ## Deployment Strategy
 
-### GitHub Actions Workflow
-- **Trigger**: Push to main branch or manual workflow dispatch
+### Cloudflare Pages Deployment
+- **Trigger**: Cloudflare Pages builds and deploys pushes to main; GitHub Actions triggers the scheduled deploy hook refresh
 - **Build Process**: Hugo static site generation with extended features
-- **Deployment Target**: GitHub Pages
-- **Dependencies**: Automated installation of Hugo CLI and Dart Sass
+- **Deployment Target**: Cloudflare Pages
+- **Dependencies**: Cloudflare Pages build variables provide Hugo and Node.js versions
 
 ### Development Workflow
 - **Local Development**: Hugo development server on port 5000
@@ -212,7 +212,7 @@ C.O.D.E is a community-focused static website built with Hugo, designed to bring
   - Converted static HTML site to Hugo static site generator
   - Implemented responsive navigation with mobile menu
   - Created blog functionality with Hugo content management
-  - Set up GitHub Pages deployment workflow
+  - Set up the original GitHub Pages deployment workflow
 
 ## Changelog
 

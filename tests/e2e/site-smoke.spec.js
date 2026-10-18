@@ -62,17 +62,20 @@ test('search page loads generated search index', async ({ page }) => {
   ).toBeVisible();
 });
 
-test('blog page uses project-relative image paths', async ({ page }) => {
+test('blog page uses image paths compatible with the configured base path', async ({ page }) => {
   await page.goto('./blog/');
 
   await expect(page.getByRole('heading', { name: /Media/i })).toBeVisible();
   const siteBasePath = new URL('../', page.url()).pathname;
+  const expectedImagePrefix = siteBasePath === '/' ? '/' : siteBasePath;
   const coverImages = page.locator(
-    `img[src*="${siteBasePath}images/"], img[src*="${siteBasePath}blog/"]`
+    `img[src^="${expectedImagePrefix}images/"], img[src^="${expectedImagePrefix}blog/"]`
   );
   await expect(coverImages.first()).toBeVisible();
   await expect.poll(() => coverImages.first().evaluate(img => img.naturalWidth)).toBeGreaterThan(0);
 
   const rootRelativeImageCount = await page.locator('img[src^="/images/"]').count();
-  expect(rootRelativeImageCount).toBe(0);
+  if (siteBasePath !== '/') {
+    expect(rootRelativeImageCount).toBe(0);
+  }
 });

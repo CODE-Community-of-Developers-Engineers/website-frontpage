@@ -80,6 +80,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: lint-codebase
+    env:
+      SITE_BASE_PATH: /
 
     steps:
       - name: Checkout code
@@ -115,16 +117,9 @@ jobs:
         run: npm run generate:data
 
       - name: Build Hugo site
-        run: hugo --gc --minify --baseURL "/website-frontpage/"
+        run: hugo --gc --minify
         env:
           HUGO_ENVIRONMENT: production
-
-      - name: Check GitHub Pages asset paths
-        run: |
-          if grep -RInE "(src|href)=[\"']/((css|js|images)/|search\\.json)" public --include="*.html"; then
-            echo "Found root-relative asset path(s); use relURL so GitHub Pages project paths work."
-            exit 1
-          fi
 
       - name: Run end-to-end smoke tests
         run: npm run test:e2e
@@ -132,7 +127,6 @@ jobs:
       - name: Validate HTML output
         run: |
           htmlproofer ./public \
-            --swap-urls '^/website-frontpage/:/' \
             --disable-external \
             --ignore-urls "/^#/,/^mailto:/,/^tel:/,/^javascript:/" \
             --ignore-files "/index.xml$/,/sitemap.xml$/" \

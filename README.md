@@ -1,8 +1,7 @@
 # C.O.D.E
 
 [![Hugo](https://img.shields.io/badge/Hugo-0.126.1-ff4088?logo=hugo)](https://gohugo.io/)
-[![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-222?logo=github)](https://pages.github.com/)
-[![Cloudflare](https://img.shields.io/badge/CDN-Cloudflare-f38020?logo=cloudflare)](https://www.cloudflare.com/)
+[![Cloudflare Pages](https://img.shields.io/badge/Hosted_on-Cloudflare_Pages-f38020?logo=cloudflare)](https://pages.cloudflare.com/)
 
 **Your space to build.** A community-focused coding initiative bringing together developers, designers, and tech enthusiasts in the Philadelphia area.
 
@@ -41,8 +40,7 @@ We host regular events including:
 | Category | Technology |
 | ---------- | ------------ |
 | Static Site Generator | [Hugo](https://gohugo.io/) v0.126.1 |
-| Hosting | [GitHub Pages](https://pages.github.com/) |
-| CDN | [Cloudflare](https://www.cloudflare.com/) |
+| Hosting and CDN | [Cloudflare Pages](https://pages.cloudflare.com/) |
 | CSS Framework | [PureCSS](https://purecss.io/) |
 | Forms | [Tally.so](https://tally.so/) |
 | Fonts | Google Fonts (Vollkorn, Gloria Hallelujah, Space Mono) |
@@ -54,13 +52,12 @@ flowchart TB
     subgraph External["External Services"]
         Meetup[Meetup.com API]
         Tally[Tally.so Forms]
-        CF[Cloudflare CDN]
     end
 
     subgraph Build["Build Process"]
         Node[Node.js Script]
         Hugo[Hugo Generator]
-        GHA[GitHub Actions]
+        CFP[Cloudflare Pages build]
     end
 
     subgraph Runtime["Browser Runtime"]
@@ -71,8 +68,7 @@ flowchart TB
 
     Node -->|generates| EventsData[events-data.js]
     Hugo -->|builds| Static[Static HTML/CSS/JS]
-    GHA -->|deploys| GHP[GitHub Pages]
-    GHP --> CF
+    CFP -->|deploys| CF[Cloudflare Pages]
     CF -->|serves| Browser[User Browser]
 
     Browser --> Menu
@@ -126,23 +122,22 @@ To run a local test copy of the prod build use: `npm run prod`
 
 ```mermaid
 flowchart LR
-    A[Push to main] --> B[GitHub Actions]
-    B --> C[Install Hugo + Node]
-    C --> D[generate-events-data.js]
+    A[Push to main] --> B[Cloudflare Pages build]
+    B --> C[npm ci]
+    C --> D[Generate events and live feed data]
     D --> E[Hugo Build]
-    E --> F[Upload Artifact]
-    F --> G[Deploy to GitHub Pages]
-    G --> H[Cloudflare Cache]
-    H --> I[Live Site]
+    E --> F[Deploy to Cloudflare Pages]
+    F --> G[Live Site]
 ```
 
-Deployment is automated via GitHub Actions. Every push to `main` triggers:
+Cloudflare Pages builds the site from this repository. Every push to `main` triggers:
 
-1. Installation of Hugo v0.126.1 and Node.js 20
-2. Events data generation from image files
+1. Installation of Hugo v0.126.1 and Node.js 20, set by the `HUGO_VERSION` and `NODE_VERSION` build variables
+2. Events and live feed data generation
 3. Hugo build with minification
-4. Deployment to GitHub Pages
-5. Served via Cloudflare CDN
+4. Deployment to Cloudflare Pages
+
+The `hugo.yml` workflow calls the project's deploy hook every day at 10:17 UTC to refresh the Tech Pulse data. The hook URL is stored in the `CLOUDFLARE_PAGES_DEPLOY_HOOK` repository secret.
 
 ## Content Operations
 

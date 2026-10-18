@@ -108,6 +108,9 @@ jobs:
           npm ci
           gem install html-proofer
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
       - name: Generate static data
         run: npm run generate:data
 

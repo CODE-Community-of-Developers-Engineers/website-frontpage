@@ -16,10 +16,11 @@ permissions:
 jobs:
   rebuild:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Trigger Cloudflare Pages deploy hook
         env:
           DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
         run: |
           : "${DEPLOY_HOOK_URL:?CLOUDFLARE_PAGES_DEPLOY_HOOK secret is not set}"
-          curl -fsS -X POST "$DEPLOY_HOOK_URL"
+          curl -fsS --connect-timeout 10 --max-time 60 --retry 3 --retry-all-errors -X POST "$DEPLOY_HOOK_URL"

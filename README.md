@@ -127,13 +127,16 @@ flowchart LR
     A[Main push or daily refresh] --> B[Generate data and validate]
     B --> C[Hugo build and browser tests]
     C --> D[Retain artifact and checksum]
-    D --> E[Wrangler uploads tested directory]
-    E --> F[Check live site and deployed commit]
+    D --> E{Still current main?}
+    E -->|No| Skip[Skip upload and checks]
+    E -->|Yes| F[Wrangler uploads tested directory]
+    F --> G[Wait for exact deployment manifest]
+    G --> H[Check live site]
 ```
 
-The `hugo.yml` workflow directly uploads to project **code-philly-community** in Cloudflare account **241b2116c32fcb97feef45212430dbce**. It runs on `main` pushes, daily at 10:17 UTC, or manually on `main`. It uses Hugo 0.126.1, Node 22, and Wrangler 4.152.0. Releases are serialized through the production checks. The retired domain and its DNS are outside this deployment path.
+The `hugo.yml` workflow directly uploads to project **code-philly-community** in Cloudflare account **241b2116c32fcb97feef45212430dbce**. It runs on `main` pushes, daily at 10:17 UTC, or manually on `main`. It uses Hugo 0.126.1, Node 22, and Wrangler 4.152.0. Releases are serialized through the production checks. Immediately before upload, it checks remote `main`: a superseded commit skips upload and production verification; a failed lookup fails the run. After upload, it waits a bounded time for production's `/deployment.json` to match the built file, including run ID and build time, before running the full site check. The retired domain and its DNS are outside this deployment path.
 
-Before enabling releases, set the repository secret `CLOUDFLARE_PAGES_API_TOKEN` to a token with **Account / Cloudflare Pages / Edit**, restricted to that account. Do not reuse the old deploy-hook secret. Before merging the migration, verify that the legacy external Git integration cannot deploy the same `main` push to the retired site; this repository change does not disable that external integration.
+Before enabling releases, set the repository secret `CLOUDFLARE_PAGES_API_TOKEN` to a token with **Account / Cloudflare Pages / Edit**, restricted to that account. Do not reuse the old deploy-hook secret. Keep workflow `367311100` disabled until this replacement reaches `main`, then re-enable it and verify its first run. Before merging the migration, verify that the legacy external Git integration cannot deploy the same `main` push to the retired site; this repository change does not disable that external integration.
 
 The production gate validates canonical and preview URLs, sitemap, robots, Google verification, critical assets, search data, a root 404 page, and feed freshness. A successful Meetup fetch is required; zero upcoming events is valid. Optional news failures are recorded per source and displayed as unavailable. If every provider fails, generation stops without replacing the previous file. Data older than 36 hours fails the production check. Generated feed data is rebuilt during release and should not be committed.
 
@@ -143,13 +146,26 @@ The production gate validates canonical and preview URLs, sitemap, robots, Googl
 npm run check:site -- --url https://code-philly-community.pages.dev/
 ```
 
-The `monitor.yml` workflow runs this check every 15 minutes and retries once after 20 seconds. The maintainer responsible for releases must enable GitHub Actions failure notifications and verify delivery with a manual run. GitHub schedules may be delayed; this is a basic operational check, not a measured availability SLA. On failure, inspect the named check, deployment log, and per-source status in `/js/live-feeds-data.js`. Optional news outages warn; failed or stale Meetup data fails the check. If the deployed website is broken, restore the last successful deployment and rerun the command above.
+The `monitor.yml` workflow runs this check every 15 minutes and retries once after 20 seconds. The maintainer responsible for releases must enable GitHub Actions failure notifications and verify delivery with a manual run. GitHub schedules may be delayed; this is a basic operational check, not a measured availability SLA. On failure, inspect the named check, deployment log, and per-source status in `/js/live-feeds-data.js`. Optional news outages warn; failed or stale Meetup data fails the check. If the deployed website is broken, follow the rollback verification below, then deploy corrected code with fresh feeds to restore the normal check.
 
 ### Recovery
 
 Each release retains `site.tar.gz` and its SHA256 checksum for 30 days. Its `/deployment.json` records commit, build time, and Actions run ID. The Actions deployment log records the Cloudflare deployment URL/ID. Rebuilding an old commit refetches current content, so use the saved artifact or an existing successful deployment when restoring a release.
 
-In Cloudflare, open **Workers & Pages → code-philly-community → Deployments**, find the previous successful production deployment, and choose **Rollback to this deployment**. Verify the restored commit with `npm run check:site -- --url https://code-philly-community.pages.dev/ --commit <restored-commit>`. Confirm the target project before acting. A rollback drill and notification delivery must be checked by the release owner before relying on this procedure.
+In Cloudflare, open **Workers & Pages → code-philly-community → Deployments**, find the previous successful production deployment, and choose **Rollback to this deployment**. Confirm the target project before acting. Verify the restored revision, target, and critical page availability separately from feed freshness:
+
+```bash
+set -euo pipefail
+RESTORED_COMMIT='<full-restored-commit-sha>'
+curl --fail --silent --show-error --max-time 20 https://code-philly-community.pages.dev/deployment.json |
+  EXPECTED_COMMIT="$RESTORED_COMMIT" node -e 'const assert = require("node:assert/strict"); const deployment = JSON.parse(require("node:fs").readFileSync(0, "utf8")); assert.equal(deployment.commit, process.env.EXPECTED_COMMIT); assert.equal(deployment.siteUrl, "https://code-philly-community.pages.dev/"); console.log("Restored revision and target verified");'
+curl --fail --fail-early --silent --show-error --max-time 20 \
+  --output /dev/null https://code-philly-community.pages.dev/ \
+  --output /dev/null https://code-philly-community.pages.dev/blog/ \
+  --output /dev/null https://code-philly-community.pages.dev/links/
+```
+
+A restored artifact with feeds older than 36 hours still fails the normal production check and monitoring; this is expected and must not be bypassed. After confirming the rollback, deploy corrected code from `main` with newly generated feeds, then rerun `npm run check:site -- --url https://code-philly-community.pages.dev/ --commit <new-commit>`. A rollback drill and notification delivery must be checked by the release owner before relying on this procedure.
 
 If the deployment is no longer available, download the retained Actions artifact, verify `sha256sum -c site.tar.gz.sha256`, extract it to an empty directory, and upload that directory with the same account, project, and production branch as the workflow. Do not regenerate its data. See [Cloudflare's direct-upload CI guide](https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/) and [rollback instructions](https://developers.cloudflare.com/pages/configuration/rollbacks/).
 
@@ -236,8 +252,8 @@ sequenceDiagram
     participant EventsData as events-data.js
     participant Carousel as events-gallery.js
     participant Menu as menu.js
-    participant MeetupJS as meetup.js
-    participant API as Meetup API
+    participant FeedData as live-feeds-data.js
+    participant Feeds as live-feeds.js
 
     Browser->>EventsData: Load (sets window.eventsImageData)
     Browser->>Carousel: Initialize IIFE
@@ -246,17 +262,19 @@ sequenceDiagram
     Note over Carousel: Auto-advance every 3s
     Browser->>Menu: Setup event listeners
     Note over Menu: Mobile nav toggle at 1300px
-    Browser->>MeetupJS: Fetch events
-    MeetupJS->>API: GET via CORS proxy
-    API-->>MeetupJS: Event data
-    MeetupJS->>Browser: Render event cards
+    Note over FeedData: generate-live-feeds.js fetches Meetup and news during the build
+    Browser->>FeedData: Load snapshot (sets window.LIVE_FEEDS)
+    Browser->>Feeds: Initialize IIFE
+    Feeds->>FeedData: Read LIVE_FEEDS
+    Feeds->>Browser: Render event and news cards
 ```
 
 | Module | Purpose |
 | -------- | --------- |
 | `menu.js` | Responsive mobile navigation toggle (breakpoint: 1300px) |
 | `events-gallery.js` | Events photo grid (one tile per image) |
-| `meetup.js` | Fetches live events from Meetup.com via CORS proxy |
+| `live-feeds.js` | Renders event and news cards from the build-time snapshot |
+| `live-feeds-data.js` | Snapshot generated by `scripts/generate-live-feeds.js` |
 | `events-data.js` | Auto-generated event data from image filenames |
 
 ## Contributing

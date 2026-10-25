@@ -9,6 +9,7 @@
     {{ $previewImage := "media/logo.png" | absURL }}
     {{ $previewImageAlt := "C.O.D.E Philadelphia community logo" }}
     <title>{{ $title }}</title>
+    <link rel="canonical" href="{{ .Permalink }}">
     <meta name="description" content="{{ $description }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ .Site.Title }}">

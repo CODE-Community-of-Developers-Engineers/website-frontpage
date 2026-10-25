@@ -1,7 +1,8 @@
-baseURL = 'https://www.codephilly.com/'
+baseURL = 'https://code-philly-community.pages.dev/'
 languageCode = 'en-us'
 title = 'C.O.D.E - Community of Developers & Engineers'
 enableGitInfo = true
+enableRobotsTXT = true
 ignoreFiles = ["README\\.md$"]
 
 [params]

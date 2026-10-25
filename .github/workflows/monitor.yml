@@ -1,0 +1,35 @@
+name: Monitor production site
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: monitor-production
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check availability and feed freshness
+        env:
+          SITE_URL: https://code-philly-community.pages.dev/
+        run: |
+          npm run check:site -- --url "$SITE_URL" || {
+            sleep 20
+            npm run check:site -- --url "$SITE_URL"
+          }

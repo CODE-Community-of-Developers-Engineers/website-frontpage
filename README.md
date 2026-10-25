@@ -30,7 +30,7 @@ We host regular events including:
 
 | Resource | Link |
 | ---------- | ------ |
-| Live Site | [codephilly.com](https://www.codephilly.com/Code-And-Coffee-philidelphia-Website) |
+| Live Site | [code-philly-community.pages.dev](https://code-philly-community.pages.dev/) |
 | Meetup Group | [C.O.D.E](https://www.meetup.com/code-and-coffee-philadelphia/) |
 | Merch Store | [Fourth Wall Shop](https://nol-kky-shop.fourthwall.com/) |
 | Community Fund | [Givebutter](https://givebutter.com/c_o_d_e) |
@@ -50,32 +50,35 @@ We host regular events including:
 ```mermaid
 flowchart TB
     subgraph External["External Services"]
-        Meetup[Meetup.com API]
+        Meetup[Meetup and news feeds]
         Tally[Tally.so Forms]
     end
 
     subgraph Build["Build Process"]
         Node[Node.js Script]
         Hugo[Hugo Generator]
-        CFP[Cloudflare Pages build]
+        CI[GitHub Actions validation]
     end
 
     subgraph Runtime["Browser Runtime"]
         Menu[menu.js]
         Carousel[events-gallery.js]
-        MeetupJS[meetup.js]
+        Feeds[live-feeds.js]
     end
 
     Node -->|generates| EventsData[events-data.js]
+    Meetup --> Node
+    Node -->|generates| FeedData[live-feeds-data.js]
     Hugo -->|builds| Static[Static HTML/CSS/JS]
-    CFP -->|deploys| CF[Cloudflare Pages]
+    Static --> CI
+    CI -->|uploads tested artifact| CF[Cloudflare Pages]
     CF -->|serves| Browser[User Browser]
 
     Browser --> Menu
     Browser --> Carousel
-    Browser --> MeetupJS
+    Browser --> Feeds
     EventsData --> Carousel
-    MeetupJS -->|fetches| Meetup
+    FeedData --> Feeds
     Tally -->|embeds in| Browser
 ```
 
@@ -84,36 +87,35 @@ flowchart TB
 ### Prerequisites
 
 - [Hugo](https://gohugo.io/installation/) v0.126.1 or later (extended version)
-- [Node.js](https://nodejs.org/) v20 or later
+- [Node.js](https://nodejs.org/) v22 or later
 - Git
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/Code-And-Coffee-philidelphia-Website.git
-cd Code-And-Coffee-philidelphia-Website
+git clone https://github.com/CODE-Community-of-Developers-Engineers/website-frontpage.git
+cd website-frontpage
 
-# Generate events data (required before first build)
-node scripts/generate-events-data.js
-
-# Start development server
-hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
+npm ci
+npm start
 ```
 
 ### Full Development Build
 
 ```bash
-# Clean build with events data regeneration
-rm -rf public && node scripts/generate-events-data.js && hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
+npm start
 ```
 
-Quick version (does the same thing): `npm start`
+This regenerates events and feeds before starting the local Hugo server.
 
 ### Production Build
 
 ```bash
-node scripts/generate-events-data.js && hugo --gc --minify --cleanDestinationDir --forceSyncStatic
+npm ci
+npm run generate:data
+HUGO_ENVIRONMENT=production npm run prod:build
+npm run check:site -- --dir public
 ```
 
 To run a local test copy of the prod build use: `npm run prod`
@@ -122,22 +124,34 @@ To run a local test copy of the prod build use: `npm run prod`
 
 ```mermaid
 flowchart LR
-    A[Push to main] --> B[Cloudflare Pages build]
-    B --> C[npm ci]
-    C --> D[Generate events and live feed data]
-    D --> E[Hugo Build]
-    E --> F[Deploy to Cloudflare Pages]
-    F --> G[Live Site]
+    A[Main push or daily refresh] --> B[Generate data and validate]
+    B --> C[Hugo build and browser tests]
+    C --> D[Retain artifact and checksum]
+    D --> E[Wrangler uploads tested directory]
+    E --> F[Check live site and deployed commit]
 ```
 
-Cloudflare Pages builds the site from this repository. Every push to `main` triggers:
+The `hugo.yml` workflow directly uploads to project **code-philly-community** in Cloudflare account **241b2116c32fcb97feef45212430dbce**. It runs on `main` pushes, daily at 10:17 UTC, or manually on `main`. It uses Hugo 0.126.1, Node 22, and Wrangler 4.152.0. Releases are serialized through the production checks. The retired domain and its DNS are outside this deployment path.
 
-1. Installation of Hugo v0.126.1 and Node.js 20, set by the `HUGO_VERSION` and `NODE_VERSION` build variables
-2. Events and live feed data generation
-3. Hugo build with minification
-4. Deployment to Cloudflare Pages
+Before enabling releases, set the repository secret `CLOUDFLARE_PAGES_API_TOKEN` to a token with **Account / Cloudflare Pages / Edit**, restricted to that account. Do not reuse the old deploy-hook secret. Before merging the migration, verify that the legacy external Git integration cannot deploy the same `main` push to the retired site; this repository change does not disable that external integration.
 
-The `hugo.yml` workflow calls the project's deploy hook every day at 10:17 UTC to refresh the Tech Pulse data. The hook URL is stored in the `CLOUDFLARE_PAGES_DEPLOY_HOOK` repository secret.
+The production gate validates canonical and preview URLs, sitemap, robots, Google verification, critical assets, search data, a root 404 page, and feed freshness. A successful Meetup fetch is required; zero upcoming events is valid. Optional news failures are recorded per source and displayed as unavailable. If every provider fails, generation stops without replacing the previous file. Data older than 36 hours fails the production check. Generated feed data is rebuilt during release and should not be committed.
+
+### Production checks and alerts
+
+```bash
+npm run check:site -- --url https://code-philly-community.pages.dev/
+```
+
+The `monitor.yml` workflow runs this check every 15 minutes and retries once after 20 seconds. The maintainer responsible for releases must enable GitHub Actions failure notifications and verify delivery with a manual run. GitHub schedules may be delayed; this is a basic operational check, not a measured availability SLA. On failure, inspect the named check, deployment log, and per-source status in `/js/live-feeds-data.js`. Optional news outages warn; failed or stale Meetup data fails the check. If the deployed website is broken, restore the last successful deployment and rerun the command above.
+
+### Recovery
+
+Each release retains `site.tar.gz` and its SHA256 checksum for 30 days. Its `/deployment.json` records commit, build time, and Actions run ID. The Actions deployment log records the Cloudflare deployment URL/ID. Rebuilding an old commit refetches current content, so use the saved artifact or an existing successful deployment when restoring a release.
+
+In Cloudflare, open **Workers & Pages → code-philly-community → Deployments**, find the previous successful production deployment, and choose **Rollback to this deployment**. Verify the restored commit with `npm run check:site -- --url https://code-philly-community.pages.dev/ --commit <restored-commit>`. Confirm the target project before acting. A rollback drill and notification delivery must be checked by the release owner before relying on this procedure.
+
+If the deployment is no longer available, download the retained Actions artifact, verify `sha256sum -c site.tar.gz.sha256`, extract it to an empty directory, and upload that directory with the same account, project, and production branch as the workflow. Do not regenerate its data. See [Cloudflare's direct-upload CI guide](https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/) and [rollback instructions](https://developers.cloudflare.com/pages/configuration/rollbacks/).
 
 ## Content Operations
 

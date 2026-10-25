@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const http = require('http');
+const { setTimeout: delay } = require('node:timers/promises');
 
 const MEETUP_EVENTS_URL = 'https://www.meetup.com/code-coffee-philly/events/';
 const HN_TOP_URL = 'https://hacker-news.firebaseio.com/v0/topstories.json';
@@ -58,22 +59,13 @@ function parseMeetupEventsPage(html) {
   // Extract __NEXT_DATA__ script containing Apollo state
   const nextDataMatch = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
   if (!nextDataMatch) {
-    console.warn('  Could not find __NEXT_DATA__ in Meetup page');
-    return events;
+    throw new Error('Missing __NEXT_DATA__ in Meetup page');
   }
 
-  let nextData;
-  try {
-    nextData = JSON.parse(nextDataMatch[1]);
-  } catch (e) {
-    console.warn('  Failed to parse __NEXT_DATA__:', e.message);
-    return events;
-  }
-
+  const nextData = JSON.parse(nextDataMatch[1]);
   const apolloState = nextData?.props?.pageProps?.__APOLLO_STATE__;
-  if (!apolloState) {
-    console.warn('  Could not find __APOLLO_STATE__ in __NEXT_DATA__');
-    return events;
+  if (!apolloState || typeof apolloState !== 'object' || Array.isArray(apolloState)) {
+    throw new Error('Missing __APOLLO_STATE__ in Meetup page');
   }
 
   // Find all Event objects in the Apollo cache
@@ -105,7 +97,7 @@ function parseMeetupEventsPage(html) {
 
     events.push({
       name: title,
-      date: dateTime ? new Date(dateTime).toISOString() : new Date().toISOString(),
+      date: new Date(dateTime).toISOString(),
       location: location,
       url: eventUrl,
       rsvpCount: rsvpCount
@@ -117,70 +109,93 @@ function parseMeetupEventsPage(html) {
 
 // --- HTTP fetch with redirect following ---
 
-function fetchUrlOnce(url) {
+function fetchUrlOnce(url, signal) {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('https') ? https : http;
     const req = client.get(url, {
+      signal,
       headers: { 'User-Agent': 'CodePhilly/1.0 (Website Build)' }
     }, (res) => {
-      // Follow redirects
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return fetchUrl(res.headers.location).then(resolve).catch(reject);
-      }
+      res.on('error', reject);
       if (res.statusCode !== 200) {
-        return reject(new Error(`HTTP ${res.statusCode} from ${url}`));
+        resolve({ status: res.statusCode, headers: res.headers });
+        res.destroy();
+        return;
       }
       let data = '';
+      res.setEncoding('utf8');
       res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve(data));
+      res.on('end', () => resolve({ status: res.statusCode, body: data }));
     });
     req.on('error', reject);
-    req.setTimeout(15000, () => { req.destroy(); reject(new Error('Request timeout')); });
   });
 }
 
-async function fetchUrl(url, attempts) {
-  attempts = attempts || 2;
-  let lastError;
-  for (let attempt = 1; attempt <= attempts; attempt++) {
-    try {
-      return await fetchUrlOnce(url);
-    } catch (e) {
-      lastError = e;
-      if (attempt < attempts) {
+async function fetchUrl(url, attempts = 2, timeoutMs = 15000) {
+  const controller = new AbortController();
+  const deadline = Date.now() + timeoutMs;
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  let redirects = 0;
+  try {
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      try {
+        let currentUrl = new URL(url);
+        while (true) {
+          if (!['http:', 'https:'].includes(currentUrl.protocol)) throw new Error('Unsupported redirect protocol');
+          const response = await fetchUrlOnce(currentUrl.href, controller.signal);
+          if (response.status === 200) return response.body;
+          if ([301, 302, 303, 307, 308].includes(response.status) && response.headers.location) {
+            if (++redirects > 5) throw new Error('Too many redirects');
+            currentUrl = new URL(response.headers.location, currentUrl);
+            continue;
+          }
+          const error = new Error(`HTTP ${response.status} from ${currentUrl.href}`);
+          error.status = response.status;
+          error.retryAfter = response.headers['retry-after'];
+          throw error;
+        }
+      } catch (e) {
+        if (controller.signal.aborted) throw new Error(`Request deadline exceeded for ${url}`, { cause: e });
+        const transient = [408, 429, 500, 502, 503, 504].includes(e.status)
+          || ['ECONNRESET', 'ECONNREFUSED', 'ETIMEDOUT', 'EAI_AGAIN', 'EPIPE'].includes(e.code);
+        if (!transient || attempt === attempts) throw e;
+        const retryAfter = e.retryAfter && (Number.isFinite(Number(e.retryAfter))
+          ? Number(e.retryAfter) * 1000 : Date.parse(e.retryAfter) - Date.now());
+        const waitMs = Math.max(250 * attempt, retryAfter || 0);
+        if (waitMs >= deadline - Date.now()) throw e;
         console.warn(`  Request failed (${attempt}/${attempts}) for ${url}: ${e.message}`);
+        await delay(waitMs, undefined, { signal: controller.signal });
       }
     }
+  } finally {
+    clearTimeout(timer);
   }
-  throw lastError;
 }
 
 // --- Hacker News fetcher (same approach as ccp-discord-daily) ---
 
-async function fetchHackerNews(count) {
+async function fetchHackerNews(count, request = fetchUrl) {
   count = count || 5;
   let stories = [];
 
   // Try Firebase first
   try {
-    const topJson = await fetchUrl(HN_TOP_URL);
-    const topIds = JSON.parse(topJson).slice(0, count);
-    for (const id of topIds) {
-      try {
-        const itemJson = await fetchUrl(`${HN_ITEM_URL}${id}.json`);
-        const item = JSON.parse(itemJson);
-        if (item && item.title) {
-          stories.push({
-            title: item.title,
-            url: item.url || `https://news.ycombinator.com/item?id=${item.id}`,
-            score: item.score || 0,
-            comments: item.descendants || 0,
-            author: item.by || 'unknown',
-            hnId: item.id,
-            hnUrl: `https://news.ycombinator.com/item?id=${item.id}`
-          });
-        }
-      } catch (e) { /* skip individual item failures */ }
+    const topJson = await request(HN_TOP_URL);
+    const topIds = JSON.parse(topJson);
+    if (!Array.isArray(topIds)) throw new Error('Invalid Hacker News story list');
+    for (const id of topIds.slice(0, count)) {
+      const itemJson = await request(`${HN_ITEM_URL}${id}.json`);
+      const item = JSON.parse(itemJson);
+      if (!item || !item.title || !item.id) throw new Error('Invalid Hacker News item');
+      stories.push({
+        title: item.title,
+        url: item.url || `https://news.ycombinator.com/item?id=${item.id}`,
+        score: item.score || 0,
+        comments: item.descendants || 0,
+        author: item.by || 'unknown',
+        hnId: item.id,
+        hnUrl: `https://news.ycombinator.com/item?id=${item.id}`
+      });
     }
     return stories;
   } catch (e) {
@@ -188,22 +203,21 @@ async function fetchHackerNews(count) {
   }
 
   // Fallback to Algolia
-  try {
-    const algoliaJson = await fetchUrl(HN_ALGOLIA_URL);
-    const data = JSON.parse(algoliaJson);
-    for (const hit of (data.hits || []).slice(0, count)) {
-      stories.push({
-        title: hit.title || '',
-        url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
-        score: hit.points || 0,
-        comments: hit.num_comments || 0,
-        author: hit.author || 'unknown',
-        hnId: hit.objectID,
-        hnUrl: `https://news.ycombinator.com/item?id=${hit.objectID}`
-      });
-    }
-  } catch (e) {
-    console.warn('  Algolia HN also failed:', e.message);
+  stories = [];
+  const algoliaJson = await request(HN_ALGOLIA_URL);
+  const data = JSON.parse(algoliaJson);
+  if (!Array.isArray(data.hits)) throw new Error('Invalid Algolia story list');
+  for (const hit of data.hits.slice(0, count)) {
+    if (!hit.title || !hit.objectID) throw new Error('Invalid Algolia story');
+    stories.push({
+      title: hit.title,
+      url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+      score: hit.points || 0,
+      comments: hit.num_comments || 0,
+      author: hit.author || 'unknown',
+      hnId: hit.objectID,
+      hnUrl: `https://news.ycombinator.com/item?id=${hit.objectID}`
+    });
   }
 
   return stories;
@@ -237,16 +251,15 @@ function parseAtomFeed(xml, count) {
   return products;
 }
 
-async function fetchProductHunt(count) {
+async function fetchProductHunt(count, request = fetchUrl) {
   count = count || 5;
-  try {
-    const xml = await fetchUrl(PH_FEED_URL);
-    if (!xml.includes('<entry>')) return [];
-    return parseAtomFeed(xml, count);
-  } catch (e) {
-    console.warn('  Product Hunt fetch failed:', e.message);
-    return [];
+  const xml = await request(PH_FEED_URL);
+  if (!/<feed[\s>]/.test(xml) || !xml.includes('</feed>')) throw new Error('Invalid Product Hunt feed');
+  const products = parseAtomFeed(xml, count);
+  if ((/<entry\b/.test(xml) && !products.length) || products.some(product => !product.url)) {
+    throw new Error('Invalid Product Hunt entries');
   }
+  return products;
 }
 
 // --- GitHub Trending fetcher (same approach as ccp-discord-daily agent) ---
@@ -279,7 +292,7 @@ function parseGithubTrendingHtml(html, count) {
       description: descMatch ? stripHtml(descMatch[1]).slice(0, 200) : 'No description',
       language: languageMatch ? stripHtml(languageMatch[1]) : 'Unknown',
       stars: parseNumber(starsMatch ? stripHtml(starsMatch[1]) : ''),
-      todayStars: parseNumber(todayMatch ? todayMatch[1] : ''),
+      ...(todayMatch ? { todayStars: parseNumber(todayMatch[1]) } : {}),
       url: `https://github.com/${repoPath}`
     });
   }
@@ -287,10 +300,10 @@ function parseGithubTrendingHtml(html, count) {
   return repos;
 }
 
-async function fetchGithubTrending(count) {
+async function fetchGithubTrending(count, request = fetchUrl) {
   count = count || 5;
   try {
-    const html = await fetchUrl(GITHUB_TRENDING_URL);
+    const html = await request(GITHUB_TRENDING_URL);
     const repos = parseGithubTrendingHtml(html, count);
     if (repos.length) return repos;
     console.warn('  GitHub Trending page returned no repos; trying Search API fallback');
@@ -298,27 +311,23 @@ async function fetchGithubTrending(count) {
     console.warn('  GitHub Trending page failed:', e.message, '— trying Search API fallback');
   }
 
-  try {
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-    const query = encodeURIComponent(`pushed:>${yesterday} stars:>1000 archived:false`);
-    const url = `${GITHUB_SEARCH_URL}?q=${query}&sort=updated&order=desc&per_page=${count * 3}`;
-    const json = await fetchUrl(url);
-    const data = JSON.parse(json);
-    return (data.items || [])
-      .filter(item => item && item.html_url && item.full_name)
-      .slice(0, count)
-      .map(item => ({
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  const query = encodeURIComponent(`pushed:>${yesterday} stars:>1000 archived:false`);
+  const url = `${GITHUB_SEARCH_URL}?q=${query}&sort=updated&order=desc&per_page=${count * 3}`;
+  const json = await request(url);
+  const data = JSON.parse(json);
+  if (!Array.isArray(data.items) || data.items.some(item => !item?.html_url || !item.full_name)) {
+    throw new Error('Invalid GitHub Search response');
+  }
+  return data.items
+    .slice(0, count)
+    .map(item => ({
       name: item.full_name || '',
       description: (item.description || 'No description').slice(0, 200),
       language: item.language || 'Unknown',
       stars: item.stargazers_count || 0,
-      todayStars: item.stargazers_count || 0,
       url: item.html_url || ''
     }));
-  } catch (e) {
-    console.warn('  GitHub Trending fetch failed:', e.message);
-    return [];
-  }
 }
 
 // --- arXiv AI Papers fetcher (same approach as ccp-discord-daily agent) ---
@@ -354,18 +363,17 @@ function parseArxivXml(xml, count) {
   return papers;
 }
 
-async function fetchArxivPapers(count) {
+async function fetchArxivPapers(count, request = fetchUrl) {
   count = count || 5;
-  try {
-    const query = 'cat:cs.AI+OR+cat:cs.CL+OR+cat:cs.LG';
-    const url = `${ARXIV_API_URL}?search_query=${query}&sortBy=submittedDate&sortOrder=descending&max_results=${count * 2}`;
-    const xml = await fetchUrl(url);
-    if (!xml.includes('<entry>')) return [];
-    return parseArxivXml(xml, count);
-  } catch (e) {
-    console.warn('  arXiv fetch failed:', e.message);
-    return [];
+  const query = 'cat:cs.AI+OR+cat:cs.CL+OR+cat:cs.LG';
+  const url = `${ARXIV_API_URL}?search_query=${query}&sortBy=submittedDate&sortOrder=descending&max_results=${count * 2}`;
+  const xml = await request(url);
+  if (!/<feed[\s>]/.test(xml) || !xml.includes('</feed>')) throw new Error('Invalid arXiv feed');
+  const papers = parseArxivXml(xml, count);
+  if ((/<entry\b/.test(xml) && !papers.length) || papers.some(paper => !paper.url)) {
+    throw new Error('Invalid arXiv entries');
   }
+  return papers;
 }
 
 // --- Philly Tech News fetcher (Google News RSS, same as philly-tech-news agent) ---
@@ -423,23 +431,28 @@ function parseGoogleNewsRss(xml) {
   return articles;
 }
 
-async function fetchPhillyNews(count) {
+async function fetchPhillyNews(count, request = fetchUrl) {
   count = count || 5;
   const seen = new Set();
   const articles = [];
   const newestAllowed = Date.now() - (PHILLY_NEWS_MAX_AGE_DAYS * 86400000);
+  let successes = 0;
+  let lastError;
 
   for (const query of PHILLY_NEWS_QUERIES) {
     if (articles.length >= count) break;
     try {
       const encoded = encodeURIComponent(query);
       const url = `${GOOGLE_NEWS_RSS_URL}?q=${encoded}&hl=en-US&gl=US&ceid=US:en`;
-      const xml = await fetchUrl(url);
+      const xml = await request(url);
+      if (!/<rss[\s>]/.test(xml) || !xml.includes('</rss>')) throw new Error('Invalid Google News feed');
       const items = parseGoogleNewsRss(xml);
+      if (/<item\b/.test(xml) && !items.length) throw new Error('Invalid Google News entries');
       for (const item of items) {
         if (articles.length >= count) break;
-        const publishedAt = item.pubDate ? new Date(item.pubDate) : null;
-        if (!publishedAt || Number.isNaN(publishedAt.getTime()) || publishedAt.getTime() < newestAllowed) continue;
+        const publishedAt = new Date(item.pubDate);
+        if (Number.isNaN(publishedAt.getTime())) throw new Error('Invalid Google News publication date');
+        if (publishedAt.getTime() < newestAllowed) continue;
         if (!isPhillyTechArticle(item)) continue;
         // Deduplicate by title similarity
         const key = item.title.toLowerCase().slice(0, 60);
@@ -453,128 +466,64 @@ async function fetchPhillyNews(count) {
           date: publishedAt.toISOString().slice(0, 10)
         });
       }
+      successes++;
     } catch (e) {
+      lastError = e;
       console.warn(`  Google News RSS failed for "${query}":`, e.message);
     }
   }
 
+  if (!successes) throw lastError;
   return articles;
-}
-
-function requireItems(name, items) {
-  if (!Array.isArray(items) || items.length === 0) {
-    console.warn(`  ⚠ ${name} returned no items; continuing with an empty feed`);
-    return false;
-  }
-  return true;
 }
 
 // --- Main ---
 
-async function generateLiveFeeds() {
+async function generateLiveFeeds({ outputFile = OUTPUT_FILE, request = fetchUrl } = {}) {
   console.log('Fetching live feeds...\n');
-
-  // Fetch all sources in parallel
-  const [meetupResult, hnResult, phResult, ghResult, arxivResult, phillyResult] = await Promise.allSettled([
-    fetchUrl(MEETUP_EVENTS_URL).then(html => parseMeetupEventsPage(html)),
-    fetchHackerNews(5),
-    fetchProductHunt(5),
-    fetchGithubTrending(5),
-    fetchArxivPapers(5),
-    fetchPhillyNews(5)
+  const names = ['upcomingEvents', 'hackerNews', 'productHunt', 'githubTrending', 'aiPapers', 'phillyNews'];
+  const results = await Promise.allSettled([
+    request(MEETUP_EVENTS_URL).then(parseMeetupEventsPage),
+    fetchHackerNews(5, request),
+    fetchProductHunt(5, request),
+    fetchGithubTrending(5, request),
+    fetchArxivPapers(5, request),
+    fetchPhillyNews(5, request)
   ]);
-
-  let meetupEvents = [];
-  if (meetupResult.status === 'fulfilled') {
-    meetupEvents = meetupResult.value;
-    console.log(`✓ Meetup: ${meetupEvents.length} events`);
-  } else {
-    console.warn('⚠ Meetup events page failed:', meetupResult.reason?.message);
+  const lastUpdated = new Date().toISOString();
+  const feedsData = { lastUpdated, sources: {} };
+  for (const [index, result] of results.entries()) {
+    const name = names[index];
+    const ok = result.status === 'fulfilled';
+    feedsData[name] = ok ? result.value : [];
+    feedsData.sources[name] = { status: ok ? 'ok' : 'error', lastSuccessAt: ok ? lastUpdated : null };
+    if (ok) console.log(`✓ ${name}: ${result.value.length} items`);
+    else console.warn(`⚠ ${name}: ${result.reason.message}`);
+  }
+  if (results.every(result => result.status === 'rejected')) {
+    throw new Error('All live feed sources failed; existing output was not replaced');
   }
 
-  let hnStories = [];
-  if (hnResult.status === 'fulfilled') {
-    hnStories = hnResult.value;
-    console.log(`✓ Hacker News: ${hnStories.length} stories`);
-  } else {
-    console.warn('⚠ HN fetch failed:', hnResult.reason?.message);
-  }
-
-  let phProducts = [];
-  if (phResult.status === 'fulfilled') {
-    phProducts = phResult.value;
-    console.log(`✓ Product Hunt: ${phProducts.length} products`);
-  } else {
-    console.warn('⚠ Product Hunt fetch failed:', phResult.reason?.message);
-  }
-
-  let githubTrending = [];
-  if (ghResult.status === 'fulfilled') {
-    githubTrending = ghResult.value;
-    console.log(`✓ GitHub Trending: ${githubTrending.length} repos`);
-  } else {
-    console.warn('⚠ GitHub Trending fetch failed:', ghResult.reason?.message);
-  }
-
-  let aiPapers = [];
-  if (arxivResult.status === 'fulfilled') {
-    aiPapers = arxivResult.value;
-    console.log(`✓ arXiv Papers: ${aiPapers.length} papers`);
-  } else {
-    console.warn('⚠ arXiv fetch failed:', arxivResult.reason?.message);
-  }
-
-  let phillyNews = [];
-  if (phillyResult.status === 'fulfilled') {
-    phillyNews = phillyResult.value;
-    console.log(`✓ Philly News: ${phillyNews.length} articles`);
-  } else {
-    console.warn('⚠ Philly News fetch failed:', phillyResult.reason?.message);
-  }
-
-  // Keep only future events, sorted soonest first, limit to 5
-  const now = new Date();
-  meetupEvents = meetupEvents
-    .filter(e => new Date(e.date) >= now)
+  // A valid Meetup response with no future events is a successful empty feed.
+  feedsData.upcomingEvents = feedsData.upcomingEvents
+    .filter(event => new Date(event.date) >= new Date(lastUpdated))
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .slice(0, 5);
-
-  requireItems('Meetup', meetupEvents);
-  requireItems('Hacker News', hnStories);
-  requireItems('Product Hunt', phProducts);
-  requireItems('Philly News', phillyNews);
-  requireItems('GitHub Trending', githubTrending);
-  requireItems('arXiv Papers', aiPapers);
-
-  // Build the feeds data - all feeds fetched live
-  const feedsData = {
-    lastUpdated: new Date().toISOString(),
-    upcomingEvents: meetupEvents.map(e => ({
-      name: e.name,
-      date: e.date,
-      location: e.location,
-      url: e.url,
-      rsvpCount: e.rsvpCount || 0
-    })),
-    hackerNews: hnStories,
-    productHunt: phProducts,
-    phillyNews: phillyNews,
-    githubTrending: githubTrending,
-    aiPapers: aiPapers
-  };
 
   const jsContent = `// Live feeds data - all feeds fetched from real APIs at build time
 // Auto-generated by scripts/generate-live-feeds.js
 window.LIVE_FEEDS = ${JSON.stringify(feedsData, null, 2)};
 `;
-
-  fs.writeFileSync(OUTPUT_FILE, jsContent);
-  console.log(`\n✓ Wrote live feeds data to ${OUTPUT_FILE}`);
-  console.log(`  Events: ${feedsData.upcomingEvents.length}`);
-  console.log(`  File size: ${fs.statSync(OUTPUT_FILE).size} bytes`);
+  fs.writeFileSync(outputFile, jsContent);
+  console.log(`\n✓ Wrote live feeds data to ${outputFile}`);
+  return feedsData;
 }
 
-generateLiveFeeds().catch(err => {
-  console.error('Fatal error:', err);
-  process.exit(1);
-});
+module.exports = { fetchUrl, generateLiveFeeds, parseMeetupEventsPage, fetchGithubTrending };
+
+if (require.main === module) {
+  generateLiveFeeds().catch(err => {
+    console.error('Fatal error:', err);
+    process.exitCode = 1;
+  });
+}

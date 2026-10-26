@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Params.shortName }}{{ end }}</title>
-    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    {{ $title := .Site.Title }}
+    {{ if not .IsHome }}{{ $title = printf "%s | %s" .Title .Site.Params.shortName }}{{ end }}
+    {{ $description := .Description | default .Site.Params.description }}
+    {{ $previewImage := "media/logo.png" | absURL }}
+    {{ $previewImageAlt := "C.O.D.E Philadelphia community logo" }}
+    <title>{{ $title }}</title>
+    <link rel="canonical" href="{{ .Permalink }}">
+    <meta name="description" content="{{ $description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ .Site.Title }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:image" content="{{ $previewImage }}">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+    <meta property="og:image:alt" content="{{ $previewImageAlt }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ $title }}">
+    <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ $previewImage }}">
+    <meta name="twitter:image:alt" content="{{ $previewImageAlt }}">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">

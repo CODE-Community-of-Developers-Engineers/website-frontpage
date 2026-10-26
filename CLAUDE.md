@@ -12,14 +12,14 @@ C.O.D.E (Community of Developers & Engineers) Philadelphia community website bui
 # Development server
 hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
 
-# Full development build (regenerates events data)
-rm -rf public && node scripts/generate-events-data.js && hugo server --bind 0.0.0.0 --port 5000 --baseURL http://localhost:5000
+# Full development build (regenerates events and feed data)
+npm start
 
 # Production build
-node scripts/generate-events-data.js && hugo --gc --minify --cleanDestinationDir --forceSyncStatic
+npm run generate:data && HUGO_ENVIRONMENT=production npm run prod:build
 ```
 
-**Important:** Always run `node scripts/generate-events-data.js` before building - the events gallery depends on the generated `/static/js/events-data.js` file.
+**Important:** Run `npm run generate:data` before building. It generates `/static/js/events-data.js` for the gallery and `/static/js/live-feeds-data.js` for event and news cards. Feed data is fetched during the build, not by the browser.
 
 ## Validation & Linting
 
@@ -59,13 +59,14 @@ CI runs these checks on every PR via `.github/workflows/lint.yml` and `.github/w
 - **JavaScript:** Vanilla JS modules in `/static/js/`
   - `menu.js` - Responsive navigation (breakpoint: 960px)
   - `events-gallery.js` - Photo grid of events on the homepage
-  - `meetup.js` - Meetup.com API integration with CORS proxy fallback
+  - `live-feeds.js` - Renders event and news cards from the generated snapshot
+  - `live-feeds-data.js` - Build-time snapshot from `scripts/generate-live-feeds.js`
   - `events-data.js` - Auto-generated from `/static/images/events/` filenames
 
 ### Data Flow
 - **Events gallery:** Image files in `/static/images/events/` → `generate-events-data.js` → `events-data.js` → gallery tiles (filename becomes the caption)
 - **Forms:** Embedded Tally.so iframes
-- **Event info:** Meetup.com API → client-side rendering
+- **Event and news feeds:** Meetup and news providers → `scripts/generate-live-feeds.js` during the build → `live-feeds-data.js` → `live-feeds.js` renders cards in the browser
 
 ## Blog Post Front Matter
 
@@ -94,14 +95,17 @@ image: "/images/post-image.jpg"
 ## External Services
 
 - **Tally.so** - Form handling (project requests, talent matchboard)
-- **Meetup.com API** - Event display
-- **Cloudflare Pages** - Hosting and CDN; builds and deploys every push to main
+- **Meetup and news providers** - Fetched during the build for event and news display
+- **Cloudflare Pages** - Hosting and CDN; GitHub Actions uploads the tested artifact to `code-philly-community`
 
 ## CI/CD
 
-- **hugo.yml** - Triggers the daily Cloudflare Pages rebuild through the `CLOUDFLARE_PAGES_DEPLOY_HOOK` secret
+- **hugo.yml** - Builds, validates, retains, and directly uploads the tested artifact on `main` pushes, daily refreshes, or manual runs using `CLOUDFLARE_PAGES_API_TOKEN`. Skips superseded commits immediately before upload and waits a bounded time for the exact built `/deployment.json` before checking production. Keep workflow `367311100` disabled until this replacement reaches `main`, then re-enable it and verify its first run.
 - **lint.yml** - Runs markdown, YAML, and template linting
 - **pr-checks.yml** - Validates events data, front matter, and internal links on PRs
+- **monitor.yml** - Checks the production site every 15 minutes, including the 36-hour feed freshness gate
+
+See [README recovery instructions](README.md#recovery) for separate rollback revision/target and page availability checks. An old artifact may restore the site while still failing feed freshness; deploy corrected code with fresh feeds to restore the normal production check.
 
 ## Coding Principles
 

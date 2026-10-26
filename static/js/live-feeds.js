@@ -51,17 +51,42 @@
   }
 
   function renderGithubTrending(items, container) {
-    container.innerHTML = items.map(function (item) {
-      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<h4 class="feed-item-title feed-item-repo">' + escapeHtml(item.name) + '</h4>' +
-        '<p class="feed-item-desc">' + escapeHtml(item.description) + '</p>' +
-        '<div class="feed-item-meta">' +
-          '<span class="feed-item-lang"><span class="lang-dot lang-' + safeClassPart(item.language) + '"></span>' + escapeHtml(item.language) + '</span>' +
-          '<span><i class="fa-solid fa-star"></i> ' + escapeHtml(formatStars(item.stars)) + '</span>' +
-          '<span class="feed-item-today">+' + escapeHtml(formatStars(item.todayStars)) + ' today</span>' +
-        '</div>' +
-      '</a>';
-    }).join('');
+    container.replaceChildren(...items.map(function (item) {
+      var card = document.createElement('a');
+      card.href = safeUrl(item.url);
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.className = 'feed-item';
+
+      var title = document.createElement('h4');
+      title.className = 'feed-item-title feed-item-repo';
+      title.textContent = item.name;
+      var description = document.createElement('p');
+      description.className = 'feed-item-desc';
+      description.textContent = item.description;
+
+      var meta = document.createElement('div');
+      meta.className = 'feed-item-meta';
+      var language = document.createElement('span');
+      language.className = 'feed-item-lang';
+      language.textContent = item.language;
+      var dot = document.createElement('span');
+      dot.className = 'lang-dot lang-' + safeClassPart(item.language);
+      language.prepend(dot);
+      var stars = document.createElement('span');
+      var starIcon = document.createElement('i');
+      starIcon.className = 'fa-solid fa-star';
+      stars.append(starIcon, ' ' + formatStars(item.stars));
+      meta.append(language, stars);
+      if (Number.isFinite(item.todayStars)) {
+        var today = document.createElement('span');
+        today.className = 'feed-item-today';
+        today.textContent = '+' + formatStars(item.todayStars) + ' today';
+        meta.append(today);
+      }
+      card.append(title, description, meta);
+      return card;
+    }));
   }
 
   function renderAiPapers(items, container) {
@@ -103,9 +128,15 @@
   }
 
   function renderUpcomingEvents(items, container) {
-    var sorted = items.slice().sort(function (a, b) {
+    var sorted = items.filter(function (item) {
+      return new Date(item.date).getTime() > Date.now();
+    }).sort(function (a, b) {
       return new Date(a.date) - new Date(b.date);
     });
+    if (!sorted.length) {
+      container.textContent = 'No upcoming events listed. Check Meetup for the latest schedule.';
+      return;
+    }
     container.innerHTML = sorted.map(function (item) {
       var d = new Date(item.date);
       var weekday = d.toLocaleDateString('en-US', { weekday: 'short' });
@@ -133,51 +164,48 @@
     var el = document.getElementById('feeds-last-updated');
     if (!el) return;
     var date = new Date(dateStr);
-    el.textContent = 'Updated ' + date.toLocaleDateString('en-US', {
+    el.textContent = 'Last checked ' + date.toLocaleDateString('en-US', {
       month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
     });
   }
 
   function init() {
     var data = window.LIVE_FEEDS;
-    if (!data) return;
-
-    var newsContainer = document.getElementById('feed-philly-news');
-    var githubContainer = document.getElementById('feed-github-trending');
-    var papersContainer = document.getElementById('feed-ai-papers');
-    var hnContainer = document.getElementById('feed-hacker-news');
-    var phContainer = document.getElementById('feed-product-hunt');
-    var eventsContainer = document.getElementById('feed-upcoming-events');
-
-    if (newsContainer && data.phillyNews && data.phillyNews.length) {
-      renderPhillyNews(data.phillyNews, newsContainer);
-    } else if (newsContainer) {
-      newsContainer.closest('.feed-column').style.display = 'none';
+    var feeds = [
+      ['phillyNews', 'feed-philly-news', renderPhillyNews],
+      ['githubTrending', 'feed-github-trending', renderGithubTrending],
+      ['aiPapers', 'feed-ai-papers', renderAiPapers],
+      ['hackerNews', 'feed-hacker-news', renderHackerNews],
+      ['productHunt', 'feed-product-hunt', renderProductHunt],
+      ['upcomingEvents', 'feed-upcoming-events', renderUpcomingEvents]
+    ];
+    feeds.forEach(function (feed) {
+      var container = document.getElementById(feed[1]);
+      if (!container) return;
+      var source = data && data.sources && data.sources[feed[0]];
+      if (!source || source.status !== 'ok') {
+        container.textContent = 'This feed is temporarily unavailable. Please check back later.';
+        return;
+      }
+      if (feed[0] === 'upcomingEvents' || data[feed[0]].length) {
+        feed[2](data[feed[0]], container);
+      } else {
+        container.textContent = 'No items are currently listed.';
+      }
+      var lastSuccess = Date.parse(source.lastSuccessAt);
+      if (!Number.isFinite(lastSuccess) || Date.now() - lastSuccess > 36 * 60 * 60 * 1000) {
+        var notice = document.createElement('p');
+        notice.className = 'feed-item';
+        notice.textContent = 'This feed has not refreshed recently. These items may be out of date.';
+        container.prepend(notice);
+      }
+    });
+    if (data && data.lastUpdated) {
+      renderLastUpdated(data.lastUpdated);
+    } else {
+      var lastUpdated = document.getElementById('feeds-last-updated');
+      if (lastUpdated) lastUpdated.textContent = 'Feeds are temporarily unavailable.';
     }
-    if (githubContainer && data.githubTrending && data.githubTrending.length) {
-      renderGithubTrending(data.githubTrending, githubContainer);
-    } else if (githubContainer) {
-      githubContainer.closest('.feed-column').style.display = 'none';
-    }
-    if (papersContainer && data.aiPapers && data.aiPapers.length) {
-      renderAiPapers(data.aiPapers, papersContainer);
-    } else if (papersContainer) {
-      papersContainer.closest('.feed-column').style.display = 'none';
-    }
-    if (hnContainer && data.hackerNews && data.hackerNews.length) {
-      renderHackerNews(data.hackerNews, hnContainer);
-    } else if (hnContainer) {
-      hnContainer.closest('.feed-column').style.display = 'none';
-    }
-    if (phContainer && data.productHunt && data.productHunt.length) {
-      renderProductHunt(data.productHunt, phContainer);
-    } else if (phContainer) {
-      phContainer.closest('.feed-column').style.display = 'none';
-    }
-    if (eventsContainer && data.upcomingEvents && data.upcomingEvents.length) {
-      renderUpcomingEvents(data.upcomingEvents, eventsContainer);
-    }
-    if (data.lastUpdated) renderLastUpdated(data.lastUpdated);
   }
 
   if (document.readyState === 'loading') {

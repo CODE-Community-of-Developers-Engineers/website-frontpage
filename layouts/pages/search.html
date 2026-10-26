@@ -7,13 +7,13 @@
         <!-- Search Interface -->
         <div style="margin-bottom: 3rem;">
             <div style="position: relative; margin-bottom: 1.5rem;">
-                <input type="text" id="search-input" placeholder="Search blog posts, pages, tutorials, and community content..." 
+                <input type="text" id="search-input" aria-label="Search website" placeholder="Search blog posts, pages, tutorials, and community content..."
                        style="width: 100%; padding: 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-lg); font-size: 1.1rem; background: var(--background); color: var(--text-primary);">
             </div>
             
             <!-- Quick Filters -->
             <div style="margin-bottom: 2rem;">
-                <div id="search-stats" style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem; display: none;"></div>
+                <div id="search-stats" role="status" style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem; display: none;"></div>
                 <h3 style="margin-bottom: 1rem; font-size: 1rem;">Quick Filters</h3>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                     <button class="tag search-filter active" data-filter="all">All Content</button>
@@ -29,7 +29,7 @@
         </div>
         
         <!-- Search Results -->
-        <div id="search-results">
+        <div id="search-results" aria-live="polite">
             <div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;">
                 <h3>Start typing to search</h3>
                 <p>Search through our blog posts, pages, tutorials, and community content.</p>
@@ -44,7 +44,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const basePath = window.siteBasePath || '';
     let searchIndex = [];
-    let isLoading = true;
+    let searchState = 'loading';
 
     function resolveSiteUrl(url) {
         if (/^https?:\/\//.test(url)) {
@@ -59,42 +59,33 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${basePath}${cleanUrl}`;
     }
     
-    // Build search index from Hugo-generated JSON
     async function buildSearchIndex() {
+        searchState = 'loading';
+        renderResults([], searchInput.value);
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
         try {
-            console.log('Fetching search index...');
-            const response = await fetch(resolveSiteUrl('/index.json'));
-            if (!response.ok) {
-                throw new Error('Failed to fetch search index');
-            }
-            
+            const response = await fetch(resolveSiteUrl('/index.json'), { signal: controller.signal });
+            if (!response.ok) throw new Error(`Search index returned HTTP ${response.status}`);
             const content = await response.json();
-            searchIndex = content.filter(item => item.title && item.title.trim());
-            isLoading = false;
-            
-            console.log(`Search index loaded with ${searchIndex.length} items (${searchIndex.filter(i => i.type === 'blog').length} blog posts, ${searchIndex.filter(i => i.type === 'page').length} pages)`);
-            console.log('Sample items:', searchIndex.slice(0, 3).map(i => ({ title: i.title, type: i.type, url: i.url })));
-            
-            // Debug URLs
-            console.log('All URLs in search index:');
-            searchIndex.forEach((item, index) => {
-                if (index < 10) {
-                    console.log(`${index + 1}. "${item.title}" -> ${item.url}`);
-                }
-            });
-            
+            if (!Array.isArray(content) || content.some(item =>
+                !item || typeof item.title !== 'string' || typeof item.url !== 'string')) {
+                throw new Error('Invalid search index');
+            }
+            searchIndex = content.filter(item => item.title.trim());
+            searchState = 'ready';
         } catch (error) {
             console.error('Error loading search index:', error);
-            isLoading = false;
+            searchState = 'error';
+        } finally {
+            clearTimeout(timeout);
         }
+        updateSearch();
     }
-    
+
     // Search function
     function performSearch(query, filter = 'all') {
-        if (isLoading) {
-            console.log('Search index still loading...');
-            return [];
-        }
+        if (searchState !== 'ready') return [];
         
         const searchQuery = query.toLowerCase().trim();
         if (!searchQuery) return [];
@@ -102,16 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Performing search for:', searchQuery, 'with filter:', filter);
         
         const results = searchIndex.filter(item => {
-            // Filter by category first
-            if (filter !== 'all') {
-                if (filter === 'tutorial' || filter === 'community' || filter === 'events') {
-                    // Topic-based filtering
-                    if (item.topic !== filter) return false;
-                } else {
-                    // Tag-based filtering
-                    if (!Array.isArray(item.tags) || !item.tags.includes(filter)) return false;
-                }
-            }
+            if (filter !== 'all' && item.topic !== filter &&
+                (!Array.isArray(item.tags) || !item.tags.includes(filter))) return false;
             
             // Then search content
             const searchableText = [
@@ -148,135 +131,94 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Render search results
+    // Render only static markup with innerHTML; index content is assigned as text.
     function renderResults(results, query) {
         const resultsContainer = document.getElementById('search-results');
         const statsContainer = document.getElementById('search-stats');
-        
+        statsContainer.style.display = 'block';
+        statsContainer.textContent = '';
+        if (searchState === 'loading') {
+            resultsContainer.textContent = 'Loading search…';
+            return;
+        }
+        if (searchState === 'error') {
+            resultsContainer.innerHTML = '<p>Search is temporarily unavailable. Please try again.</p><button type="button" class="btn btn-secondary" id="search-retry">Retry search</button>';
+            document.getElementById('search-retry').addEventListener('click', buildSearchIndex);
+            return;
+        }
         if (!query.trim()) {
-            resultsContainer.innerHTML = `
-                <div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;">
-                    <h3>Start typing to search</h3>
-                    <p>Search through our blog posts, tutorials, and community content.</p>
-                </div>
-            `;
-            statsContainer.textContent = '';
+            resultsContainer.innerHTML = '<div id="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 3rem;"><h3>Start typing to search</h3><p>Search through our blog posts, pages, tutorials, and community content.</p><div id="content-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; max-width: 600px; margin: 2rem auto 0;"></div></div>';
+            showContentSummary();
             return;
         }
-        
         statsContainer.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
-        
-        if (results.length === 0) {
-            resultsContainer.innerHTML = `
-                <div style="text-align: center; color: var(--text-muted); padding: 3rem;">
-                    <h3>No results found</h3>
-                    <p>Try different keywords or check your spelling.</p>
-                </div>
-            `;
+        if (!results.length) {
+            resultsContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 3rem;"><h3>No results found</h3><p>Try different keywords or check your spelling.</p></div>';
             return;
         }
-        
-        const resultsHTML = results.map((item, index) => {
-            console.log(`Rendering result ${index + 1}:`, item.title, item.url);
-            return `
-            <div class="search-result search-result-card">
-                <h3 class="search-result-heading">
-                    <a href="#" class="search-result-title" onclick="navigateToPage('${item.url}'); return false;">${item.title}</a>
-                    ${item.featured ? '<span class="search-result-badge search-result-badge-featured">FEATURED</span>' : ''}
-                    <span class="search-result-badge">${item.type}</span>
-                </h3>
-                <div class="search-result-meta">
-                    <span>${item.type === 'blog' ? 'Blog Post' : 'Page'}</span>
-                    <span>by ${item.author}</span>
-                    <span>${item.readingTime} min read</span>
-                    ${item.topic ? `<span>Topic: ${item.topic}</span>` : ''}
-                </div>
-                <p class="search-result-description">${item.description || 'No description available.'}</p>
-                ${(item.tags && Array.isArray(item.tags) && item.tags.length > 0) ? `
-                <div class="search-result-tags">
-                    ${item.tags.map(tag => `<span class="search-result-tag">${tag}</span>`).join('')}
-                </div>
-                ` : ''}
-            </div>
-        `;
-        }).join('');
-        
-        console.log('Setting results HTML:', resultsHTML.length, 'characters');
-        console.log('Results container:', resultsContainer);
-        resultsContainer.innerHTML = resultsHTML;
-        console.log('Results container after setting innerHTML:', resultsContainer.innerHTML.length, 'characters');
-        
-        // Add hover effects
-        document.querySelectorAll('.search-result').forEach(result => {
-            result.addEventListener('mouseenter', function() {
+        resultsContainer.replaceChildren();
+        results.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'search-result search-result-card';
+            card.innerHTML = '<h3 class="search-result-heading"><a class="search-result-title"></a><span class="search-result-badge search-result-badge-featured">FEATURED</span><span class="search-result-badge search-result-type"></span></h3><div class="search-result-meta"></div><p class="search-result-description"></p><div class="search-result-tags"></div>';
+            const link = card.querySelector('a');
+            link.href = resolveSiteUrl(item.url);
+            link.textContent = item.title;
+            if (!item.featured) card.querySelector('.search-result-badge-featured').remove();
+            card.querySelector('.search-result-type').textContent = item.type;
+            const metadata = [item.type === 'blog' ? 'Blog Post' : 'Page', `by ${item.author}`, `${item.readingTime} min read`];
+            if (item.topic) metadata.push(`Topic: ${item.topic}`);
+            metadata.forEach(text => {
+                const span = document.createElement('span');
+                span.textContent = text;
+                card.querySelector('.search-result-meta').append(span);
+            });
+            card.querySelector('.search-result-description').textContent = item.description || 'No description available.';
+            if (Array.isArray(item.tags)) item.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'search-result-tag';
+                span.textContent = tag;
+                card.querySelector('.search-result-tags').append(span);
+            });
+            card.addEventListener('mouseenter', function() {
                 this.style.borderColor = 'var(--primary-color)';
                 this.style.boxShadow = 'var(--shadow)';
             });
-            result.addEventListener('mouseleave', function() {
+            card.addEventListener('mouseleave', function() {
                 this.style.borderColor = 'var(--border-color)';
                 this.style.boxShadow = 'none';
             });
+            resultsContainer.append(card);
         });
     }
-    
+
     // Search input handling
     const searchInput = document.getElementById('search-input');
     const searchFilters = document.querySelectorAll('.search-filter');
     let currentFilter = 'all';
     let searchTimeout;
     
-    // Make currentFilter available to renderResults
-    window.currentFilter = currentFilter;
-    
+    function updateSearch() {
+        const query = searchInput.value;
+        renderResults(performSearch(query, currentFilter), query);
+    }
+
     searchInput.addEventListener('input', function() {
-        const query = this.value;
-        console.log('Search input:', query);
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            const results = performSearch(query, currentFilter);
-            console.log('Search results:', results.length, 'items found');
-            renderResults(results, query);
-        }, 300); // Debounce search
+        searchTimeout = setTimeout(updateSearch, 300);
     });
-    
-    // Filter handling
+
     searchFilters.forEach(filter => {
         filter.addEventListener('click', function() {
             searchFilters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             currentFilter = this.getAttribute('data-filter');
-            window.currentFilter = currentFilter;
-            console.log('Filter changed to:', currentFilter);
-            
-            // Populate search field with filter term
-            if (currentFilter !== 'all') {
-                searchInput.value = currentFilter;
-                searchInput.focus();
-                
-                // Perform search with the filter term
-                const results = performSearch(currentFilter, 'all');
-                renderResults(results, currentFilter);
-            } else {
-                // Clear search field for "All Content"
-                searchInput.value = '';
-                renderResults([], '');
-            }
+            searchInput.value = currentFilter === 'all' ? '' : currentFilter;
+            searchInput.focus();
+            updateSearch();
         });
     });
-    
-    // Navigation helper function
-    window.navigateToPage = function(url) {
-        console.log('Navigating to:', url);
-        console.log('Current location:', window.location.href);
 
-        const targetUrl = resolveSiteUrl(url);
-        console.log('Final target URL:', targetUrl);
-        window.location.href = targetUrl;
-    };
-    
-    // Initialize
-    buildSearchIndex();
-    
     // Show content summary on load
     function showContentSummary() {
         if (searchIndex.length > 0) {
@@ -298,8 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Show summary after index is built
-    setTimeout(showContentSummary, 100);
+    buildSearchIndex();
     
     // Focus search input on page load
     searchInput.focus();

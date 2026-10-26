@@ -1,26 +1,108 @@
-# Cloudflare Pages builds and deploys every push to main through its GitHub integration.
-# This workflow only triggers the daily rebuild that refreshes the Tech Pulse data.
-name: Daily Cloudflare Pages rebuild
+name: Deploy Cloudflare Pages
 
 on:
-  # Refresh Tech Pulse data daily at 10:17 UTC (~6:17 ET during DST; ~5:17 ET during standard time)
+  push:
+    branches: [main]
   schedule:
     - cron: '17 10 * * *'
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# Keep a deployment and its production checks together, including manual runs.
+concurrency:
+  group: production-pages
+  cancel-in-progress: false
+
 jobs:
-  rebuild:
+  deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 20
+    env:
+      SITE_BASE_PATH: /
+      SITE_URL: https://code-philly-community.pages.dev/
+      HUGO_ENVIRONMENT: production
+      HUGO_ENV: production
+      HUGO_ENABLEROBOTSTXT: 'true'
+
     steps:
-      - name: Trigger Cloudflare Pages deploy hook
-        env:
-          DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.126.1'
+          extended: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate and validate data
         run: |
-          : "${DEPLOY_HOOK_URL:?CLOUDFLARE_PAGES_DEPLOY_HOOK secret is not set}"
-          curl -fsS --connect-timeout 10 --max-time 60 -X POST "$DEPLOY_HOOK_URL"
+          npm run generate:data
+          npm run validate
+          npm test
+
+      - name: Build production site
+        run: |
+          npm run prod:build -- --baseURL "$SITE_URL"
+          node -e 'require("node:fs").writeFileSync("public/deployment.json", JSON.stringify({commit: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, builtAt: new Date().toISOString(), siteUrl: process.env.SITE_URL}) + "\n")'
+
+      - name: Check deployment artifact
+        run: |
+          npm run check:site -- --dir public --commit "$GITHUB_SHA"
+          npm run test:e2e
+
+      - name: Package tested artifact
+        run: |
+          tar -czf site.tar.gz -C public .
+          sha256sum site.tar.gz > site.tar.gz.sha256
+
+      - name: Retain tested artifact for rollback
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-${{ github.sha }}-${{ github.run_id }}
+          path: |
+            site.tar.gz
+            site.tar.gz.sha256
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Deploy and verify tested artifact
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 241b2116c32fcb97feef45212430dbce
+        run: |
+          remote_main=$(git ls-remote --exit-code origin refs/heads/main)
+          if [ "${remote_main%%[[:space:]]*}" != "$GITHUB_SHA" ]; then
+            echo "Skipping superseded commit $GITHUB_SHA"
+            exit 0
+          fi
+
+          : "${CLOUDFLARE_API_TOKEN:?CLOUDFLARE_PAGES_API_TOKEN secret is not set}"
+          npx --yes wrangler@4.152.0 pages deploy public --project-name code-philly-community --branch main --commit-hash "$GITHUB_SHA" --commit-dirty=true
+
+          for attempt in {1..12}; do
+            if curl --fail --silent --show-error --compressed --max-time 10 \
+              --output "$RUNNER_TEMP/deployment.json" \
+              "${SITE_URL%/}/deployment.json?run=$GITHUB_RUN_ID&attempt=$GITHUB_RUN_ATTEMPT&poll=$attempt" \
+              && cmp -s public/deployment.json "$RUNNER_TEMP/deployment.json"; then
+              npm run check:site -- --url "$SITE_URL" --commit "$GITHUB_SHA"
+              exit 0
+            fi
+            if [ "$attempt" -lt 12 ]; then sleep 5; fi
+          done
+          echo "::error::Production did not serve the tested deployment manifest within 12 attempts"
+          exit 1

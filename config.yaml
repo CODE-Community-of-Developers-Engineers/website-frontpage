@@ -1,4 +1,5 @@
-baseURL: 'https://www.codephilly.com/'
+baseURL: 'https://code-philly-community.pages.dev/'
+enableRobotsTXT: true
 languageCode: 'en-us'
 title: 'C.O.D.E - Community of Developers & Engineers'
 theme: ''

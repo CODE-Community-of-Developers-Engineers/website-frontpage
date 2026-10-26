@@ -302,7 +302,7 @@ CodeRabbit is installed for this repository and reviews PRs using `.coderabbit.y
 ## Community
 
 - **Meetup**: [C.O.D.E](https://www.meetup.com/code-and-coffee-philadelphia/)
-- **Website**: [codephilly.com](https://www.codephilly.com/Code-And-Coffee-philidelphia-Website)
+- **Website**: [code-philly-community.pages.dev](https://code-philly-community.pages.dev/)
 
 Join us for events, ask questions, and connect with fellow developers!
 

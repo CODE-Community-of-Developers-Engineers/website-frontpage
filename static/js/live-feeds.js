@@ -51,17 +51,42 @@
   }
 
   function renderGithubTrending(items, container) {
-    container.innerHTML = items.map(function (item) {
-      return '<a href="' + escapeHtml(safeUrl(item.url)) + '" target="_blank" rel="noopener noreferrer" class="feed-item">' +
-        '<h4 class="feed-item-title feed-item-repo">' + escapeHtml(item.name) + '</h4>' +
-        '<p class="feed-item-desc">' + escapeHtml(item.description) + '</p>' +
-        '<div class="feed-item-meta">' +
-          '<span class="feed-item-lang"><span class="lang-dot lang-' + safeClassPart(item.language) + '"></span>' + escapeHtml(item.language) + '</span>' +
-          '<span><i class="fa-solid fa-star"></i> ' + escapeHtml(formatStars(item.stars)) + '</span>' +
-          (Number.isFinite(item.todayStars) ? '<span class="feed-item-today">+' + escapeHtml(formatStars(item.todayStars)) + ' today</span>' : '') +
-        '</div>' +
-      '</a>';
-    }).join('');
+    container.replaceChildren(...items.map(function (item) {
+      var card = document.createElement('a');
+      card.href = safeUrl(item.url);
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.className = 'feed-item';
+
+      var title = document.createElement('h4');
+      title.className = 'feed-item-title feed-item-repo';
+      title.textContent = item.name;
+      var description = document.createElement('p');
+      description.className = 'feed-item-desc';
+      description.textContent = item.description;
+
+      var meta = document.createElement('div');
+      meta.className = 'feed-item-meta';
+      var language = document.createElement('span');
+      language.className = 'feed-item-lang';
+      language.textContent = item.language;
+      var dot = document.createElement('span');
+      dot.className = 'lang-dot lang-' + safeClassPart(item.language);
+      language.prepend(dot);
+      var stars = document.createElement('span');
+      var starIcon = document.createElement('i');
+      starIcon.className = 'fa-solid fa-star';
+      stars.append(starIcon, ' ' + formatStars(item.stars));
+      meta.append(language, stars);
+      if (Number.isFinite(item.todayStars)) {
+        var today = document.createElement('span');
+        today.className = 'feed-item-today';
+        today.textContent = '+' + formatStars(item.todayStars) + ' today';
+        meta.append(today);
+      }
+      card.append(title, description, meta);
+      return card;
+    }));
   }
 
   function renderAiPapers(items, container) {

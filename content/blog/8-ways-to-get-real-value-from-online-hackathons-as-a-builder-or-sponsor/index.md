@@ -14,7 +14,7 @@ An online hackathon is a time-boxed building event where participants form teams
 
 We run C.O.D.E Philadelphia, a volunteer-run community of developers and engineers, and our work is built around in-person weekly coding sessions and quarterly hackathons at venues like Pennovation Works. Our 490+ builders on Discord also join remote events all year, and we hear the same stories again and again: the team that fell apart on day two, the student who finally shipped a first project, the sponsor whose challenge got zero submissions.
 
-This round-up is for everyone who touches these events. Developers and bootcamp graduates will find tips on choosing events and finishing them. Students and beginners will find advice on free events that welcome newcomers. Corporate sponsors, CSR managers and donors will find guidance on funding online events that produce outcomes worth reporting. The scale is real: the [2024 HackerRank Developer Skills Report showed 70% of developers had participated in hackathons](https://wal.sh/research/online-hackathons/), and the field has only grown since.
+This round-up is for everyone who touches these events. Developers and bootcamp graduates will find tips on choosing events and finishing them. Students and beginners will find advice on free events that welcome newcomers. Corporate sponsors, CSR managers and donors will find guidance on funding online events that produce outcomes worth reporting.
 
 ![Developer joining an online hackathon from home with remote teammates on a video call](https://pub-451d10ec53cc4a789b85ceaa163ede7f.r2.dev/inline/076c647b0f1f4dffa73795562779a99b.webp)
 *Most online hackathon work happens at kitchen tables and home desks.*
@@ -25,7 +25,7 @@ This round-up is for everyone who touches these events. Developers and bootcamp 
 
 **Read the judging rules before the prize table.** Every online hackathon tells you how projects are judged, and that detail shapes your entire weekend. Some events want a live demo during a scheduled slot. Others want a two-to-three-minute recorded video, a public repository and a written description. A few judge mostly on the written pitch. Choose the format that plays to your strengths.
 
-Prize size does affect behavior. Across Major League Hacking events, [60–70% of registered participants submitted a project, and events with $10,000+ prize pools see 75–80% submission rates](https://wal.sh/research/online-hackathons/). Bigger prizes keep people committed, but they also draw stronger and more experienced teams. If your goal is learning, a smaller event with clear judging criteria and active mentors can teach you more than a crowded global contest where you are one of thousands.
+Prize size does affect behavior. Bigger prizes keep people committed, but they also draw stronger and more experienced teams. If your goal is learning, a smaller event with clear judging criteria and active mentors can teach you more than a crowded global contest where you are one of thousands.
 
 - Find the judging rubric and note which criteria carry the most weight.
 - Check whether a live demo slot is required and whether its time zone works for you.
@@ -70,7 +70,7 @@ The fix is to form your team, or at least a core pair, before the event opens. A
 
 ## 5. Scope for a demo video, not a product
 
-**Judges see your video first, so build what the video needs to show.** In most online hackathons, judges review a short recorded demo, and many never run your code. That changes the goal. You need one clear story: the problem, the person who has it and the moment your project solves it on screen. Everything else is optional.
+**If the event judges a recorded demo, build what the video needs to show.** At those events, judges review a short video, and many never run your code. That changes the goal. You need one clear story: the problem, the person who has it and the moment your project solves it on screen. Everything else is optional. Live-demo and pitch-judged events reward the same single story, told in the demo slot or the written pitch.
 
 Teams lose online events by over-building. They spend thirty hours on login systems and databases and two rushed hours on a video nobody can follow. Scale has made this sharper: when Bolt ran its [2025 online hackathon, more than 130,000 people registered](https://litslink.com/blog/virtual-hackathons). With fields that size, judges move quickly, and a clear ninety-second demo beats a sprawling feature list.
 
@@ -95,7 +95,7 @@ This is the reason C.O.D.E Philadelphia calls itself a working community. Our 5,
 
 **The money that changes outcomes goes to mentors, workshops and follow-up.** Prize pools raise submission rates, but they mostly reward people who were already likely to win. For CSR programs focused on inclusion and skills, the more effective spend is on the support around the event: mentor hours, beginner workshops, accessibility and help for participants after the event ends.
 
-Online events can reach large audiences cheaply. [Major League Hacking reported 250,000 participants globally in 2024](https://wal.sh/research/online-hackathons/), which shows how far remote formats can stretch. Reach alone is a weak metric for a CSR report, though. Stakeholders want to know who was helped and how, so ask organizers what they will measure before you commit funds.
+Online events can reach large audiences cheaply. Reach alone is a weak metric for a CSR report, though. Stakeholders want to know who was helped and how, so ask organizers what they will measure before you commit funds.
 
 ### What CSR teams should ask for in a sponsorship
 
@@ -111,10 +111,9 @@ Local community partners make that last point easier. A sponsor who backs both a
 
 ## Sources
 
-- [Online Hackathons - wal.sh](https://wal.sh/research/online-hackathons/)
-- [Virtual Hackathons: How They Work & Who Wins 2026 - litslink.com](https://litslink.com/blog/virtual-hackathons)
-- [Winners of UNESCO’s Youth Hackathon 2024 Shape the Future of Media and - unesco.org](https://www.unesco.org/en/articles/winners-unescos-youth-hackathon-2024-shape-future-media-and-information-literacy)
+- [Virtual Hackathons: How They Work & Who Wins (2026) - litslink.com](https://litslink.com/blog/virtual-hackathons)
+- [Winners of UNESCO’s Youth Hackathon 2024 Shape the Future of Media and Information Literacy - unesco.org](https://www.unesco.org/en/articles/winners-unescos-youth-hackathon-2024-shape-future-media-and-information-literacy)
 
 <p class="powered-by">Powered by <a href="https://gofylo.io?utm_source=codephilly.com&amp;utm_medium=referral&amp;utm_campaign=powered_by" rel="sponsored">gofylo.io</a></p>
 
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"8 Ways to Get Real Value From Online Hackathons as a Builder or Sponsor","description":"Eight practical tips for online hackathons: picking free and beginner-friendly events, staying on track remotely, and how sponsors can fund real outcomes.","wordCount":1835,"inLanguage":"en","author":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"publisher":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"dateModified":"2026-10-27T03:33:42.686459","keywords":"online hackathons","citation":["https://wal.sh/research/online-hackathons/","https://www.unesco.org/en/articles/winners-unescos-youth-hackathon-2024-shape-future-media-and-information-literacy","https://litslink.com/blog/virtual-hackathons"]},{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"1. Pick events by submission format, not prize size"},{"@type":"ListItem","position":2,"name":"2. Treat free online hackathons as a portfolio engine"},{"@type":"ListItem","position":3,"name":"3. Students and beginners: choose events built for you"},{"@type":"ListItem","position":4,"name":"4. Recruit or match your team before kickoff"},{"@type":"ListItem","position":5,"name":"5. Scope for a demo video, not a product"},{"@type":"ListItem","position":6,"name":"6. Build a remote rhythm with fixed check-ins"},{"@type":"ListItem","position":7,"name":"7. Pair online events with a local in-person group"},{"@type":"ListItem","position":8,"name":"8. Sponsors: fund support, not just prizes"}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"8 Ways to Get Real Value From Online Hackathons as a Builder or Sponsor","description":"Eight practical tips for online hackathons: picking free and beginner-friendly events, staying on track remotely, and how sponsors can fund real outcomes.","wordCount":1835,"inLanguage":"en","author":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"publisher":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"dateModified":"2026-10-27T03:33:42.686459","keywords":"online hackathons","citation":["https://www.unesco.org/en/articles/winners-unescos-youth-hackathon-2024-shape-future-media-and-information-literacy","https://litslink.com/blog/virtual-hackathons"]},{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"1. Pick events by submission format, not prize size"},{"@type":"ListItem","position":2,"name":"2. Treat free online hackathons as a portfolio engine"},{"@type":"ListItem","position":3,"name":"3. Students and beginners: choose events built for you"},{"@type":"ListItem","position":4,"name":"4. Recruit or match your team before kickoff"},{"@type":"ListItem","position":5,"name":"5. Scope for a demo video, not a product"},{"@type":"ListItem","position":6,"name":"6. Build a remote rhythm with fixed check-ins"},{"@type":"ListItem","position":7,"name":"7. Pair online events with a local in-person group"},{"@type":"ListItem","position":8,"name":"8. Sponsors: fund support, not just prizes"}]}]</script>

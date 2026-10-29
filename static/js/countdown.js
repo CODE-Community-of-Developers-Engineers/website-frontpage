@@ -31,7 +31,7 @@
     if (now >= start && now < end) {
       remaining = end - now;
       heading = 'Hackathon ends in';
-      status = 'Submissions close at 5:00 PM EST';
+      status = 'Submissions close at 6:00 PM EST';
     } else if (now >= end) {
       remaining = 0;
       heading = 'Hackathon complete';

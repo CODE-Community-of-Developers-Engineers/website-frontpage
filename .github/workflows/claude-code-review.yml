@@ -1,0 +1,38 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  claude-review:
+    # Fork PRs get no secrets, so skip them instead of failing
+    if: |
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write  # Required to fetch the Claude GitHub App token (OIDC)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Review this pull request to the Hugo site. Focus on bugs, security, accessibility,
+            broken links, and front matter problems; skip style nitpicks. Check changes against
+            the coding principles in CLAUDE.md.
+
+            Post the review as a single PR comment with `gh pr comment`.
+          claude_args: '--allowed-tools "Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"'

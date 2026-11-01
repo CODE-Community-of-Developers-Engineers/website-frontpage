@@ -956,7 +956,8 @@ p {
     margin-bottom: 1rem;
 }
 
-/* .events-feed-list sets display: grid, which would otherwise override [hidden] */
+/* These set their own display, which would otherwise override [hidden] */
+.events-source-toggle[hidden],
 .events-feed-list[hidden] {
     display: none;
 }

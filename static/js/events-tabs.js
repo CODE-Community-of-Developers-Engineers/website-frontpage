@@ -17,9 +17,14 @@
     tab.addEventListener('keydown', event => {
       const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
       if (!step) return;
+      event.preventDefault();
       const next = tabs[(index + step + tabs.length) % tabs.length];
       select(next);
       next.focus();
     });
   });
+
+  // The markup shows both feeds and hides the tabs, so the Meetup feed stays usable if this script fails
+  select(tabs[0]);
+  tabs[0].closest('[role="tablist"]').hidden = false;
 })();

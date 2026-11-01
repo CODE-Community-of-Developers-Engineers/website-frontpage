@@ -121,20 +121,40 @@
     </div>
 </section>
 
-<!-- Upcoming Events (powered by Meetup) -->
+<!-- Upcoming Events: Luma calendar embed or Meetup feed (filled by live-feeds.js) -->
 <section class="home-section fade-in-section" id="events">
     <div class="container section-split">
         <div class="section-head">
             <span class="eyebrow">Upcoming events</span>
             <h2>Pick a session and show up.</h2>
-            <p>Every event is listed on Meetup. RSVP there so we know you're coming.</p>
+            <p>Our events are listed on Luma and Meetup. RSVP on either so we know you're coming.</p>
             <a href="https://www.meetup.com/code-coffee-philly/events/" class="btn btn-secondary">View all on Meetup</a>
         </div>
-        <div class="events-feed-list" id="feed-upcoming-events">
-            <p class="events-feed-empty">Our schedule lives on Meetup. Follow the link to see what's coming up.</p>
+        <div>
+            <div class="events-source-toggle" role="group" aria-label="Show events from">
+                <button type="button" class="btn" data-events-source="luma" aria-pressed="true">Luma</button>
+                <button type="button" class="btn btn-secondary" data-events-source="meetup" aria-pressed="false">Meetup</button>
+            </div>
+            <iframe src="https://luma.com/embed/calendar/cal-ftxaA6PDR5Tbllt/events" title="C.O.D.E events calendar on Luma" class="luma-calendar" data-events-panel="luma" width="100%" height="450" loading="lazy" allowfullscreen></iframe>
+            <div class="events-feed-list" id="feed-upcoming-events" data-events-panel="meetup" hidden>
+                <p class="events-feed-empty">Our schedule lives on Meetup. Follow the link to see what's coming up.</p>
+            </div>
         </div>
     </div>
 </section>
+<script>
+    document.querySelectorAll('[data-events-source]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            document.querySelectorAll('[data-events-source]').forEach(function (other) {
+                other.setAttribute('aria-pressed', String(other === button));
+                other.classList.toggle('btn-secondary', other !== button);
+            });
+            document.querySelectorAll('[data-events-panel]').forEach(function (panel) {
+                panel.hidden = panel.dataset.eventsPanel !== button.dataset.eventsSource;
+            });
+        });
+    });
+</script>
 
 <!-- Get involved -->
 <section class="home-section home-section-alt fade-in-section">

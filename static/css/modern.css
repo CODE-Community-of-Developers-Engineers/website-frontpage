@@ -944,6 +944,23 @@ p {
     margin: 0;
 }
 
+.luma-calendar {
+    display: block;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.events-source-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* The panels set their own display, which would otherwise override [hidden] */
+[data-events-panel][hidden] {
+    display: none;
+}
+
 /* Photo mosaic */
 .photo-mosaic {
     display: grid;

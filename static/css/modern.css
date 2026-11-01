@@ -533,6 +533,8 @@ p {
 .btn-sponsor {
     background: var(--ink);
     border-color: var(--ink);
+    /* --ink stays dark in both themes, but --on-accent turns dark in dark mode */
+    color: #ffffff;
     border-radius: 999px;
     padding: 0.85rem 2rem;
     box-shadow: var(--shadow-lg);
@@ -545,10 +547,11 @@ p {
 .btn-sponsor:hover {
     background: var(--accent-dark);
     border-color: var(--accent-dark);
+    color: var(--on-accent);
 }
 
 .btn-sponsor:hover i {
-    color: white;
+    color: inherit;
 }
 
 .hero-side {

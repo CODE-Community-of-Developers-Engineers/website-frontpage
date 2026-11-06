@@ -1,8 +1,8 @@
 ---
-title: "8 Hackathon Judging Rubric Tools, Templates and Scorecards to Use"
+title: "7 Hackathon Judging Rubric Tools, Templates and Scorecards to Use"
 date: 2026-10-31
 author: "C.O.D.E Philadelphia"
-description: "Eight hackathon judging rubric resources, from free criteria builders to full platforms, with notes on who each one suits and how weighted scoring works."
+description: "Seven hackathon judging rubric resources, from free criteria builders to full platforms, with notes on who each one suits and how weighted scoring works."
 topic: "events"
 tags: ["hackathon"]
 image: "cover.webp"
@@ -14,7 +14,7 @@ A [hackathon judging](https://codephilly.com/blog/how-does-hackathon-judging-wor
 
 We run quarterly hackathons at C.O.D.E Philadelphia, including our AI Agent Hackathon at Pennovation Works, so we have built and rebuilt rubrics more than once. I picked these resources for one reason: you can open each one and use it the same day. Some are free builders, some are published sample rubrics you can copy and adapt, and some are full platforms that handle submissions and scoring together. Sponsors and CSR managers can use the list to check how a prize gets decided. Builders and bootcamp graduates can use it to see what judges will actually score before the clock starts.
 
-Each resource is described on the same terms. Where our own community appears, I say so plainly. The table below names every resource in the order it appears.
+Each resource is described on the same terms. The table below names every resource in the order it appears.
 
 Hackathon judging rubric resources compared by purpose and audience
 
@@ -27,7 +27,6 @@ Hackathon judging rubric resources compared by purpose and audience
 | MLH Hackathon Organizer Guide | Judging plan, logistics and judge timing | Student and campus events |
 | Devpost | Submission hosting and online judging | Public and virtual hackathons |
 | Innovation Mode nine-dimension model | Business-focused assessment framework | Corporate and sponsor-run hackathons |
-| C.O.D.E Philadelphia (our own community) | Live practice judging and building at events | Philadelphia builders, sponsors, volunteers |
 
 ![Hackathon judges reviewing team project demos at tables using a judging rubric](https://pub-451d10ec53cc4a789b85ceaa163ede7f.r2.dev/inline/4cf393e03aa54ef98e44cf25564d3a0d.webp)
 *Science-fair style judging lets judges score each team at its own table.*
@@ -80,7 +79,7 @@ Equal weighting is a deliberate choice. It tells beginners that clean, readable 
 
 ## MLH Hackathon Organizer Guide: Judging Plan
 
-Major League Hacking publishes a judging plan in its Hackathon Organizer Guide that covers the logistics around a rubric. It recommends science-fair style judging, where judges move between team tables, explains shortlisting and elimination rounds, and walks through how to estimate how many judges you need and how long they will spend. MLH supports a large network of student hackathons, so the guidance reflects many events.
+Major League Hacking publishes a [judging plan](https://guide.mlh.com/general-information/judging-and-submissions/judging-plan) in its Hackathon Organizer Guide that covers the logistics around a rubric. It recommends science-fair style judging, where judges move between team tables, explains shortlisting and elimination rounds, and walks through how to estimate how many judges you need and how long they will spend. MLH supports a large network of student hackathons, so the guidance reflects many events.
 
 - Science-fair style judging setup
 - Shortlisting rounds for large events
@@ -91,7 +90,7 @@ Major League Hacking publishes a judging plan in its Hackathon Organizer Guide t
 
 ## Devpost
 
-[Devpost](https://devpost.com) is a widely used platform for hosting hackathon submissions. Teams post project pages with descriptions, demos and code links, and organizers can set up judging criteria so judges score submissions online. Because projects stay public afterward, it also works as a portfolio for participants.
+[Devpost](https://devpost.com) is a widely used platform for hosting hackathon submissions. Teams post project pages with descriptions, demos and code links, and organizers can set up judging criteria so judges score submissions online. When an event keeps its projects public afterward, Devpost also works as a portfolio for participants.
 
 **Best for** Virtual or hybrid hackathons with many submissions, and builders who want a lasting public record of what they shipped.
 
@@ -101,9 +100,9 @@ The [corporate hackathon guide from Ainna](https://ainna.ai/resources/faq/corpor
 
 **Best for** Corporate sponsors and internal innovation teams who want hackathon outcomes tied to business priorities.
 
-## C.O.D.E Philadelphia Hackathons
+## Where C.O.D.E Philadelphia fits
 
-This one is our own community, so weigh it accordingly. C.O.D.E Philadelphia is a volunteer-run nonprofit with 5,700+ members on Meetup, and we run quarterly hackathons at venues like Pennovation Works alongside weekly coding sessions. It is not a software tool. It is a place to see rubrics used in a live room, to judge or volunteer, and to test your own project against real criteria. Other Philadelphia and AI-focused communities, such as Techadelphia and [Cerebral Valley](https://cerebralvalley.ai), also host events worth attending.
+This is our own community, so it isn't ranked with the others. C.O.D.E Philadelphia is a volunteer-run nonprofit with 5,700+ members on Meetup, and we run quarterly hackathons at venues like Pennovation Works alongside weekly coding sessions. It is not a software tool. It is a place to see rubrics used in a live room, to judge or volunteer, and to test your own project against real criteria. Other Philadelphia and AI-focused communities, such as Techadelphia and [Cerebral Valley](https://cerebralvalley.ai), also host events worth attending.
 
 - Quarterly theme-based hackathons open to all skill levels
 - Volunteer roles at hackathons, including event support
@@ -121,8 +120,9 @@ This one is our own community, so weigh it accordingly. C.O.D.E Philadelphia is 
 - [Hackathon Judging Criteria Builder: Free Rubric - hackathonhost.com](https://hackathonhost.com/tools/judging-criteria-builder)
 - [JUDGING RUBRIC - Ethical AI Hackathon - research.cgu.edu](https://research.cgu.edu/hackathon/home/judging-rubric/)
 - [Code for All: Educational Applications of the "Vibe Coding" Hackathon in Programming Education across All Skill Levels - arxiv.org](https://arxiv.org/pdf/2604.22747)
+- [Judging Plan - guide.mlh.com](https://guide.mlh.com/general-information/judging-and-submissions/judging-plan)
 - [How to Run a Corporate Hackathon: Steps, Judging & ROI - ainna.ai](https://ainna.ai/resources/faq/corporate-hackathon-guide)
 
 <p class="powered-by">Powered by <a href="https://gofylo.io?utm_source=code-philly-community.pages.dev&amp;utm_medium=referral&amp;utm_campaign=powered_by" rel="sponsored">gofylo.io</a></p>
 
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"8 Hackathon Judging Rubric Tools, Templates and Scorecards to Use","description":"Eight hackathon judging rubric resources, from free criteria builders to full platforms, with notes on who each one suits and how weighted scoring works.","wordCount":1498,"inLanguage":"en","author":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"publisher":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"keywords":"hackathon judging rubric","citation":["https://codephilly.com/blog/how-does-hackathon-judging-work-and-what-do-judges-reward","https://hackathonhost.com/tools/judging-criteria-builder","https://hackathonhost.com/articles/hackathon-judging-criteria","https://hacktribe.co/blog/fair-balanced-the-hackathon-judging-rubric-blueprint","https://research.cgu.edu/hackathon/home/judging-rubric/","https://arxiv.org/pdf/2604.22747","https://devpost.com","https://ainna.ai/resources/faq/corporate-hackathon-guide","https://cerebralvalley.ai"]},{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"HackathonHost Judging Criteria Builder"},{"@type":"ListItem","position":2,"name":"Hacktribe Hackathon Judging Rubric Blueprint"},{"@type":"ListItem","position":3,"name":"CGU Ethical AI Hackathon Rubric"},{"@type":"ListItem","position":4,"name":"Vibe Coding Hackathon Rubric Example from arXiv"},{"@type":"ListItem","position":5,"name":"MLH Hackathon Organizer Guide: Judging Plan"},{"@type":"ListItem","position":6,"name":"Devpost"},{"@type":"ListItem","position":7,"name":"Innovation Mode Nine-Dimension Assessment Model"},{"@type":"ListItem","position":8,"name":"C.O.D.E Philadelphia Hackathons"}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"7 Hackathon Judging Rubric Tools, Templates and Scorecards to Use","description":"Seven hackathon judging rubric resources, from free criteria builders to full platforms, with notes on who each one suits and how weighted scoring works.","wordCount":1576,"inLanguage":"en","author":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"publisher":{"@type":"Organization","name":"C.O.D.E Philadelphia"},"dateModified":"2026-11-06T04:48:16.792548","keywords":"hackathon judging rubric","citation":["https://codephilly.com/blog/how-does-hackathon-judging-work-and-what-do-judges-reward","https://hackathonhost.com/tools/judging-criteria-builder","https://hackathonhost.com/articles/hackathon-judging-criteria","https://hacktribe.co/blog/fair-balanced-the-hackathon-judging-rubric-blueprint","https://research.cgu.edu/hackathon/home/judging-rubric/","https://arxiv.org/pdf/2604.22747","https://guide.mlh.com/general-information/judging-and-submissions/judging-plan","https://devpost.com","https://ainna.ai/resources/faq/corporate-hackathon-guide","https://cerebralvalley.ai"]},{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"HackathonHost Judging Criteria Builder"},{"@type":"ListItem","position":2,"name":"Hacktribe Hackathon Judging Rubric Blueprint"},{"@type":"ListItem","position":3,"name":"CGU Ethical AI Hackathon Rubric"},{"@type":"ListItem","position":4,"name":"Vibe Coding Hackathon Rubric Example from arXiv"},{"@type":"ListItem","position":5,"name":"MLH Hackathon Organizer Guide: Judging Plan"},{"@type":"ListItem","position":6,"name":"Devpost"},{"@type":"ListItem","position":7,"name":"Innovation Mode Nine-Dimension Assessment Model"},{"@type":"ListItem","position":8,"name":"Where C.O.D.E Philadelphia fits"}]}]</script>

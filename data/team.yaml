@@ -34,8 +34,8 @@ team:
   - name: "Chase Lauer"
     role: "Chief Information Officer"
     bio: "Leads information systems for C.O.D.E."
-    photo: ""
-    linkedin: "https://www.linkedin.com/in/chase-l-80666a160/"
+    photo: "/images/team/chase-lauer.jpg"
+    linkedin: "https://www.linkedin.com/in/chase-lauer-80666a160/"
     github: ""
     twitter: ""
 

@@ -297,7 +297,7 @@ We welcome contributions! Here's how to get involved:
 
 Every pull request targeting `main` runs the documented GitHub Actions validation checks in `.github/workflows/`. Before opening a PR, run `npm run generate:data`, `npm run validate`, and `npm test` locally when your change touches content, data, scripts, templates, or generated static data. PR checks also build the Hugo site, run end-to-end smoke tests, guard against root-relative asset paths that break project-page deployments, and check internal links in the generated output.
 
-CodeRabbit is installed for this repository and reviews PRs using `.coderabbit.yaml`. It focuses on static-site safety, Hugo templates, content/front matter quality, responsive CSS, browser JavaScript, GitHub Actions, secrets checks, and accessibility-impacting changes. If automatic reviews are paused and an existing PR needs a fresh review, comment `@coderabbitai review`; incremental reviews do not revisit commits that CodeRabbit has already reviewed.
+Claude reviews every non-draft pull request opened from this repository, when it opens and after each push, using `.github/workflows/claude-code-review.yml`. It submits a formal review: an approval satisfies the one required review on `main`, and a change request blocks merging until a later push earns an approval. Claude skips PRs that change `claude-code-review.yml`, because the action only runs a workflow identical to the one on `main`; those PRs need approval from another maintainer. Maintainers with write access can re-run a review (`gh workflow run claude-code-review.yml -f pr_number=<number>`) or comment `@claude` on a PR or issue to ask Claude a question; other contributors should ask a maintainer.
 
 ## Community
 

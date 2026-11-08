@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 20
     env:
       SITE_BASE_PATH: /
-      SITE_URL: https://code-philly-community.pages.dev/
+      SITE_URL: https://www.codephilly.com/
       HUGO_ENVIRONMENT: production
       HUGO_ENV: production
       HUGO_ENABLEROBOTSTXT: 'true'

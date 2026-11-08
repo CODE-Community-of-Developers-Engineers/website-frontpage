@@ -30,7 +30,7 @@ We host regular events including:
 
 | Resource | Link |
 | ---------- | ------ |
-| Live Site | [code-philly-community.pages.dev](https://code-philly-community.pages.dev/) |
+| Live Site | [www.codephilly.com](https://www.codephilly.com/) |
 | Meetup Group | [C.O.D.E](https://www.meetup.com/code-and-coffee-philadelphia/) |
 | Merch Store | [Fourth Wall Shop](https://nol-kky-shop.fourthwall.com/) |
 | Community Fund | [Givebutter](https://givebutter.com/c_o_d_e) |
@@ -134,7 +134,7 @@ flowchart LR
     G --> H[Check live site]
 ```
 
-The `hugo.yml` workflow directly uploads to project **code-philly-community** in Cloudflare account **241b2116c32fcb97feef45212430dbce**. It runs on `main` pushes, daily at 10:17 UTC, or manually on `main`. It uses Hugo 0.126.1, Node 22, and Wrangler 4.152.0. Releases are serialized through the production checks. Immediately before upload, it checks remote `main`: a superseded commit skips upload and production verification; a failed lookup fails the run. After upload, it waits a bounded time for production's `/deployment.json` to match the built file, including run ID and build time, before running the full site check. The retired domain and its DNS are outside this deployment path.
+The `hugo.yml` workflow directly uploads to project **code-philly-community** in Cloudflare account **241b2116c32fcb97feef45212430dbce**. It runs on `main` pushes, daily at 10:17 UTC, or manually on `main`. It uses Hugo 0.126.1, Node 22, and Wrangler 4.152.0. Releases are serialized through the production checks. Immediately before upload, it checks remote `main`: a superseded commit skips upload and production verification; a failed lookup fails the run. After upload, it waits a bounded time for production's `/deployment.json` to match the built file, including run ID and build time, before running the full site check. Production is served at www.codephilly.com, a custom domain on this project. Its CNAME lives in the codephilly.com zone in another Cloudflare account and must stay DNS-only: a proxied cross-account CNAME returns Cloudflare error 1014.
 
 Before enabling releases, set the repository secret `CLOUDFLARE_PAGES_API_TOKEN` to a token with **Account / Cloudflare Pages / Edit**, restricted to that account. Do not reuse the old deploy-hook secret. Keep workflow `367311100` disabled until this replacement reaches `main`, then re-enable it and verify its first run. Before merging the migration, verify that the legacy external Git integration cannot deploy the same `main` push to the retired site; this repository change does not disable that external integration.
 
@@ -143,7 +143,7 @@ The production gate validates canonical and preview URLs, sitemap, robots, Googl
 ### Production checks and alerts
 
 ```bash
-npm run check:site -- --url https://code-philly-community.pages.dev/
+npm run check:site -- --url https://www.codephilly.com/
 ```
 
 The `monitor.yml` workflow runs this check every 15 minutes and retries once after 20 seconds. The maintainer responsible for releases must enable GitHub Actions failure notifications and verify delivery with a manual run. GitHub schedules may be delayed; this is a basic operational check, not a measured availability SLA. On failure, inspect the named check, deployment log, and per-source status in `/js/live-feeds-data.js`. Optional news outages warn; failed or stale Meetup data fails the check. If the deployed website is broken, follow the rollback verification below, then deploy corrected code with fresh feeds to restore the normal check.
@@ -157,15 +157,15 @@ In Cloudflare, open **Workers & Pages → code-philly-community → Deployments*
 ```bash
 set -euo pipefail
 RESTORED_COMMIT='<full-restored-commit-sha>'
-curl --fail --silent --show-error --max-time 20 https://code-philly-community.pages.dev/deployment.json |
-  EXPECTED_COMMIT="$RESTORED_COMMIT" node -e 'const assert = require("node:assert/strict"); const deployment = JSON.parse(require("node:fs").readFileSync(0, "utf8")); assert.equal(deployment.commit, process.env.EXPECTED_COMMIT); assert.equal(deployment.siteUrl, "https://code-philly-community.pages.dev/"); console.log("Restored revision and target verified");'
+curl --fail --silent --show-error --max-time 20 https://www.codephilly.com/deployment.json |
+  EXPECTED_COMMIT="$RESTORED_COMMIT" node -e 'const assert = require("node:assert/strict"); const deployment = JSON.parse(require("node:fs").readFileSync(0, "utf8")); assert.equal(deployment.commit, process.env.EXPECTED_COMMIT); assert.equal(deployment.siteUrl, "https://www.codephilly.com/"); console.log("Restored revision and target verified");'
 curl --fail --fail-early --silent --show-error --max-time 20 \
-  --output /dev/null https://code-philly-community.pages.dev/ \
-  --output /dev/null https://code-philly-community.pages.dev/blog/ \
-  --output /dev/null https://code-philly-community.pages.dev/links/
+  --output /dev/null https://www.codephilly.com/ \
+  --output /dev/null https://www.codephilly.com/blog/ \
+  --output /dev/null https://www.codephilly.com/links/
 ```
 
-A restored artifact with feeds older than 36 hours still fails the normal production check and monitoring; this is expected and must not be bypassed. After confirming the rollback, deploy corrected code from `main` with newly generated feeds, then rerun `npm run check:site -- --url https://code-philly-community.pages.dev/ --commit <new-commit>`. A rollback drill and notification delivery must be checked by the release owner before relying on this procedure.
+A restored artifact with feeds older than 36 hours still fails the normal production check and monitoring; this is expected and must not be bypassed. After confirming the rollback, deploy corrected code from `main` with newly generated feeds, then rerun `npm run check:site -- --url https://www.codephilly.com/ --commit <new-commit>`. A rollback drill and notification delivery must be checked by the release owner before relying on this procedure.
 
 If the deployment is no longer available, download the retained Actions artifact, verify `sha256sum -c site.tar.gz.sha256`, extract it to an empty directory, and upload that directory with the same account, project, and production branch as the workflow. Do not regenerate its data. See [Cloudflare's direct-upload CI guide](https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/) and [rollback instructions](https://developers.cloudflare.com/pages/configuration/rollbacks/).
 
@@ -302,7 +302,7 @@ CodeRabbit is installed for this repository and reviews PRs using `.coderabbit.y
 ## Community
 
 - **Meetup**: [C.O.D.E](https://www.meetup.com/code-and-coffee-philadelphia/)
-- **Website**: [code-philly-community.pages.dev](https://code-philly-community.pages.dev/)
+- **Website**: [www.codephilly.com](https://www.codephilly.com/)
 
 Join us for events, ask questions, and connect with fellow developers!
 

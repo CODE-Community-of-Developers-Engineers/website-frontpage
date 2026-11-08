@@ -10,7 +10,7 @@
     "tags" (.Params.tags | default slice)
     "topic" (.Params.topic | default "blog")
     "featured" (.Params.featured | default false)
-    "readingTime" (.Params.readingTime | default 5)
+    "readingTime" (.Params.readingTime | default .ReadingTime)
     "type" "blog"
   -}}
   {{- $searchIndex = $searchIndex | append $item -}}
@@ -28,7 +28,7 @@
       "tags" slice
       "topic" (.Section | default "page")
       "featured" false
-      "readingTime" (div (countwords .Plain) 200 | add 1)
+      "readingTime" .ReadingTime
       "type" "page"
     -}}
     {{- $searchIndex = $searchIndex | append $item -}}

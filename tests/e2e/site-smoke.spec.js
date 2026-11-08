@@ -79,3 +79,15 @@ test('blog page uses image paths compatible with the configured base path', asyn
     expect(rootRelativeImageCount).toBe(0);
   }
 });
+
+test('blog post images are served by the site, not their original host', async ({ page }) => {
+  await page.goto('./blog/what-is-hack-for-humanity-and-how-do-social-good-hackathons-work/');
+
+  const images = page.locator('.blog-content-body img');
+  const sources = await images.evaluateAll(elements => elements.map(element => element.src));
+  expect(sources.length).toBeGreaterThan(0);
+  for (let index = 0; index < sources.length; index++) {
+    expect(new URL(sources[index]).origin).toBe(new URL(page.url()).origin);
+    await expect.poll(() => images.nth(index).evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
+  }
+});

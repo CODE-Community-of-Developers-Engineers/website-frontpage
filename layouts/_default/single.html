@@ -56,7 +56,7 @@
                         {{ end }}
                         <div class="meta-item">
                             <span class="meta-icon">⏱️</span>
-                            <span>{{ if .Params.readingTime }}{{ .Params.readingTime }}{{ else }}{{ math.Round (div (countwords .Content) 200.0) }}{{ end }} min read</span>
+                            <span>{{ .Params.readingTime | default .ReadingTime }} min read</span>
                         </div>
                     </div>
                     

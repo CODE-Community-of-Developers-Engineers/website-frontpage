@@ -76,7 +76,7 @@ test('deploys current main and checks the exact artifact once', t => {
   const result = runDeploy(t);
   assert.equal(result.status, 0, result.stderr);
   assert.deepEqual(result.calls, ['git', 'npx', 'curl', 'npm']);
-  assert.equal(fs.readFileSync(path.join(result.directory, 'urls'), 'utf8'), 'https://code-philly-community.pages.dev/deployment.json?run=123&attempt=2&poll=1\n');
+  assert.equal(fs.readFileSync(path.join(result.directory, 'urls'), 'utf8'), 'https://www.codephilly.com/deployment.json?run=123&attempt=2&poll=1\n');
 });
 
 test('superseded commits skip upload and verification before requiring credentials', t => {

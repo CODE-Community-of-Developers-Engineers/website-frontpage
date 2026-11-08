@@ -31,11 +31,24 @@ test('executable raw HTML in a post fails validation', () => {
     script: '<script>alert(1)</script>',
     breakout: '<script type="application/ld+json">{}</script><script src="https://evil.example/x.js"></script>',
     iframe: '<iframe src="https://evil.example"></iframe>',
+    object: '<object data="https://evil.example/x.swf"></object>',
+    embed: '<embed src="https://evil.example/x.swf">',
     handler: '<img src="cover.webp" onerror="alert(1)">',
-    link: '[Click](javascript:alert(1))'
+    link: '[Click](javascript:alert(1))',
+    angle: '[Click](<javascript:alert(1)>)',
+    reference: '[Click][x]\n\n[x]: javascript:alert(1)',
+    autolink: '<javascript:alert(1)>',
+    action: '<form action="javascript:alert(1)"></form>',
+    formaction: '<form><button formaction="javascript:alert(1)">Go</button></form>'
   });
   assert.equal(result.status, 1);
-  for (const name of ['script', 'breakout', 'iframe', 'handler', 'link']) {
+  const names = ['script', 'breakout', 'iframe', 'object', 'embed', 'handler', 'link', 'angle', 'reference', 'autolink', 'action', 'formaction'];
+  for (const name of names) {
     assert.match(result.stderr, new RegExp(`${name}/index\\.md: Unsafe raw HTML`));
   }
+});
+
+test('a missing content directory fails instead of passing', () => {
+  const result = spawnSync(process.execPath, [script, path.join(os.tmpdir(), 'no-such-blog-dir')], { encoding: 'utf8' });
+  assert.notEqual(result.status, 0);
 });

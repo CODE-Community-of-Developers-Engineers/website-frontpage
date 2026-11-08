@@ -86,8 +86,8 @@ test('blog post images are served by the site, not their original host', async (
   const images = page.locator('.blog-content-body img');
   const sources = await images.evaluateAll(elements => elements.map(element => element.src));
   expect(sources.length).toBeGreaterThan(0);
-  for (const source of sources) {
-    expect(new URL(source).origin).toBe(new URL(page.url()).origin);
+  for (let index = 0; index < sources.length; index++) {
+    expect(new URL(sources[index]).origin).toBe(new URL(page.url()).origin);
+    await expect.poll(() => images.nth(index).evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
   }
-  await expect.poll(() => images.first().evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
 });

@@ -28,7 +28,7 @@
       "tags" slice
       "topic" (.Section | default "page")
       "featured" false
-      "readingTime" (div (countwords .Plain) 200 | add 1)
+      "readingTime" .ReadingTime
       "type" "page"
     -}}
     {{- $searchIndex = $searchIndex | append $item -}}

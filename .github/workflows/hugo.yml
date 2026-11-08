@@ -55,7 +55,17 @@ jobs:
           npm run validate
           npm test
 
+      # Hugo never expires downloaded remote images, so a restored copy keeps the daily refresh building through an image host outage
+      - name: Cache remote post images
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/hugo_cache
+          key: hugo-remote-images-${{ github.run_id }}
+          restore-keys: hugo-remote-images-
+
       - name: Build production site
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
         run: |
           npm run prod:build -- --baseURL "$SITE_URL"
           node -e 'require("node:fs").writeFileSync("public/deployment.json", JSON.stringify({commit: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, builtAt: new Date().toISOString(), siteUrl: process.env.SITE_URL}) + "\n")'

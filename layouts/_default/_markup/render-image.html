@@ -5,10 +5,15 @@
     {{- with .Err -}}
       {{- errorf "render-image: fetching %s failed: %s" $src . -}}
     {{- else -}}
-      {{- $src = .RelPermalink -}}
+      {{- if eq .MediaType.MainType "image" -}}
+        {{- $src = .RelPermalink -}}
+      {{- else -}}
+        {{- errorf "render-image: %s returned %s, not an image" $src .MediaType.Type -}}
+      {{- end -}}
     {{- end -}}
   {{- else -}}
     {{- errorf "render-image: %s was not found" $src -}}
   {{- end -}}
 {{- end -}}
 <img src="{{ $src }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- /* Trims the trailing newline Hugo would print after every image. */ -}}

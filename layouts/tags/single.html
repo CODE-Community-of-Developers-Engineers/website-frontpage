@@ -46,8 +46,8 @@
                 {{ if .Params.author }}
                 <span>by {{ .Params.author }}</span>
                 {{ end }}
-                {{ if .Params.readingTime }}
-                <span>{{ .Params.readingTime }} min read</span>
+                {{ with .Params.readingTime | default .ReadingTime }}
+                <span>{{ . }} min read</span>
                 {{ end }}
             </div>
             

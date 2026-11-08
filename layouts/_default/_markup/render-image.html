@@ -1,0 +1,14 @@
+{{- $src := .Destination -}}
+{{- if or (hasPrefix $src "https://") (hasPrefix $src "http://") -}}
+  {{- /* Copy remote images (Gofylo hotlinks its own bucket) into the build so the site serves them; a missing image fails the build */ -}}
+  {{- with resources.GetRemote $src -}}
+    {{- with .Err -}}
+      {{- errorf "render-image: fetching %s failed: %s" $src . -}}
+    {{- else -}}
+      {{- $src = .RelPermalink -}}
+    {{- end -}}
+  {{- else -}}
+    {{- errorf "render-image: %s was not found" $src -}}
+  {{- end -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>

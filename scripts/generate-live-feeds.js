@@ -40,10 +40,11 @@ function stripHtml(text) {
     .replace(/&gt;/g, '>')
     .replace(/&nbsp;/g, ' ')
     .replace(/&quot;/g, '"')
-    .replace(/&#\d+;/g, '')
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
     // Now strip HTML tags
     .replace(/<[^>]+>/g, '')
-    .replace(/#{1,6}\s*/g, '')
+    .replace(/^#{1,6}\s+/gm, '')
     .replace(/\*{1,2}([^*]+)\*{1,2}/g, '$1')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\\/g, '')
@@ -408,7 +409,7 @@ function categorizeArticle(title) {
 
 function isPhillyTechArticle(item) {
   const text = `${item.title || ''} ${item.source || ''}`.toLowerCase();
-  return PHILLY_TECH_KEYWORDS.some(keyword => text.includes(keyword));
+  return /philly|philadelphia/.test(text) && PHILLY_TECH_KEYWORDS.some(keyword => text.includes(keyword));
 }
 
 function parseGoogleNewsRss(xml) {
@@ -519,7 +520,7 @@ window.LIVE_FEEDS = ${JSON.stringify(feedsData, null, 2)};
   return feedsData;
 }
 
-module.exports = { fetchUrl, generateLiveFeeds, parseMeetupEventsPage, fetchGithubTrending };
+module.exports = { fetchUrl, generateLiveFeeds, parseMeetupEventsPage, fetchGithubTrending, isPhillyTechArticle };
 
 if (require.main === module) {
   generateLiveFeeds().catch(err => {

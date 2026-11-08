@@ -104,15 +104,16 @@ test('GitHub HTML omits missing daily stars and keeps explicitly reported zero',
 });
 
 test('GitHub HTML keeps # characters and decodes numeric entities', async () => {
-  const html = '<article><h2><a href="/example/repo">repo</a></h2><p class="col-9">Don&#39;t miss the #1 tool, it&#x27;s fast</p><span itemprop="programmingLanguage">C#</span></article>';
+  const html = '<article><h2><a href="/example/repo">repo</a></h2><p class="col-9">\n  # Don&#39;t drop the #1 List&#60;T&#62; tool, it&#x27;s fast\n</p><span itemprop="programmingLanguage">C#</span></article>';
   const [repo] = await fetchGithubTrending(5, async () => html);
   assert.equal(repo.language, 'C#');
-  assert.equal(repo.description, "Don't miss the #1 tool, it's fast");
+  assert.equal(repo.description, "Don't drop the #1 List<T> tool, it's fast");
 });
 
-test('Philly news must mention Philadelphia, not just tech', () => {
-  assert.equal(isPhillyTechArticle({ title: 'Philadelphia AI startup raises seed round', source: 'Technical.ly' }), true);
-  assert.equal(isPhillyTechArticle({ title: 'Seattle ag-tech startup Strella lands $4.25M', source: 'GeekWire' }), false);
+test('Philly news must mention Philadelphia in the headline, not just tech or the publisher', () => {
+  assert.equal(isPhillyTechArticle({ title: 'Philadelphia AI startup raises seed round - Technical.ly', source: 'Technical.ly' }), true);
+  assert.equal(isPhillyTechArticle({ title: 'Seattle ag-tech startup Strella lands $4.25M - GeekWire', source: 'GeekWire' }), false);
+  assert.equal(isPhillyTechArticle({ title: 'Seattle startup lands $4M - The Philadelphia Inquirer', source: 'The Philadelphia Inquirer' }), false);
 });
 
 test('relative redirects resolve against the current URL', async t => {

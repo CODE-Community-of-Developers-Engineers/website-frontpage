@@ -40,11 +40,12 @@ function stripHtml(text) {
     .replace(/&gt;/g, '>')
     .replace(/&nbsp;/g, ' ')
     .replace(/&quot;/g, '"')
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
     // Now strip HTML tags
     .replace(/<[^>]+>/g, '')
-    .replace(/^#{1,6}\s+/gm, '')
+    // Numeric entities are decoded after stripping so encoded angle brackets stay text
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
+    .replace(/^\s*#{1,6}\s+/gm, '')
     .replace(/\*{1,2}([^*]+)\*{1,2}/g, '$1')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\\/g, '')
@@ -408,8 +409,12 @@ function categorizeArticle(title) {
 }
 
 function isPhillyTechArticle(item) {
-  const text = `${item.title || ''} ${item.source || ''}`.toLowerCase();
-  return /philly|philadelphia/.test(text) && PHILLY_TECH_KEYWORDS.some(keyword => text.includes(keyword));
+  const title = item.title || '';
+  const source = item.source || '';
+  // Google News titles end with " - <publisher>"; a Philly publisher alone doesn't make a story local
+  const headline = title.endsWith(` - ${source}`) ? title.slice(0, -(source.length + 3)) : title;
+  const text = `${title} ${source}`.toLowerCase();
+  return /philly|philadelphia/i.test(headline) && PHILLY_TECH_KEYWORDS.some(keyword => text.includes(keyword));
 }
 
 function parseGoogleNewsRss(xml) {

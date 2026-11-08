@@ -108,6 +108,8 @@ test('GitHub HTML keeps # characters and decodes numeric entities', async () => 
   const [repo] = await fetchGithubTrending(5, async () => html);
   assert.equal(repo.language, 'C#');
   assert.equal(repo.description, "Don't drop the #1 List<T> tool, it's fast");
+  const [bad] = await fetchGithubTrending(5, async () => html.replace('fast', 'fast &#99999999;'));
+  assert.equal(bad.description, "Don't drop the #1 List<T> tool, it's fast �");
 });
 
 test('Philly news must mention Philadelphia in the headline, not just tech or the publisher', () => {

@@ -32,6 +32,11 @@ function extractCDATA(xml, tag) {
   return match ? match[1] : null;
 }
 
+// String.fromCodePoint throws on out-of-range references in feed text; browsers show U+FFFD instead
+function decodeCodePoint(code) {
+  return code <= 0x10FFFF ? String.fromCodePoint(code) : '�';
+}
+
 function stripHtml(text) {
   return text
     // Decode HTML entities first, before stripping tags
@@ -43,8 +48,8 @@ function stripHtml(text) {
     // Now strip HTML tags
     .replace(/<[^>]+>/g, '')
     // Numeric entities are decoded after stripping so encoded angle brackets stay text
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
+    .replace(/&#(\d+);/g, (_, code) => decodeCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => decodeCodePoint(parseInt(code, 16)))
     .replace(/^\s*#{1,6}\s+/gm, '')
     .replace(/\*{1,2}([^*]+)\*{1,2}/g, '$1')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')

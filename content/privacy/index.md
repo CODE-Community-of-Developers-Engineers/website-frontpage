@@ -31,4 +31,4 @@ You can control or delete cookies through your browser settings. You can also us
 
 ## Contact
 
-For privacy questions, email [jkobygold@gmail.com](mailto:jkobygold@gmail.com?subject=Privacy%20question).
+For privacy questions, email [chase@codephilly.com](mailto:chase@codephilly.com?subject=Privacy%20question).

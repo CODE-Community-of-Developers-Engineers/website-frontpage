@@ -1527,7 +1527,7 @@ p {
     border-radius: var(--radius-lg);
 }
 
-.article-join h2 {
+.article-join .article-join-title {
     margin: 0.5rem 0;
     font-size: clamp(1.25rem, 3vw, 1.65rem);
 }

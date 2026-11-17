@@ -1519,6 +1519,29 @@ p {
 }
 
 /* Blog Post Header Styling */
+.article-join {
+    margin: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--surface-alt);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.article-join h2 {
+    margin: 0.5rem 0;
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+}
+
+.article-join p {
+    margin: 0 0 1rem;
+}
+
+.article-join .btn {
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+}
+
 .blog-post-header {
     position: relative;
     margin-bottom: 2rem;

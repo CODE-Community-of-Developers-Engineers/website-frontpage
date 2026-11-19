@@ -109,7 +109,6 @@ ls static/js/*.js
 Expected modules:
 - `menu.js` - Responsive navigation
 - `carousel.js` - Events carousel
-- `meetup.js` - Meetup API integration
 - `events-data.js` - Generated events data
 
 Check for any new JS files not in README.
@@ -132,7 +131,7 @@ Check:
 
 Verify documented services are still in use:
 - **Tally.so** - Check for Tally embeds in templates
-- **Meetup.com API** - Check `meetup.js`
+- **Meetup.com** - Check `scripts/generate-live-feeds.js` (scrapes events at build time)
 - **Cloudflare Pages** - Check `.github/workflows/hugo.yml` (builds and deploys the site)
 
 ### 3.7 CI/CD Workflows

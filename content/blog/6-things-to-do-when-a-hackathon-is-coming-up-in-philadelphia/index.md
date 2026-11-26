@@ -12,7 +12,7 @@ A hackathon coming up is a dated, time-boxed building event on your calendar: a 
 
 <!--more-->
 
-I run C.O.D.E Philadelphia, a volunteer-run nonprofit with 5,700+ members on Meetup and 490+ active builders on Discord (per our own community counts). We hold quarterly [hackathons](https://codephilly.com/blog/8-ways-to-get-real-value-from-online-hackathons-as-a-builder-or-sponsor) at venues like Pennovation Works, plus themed events such as our AI Agent Hackathon. We see the same pattern every quarter. The people who prepare in small, specific ways ship more, find better teammates, and come back. The sponsors who show up early in the planning get far more from their support than the ones who send a logo the week before.
+We run C.O.D.E Philadelphia, a volunteer-run nonprofit with 5,700+ members on Meetup and 490+ active builders on Discord (per our own community counts). We hold quarterly [hackathons](https://codephilly.com/blog/8-ways-to-get-real-value-from-online-hackathons-as-a-builder-or-sponsor) at venues like Pennovation Works, plus themed events such as our AI Agent Hackathon. We see the same pattern every quarter. The people who prepare in small, specific ways ship more, find better teammates, and come back. The sponsors who show up early in the planning get far more from their support than the ones who send a logo the week before.
 
 The tips below are written for several readers at once: Philadelphia-area developers and engineers, side-project builders, bootcamp graduates heading into a first or second event, and the corporate sponsors, CSR managers and donors who make these weekends possible. Each tip says who it is for.
 
@@ -51,7 +51,7 @@ If the theme is AI agents, as it was for our AI Agent Hackathon, a basic framewo
 
 **The theme tells you what judges will reward.** Every themed hackathon has a brief, even when it is a single sentence. Read it the way a contractor reads a client request: what problem is named, who the user is, and what a finished demo should show. Teams that ignore the theme can build impressive work and still miss the prizes.
 
-Finishing matters as much as ambition. A meaningful share of people who register never reach the submission step. A scoped idea that matches the theme is what gets a team across that line. If you are drawn to a specialty track, field-specific advice helps: our [9 Healthcare Hackathon Tips](https://codephilly.com/blog/9-healthcare-hackathon-tips-for-builders-mentors-and-sponsors) cover clinical problems and privacy, the [6 Ways](https://codephilly.com/blog/6-ways-to-get-more-from-cybersecurity-hackathons-in-philadelphia) piece on cybersecurity covers scope rules for security builds, and [What Is Hack](https://codephilly.com/blog/what-is-hack-for-humanity-and-how-do-social-good-hackathons-work) for Humanity explains how social good judging differs.
+Finishing matters as much as ambition. A meaningful share of people who register never reach the submission step. A scoped idea that matches the theme is what gets a team across that line. If you are drawn to a specialty track, field-specific advice helps: our [9 Healthcare Hackathon Tips](https://codephilly.com/blog/9-healthcare-hackathon-tips-for-builders-mentors-and-sponsors) cover clinical problems and privacy, the [6 Ways to Get More From Cybersecurity Hackathons in Philadelphia](https://codephilly.com/blog/6-ways-to-get-more-from-cybersecurity-hackathons-in-philadelphia) piece covers scope rules for security builds, and [What Is Hack for Humanity](https://codephilly.com/blog/what-is-hack-for-humanity-and-how-do-social-good-hackathons-work) explains how social good judging differs.
 
 - Write the theme on one line and agree as a team on what it means.
 - Find the judging criteria and note which ones count most.
@@ -114,9 +114,6 @@ C.O.D.E Philadelphia holds a hackathon every quarter in 2026, with themes announ
 For most builders, yes, when they prepare. A hackathon gives you a deadline, teammates and a finished demo in one weekend, which is hard to get from solo side projects. It is most worth it when you arrive with a team or a skill goal and keep building afterward at weekly sessions.
 
 > Ready for the next one? Join C.O.D.E Philadelphia on Meetup or Discord to come to a weekly session and register for the next quarterly hackathon. If your company or you want more Philadelphia builders shipping real projects, sponsor a challenge, donate, or volunteer for a shift with C.O.D.E Philadelphia.
-
-## Sources
-
 
 <p class="powered-by">Powered by <a href="https://gofylo.io?utm_source=code-philly-community.pages.dev&amp;utm_medium=referral&amp;utm_campaign=powered_by" rel="sponsored">gofylo.io</a></p>
 

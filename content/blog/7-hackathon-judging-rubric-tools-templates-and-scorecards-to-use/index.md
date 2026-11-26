@@ -56,7 +56,7 @@ Read this one after you have a draft. It works best as a review checklist: are t
 
 ## CGU Ethical AI Hackathon Rubric
 
-The Claremont Graduate University Ethical AI Hackathon judging rubric is one of the clearest public hackathon judging rubric samples available. It assigns "Socially Responsible Impact in Innovation" a weight of 20% and "Ease of Use, Transparency, and Explainability" a weight of 20%, and scores each on a 1–5 scale where 1 is Poor and 5 is Excellent.
+The [Claremont Graduate University Ethical AI Hackathon judging rubric](https://web.archive.org/web/20260419181640/https://research.cgu.edu/hackathon/home/judging-rubric/) (archived copy) is one of the clearest public hackathon judging rubric samples available. It assigns "Socially Responsible Impact in Innovation" a weight of 20% and "Ease of Use, Transparency, and Explainability" a weight of 20%, and scores each on a 1–5 scale where 1 is Poor and 5 is Excellent.
 
 What makes it worth copying is that the criteria reflect the theme. An ethical AI event that scored only technical difficulty would reward the wrong projects. If you are planning a themed event, such as an AI agent hackathon, this rubric shows how to turn the theme into scored criteria with explicit weights.
 
@@ -118,7 +118,7 @@ This is our own community, so it isn't ranked with the others. C.O.D.E Philadelp
 - [Hackathon judging criteria & scoring rubric: HackathonHost - hackathonhost.com](https://hackathonhost.com/articles/hackathon-judging-criteria)
 - [Fair & Balanced: The Hackathon Judging Rubric Blueprint - hacktribe.co](https://hacktribe.co/blog/fair-balanced-the-hackathon-judging-rubric-blueprint)
 - [Hackathon Judging Criteria Builder: Free Rubric - hackathonhost.com](https://hackathonhost.com/tools/judging-criteria-builder)
-- JUDGING RUBRIC - Ethical AI Hackathon - research.cgu.edu
+- [JUDGING RUBRIC - Ethical AI Hackathon - research.cgu.edu (archived)](https://web.archive.org/web/20260419181640/https://research.cgu.edu/hackathon/home/judging-rubric/)
 - [Code for All: Educational Applications of the "Vibe Coding" Hackathon in Programming Education across All Skill Levels - arxiv.org](https://arxiv.org/pdf/2604.22747)
 - [Judging Plan - guide.mlh.com](https://guide.mlh.com/general-information/judging-and-submissions/judging-plan)
 - [How to Run a Corporate Hackathon: Steps, Judging & ROI - ainna.ai](https://ainna.ai/resources/faq/corporate-hackathon-guide)

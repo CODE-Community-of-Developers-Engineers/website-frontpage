@@ -3,6 +3,7 @@
 <div class="container blog-layout">
     <div class="blog-content">
         <article class="blog-post">
+            {{ partial "article-join.html" (dict "position" "top") }}
             <!-- Blog Header -->
             <header class="blog-post-header">
                 {{ if .Params.image }}
@@ -74,6 +75,7 @@
             <div class="blog-content-body">
                 {{ .Content }}
             </div>
+            {{ partial "article-join.html" (dict "position" "end") }}
 
             <script>
             // Table of Contents Generator

@@ -1,7 +1,7 @@
 (function() {
     const SEND_TO = 'AW-18553752846/mTX5CLzJz7EdEI6aj49F';
 
-    function isJoinLink(href) {
+    function isJoinLink(href, isLumaRsvp = false) {
         let url;
         try {
             url = new URL(href, 'https://example.invalid/');
@@ -15,6 +15,7 @@
 
         const host = url.hostname.toLowerCase();
         return host === 'meetup.com' || host.endsWith('.meetup.com') ||
+            (isLumaRsvp && (host === 'luma.com' || host === 'lu.ma')) ||
             host === 'discord.gg' ||
             ((host === 'discord.com' || host === 'discordapp.com') && url.pathname.startsWith('/invite/')) ||
             (host.endsWith('.devpost.com') && url.pathname.startsWith('/register')) ||
@@ -31,7 +32,7 @@
         }
 
         const anchor = event.target.closest('a[href]');
-        if (!anchor || !isJoinLink(anchor.href)) {
+        if (!anchor || !isJoinLink(anchor.href, anchor.dataset.joinConversion === 'luma-rsvp')) {
             return;
         }
 

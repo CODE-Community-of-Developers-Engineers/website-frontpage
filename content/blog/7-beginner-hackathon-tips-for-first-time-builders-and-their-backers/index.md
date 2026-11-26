@@ -64,7 +64,7 @@ Weekend-sized beginner hackathon projects compared
 
 ## 4. Use AI assistants openly and within the rules
 
-**Most hackathons in 2026 allow ChatGPT and similar tools, but the rules vary, so read them.** Some events ban generated code entirely, some require you to disclose what you used, and AI-themed events like our AI Agent Hackathon expect you to build with models. Ask the organizers if the rules are silent.
+**AI rules vary from event to event, so read them before you use ChatGPT or similar tools.** Some events ban generated code entirely, some require you to disclose what you used, and AI-themed events like our AI Agent Hackathon expect you to build with models. Ask the organizers if the rules are silent.
 
 Used well, an assistant is a patient mentor at 2 a.m. It can explain an error message, sketch boilerplate or suggest a library. Used badly, it produces code no one on the team understands, and that falls apart during the live demo or the judges' questions. A simple habit helps: do not commit a block of generated code until a teammate can explain what it does.
 
@@ -87,7 +87,7 @@ Mixed teams are normal at well-run events. At an ASA DataFest weekend, [82 stude
 
 ## 6. Plan for the week after the hackathon
 
-**Decide before demos end what happens to the project and the people.** Most hackathon work stops when the event does. A study of nearly 11,900 hackathon projects found [about 85% of changes happened within the first month, and only 7% of projects had any activity after](https://dl.acm.org/doi/10.1145/3544548.3581234). Repeat attendance is also rare: in one study, [only 13.10% of participants went to more than one event](https://doi.org/10.1145/3340481.3342735).
+**Decide before demos end what happens to the project and the people.** Most hackathon work stops when the event does. A study of nearly 11,900 hackathon projects found [about 85% of changes happened within the first month, and only 7% of projects had any activity six months after the event](https://dl.acm.org/doi/10.1145/3544548.3581234). Repeat attendance is also rare: in one study, [only 13.10% of participants went to more than one event](https://doi.org/10.1145/3340481.3342735).
 
 For a bootcamp graduate, the week after the hackathon is where the project turns into a portfolio piece. Clean up the README, record a two-minute walkthrough and post it. Then bring the project to a weekly session and keep going with the same teammates. Continuity is what turns a weekend into a habit.
 

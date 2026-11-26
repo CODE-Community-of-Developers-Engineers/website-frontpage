@@ -21,7 +21,7 @@ Some context on scale helps. The United States is home to [350 hackathons each y
 ![Teams of developers building hackathon projects together at long tables in a shared workspace](https://pub-451d10ec53cc4a789b85ceaa163ede7f.r2.dev/inline/5bf1402bc1df4032b3d2e05eaaf071ff.webp)
 *Winning projects grow out of program design: the challenge, the support and the time teams get.*
 
-> The pattern these six share: every program tied its challenge to a real problem or a real tool the sponsor cared about, gave builders support beyond a single weekend (mentors, tooling, a community hub or a follow-on track) and measured success by finished solutions and engaged builders, not attendance alone.
+> The pattern these six share: every program tied its challenge to a real problem or a real tool the sponsor cared about, gave builders support beyond a single weekend (mentors, tooling, a community hub or a follow-on track) and measured success by what builders produced, not attendance alone.
 
 ## P&G: public hackathons across seven cities
 

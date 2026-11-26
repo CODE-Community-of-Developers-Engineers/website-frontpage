@@ -1,0 +1,2 @@
+<a href="{{ .Destination }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /* Never pipe .Destination through safeURL: escaping is what turns javascript: links (unfiltered under unsafe = true) into #ZgotmplZ. This comment also trims the trailing newline. */ -}}

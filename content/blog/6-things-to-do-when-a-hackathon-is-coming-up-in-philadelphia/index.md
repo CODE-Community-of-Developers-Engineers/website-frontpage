@@ -37,7 +37,7 @@ Our weekly coding sessions are in-person meetups where members code side by side
 
 **Install everything now. Build nothing yet.** Most hackathons ask teams to start the project at kickoff, so pre-written feature code breaks the spirit of the event and often the rules. Setup is different. Time spent fighting a package manager, an expired API key or a broken local database on Saturday morning is time stolen from the build.
 
-Participation is common across the field. The [2024 HackerRank Developer Skills Report showed 70% of developers had participated in hackathons](https://wal.sh/research/online-hackathons/), which means your teammates will likely have opinions about tools. Settle those choices early. A short checklist works better than good intentions.
+Your teammates will likely have opinions about tools. Settle those choices early. A short checklist works better than good intentions.
 
 - Update your operating system, editor and language runtimes a week ahead, not the night before.
 - Create accounts and API keys for any cloud, model or mapping service you expect to use, and confirm the free tier limits.
@@ -51,7 +51,7 @@ If the theme is AI agents, as it was for our AI Agent Hackathon, a basic framewo
 
 **The theme tells you what judges will reward.** Every themed hackathon has a brief, even when it is a single sentence. Read it the way a contractor reads a client request: what problem is named, who the user is, and what a finished demo should show. Teams that ignore the theme can build impressive work and still miss the prizes.
 
-Finishing matters as much as ambition. [Across MLH events in 2024, 60–70% of registered participants submitted a project](https://wal.sh/research/online-hackathons/), so a meaningful share of people who register never reach the submission step. A scoped idea that matches the theme is what gets a team across that line. If you are drawn to a specialty track, field-specific advice helps: our [9 Healthcare Hackathon Tips](https://codephilly.com/blog/9-healthcare-hackathon-tips-for-builders-mentors-and-sponsors) cover clinical problems and privacy, the [6 Ways](https://codephilly.com/blog/6-ways-to-get-more-from-cybersecurity-hackathons-in-philadelphia) piece on cybersecurity covers scope rules for security builds, and [What Is Hack](https://codephilly.com/blog/what-is-hack-for-humanity-and-how-do-social-good-hackathons-work) for Humanity explains how social good judging differs.
+Finishing matters as much as ambition.sh/research/online-hackathons/), so a meaningful share of people who register never reach the submission step. A scoped idea that matches the theme is what gets a team across that line. If you are drawn to a specialty track, field-specific advice helps: our [9 Healthcare Hackathon Tips](https://codephilly.com/blog/9-healthcare-hackathon-tips-for-builders-mentors-and-sponsors) cover clinical problems and privacy, the [6 Ways](https://codephilly.com/blog/6-ways-to-get-more-from-cybersecurity-hackathons-in-philadelphia) piece on cybersecurity covers scope rules for security builds, and [What Is Hack](https://codephilly.com/blog/what-is-hack-for-humanity-and-how-do-social-good-hackathons-work) for Humanity explains how social good judging differs.
 
 - Write the theme on one line and agree as a team on what it means.
 - Find the judging criteria and note which ones count most.

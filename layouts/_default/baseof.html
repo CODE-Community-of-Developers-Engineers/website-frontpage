@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ partial "google-tag.html" . }}
     {{ $title := .Site.Title }}
     {{ if not .IsHome }}{{ $title = printf "%s | %s" .Title .Site.Params.shortName }}{{ end }}
     {{ $description := .Description | default .Site.Params.description }}
@@ -72,6 +73,7 @@
     <script>window.siteBasePath = '{{ "" | relURL }}'.replace(/\/$/, '');</script>
     <script src="{{ "js/menu.js" | relURL }}"></script>
     <script src="{{ "js/theme-toggle.js" | relURL }}"></script>
+    <script src="{{ "js/join-conversion.js" | relURL }}"></script>
     {{ if .IsHome }}
     <script>
         // Add timestamp to prevent caching of events data

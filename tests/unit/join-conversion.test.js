@@ -27,6 +27,17 @@ test('isJoinLink accepts hackathon registration and Google Forms sign-ups', () =
   assert.equal(isJoinLink('https://docs.google.com/document/d/123'), false);
 });
 
+test('Luma RSVP links require an explicit opt-in on an exact Luma host', () => {
+  assert.equal(isJoinLink('https://luma.com/code-philly', true), true);
+  assert.equal(isJoinLink('https://lu.ma/a-community-event', true), true);
+  assert.equal(isJoinLink('https://LUMA.COM/code-philly', true), true);
+  assert.equal(isJoinLink('https://lu.ma/privacy'), false);
+  assert.equal(isJoinLink('https://luma.com/code-philly'), false);
+  assert.equal(isJoinLink('https://luma.com.evil.com/event', true), false);
+  assert.equal(isJoinLink('https://evillu.ma/event', true), false);
+  assert.equal(isJoinLink('javascript:alert(1)', true), false);
+});
+
 test('isJoinLink rejects unrelated, internal, malformed, and non-http links', () => {
   for (const href of [
     'https://givebutter.com/code-philly',

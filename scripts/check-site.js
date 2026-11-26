@@ -3,7 +3,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const { parseArgs } = require('node:util');
 
-const SITE_URL = 'https://code-philly-community.pages.dev/';
+const SITE_URL = 'https://www.codephilly.com/';
 const VERIFICATION_FILE = 'googlecd79e637249597f6.html';
 const MAX_FEED_AGE_MS = 36 * 60 * 60 * 1000;
 const FEEDS = ['upcomingEvents', 'hackerNews', 'productHunt', 'phillyNews', 'githubTrending', 'aiPapers'];

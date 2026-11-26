@@ -32,6 +32,11 @@ function extractCDATA(xml, tag) {
   return match ? match[1] : null;
 }
 
+// String.fromCodePoint throws on out-of-range references in feed text; browsers show U+FFFD instead
+function decodeCodePoint(code) {
+  return code <= 0x10FFFF ? String.fromCodePoint(code) : '�';
+}
+
 function stripHtml(text) {
   return text
     // Decode HTML entities first, before stripping tags
@@ -40,10 +45,12 @@ function stripHtml(text) {
     .replace(/&gt;/g, '>')
     .replace(/&nbsp;/g, ' ')
     .replace(/&quot;/g, '"')
-    .replace(/&#\d+;/g, '')
     // Now strip HTML tags
     .replace(/<[^>]+>/g, '')
-    .replace(/#{1,6}\s*/g, '')
+    // Numeric entities are decoded after stripping so encoded angle brackets stay text
+    .replace(/&#(\d+);/g, (_, code) => decodeCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => decodeCodePoint(parseInt(code, 16)))
+    .replace(/^\s*#{1,6}\s+/gm, '')
     .replace(/\*{1,2}([^*]+)\*{1,2}/g, '$1')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\\/g, '')
@@ -407,8 +414,12 @@ function categorizeArticle(title) {
 }
 
 function isPhillyTechArticle(item) {
-  const text = `${item.title || ''} ${item.source || ''}`.toLowerCase();
-  return PHILLY_TECH_KEYWORDS.some(keyword => text.includes(keyword));
+  const title = item.title || '';
+  const source = item.source || '';
+  // Google News titles end with " - <publisher>"; a Philly publisher alone doesn't make a story local
+  const headline = title.endsWith(` - ${source}`) ? title.slice(0, -(source.length + 3)) : title;
+  const text = `${title} ${source}`.toLowerCase();
+  return /philly|philadelphia/i.test(headline) && PHILLY_TECH_KEYWORDS.some(keyword => text.includes(keyword));
 }
 
 function parseGoogleNewsRss(xml) {
@@ -519,7 +530,7 @@ window.LIVE_FEEDS = ${JSON.stringify(feedsData, null, 2)};
   return feedsData;
 }
 
-module.exports = { fetchUrl, generateLiveFeeds, parseMeetupEventsPage, fetchGithubTrending };
+module.exports = { fetchUrl, generateLiveFeeds, parseMeetupEventsPage, fetchGithubTrending, isPhillyTechArticle };
 
 if (require.main === module) {
   generateLiveFeeds().catch(err => {

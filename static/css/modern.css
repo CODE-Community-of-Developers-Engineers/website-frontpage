@@ -2589,6 +2589,11 @@ footer {
     margin-bottom: 3rem;
 }
 
+/* Pages other than the homepage have no bottom row */
+.footer-content:last-child {
+    margin-bottom: 0;
+}
+
 .footer-brand .logo {
     margin-bottom: 1rem;
 }
@@ -2668,7 +2673,7 @@ footer {
 
 .footer-bottom .footer-ads-note {
     max-width: 32rem;
-    margin: 0.75rem 0 0 auto;
+    margin: 0 0 0 auto;
     font-size: 0.75rem;
     text-align: right;
 }

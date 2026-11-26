@@ -862,7 +862,7 @@ p {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     gap: 1.5rem;
     margin: 0;
     padding: 2rem 0;
@@ -1519,6 +1519,29 @@ p {
 }
 
 /* Blog Post Header Styling */
+.article-join {
+    margin: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background: var(--surface-alt);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.article-join .article-join-title {
+    margin: 0.5rem 0;
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+}
+
+.article-join p {
+    margin: 0 0 1rem;
+}
+
+.article-join .btn {
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+}
+
 .blog-post-header {
     position: relative;
     margin-bottom: 2rem;
@@ -2566,6 +2589,11 @@ footer {
     margin-bottom: 3rem;
 }
 
+/* Pages other than the homepage have no bottom row */
+.footer-content:last-child {
+    margin-bottom: 0;
+}
+
 .footer-brand .logo {
     margin-bottom: 1rem;
 }
@@ -2641,6 +2669,13 @@ footer {
 .footer-bottom p {
     color: inherit;
     margin: 0;
+}
+
+.footer-bottom .footer-ads-note {
+    max-width: 32rem;
+    margin: 0 0 0 auto;
+    font-size: 0.75rem;
+    text-align: right;
 }
 
 @media (max-width: 960px) {

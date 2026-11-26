@@ -2,17 +2,24 @@
 # COMMUNITY STATS (homepage stats band)
 # =============================================================================
 # Edit these by hand when the numbers change. Round down so they stay true.
-# Last checked 2026-09-30: Meetup 5,781 members, LinkedIn 2,237 followers,
-# Discord 490 members.
+# Last checked 2026-11-25: Meetup 6,352 members, LinkedIn 2,475 followers,
+# Instagram 1,227 followers (645 + 582 across two accounts), Luma 392 members.
+# Discord 490 members, last checked 2026-09-30.
+# Adding or removing a stat? Match .stats-grid's column count in
+# static/css/modern.css.
 # =============================================================================
 
 stats:
-  - value: "5,700+"
+  - value: "6,300+"
     label: "members on Meetup"
-  - value: "2,200+"
+  - value: "2,400+"
     label: "followers on LinkedIn"
+  - value: "1,200+"
+    label: "followers on Instagram"
   - value: "490+"
     label: "builders on Discord"
+  - value: "390+"
+    label: "members on Luma"
   - value: "Weekly"
     label: "coding sessions"
   - value: "Quarterly"

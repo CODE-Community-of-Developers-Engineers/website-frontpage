@@ -15,7 +15,7 @@ team:
     github: "https://github.com/Tony363"
     twitter: ""
 
-  - name: "Satya Vegulla"
+  - name: "Satya Vegulla (Volunteer)"
     role: "Principal Architect & Project Manager"
     bio: "Leads architecture and project management for C.O.D.E initiatives."
     photo: "/images/team/satya-vegulla.jpg"
@@ -34,8 +34,8 @@ team:
   - name: "Chase Lauer"
     role: "Chief Information Officer"
     bio: "Leads information systems for C.O.D.E."
-    photo: ""
-    linkedin: "https://www.linkedin.com/in/chase-l-80666a160/"
+    photo: "/images/team/chase-lauer.jpg"
+    linkedin: "https://www.linkedin.com/in/chase-lauer-80666a160/"
     github: ""
     twitter: ""
 

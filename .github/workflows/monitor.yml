@@ -27,7 +27,7 @@ jobs:
 
       - name: Check availability and feed freshness
         env:
-          SITE_URL: https://code-philly-community.pages.dev/
+          SITE_URL: https://www.codephilly.com/
         run: |
           npm run check:site -- --url "$SITE_URL" || {
             sleep 20

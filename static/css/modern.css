@@ -2666,6 +2666,13 @@ footer {
     margin: 0;
 }
 
+.footer-bottom .footer-ads-note {
+    max-width: 32rem;
+    margin: 0.75rem 0 0 auto;
+    font-size: 0.75rem;
+    text-align: right;
+}
+
 @media (max-width: 960px) {
     .footer-content {
         grid-template-columns: repeat(2, 1fr);

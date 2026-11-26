@@ -40,6 +40,9 @@ collaborators:
   - name: "Cursor Philadelphia"
     logo: "cursor-philadelphia.png"
     url: "https://cursorphilly.com"
+  - name: "VetsinTech"
+    logo: "vetsintech.jpg"
+    url: "https://vetsintech.co/"
 
 # Sponsors of our most recent hackathon (AI Agent Hackathon, September 2026)
 hackathon_sponsors:

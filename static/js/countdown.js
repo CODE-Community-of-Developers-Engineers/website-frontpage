@@ -31,7 +31,9 @@
     if (now >= start && now < end) {
       remaining = end - now;
       heading = 'Hackathon ends in';
-      status = 'Submissions close at 6:00 PM EST';
+      status = 'Submissions close at ' + new Date(end).toLocaleTimeString('en-US', {
+        hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York', timeZoneName: 'short'
+      });
     } else if (now >= end) {
       remaining = 0;
       heading = 'Hackathon complete';

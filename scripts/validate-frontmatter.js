@@ -3,7 +3,7 @@
 /**
  * Front Matter Validator for Blog Posts
  *
- * Validates that all blog posts have required front matter fields.
+ * Validates that all blog posts have required front matter fields and no executable raw HTML.
  * Run with: npm run validate:frontmatter
  */
 
@@ -19,15 +19,24 @@ try {
   process.exit(1);
 }
 
-const CONTENT_DIR = path.join(__dirname, '..', 'content', 'blog');
+const CONTENT_DIR = process.argv[2] || path.join(__dirname, '..', 'content', 'blog');
 const REQUIRED_FIELDS = ['title', 'date'];
+// Hugo publishes raw HTML in posts as-is (goldmark unsafe = true); JSON-LD is data, so it is the only script allowed
+// shortcut: regex screening misses obfuscated raw HTML such as entity-encoded javascript: URLs (Markdown links are neutralised by render-link.html), switch to an HTML parser allowlist if untrusted authors can open PRs
+const UNSAFE_HTML = [
+  [/<script\b(?![^>]*\btype\s*=\s*["']?application\/ld\+json)/i, '<script> other than JSON-LD'],
+  [/<(iframe|object|embed)\b/i, '<iframe>, <object> or <embed>'],
+  [/<[a-z][^>]*\son[a-z]+\s*=/i, 'inline event handler'],
+  // Any attribute value, inline or <angle> link destination, link reference definition, or autolink
+  [/(?:=\s*["']?|\]\(\s*<?|^ {0,3}\[[^\]]+\]:\s*<?|<)\s*javascript:/im, 'javascript: URL']
+];
 
 let errors = [];
 let warnings = [];
 
 function validatePost(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
-  const { data } = matter(content);
+  const { data, content: body } = matter(content);
   const relativePath = path.relative(process.cwd(), filePath);
 
   // Check required fields
@@ -45,6 +54,12 @@ function validatePost(filePath) {
     }
   }
 
+  UNSAFE_HTML.forEach(([pattern, label]) => {
+    if (pattern.test(body)) {
+      errors.push(`${relativePath}: Unsafe raw HTML (${label})`);
+    }
+  });
+
   // Warn about recommended fields (non-blocking)
   if (!data.author) {
     warnings.push(`${relativePath}: Missing recommended field 'author'`);
@@ -55,7 +70,8 @@ function validatePost(filePath) {
 }
 
 // Check if blog directory exists
-if (!fs.existsSync(CONTENT_DIR)) {
+// A directory passed explicitly must exist: readdirSync below crashes instead of reporting a pass
+if (!process.argv[2] && !fs.existsSync(CONTENT_DIR)) {
   console.log('No blog directory found at content/blog/ - skipping validation');
   process.exit(0);
 }

@@ -35,6 +35,13 @@ test('root-relative content image paths are normalized through relURL', () => {
   assert.doesNotMatch(listTemplate, /src="{{ \.Params\.image }}"/);
 });
 
+test('Markdown links keep html/template URL escaping so javascript: links are neutralised', () => {
+  const hook = read('layouts/_default/_markup/render-link.html');
+
+  assert.match(hook, /href="{{ \.Destination }}"/);
+  assert.doesNotMatch(hook, /Destination\s*\|\s*safeURL/);
+});
+
 test('homepage exposes the next hackathon countdown contract', () => {
   const homeTemplate = read('layouts/index.html');
   const baseTemplate = read('layouts/_default/baseof.html');

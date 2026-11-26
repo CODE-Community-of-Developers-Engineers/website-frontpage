@@ -48,8 +48,10 @@
             </div>
         </div>
 
+        {{ if .IsHome }}
         <div class="footer-bottom">
-            <p>© {{ now.Format "2006" }} {{ .Site.Title }}. Made in Philadelphia for the tech community.</p>
+            <p class="footer-ads-note">C.O.D.E. Google Ads is an internal tool that C.O.D.E. uses to manage its own Google Ad Grants campaigns. It is not available to the public. Its data practices are described in our <a href="{{ "privacy/" | relURL }}">Privacy Policy</a>.</p>
         </div>
+        {{ end }}
     </div>
 </footer>

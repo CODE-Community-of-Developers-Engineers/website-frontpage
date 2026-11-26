@@ -35,13 +35,21 @@ test('root-relative content image paths are normalized through relURL', () => {
   assert.doesNotMatch(listTemplate, /src="{{ \.Params\.image }}"/);
 });
 
+test('Markdown links keep html/template URL escaping so javascript: links are neutralised', () => {
+  const hook = read('layouts/_default/_markup/render-link.html');
+
+  assert.match(hook, /href="{{ \.Destination }}"/);
+  assert.doesNotMatch(hook, /Destination\s*\|\s*safeURL/);
+});
+
 test('homepage exposes the next hackathon countdown contract', () => {
   const homeTemplate = read('layouts/index.html');
   const baseTemplate = read('layouts/_default/baseof.html');
   const hackathonData = read('data/next_hackathon.yaml');
 
-  assert.match(hackathonData, /title:\s*"January Hackathon"/);
-  assert.match(hackathonData, /starts_at:\s*"2027-01-23T10:00:00-05:00"/);
+  assert.match(hackathonData, /title:\s*"February Hackathon"/);
+  assert.match(hackathonData, /starts_at:\s*"2027-02-06T09:00:00-05:00"/);
+  assert.match(hackathonData, /ends_at:\s*"2027-02-06T18:00:00-05:00"/);
   assert.match(hackathonData, /register_url:\s*"https:\/\/tbd-hackathon\.devpost\.com\/register/);
   assert.match(homeTemplate, /id="next-hackathon"/);
   assert.match(homeTemplate, /data-countdown-start="{{ \.starts_at }}"/);

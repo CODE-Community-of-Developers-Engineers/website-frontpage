@@ -58,9 +58,7 @@ One person can hold more than one role. What matters is that someone on the team
 
 Organizers can help by running team-matching at kickoff. At our events, we encourage solo arrivals to pitch a problem in a sentence or two and find teammates whose skills fill the gaps. On our Discord, 490+ active builders trade ideas before events, so many people arrive with a rough team already in place.
 
-![Hackathon participation at a glance: Developers who have joined hackathons: 70%; Stacks vibe coding hackathon turnout: nearly 600; Generative AI hackathon record: 1,460. Sources: wal.sh, youtube.com, guinnessworldrecords.com.](https://pub-451d10ec53cc4a789b85ceaa163ede7f.r2.dev/charts/bec75a43a33c49c8bc38ffba4ee4b62d.png)
-
-Hackathons are already a common experience for developers. The [2024 HackerRank Developer Skills Report](https://wal.sh/research/online-hackathons/) showed 70% of developers had participated in hackathons. Vibe coding events extend that experience to people who never considered themselves developers at all.
+Hackathons are already a common experience for developers. Vibe coding events extend that experience to people who never considered themselves developers at all.
 
 ## What judges and organizers should watch for
 

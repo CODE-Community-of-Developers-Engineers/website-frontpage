@@ -8,7 +8,8 @@
         {{ else }}
             {{ with .Resources.GetMatch .Params.image }}
     <a href="{{ $.RelPermalink }}" class="post-card-image">
-        <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        {{ $thumb := . }}{{ if gt .Width 800 }}{{ $thumb = .Resize "800x" }}{{ end }}
+        <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
     </a>
             {{ end }}
         {{ end }}

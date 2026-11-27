@@ -15,6 +15,7 @@
                         {{/* Page bundle resource - use Resources.GetMatch */}}
                         {{ $img := .Resources.GetMatch .Params.image }}
                         {{ if $img }}
+                            {{ if gt $img.Width 1200 }}{{ $img = $img.Resize "1200x" }}{{ end }}
                             <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}">
                         {{ else }}
                             {{/* Fallback for missing resources */}}
